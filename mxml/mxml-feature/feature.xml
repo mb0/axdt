@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.axdt.mxml.feature"
+      label="Mxml Feature"
+      version="0.0.8.qualifier"
+      provider-name="http://axdt.org">
+
+   <description url="http://www.axdt.org/wiki">
+      The Mxml feature adds basic support for editing Mxml files.
+   </description>
+
+   <copyright url="http://mb0.org">
+      (c) Martin Schnabel mb0@mb0.org
+   </copyright>
+
+   <license url="http://www.eclipse.org/org/documents/epl-v10.php">
+      Eclipse Public License 1.0
+You can find a copy of the license text in any Axdt feature.
+   </license>
+
+   <url>
+      <update label="Axdt Updates" url="http://update.axdt.org/"/>
+   </url>
+
+</feature>

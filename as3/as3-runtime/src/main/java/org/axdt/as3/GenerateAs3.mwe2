@@ -1,0 +1,91 @@
+module org.axdt.as3
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var grammarURI = "classpath:/org/axdt/as3/As3.xtext"
+var file.extensions = "as"
+var runtimeProject = "../as3-runtime"
+var uiProject = "../as3-ui"
+var avmProject = "../../avm/avm-runtime"
+var srcGen = "/src/generated/java"
+var src = "/src/main/java"
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "../../.."
+		registerGeneratedEPackage = "org.axdt.as3.As3EPackage"
+		uriMap = Mapping {
+			from = "platform:/resource/org.axdt.as3.runtime/src/main/ecore/As3.ecore"
+			to = "${runtimeProject}/src/main/ecore/As3.ecore"
+		}
+		uriMap = Mapping {
+			from = "platform:/resource/org.axdt.avm.runtime/src/main/ecore/Avm.ecore"
+			to = "${avmProject}/src/main/ecore/Avm.ecore"
+		}
+	}
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}${srcGen}"
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${uiProject}${srcGen}"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = uiProject
+		projectNameRt = "org.axdt.as3.runtime"
+		projectNameUi = "org.axdt.as3.ui"	
+		srcPath = src
+		srcGenPath = srcGen
+		language = {
+			uri = grammarURI
+			fileExtensions = file.extensions
+			
+			// Java API to access grammar elements (required by several other fragments)
+			fragment = grammarAccess.GrammarAccessFragment {}
+			
+			// the serialization component
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			
+			// a custom ResourceFactory for use with EMF
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = file.extensions
+			}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+				options = {
+					backtrack = true
+					memoize = true
+					classSplitting = true
+				}
+			}
+			fragment = validation.JavaValidatorFragment {
+				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			// scoping API 	
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
+			fragment = builder.BuilderIntegrationFragment {}
+			// formatter API 
+			fragment = formatting.FormatterFragment {}
+			// labeling API 
+			fragment = labeling.LabelProviderFragment {}
+			// outline API
+			fragment = outline.OutlineNodeAdapterFactoryFragment {}
+			fragment = outline.TransformerFragment {}
+			fragment = outline.QuickOutlineFragment {}
+
+			// java-based API for content assistance 
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment { 
+				options = {
+					backtrack = true
+					memoize = true	
+					classSplitting = true
+				}
+			}
+		}
+	}
+}

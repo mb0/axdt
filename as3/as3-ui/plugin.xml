@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="as"
+            id="org.axdt.as3.As3"
+            icon="icons/editor.gif"
+            name="%as3Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.axdt.as3.editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.axdt.as3.validate">
+			<activeWhen>
+	            <reference
+	            	definitionId="org.axdt.as3.editor.opened">
+	            </reference>
+         	</activeWhen>
+    	</handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.axdt.as3.editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.axdt.as3.As3" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.axdt.core.ui.preferences"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.axdt.as3.preferences"
+            name="%as3PrefBase">
+            <keywordReference id="org.axdt.as3.ui.keyword"/>
+        </page>
+        <page
+            category="org.axdt.as3.preferences"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.axdt.as3.preferences.coloring"
+            name="%as3PrefSyntaxColoring">
+            <keywordReference id="org.axdt.as3.ui.keyword"/>
+        </page>
+        <page
+            category="org.axdt.as3.preferences"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.axdt.as3.preferences.templates"
+            name="%as3PrefTemplates">
+            <keywordReference id="org.axdt.as3.ui.keyword"/>
+        </page>
+        <page
+            category="org.axdt.as3.preferences"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.preferences.As3EditorPreferencePage"
+            id="org.axdt.as3.preferences.editor"
+            name="%as3PrefEditor">
+            <keywordReference id="org.axdt.as3.ui.keyword"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.axdt.as3.ui.keyword"
+            label="%as3Keyword"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="%as3CmdValidateDescription"
+            id="org.axdt.as3.validate"
+            name="%as3CmdValidate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.axdt.as3.validate"
+                 style="push"
+                 tooltip="%as3CmdValidateTooltip">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.axdt.as3.editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.axdt.as3.editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.axdt.as3.editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="as">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="as">
+        </resourceServiceProvider>
+    </extension>
+
+
+
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.axdt.as3.editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.axdt.as3.editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.axdt.category"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.wizards.NewAs3ProjectWizard"
+            icon="icons/editor.gif"
+            id="org.axdt.as3.ui.wizards.newAs3ProjectWizard"
+            name="%as3Project"
+            project="true">
+      </wizard>
+      <wizard
+            name="%as3File"
+            icon="icons/editor.gif"
+            category="org.axdt.category"
+            class="org.axdt.as3.ui.wizards.NewAs3FileWizard"
+            id="org.axdt.as3.ui.wizards.newAs3FileWizard">
+      </wizard>
+   </extension>
+   
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.preferences.As3EditorPreferences">
+      </initializer>
+      <initializer
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.preferences.As3FormattingPreferences">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.axdt.core.ui.perspective">
+         <newWizardShortcut
+               id="org.axdt.as3.ui.wizards.newAs3ProjectWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.axdt.as3.ui.wizards.newAs3FileWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+</plugin>

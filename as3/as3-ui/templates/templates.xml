@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Type cast" enabled="true" id="org.axdt.as3.templates.cast" name="cast"
+>var ${newname}:${type:CrossReference(avm.AvmDeclaredTypeReference.type)} = ${target:CrossReference(As3PropertyIdentifier.reference)} as ${type:CrossReference(avm.AvmDeclaredTypeReference.type)};</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Class definition" enabled="true" id="org.axdt.as3.templates.class" name="class"
+>class ${TypeName} {
+	public function ${TypeName}(${}) {
+		${cursor}
+	}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Equals function" enabled="true" id="org.axdt.as3.templates.equals" name="equals"
+>public function equals(other:Object):Boolean {
+	if (other is ${type:CrossReference(avm.AvmDeclaredTypeReference.type)}) {
+		var o:${type:CrossReference(avm.AvmDeclaredTypeReference.type)} = other as ${type:CrossReference(avm.AvmDeclaredTypeReference.type)};
+		return ${this} == o${cursor};
+	}
+	return false;
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="For statement" enabled="true" id="org.axdt.as3.templates.for_simple" name="for"
+>for (var ${i}:int = 0; ${i} &lt; ${length}; ${i}++) {
+	${line_selection}${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.ExpressionStatement" deleted="false" description="Function expression" enabled="true" id="org.axdt.as3.templates.function_expression" name="function"
+>function ${name}(${}):${void:CrossReference(avm.AvmDeclaredTypeReference.type)} {
+	${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Interface definition" enabled="true" id="org.axdt.as3.templates.interface" name="interface"
+>interface ${typeName} {
+	${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Check for type" enabled="true" id="org.axdt.as3.templates.istype" name="istype"
+>if (${name:CrossReference(As3PropertyIdentifier.reference)} is ${type:CrossReference(avm.AvmDeclaredTypeReference.type)}) {
+	${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Check for type and cast" enabled="true" id="org.axdt.as3.templates.istype_cast" name="istype_cast"
+>if (${name:CrossReference(As3PropertyIdentifier.reference)} is ${type:CrossReference(avm.AvmDeclaredTypeReference.type)}) {
+	var ${newname}:${type:CrossReference(avm.AvmDeclaredTypeReference.type)} = ${name:CrossReference(As3PropertyIdentifier.reference)} as ${type:CrossReference(avm.AvmDeclaredTypeReference.type)};
+	${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.ExpressionStatement" deleted="false" description="Lazy initialization" enabled="true" id="org.axdt.as3.templates.lazy" name="lazy"
+>if (${name:CrossReference(As3PropertyIdentifier.reference)} == null) {
+	${name:CrossReference(As3PropertyIdentifier.reference)} = new ${type:CrossReference(avm.AvmDeclaredTypeReference.type)}(${});
+}
+${cursor}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.Program" deleted="false" description="Package directive" enabled="true" id="org.axdt.as3.templates.package" name="package"
+>package ${packageName} {
+	${cursor}
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Switch statement" enabled="true" id="org.axdt.as3.templates.switch" name="switch"
+>switch (${key}) {
+case ${value}:
+	${cursor}
+	break;
+default:
+	break;
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="To string function" enabled="true" id="org.axdt.as3.templates.toString" name="toString"
+>public function toString():String {
+	return "${cursor}";
+}</template>
+<template autoinsert="false" context="org.axdt.as3.As3.PackageDirective" deleted="false" description="Try statement" enabled="true" id="org.axdt.as3.templates.try" name="try"
+>try {
+	${line_selection}${cursor}
+} catch (e:${Error}) {
+	// trace(e);
+}</template>
+</templates>

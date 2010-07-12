@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.ccil.cowan.tagsoup
+Bundle-Version: 1.2.0
+Bundle-ClassPath: tagsoup-1.2.jar
+Export-Package: org.ccil.cowan.tagsoup,
+ org.ccil.cowan.tagsoup.jaxp
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

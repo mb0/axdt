@@ -1,0 +1,584 @@
+grammar org.axdt.as3.As3 hidden(WS,SL_COMMENT,ML_COMMENT,DOC_COMMENT)
+
+import "platform:/resource/org.axdt.as3.runtime/src/main/ecore/As3.ecore"
+import "platform:/resource/org.axdt.avm.runtime/src/main/ecore/Avm.ecore" as avm
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+As3Program: {As3Program}
+	(LT* package=As3Package)?
+	(LT* directives+=PackageDirective)* LT*
+	;
+// 14 Expressions
+// 14.1 Identifiers
+Identifier
+	: ID
+	| 'dynamic'
+	| 'each'
+	| 'get'
+	| 'set'
+	| 'static'
+	| 'final'
+	| 'prototype'
+	| 'override'
+	| 'native'
+	; 
+As3PropertyIdentifierFirst returns As3PropertyIdentifier
+	: reference=[avm::AvmIdentifiable|Identifier]
+	;
+As3PropertyIdentifier
+	: name='*'
+	| name=Identifier
+	;
+As3SimpleQualifiedIdentifier  
+	: qualifier=As3SimpleIdentifier LT* '::' 
+	LT* ( identifier=As3PropertyIdentifier
+		| '[' LT* expressions=As3ListExpression LT* ']'
+		)
+	;
+As3ExpressionQualifiedIdentifier
+	: '(' LT* qualifier=IAssignmentExpression LT* ')' LT* '::'
+	LT*	( identifier=As3PropertyIdentifier
+		| '[' LT* expressions=As3ListExpression LT* ']'
+		)
+	;
+As3NonAttributeQualifiedIdentifier
+	: As3SimpleQualifiedIdentifier
+	| As3ExpressionQualifiedIdentifier
+	;
+AttributeQualifiedIdentifier returns As3AttributeQualifiedIdentifier
+	: '@' 
+	LT* ( identifier=As3NonAttributeQualifiedIdentifier
+		| '[' LT* expressions=As3ListExpression LT* ']'
+		)
+	;
+As3QualifiedIdentifier
+	: As3NonAttributeQualifiedIdentifier
+	| AttributeQualifiedIdentifier 
+	;
+As3SimpleIdentifier
+	: As3PropertyIdentifierFirst
+	| ReservedNamespaceName
+	;
+IIdentifier
+	: As3SimpleIdentifier
+	| As3QualifiedIdentifier
+	;
+// 14.2 Primary expressions
+IPrimaryExpression
+	: ILiteral
+	| IIdentifier
+	| As3FunctionExpression
+	| As3ArrayInitializer
+	| ObjectInitialiser 
+	| As3ParenListExpression
+	| {As3ThisExpression} 'this'
+	| {As3SuperExpression} 'super'
+	;
+ILiteral
+	: As3NumberLiteral
+	| As3StringLiteral
+	| {As3BooleanLiteral} value?='true'
+	| {As3BooleanLiteral} 'false'
+	| {As3NullLiteral} 'null'
+	| {As3RegexLiteral} value=REGEX
+// TODO xml literal
+	;
+As3NumberLiteral: value=NUMBER;
+As3StringLiteral: value=STRING;
+// 14.3 Reserved namespace expressions
+enum ReservedNamespace returns avm::AvmVisibility
+	: INTERNAL='internal'
+	| PUBLIC='public'
+	| PROTECTED='protected'
+	| PRIVATE='private'
+	;
+ReservedNamespaceName returns As3PropertyIdentifier
+	: name='public'
+	| name='private'
+	| name='protected'
+	| name='internal'
+	;
+// 14.4 Parenthesized expressions
+As3ParenListExpression:
+	'(' LT*	expressions+=IAssignmentExpression
+	(LT* ',' LT* expressions+=IAssignmentExpression)* LT* ')';
+// 14.5 Function expression
+As3FunctionExpression 
+	: 'function' LT*  (name=Identifier LT*)?
+	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
+	LT* returnType=ResultType LT* body=As3Block;
+// 14.6 Object initialiser
+ObjectInitialiser returns As3ObjectInitializer
+	: {As3ObjectInitializer}
+	'{' LT* (fields+=As3LiteralField (LT* ',' LT* fields+=As3LiteralField)* LT*)?'}';
+As3LiteralField
+	: name=ILiteralFieldName LT* ':' LT* expression=IConditionalExpression;
+ILiteralFieldName
+	: As3StringLiteral
+	| As3NumberLiteral
+	| {As3PropertyIdentifier} name=Identifier
+	| ReservedNamespaceName
+	;
+// 14.7 Array initialiser
+As3ArrayInitializer
+	: {As3ArrayInitializer}
+	'[' elements+=As3ArrayElement (LT* ',' elements+=As3ArrayElement)* LT* ']';
+As3ArrayElement
+	: {As3ArrayElement}
+	( LT* expression=IConditionalExpression)?
+	;
+// 14.9 Super expression
+//SuperExpression: {SuperExpressions}
+//	'super' (LT* arguments=Arguments)?;
+// 14.10 Postfix Expressions
+IPostfixExpression
+	: 	( IPrimaryExpression
+		| As3NewExpression
+		)
+		( {As3AccessExpression.expression = current} LT* operator=As3PropertyOperator
+		| {As3InvocationExpression.expression = current} LT* arguments=As3Arguments
+		| {As3QueryExpression.expression = current} LT* operator=As3QueryOperator
+		| {As3PostIncrementExpression.expression = current} '++'
+		| {As3PostDecrementExpression.expression = current} '--'
+		)*
+	;
+
+// 14.11 New expressions
+As3NewExpression 
+	: 'new' LT* target=IPostfixExpression;
+
+// 14.12 Property accessors
+As3PropertyOperator
+	: '.' LT* identifier=IIdentifier
+	| '[' LT* expressions=As3ListExpression LT* ']'
+	;
+// 14.13 Query operators
+As3QueryOperator 
+	: '..' LT* identifier=IIdentifier
+	| '.' LT* '(' LT* expressions=As3ListExpression LT* ')'
+	;
+// 14.14 Call expressions
+As3Arguments
+	: {As3Arguments} 
+	'(' LT* (
+		expressions+=IAssignmentExpression
+		(LT* ',' LT* expressions+=IAssignmentExpression)*
+	LT* )? ')';
+// 14.15 Unary expressions
+IUnaryExpression
+	: IPostfixExpression
+	| {As3DeleteExpression} 'delete' LT* expression=IPostfixExpression
+	| {As3VoidExpression} 'void' LT* expression=IUnaryExpression
+	| {As3TypeOfExpression} 'typeof' LT* expression=IUnaryExpression
+	| {As3PreIncrementExpression} '++' LT* expression=IPostfixExpression
+	| {As3PreDecrementExpression} '--' LT* expression=IPostfixExpression
+	| {As3UnaryPlusExpression} '+' LT* expression=IUnaryExpression
+	| {As3UnaryMinusExpression} '-' LT* expression=IUnaryExpression
+	| {As3BitwiseNotExpression} '~' LT* expression=IUnaryExpression
+	| {As3LogicalNotExpression} '!' LT* expression=IUnaryExpression
+	;
+// 14.16 Binary expressions
+// 14.16.1 Multiplicative expressions
+MultiplicativeExpression returns IArithmeticExpression
+	: IUnaryExpression ({As3MultiplicativeExpression.left=current}
+		LT* operation=('*'|'/'|'%')
+		LT* right=IUnaryExpression
+	)*;
+// 14.16.2 Additive expressions
+AdditiveExpression returns IArithmeticExpression 
+	: MultiplicativeExpression ({As3AdditiveExpression.left=current}
+		LT* operation=('+'|'-')
+		LT* right=MultiplicativeExpression
+	)*;
+// 14.16.3 Shift expressions
+ShiftExpression returns IArithmeticExpression
+	: AdditiveExpression ({As3ShiftExpression.left=current}
+		LT* operation=('<<'|'>>'|'>>>')
+		LT* right=AdditiveExpression
+	)*;
+// 14.16.4 Relational expressions
+IRelationalExpression
+	: ShiftExpression ({As3RelationalExpression.left=current}
+		LT* operation=('<'|'>'|'<='|'>='|'instanceof'|'is'|'as')
+		LT* right=ShiftExpression
+	)*;
+// 14.16.5 Equality expressions
+IEqualityExpression
+	: IRelationalExpression ({As3EqualityExpression.left=current}
+		LT* operation=('=='|'==='|'!='|'!==')
+		LT* right=IRelationalExpression
+	)*;
+// 14.16.6 Bitwise expressions
+BitwiseAndExpression returns IBitwiseExpression
+	: IEqualityExpression ({As3BitwiseExpression.left=current}
+		LT* operation='&' LT* right=IEqualityExpression
+	)*;
+BitwiseXOrExpression returns IBitwiseExpression
+	: BitwiseAndExpression ({As3BitwiseExpression.left=current}
+		LT* operation='^' LT* right=BitwiseAndExpression
+	)*;
+BitwiseOrExpression returns IBitwiseExpression
+	: BitwiseXOrExpression ({As3BitwiseExpression.left=current}
+		LT* operation='|' LT* right=BitwiseXOrExpression
+	)*;
+// 14.16.7 Logical expressions
+LogicalAndExpression returns ILogicalExpression
+	: BitwiseOrExpression ({As3LogicalExpression.left=current}
+		LT* operation='&&' LT* right=BitwiseOrExpression
+	)*;
+// 
+LogicalOrExpression returns ILogicalExpression
+	: LogicalAndExpression ({As3LogicalExpression.left=current}
+		LT* operation='||' LT* right=LogicalAndExpression
+	)*;
+// 14.17 Conditional expression
+IConditionalExpression
+	: LogicalOrExpression ({As3ConditionalExpression.condition=current} 
+		LT* '?' LT* statement=IAssignmentExpression
+		LT* ':' LT* elseStatement=IAssignmentExpression
+	)?;
+// 14.18 Non-assignment expression
+NonAssignmentExpression returns IConditionalExpression
+	: LogicalOrExpression ({As3ConditionalExpression.condition=current} 
+		LT* '?' LT* statement=NonAssignmentExpression
+		LT* ':' LT* elseStatement=NonAssignmentExpression
+	)?;
+// 14.19 Assignment expression
+IAssignmentExpression
+	: NonAssignmentExpression ({As3AssignmentExpression.left=current}
+		LT* operation=('='|'*='|'/='|'%='|'+='|'-='|'<<='|'>>='|'>>>='|'&='|'|='|'^='|'&&='|'||='|'^^=') 
+		LT* right=IAssignmentExpression
+	)?;
+// 14.20 List expression
+As3ListExpression:
+	expressions+=IAssignmentExpression
+	(LT* ',' LT* expressions+=IAssignmentExpression)*;
+// 14.21 Type expressions
+// 15 Statements
+IStatementNoVar returns IStatement
+	: As3Block
+	| As3IfStatement
+	| As3SwitchStatement
+	| As3WhileStatement
+	| As3DoStatement
+	| As3ForStatement
+	| As3ForInStatement
+	| As3WithStatement
+	| As3TryStatement
+	| As3LabeledStatement
+	| As3DefaultXmlNamespaceStatement
+	| As3SuperStatement
+	| As3ContinueStatement
+	| As3BreakStatement
+	| As3ReturnStatement
+	| As3ThrowStatement
+	| As3ExpressionStatement
+	| {As3EmptyStatement} ';'
+	;
+IStatement
+	: IStatementNoVar
+	| As3VariableDefinition
+	;
+	
+// 15.1 Empty statement
+// 15.2 Expression statement
+As3ExpressionStatement:
+	expressions+=IAssignmentExpression 
+	(LT* ',' LT* expressions+=IAssignmentExpression)* 
+	vsemi=VirtualSemi;
+// 15.3 Super statement
+As3SuperStatement
+	: 'super' LT* arguments=As3Arguments vsemi=VirtualSemi;
+// 15.4 Block statement
+As3Block 
+	: {As3Block}
+	'{' LT* (directives+=BlockDirective LT*)* '}';
+// 15.5 Labeled statement
+As3LabeledStatement
+	: name=Identifier LT* ':' LT* statement=IStatement;
+// 15.6 Conditional statements
+// 15.6.1 If statement
+As3IfStatement
+	: 'if' LT* conditions=As3ParenListExpression 
+	LT* statement=IStatement 
+	(LT* 'else' LT* elseStatement=IStatement)?;
+// 15.6.2 Switch statement
+As3SwitchStatement
+	: 'switch' LT* conditions=As3ParenListExpression LT* '{' (LT* cases+=ICaseElement)* LT* '}';
+ICaseElement
+	: {As3ExpressionCase} 'case' LT* expressions=As3ListExpression ':'
+	| {As3DefaultCase} 'default' LT* ':' 
+	| BlockDirective
+	;
+// 15.7 Iteration statements
+// 15.7.1 Do-while statement
+As3DoStatement
+	: 'do' LT* statement=IStatement LT* 'while' LT* conditions=As3ParenListExpression vsemi=VirtualSemi;
+// 15.7.2 While statement
+As3WhileStatement
+	: 'while' LT* conditions=As3ParenListExpression LT* statement=IStatement;
+// 15.7.3 For Statement
+As3ForStatement
+	: 'for' LT* '(' LT*
+		(init=IForInit LT*)?
+		';' LT* (conditions=As3ListExpression LT*)?
+		';' LT* (iter=As3ListExpression LT*)? 
+		')' LT* statement=IStatement
+	;
+IForInit
+	: As3ListExpression
+	| {As3VariableDefinition} 'var' LT* bindings+=As3VariableAssign (LT* ',' LT* bindings+=As3VariableAssign)*
+	;
+As3ForInStatement
+	: 'for' (forEach?='each')? LT* '(' LT*
+		init=IForInInit LT*
+		'in' LT* target=As3ListExpression LT*
+		')' LT* statement=IStatement
+	;
+IForInInit
+	: IPostfixExpression
+	| {As3VariableDefinition} 'var' LT* bindings+=As3Variable
+	;
+// 15.8 Continue statement
+As3ContinueStatement
+	: {As3ContinueStatement}
+	'continue' (label=[As3LabeledStatement|Identifier])? vsemi=VirtualSemi;
+// 15.9 Break statement
+As3BreakStatement
+	: {As3BreakStatement}
+	'break' (label=[As3LabeledStatement|Identifier])? vsemi=VirtualSemi;
+// 15.10 With statement
+As3WithStatement
+	: 'with' LT* target=As3ParenListExpression LT* statement=IStatement; 
+// 15.11 Return statement
+As3ReturnStatement
+	: {As3ReturnStatement}
+	'return' (expression=As3ListExpression)? vsemi=VirtualSemi;
+// 15.12 Throw statement
+As3ThrowStatement
+	: 'throw' expression=As3ListExpression vsemi=VirtualSemi;
+// 15.13 Try statement
+As3TryStatement
+	: 'try' LT* block=As3Block (LT* catches+=As3CatchClause)* (LT* 'finally' LT* finalBlock=As3Block)?;
+As3CatchClause
+	: 'catch' LT* '(' LT* error=As3Parameter LT* ')' LT* block=As3Block;
+// 15.14 Default XML namespace statement
+As3DefaultXmlNamespaceStatement
+	: 'default' 'xml' 'namespace' LT* '=' LT* expression=NonAssignmentExpression;
+
+// 16 Directives
+PackageDirective returns IDirective
+	: As3Class
+	| As3Interface
+	| As3Operation
+	| As3FieldDefinition
+	| As3Namespace
+	| As3Include
+	| As3Use
+	| As3ImportList
+	| IStatementNoVar
+	;
+TypeDirective returns IDirective
+	: As3Operation
+	| As3FieldDefinition
+	| As3Namespace
+	| As3Include
+	| As3Use
+	| As3ImportList
+	| IStatementNoVar
+	;
+BlockDirective returns IDirective
+	: As3Namespace
+	| As3Include
+	| As3Use
+	| As3ImportList
+	| IStatement
+	;
+// 16.1 Attributes
+IAttribute
+	: As3AttributeExpression
+	;
+As3MetadataTag:
+	'[' name=Identifier 
+		('(' parameters+=As3MetadataParameter (',' parameters+=As3MetadataParameter)* ')')?
+	']' LT*;
+As3MetadataParameter:
+	(name=Identifier '=')? value=ILiteral;
+As3AttributeExpression:
+	{As3SimpleAttributeExpression} ident=As3PropertyIdentifierFirst 
+	({As3QualifiedAttributeExpression.qualifier=current} 
+		'.' identifier=As3SimpleIdentifier
+	)*;
+// 16.2 Import directive
+As3Import: 
+	'import' LT* qualifiedName=ImportFQN vsemi=VirtualSemi;
+
+ImportFQN : Identifier (LT* '.' LT* Identifier)* (LT* '.' LT*  '*')?;
+FQN : Identifier (LT* '.' LT* Identifier)*;
+// group imports. ignore warnings
+As3ImportList:
+	imports+=As3Import (LT* imports+=As3Import)*;
+
+// 16.3 Include directive
+As3Include:
+	'include' target=STRING vsemi=VirtualSemi;
+
+// 16.4 Use directive
+As3Use:
+	'use' LT* 'namespace' LT* target=As3ListExpression vsemi=VirtualSemi;
+
+// 17 Definitions
+// 17.1 Variable definition
+As3FieldDefinition:
+	(metadata+=As3MetadataTag)*
+	( (static?="static")?
+	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	)
+	('var'|constant?='const') LT*
+	bindings+=As3FieldBinding (LT* ',' LT* bindings+=As3FieldBinding)*
+	vsemi=VirtualSemi;
+As3FieldBinding:
+	name=Identifier 
+	( LT* type=VarTypeAssign LT* expression=IAssignmentExpression
+	| (LT* type=VarType)? ( LT* '=' LT* expression=IAssignmentExpression)?
+	);
+As3VariableDefinition:
+	('var'|constant?='const') LT*
+	bindings+=As3VariableAssign (LT* ',' LT* bindings+=As3VariableAssign)*
+	vsemi=VirtualSemi;
+As3VariableAssign:
+	name=Identifier 
+	( LT* type=VarTypeAssign LT* expression=IAssignmentExpression
+	| (LT* type=VarType)? ( LT* '=' LT* expression=IAssignmentExpression)?
+	);
+As3Variable:
+	name=Identifier (LT* type=VarType)?;
+// 17.2 Function definition
+As3Operation:
+	(metadata+=As3MetadataTag)*
+	( (static?="static")?
+	& (final?="final")?
+	& (override?="override")?
+	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	)
+	'function' LT* 
+	(setter?='set'|getter?='get')? name=Identifier LT*
+	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
+	(LT* returnType=ResultType)?
+	LT* body=As3Block;
+// 17.2.2 Function signature
+As3OperationSignature returns As3Operation:
+	(metadata+=As3MetadataTag)*
+	(visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	'function' LT* 
+	(setter?='set'|getter?='get')? name=Identifier LT*
+	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
+	(LT* returnType=ResultType)?
+	LT* ';';
+// 17.2.3 Parameter list
+As3Parameter
+	: As3ParameterAssign
+	| As3ParameterRest
+	;
+As3ParameterAssign:
+	name=Identifier 
+	( LT* type=VarTypeAssign LT* expression=IAssignmentExpression
+	| (LT* type=VarType)? ( LT* '=' LT* expression=IAssignmentExpression)?
+	);
+As3ParameterRest: {As3ParameterRest}
+	'...' (LT* name=Identifier (LT* type=VarType)?)?;
+// 17.2.4 Result type
+ResultType returns avm::AvmTypeReference
+	: {avm::AvmVoidReference} ':' LT* 'void'
+	| VarType
+	;
+VarType returns avm::AvmTypeReference
+	: ':' LT* 
+	({avm::AvmDeclaredTypeReference} type=[avm::AvmType|FQN] 
+	|{avm::AvmGenericReference} '*');
+VarTypeAssign  returns avm::AvmTypeReference
+	: {avm::AvmDeclaredTypeReference} ':' LT* GenericVarTypeAssign
+	;
+GenericVarTypeAssign: '*=';
+// 17.3 Class definition
+As3Class:
+	(metadata+=As3MetadataTag)*
+	( (final?="final")?
+	& (dynamic?="dynamic")?
+	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	)
+	'class' LT* name=Identifier 
+	(LT* 'extends' LT* extendedClass=Inheritance)?
+	(LT* 'implements' LT* extendedInterfaces+=Inheritance
+		(LT* ',' LT* extendedInterfaces+=Inheritance)*
+	)? 
+	LT* '{' LT* (directives+=TypeDirective LT*)* '}';
+Inheritance returns avm::AvmDeclaredTypeReference
+	: type=[avm::AvmType|FQN];
+// 17.3.2 Class name
+// 17.4 Interface definition
+As3Interface:
+	(metadata+=As3MetadataTag)*
+	(visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	'interface' LT* name=Identifier 
+	(LT* 'extends' LT* extendedInterfaces+=Inheritance 
+		(LT* ',' LT* extendedInterfaces+=Inheritance)*
+	)? 
+	LT* '{' LT* (directives+=As3OperationSignature LT*)* '}';
+// 17.5 Package definition
+As3Package: 
+	{As3Package}
+	'package' (LT* canonicalName=FQN)? LT*
+	'{' (LT* directives+=PackageDirective)* LT* '}';
+
+// 17.6 Namespace definition
+As3Namespace:
+	(metadata+=As3MetadataTag)*
+	( (static?="static")?
+	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	)
+	'namespace' LT* name=Identifier 
+	(LT* '=' LT* expression=NonAssignmentExpression )? 
+	vsemi=VirtualSemi;
+
+/* 
+ this rule must be assigned when called
+ in order to use a value converter to replace the
+ line terminator with a semicolon
+ */
+VirtualSemi returns ecore::EString: ';' | LT;
+// terminal rules
+terminal ID  : ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9'|'ä'|'ü'|'ö'|'ß')*;
+terminal NUMBER returns ecore::EDouble
+	: '0' ('x'|'X')('0'..'9'|'A'..'F'|'a'..'f')+
+	| ( ('0'..'9')+ ('.' ('0'..'9')+)?
+	  | '.' ('0'..'9')+
+	  ) (('e'|'E') ('+'|'-')? ('0'..'9')+)?
+	;
+terminal STRING
+	: '"'
+		( '\\' ('b'|'t'|'n'|'f'|'v'|'r'|'"'|"'"|'\\'
+			| 'u' ('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')
+			)
+		| !('\\'|'"')
+		)* '"' 
+	| "'"
+		( '\\' ('b'|'t'|'n'|'f'|'v'|'r'|'"'|"'"|'\\'
+			| 'u' ('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')
+			)
+		| !('\\'|"'")
+		)* "'"
+	; 
+terminal DOC_COMMENT: '/**' -> '*/';
+terminal ML_COMMENT	: '/*' !'*' -> '*/';
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal WS	: (' '|'\t')+;
+terminal LT	: '\r' '\n'|'\r'|'\n';
+terminal ANY_OTHER: .;
+// conflict with devision
+terminal REGEX: '/^regex$/' ('a'..'z')*;
+//terminal XML
+//	: '<>' (!'<')* '</>'
+//	| '<' ID ('/>'|'>' '</' ID '>')
+//	; 	

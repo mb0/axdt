@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.as3.runtime/src/main/java"
+    creationCommands="false" creationIcons="false" editDirectory="/org.axdt.as3.edit/src"
+    modelPluginID="org.axdt.as3.runtime" modelName="As3" editPluginClass="" editorPluginClass=""
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    suppressEMFModelTags="true" testsDirectory="/org.axdt.as3.test/src/main/java"
+    testSuiteClass="org.axdt.as3.As3AllTests" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" testsPluginID="org.axdt.as3.test"
+    usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm">
+  <foreignModel>As3.ecore</foreignModel>
+  <genPackages prefix="As3E" basePackage="org.axdt" disposableProviderFactory="true"
+      interfacePackageSuffix="model" classPackageSuffix="model.impl" providerPackageSuffix="model.provider"
+      presentationPackageSuffix="model.presentation" testsPackageSuffix="model" generateExampleClass="false"
+      fileExtensions="ax3" ecorePackage="As3.ecore#/">
+    <genClasses image="false" ecoreClass="As3.ecore#//IDirective">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//IDirective/vsemi"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//IStatement"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IExpression">
+      <genOperations ecoreOperation="As3.ecore#//IExpression/evaluateType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//IAssignmentExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IConditionalExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//ILogicalExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IBitwiseExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IEqualityExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IRelationalExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IArithmeticExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IUnaryExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IPostfixExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IPrimaryExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IIdentifier"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//ILiteral"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//ILiteralFieldName"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//ICaseElement"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//INonAttributeIdentifier"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IAttribute"/>
+    <genClasses ecoreClass="As3.ecore#//IForInit"/>
+    <genClasses ecoreClass="As3.ecore#//IForInInit"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Identifiable"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Member">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Executable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3Executable/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Program/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Program/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ImportList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ImportList/imports"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Include">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Include/target"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Use">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Use/target"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Package/directives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Package/canonicalName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Type/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/extendedInterfaces"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/directives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Type/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Class/dynamic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Class/final"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Class/extendedClass"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Interface"/>
+    <genClasses ecoreClass="As3.ecore#//As3Namespace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Namespace/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Namespace/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3VariableBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableBinding/type"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3VariableBindingAssign">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableBindingAssign/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3VariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/static"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableDefinition/bindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableDefinition/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/override"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/getter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/setter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/body"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Constructor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Constructor/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Constructor/body"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3BracketAttribute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3BracketAttribute/expression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3AttributeExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3SimpleAttributeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3SimpleAttributeExpression/ident"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3QualifiedAttributeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedAttributeExpression/qualifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedAttributeExpression/property"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3DefaultXmlNamespaceStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3DefaultXmlNamespaceStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3TryStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3TryStatement/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3TryStatement/catches"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3TryStatement/finalBlock"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3CatchClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3CatchClause/error"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3CatchClause/block"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ThrowStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ThrowStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ReturnStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3WithStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3WithStatement/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3WithStatement/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3BreakStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3BreakStatement/labelName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3BreakStatement/label"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ContinueStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3ContinueStatement/labelName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3ContinueStatement/label"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3IterationStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3IterationStatement/statement"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3ConditionalIterationStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ConditionalIterationStatement/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3DoStatement"/>
+    <genClasses ecoreClass="As3.ecore#//As3WhileStatement"/>
+    <genClasses ecoreClass="As3.ecore#//As3ForStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ForStatement/init"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ForStatement/iter"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ForInStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ForInStatement/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ForInStatement/init"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3ForInStatement/forEach"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3ConditionalStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ConditionalStatement/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3SwitchStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3SwitchStatement/cases"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3CaseLabel"/>
+    <genClasses ecoreClass="As3.ecore#//As3DefaultCase"/>
+    <genClasses ecoreClass="As3.ecore#//As3ExpressionCase">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionCase/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3IfStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3IfStatement/statement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3IfStatement/elseStatement"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3LabeledStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3LabeledStatement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3LabeledStatement/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Block/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3SuperStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3SuperStatement/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ExpressionStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3EmptyStatement"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3ExpressionList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionList/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ListExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3Arguments"/>
+    <genClasses ecoreClass="As3.ecore#//As3AssignmentExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3ConditionalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ConditionalExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ConditionalExpression/statement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ConditionalExpression/elseStatement"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3BinaryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3BinaryExpression/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3BinaryExpression/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3BinaryExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3LogicalExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3BitwiseExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3EqualityExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3RelationalExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3ShiftExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3AdditiveExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3MultiplicativeExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3UnaryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3UnaryExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3DeleteExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3VoidExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3TypeOfExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3PreIncrementExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3PreDecrementExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3UnaryPlusExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3UnaryMinusExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3BitwiseNotExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3LogicalNotExpression"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3PostfixExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3PostfixExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3PostIncrementExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3PostDecrementExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3InvocationExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3InvocationExpression/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3AccessExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3AccessExpression/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3QueryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QueryExpression/operator"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3PostfixOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3PostfixOperator/identifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3PostfixOperator/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3PropertyOperator"/>
+    <genClasses ecoreClass="As3.ecore#//As3QueryOperator"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3SimpleIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3SimpleIdentifier/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3SimpleIdentifier/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3PropertyIdentifier"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3QualifiedIdentifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedIdentifier/expressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedIdentifier/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3AttributeQualifiedIdentifier"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3NonAttributeQualifiedIdentifier"/>
+    <genClasses ecoreClass="As3.ecore#//As3SimpleQualifiedIdentifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3SimpleQualifiedIdentifier/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ExpressionQualifiedIdentifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionQualifiedIdentifier/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ThisExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3SuperExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3ParenListExpression"/>
+    <genClasses ecoreClass="As3.ecore#//As3FunctionExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FunctionExpression/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FunctionExpression/body"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3NewExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3NewExpression/target"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ArrayInitializer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ArrayInitializer/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ArrayElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ArrayElement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ObjectInitializer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ObjectInitializer/fields"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3LiteralField">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3LiteralField/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3LiteralField/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3XmlInitializer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3XmlInitializer/value"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3NullLiteral"/>
+    <genClasses ecoreClass="As3.ecore#//As3BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3NumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3RegexLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3RegexLiteral/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

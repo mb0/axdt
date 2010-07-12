@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="configProvider" name="%configProvider" schema="src/main/exsd/configProvider.exsd"/>
+   <extension
+         id="org.axdt.as3.imp.nature"
+         name="%axdtNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run class="org.axdt.core.model.impl.AxdtProjectHandleImpl">
+         </run>
+      </runtime>
+      <builder
+            id="org.eclipse.xtext.ui.shared.xtextBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="as"
+            default-charset="UTF-8"
+            base-type="org.eclipse.core.runtime.text"
+            name="%asContentType"
+            priority="high"
+            id="as-content">
+      </content-type>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://axdt.org/uri/Axdt"
+            class="org.axdt.core.AxdtEPackage"
+            genModel="src/main/ecore/Axdt.genmodel"/>
+   </extension>
+</plugin>

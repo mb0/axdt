@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.avm.runtime/src/main/java"
+    editDirectory="/org.axdt.avm.ui/src/main/java" editorDirectory="/org.axdt.avm.editor/src"
+    modelPluginID="org.axdt.avm.runtime" modelName="Avm" editPluginClass="org.axdt.avm.ui.AvmUiActivator"
+    editorPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    testsDirectory="/org.axdt.avm.test/src/main/java" testSuiteClass="org.axdt.avm.AvmAllTests"
+    booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" editPluginID="org.axdt.avm.ui" editorPluginID="org.axdt.avm.editor"
+    testsPluginID="org.axdt.avm.test" language="">
+  <foreignModel>Avm.ecore</foreignModel>
+  <genPackages prefix="AvmE" basePackage="org.axdt" disposableProviderFactory="true"
+      interfacePackageSuffix="model" classPackageSuffix="model.impl" providerPackageSuffix="ui.provider"
+      testsPackageSuffix="model" generateExampleClass="false" multipleEditorPages="false"
+      generateModelWizard="false" contentTypeIdentifier="" fileExtensions="avm" ecorePackage="Avm.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Avm.ecore#//AvmVisibility">
+      <genEnumLiterals ecoreEnumLiteral="Avm.ecore#//AvmVisibility/PUBLIC"/>
+      <genEnumLiterals ecoreEnumLiteral="Avm.ecore#//AvmVisibility/INTERNAL"/>
+      <genEnumLiterals ecoreEnumLiteral="Avm.ecore#//AvmVisibility/PROTECTED"/>
+      <genEnumLiterals ecoreEnumLiteral="Avm.ecore#//AvmVisibility/PRIVATE"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="Avm.ecore#//List">
+      <genTypeParameters ecoreTypeParameter="Avm.ecore#//List/E"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="Avm.ecore#//Iterable">
+      <genTypeParameters ecoreTypeParameter="Avm.ecore#//Iterable/E"/>
+    </genDataTypes>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmIdentifiable">
+      <genOperations ecoreOperation="Avm.ecore#//AvmIdentifiable/getQualifier"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmIdentifiable/getName"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmIdentifiable/getCanonicalName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmDefinition"/>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmDefinitionContainer">
+      <genOperations ecoreOperation="Avm.ecore#//AvmDefinitionContainer/getTypes">
+        <genTypeParameters ecoreTypeParameter="Avm.ecore#//AvmDefinitionContainer/getTypes/T"/>
+      </genOperations>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDefinitionContainer/getMembers">
+        <genTypeParameters ecoreTypeParameter="Avm.ecore#//AvmDefinitionContainer/getMembers/T"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmPackage"/>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmType">
+      <genOperations ecoreOperation="Avm.ecore#//AvmType/isDynamic"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmType/isFinal"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmType/isInterface"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmType/isClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmTypeReference">
+      <genOperations ecoreOperation="Avm.ecore#//AvmTypeReference/getType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmDeclaredElement">
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredElement/getQualifier"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredElement/getName"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredElement/getVisibility"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmDeclaredType">
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredType/getSuperTypes"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredType/getExtendedClass"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredType/getExtendedInterfaces">
+        <genTypeParameters ecoreTypeParameter="Avm.ecore#//AvmDeclaredType/getExtendedInterfaces/T"/>
+      </genOperations>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDeclaredType/getMembers">
+        <genTypeParameters ecoreTypeParameter="Avm.ecore#//AvmDeclaredType/getMembers/T"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmMember">
+      <genOperations ecoreOperation="Avm.ecore#//AvmMember/isStatic"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmExecutable">
+      <genOperations ecoreOperation="Avm.ecore#//AvmExecutable/getParameters">
+        <genTypeParameters ecoreTypeParameter="Avm.ecore#//AvmExecutable/getParameters/T"/>
+      </genOperations>
+      <genOperations ecoreOperation="Avm.ecore#//AvmExecutable/getReturnType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmVariable">
+      <genOperations ecoreOperation="Avm.ecore#//AvmVariable/getType"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmVariable/getName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmField">
+      <genOperations ecoreOperation="Avm.ecore#//AvmField/isConstant"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmField/getType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmProperty">
+      <genOperations ecoreOperation="Avm.ecore#//AvmProperty/isReadonly"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmProperty/isWriteonly"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmProperty/getGetter"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmProperty/getSetter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmNamespace"/>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmParameter">
+      <genOperations ecoreOperation="Avm.ecore#//AvmParameter/isRest"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmConstructor"/>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmOperation">
+      <genOperations ecoreOperation="Avm.ecore#//AvmOperation/isFinal"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmOperation/isNative"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmOperation/isOverride"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Avm.ecore#//AvmElement/asdoc"/>
+    </genClasses>
+    <genClasses ecoreClass="Avm.ecore#//AvmVoid"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmNull"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmGeneric"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmVoidReference"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmNullReference"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmGenericReference"/>
+    <genClasses ecoreClass="Avm.ecore#//AvmDeclaredTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Avm.ecore#//AvmDeclaredTypeReference/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

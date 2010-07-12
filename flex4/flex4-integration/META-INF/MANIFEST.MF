@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %fragmentName
+Bundle-Vendor: %providerName
+Bundle-Localization: fragment
+Bundle-SymbolicName: org.axdt.flex4.integration;singleton:=true
+Bundle-Version: 0.0.8.qualifier
+Fragment-Host: org.axdt.flex4.sdk;bundle-version="4.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.console,
+ org.axdt.core.compiler,
+ org.eclipse.wst.xml.core;bundle-version="1.0.0",
+ org.axdt.as3.debug,
+ org.axdt.core.ui
+Export-Package: org.axdt.flex4.compiler

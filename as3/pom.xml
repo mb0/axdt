@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.axdt.as3</artifactId>
+	<version>0.0.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<parent>
+		<artifactId>org.axdt</artifactId>
+		<groupId>org.axdt</groupId>
+		<version>0.0.8-SNAPSHOT</version>
+	</parent>
+	<modules>
+		<module>as3-feature</module>
+		<module>as3-debug</module>
+		<module>as3-runtime</module>
+		<module>as3-test</module>
+		<module>as3-ui</module>
+	</modules>
+</project>

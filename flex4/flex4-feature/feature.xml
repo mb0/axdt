@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.axdt.flex4.feature"
+      label="Flex4 Feature"
+      version="0.0.8.qualifier"
+      provider-name="http://axdt.org">
+
+   <description url="http://www.axdt.org/wiki">
+      The Flex4 feature bundles a version of Adobe&apos;s opensource Flex4
+SDK and integrates it into the Axdt project. 
+Sources, samples and Air related files are removed from the bundled SDK.
+   </description>
+
+   <copyright url="http://mb0.org">
+      (c) Martin Schnabel mb0@mb0.org
+---
+Look for notice or readme files for origins of bundled content.
+   </copyright>
+
+   <license url="http://www.eclipse.org/org/documents/epl-v10.php">
+      Eclipse Public License 1.0
+You can find a copy of the license text in any Axdt feature.
+---
+The Adobe FlexSDK is licensed under: Mozilla Public License 1.1
+You can find the license text in the plugin or at http://www.mozilla.org/MPL/
+Other redistributed libraries are licensed under Apache Software
+License 2.0.
+You can find a copy of the license and more information within
+the plugins artifacts.
+   </license>
+
+   <url>
+      <update label="Axdt Updates" url="http://update.axdt.org/"/>
+   </url>
+
+</feature>

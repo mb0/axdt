@@ -1,0 +1,28 @@
+«IMPORT org::axdt::as3::ui::wizards»
+
+«DEFINE main FOR As3ProjectInfo»
+«EXPAND model FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR As3ProjectInfo»
+«FILE "src/Application.as"-»
+/*
+ * This is an example Application
+ */
+package {
+	
+	import flash.display.Sprite;
+	import flash.text.TextField;
+	
+	public class Application extends Sprite {
+		
+		public function Application() {
+			var tf:TextField = new TextField();
+			tf.width = 200;
+			tf.text = "Hello World!"
+			addChild(tf);
+		}
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

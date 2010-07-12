@@ -1,0 +1,15 @@
+The Adobe FlexSDK is licensed under:
+
+	Mozilla Public License 1.1
+
+You can find the license text at lib/license-mpl.htm
+or at http://www.mozilla.org/MPL/ or in the flex4 feature of Axdt
+
+----
+
+Other content licensed under:
+	
+	Eclipse Public License 1.0
+
+You can find the license text in any Axdt feature
+or at http://www.eclipse.org/legal/epl-v10.html

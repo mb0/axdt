@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            uri="http://axdt.org/uri/Asdoc"
+            class="org.axdt.asdoc.ui.provider.AsdocEItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.axdt.asdoc.ui.preferences.AsdocPreferences">
+      </initializer>
+   </extension>
+   <extension
+         point="org.axdt.core.runtime.configProvider">
+      <provider
+            id="org.axdt.asdoc.config"
+            class="org.axdt.asdoc.ui.preferences.AsdocPreferences">
+      </provider>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.axdt.core.ui.preferences"
+			class="org.axdt.asdoc.ui.preferences.AsdocPreferencePage"
+			id="org.axdt.asdoc.ui.preferences"
+			name="%asdocPref">
+		</page>
+   </extension>
+</plugin>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="asdoc"
+    nsURI="http://axdt.org/uri/Asdoc" nsPrefix="asdoc">
+  <eClassifiers xsi:type="ecore:EEnum" name="ParseLevel">
+    <eLiterals name="EMPTY"/>
+    <eLiterals name="PACKAGE" value="16"/>
+    <eLiterals name="TYPE" value="32"/>
+    <eLiterals name="GLOBAL" value="64" literal="GLOBAL"/>
+    <eLiterals name="MEMBER" value="128"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocElement" abstract="true" eSuperTypes="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmElement ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmIdentifiable">
+    <eOperations name="getFullUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocDefinition" abstract="true" eSuperTypes="#//AsdocElement ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocMember" abstract="true" eSuperTypes="#//AsdocDefinition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"
+        defaultValueLiteral="3"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocExecutable" abstract="true" eSuperTypes="#//AsdocMember ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmExecutable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//AsdocParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocPackage" eSuperTypes="#//AsdocElement ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmPackage">
+    <eOperations name="getChildPackage" eType="#//AsdocPackage">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="createChildPackage" eType="#//AsdocPackage">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getRoot" eType="#//AsdocRoot"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canonicalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="#//AsdocPackage" containment="true" eOpposite="#//AsdocPackage/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//AsdocPackage"
+        eOpposite="#//AsdocPackage/packages"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//AsdocType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//AsdocMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageContentParsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeContentParsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="globalContentParsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberContentParsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeContentAvailable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="globalContentAvailable"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocRoot" eSuperTypes="#//AsdocPackage">
+    <eOperations name="getPackage" eType="#//AsdocPackage">
+      <eParameters name="fqn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="createPackage" eType="#//AsdocPackage">
+      <eParameters name="fqn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocType" eSuperTypes="#//AsdocDefinition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmDeclaredType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"
+        defaultValueLiteral="3"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//AsdocMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extendedClass" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extendedInterfaces" upperBound="-1"
+        eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberContentParsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocField" eSuperTypes="#//AsdocMember ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocProperty" eSuperTypes="#//AsdocField ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="writeonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocNamespace" eSuperTypes="#//AsdocMember ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmNamespace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocParameter" eSuperTypes="#//AsdocDefinition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmParameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rest" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocConstructor" eSuperTypes="#//AsdocExecutable ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmConstructor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AsdocOperation" eSuperTypes="#//AsdocExecutable ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmOperation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="native" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="override" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+</ecore:EPackage>

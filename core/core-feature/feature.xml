@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.axdt.core.feature"
+      label="%featureName"
+      version="0.0.8.qualifier"
+      provider-name="http://axdt.org">
+
+   <description url="%descriptionUrl">
+      %description
+   </description>
+
+   <copyright url="%copyrightUrl">
+      %copyright
+   </copyright>
+
+   <license url="%licenseUrl">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateName" url="http://update.axdt.org/"/>
+   </url>
+
+</feature>

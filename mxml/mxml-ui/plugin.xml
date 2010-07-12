@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+         <category name="Axdt" id="org.axdt.category"></category>
+         <wizard name="Mxml File" icon="icons/mxml_file.gif"
+			category="org.axdt.category" class="org.axdt.mxml.ui.wizards.NewMxmlWizard"
+			id="org.axdt.mxml.ui.wizards.newMxmlWizard">
+		</wizard>
+   </extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="mxml-content"
+			base-type="org.eclipse.core.runtime.xml" name="Mxml Content-type"
+			priority="high">
+		</content-type>
+		<file-association file-extensions="mxml"
+			content-type="org.axdt.mxml.mxml-content">
+		</file-association>
+	</extension>
+	<extension point="org.eclipse.wst.xml.core.catalogContributions">
+		<catalogContribution>
+			<public publicId="http://www.adobe.com/2006/mxml"
+				uri="xsd/flex3.xsd"/>
+		</catalogContribution>
+	</extension>
+	<extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.axdt.core.ui.perspective">
+         <newWizardShortcut
+               id="org.axdt.mxml.ui.wizards.newMxmlWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+    </extension>
+</plugin>

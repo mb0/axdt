@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.core.runtime/src/main/java"
+    modelPluginID="org.axdt.core.runtime" modelName="Axdt" editPluginClass="" editorPluginClass=""
+    rootImplementsInterface="" suppressEMFModelTags="true" testsDirectory="/org.axdt.core.test/src/main/java"
+    testSuiteClass="org.axdt.core.AxdtAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" testsPluginID="org.axdt.core.test"
+    language="" usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm"
+    interfaceNamePattern="" classNamePattern="">
+  <foreignModel>Axdt.ecore</foreignModel>
+  <genPackages prefix="AxdtE" basePackage="org.axdt" disposableProviderFactory="true"
+      interfacePackageSuffix="model" classPackageSuffix="model.impl" providerPackageSuffix="model.provider"
+      presentationPackageSuffix="model.presentation" testsPackageSuffix="model" generateExampleClass="false"
+      contentTypeIdentifier="" fileExtensions="axdt" ecorePackage="Axdt.ecore#/">
+    <genDataTypes ecoreDataType="Axdt.ecore#//CoreException"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//ICommand"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IPath"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IWorkspace"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IResource"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IContainer"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IProject"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IProgressMonitor"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//IProjectDescription"/>
+    <genDataTypes ecoreDataType="Axdt.ecore#//List">
+      <genTypeParameters ecoreTypeParameter="Axdt.ecore#//List/T"/>
+    </genDataTypes>
+    <genClasses image="false" ecoreClass="Axdt.ecore#//AxdtElement">
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/getPath"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/getResource"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/getName"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/isHandle"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/getHandle"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/isConnected"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/connect"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/disconnect"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/exists"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/getParent"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtElement/isReadOnly"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Axdt.ecore#//AxdtHandle">
+      <genTypeParameters ecoreTypeParameter="Axdt.ecore#//AxdtHandle/T"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtHandle/resource"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Axdt.ecore#//AxdtHandle/delegate"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtHandle/checkDelegate"/>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Axdt.ecore#//AxdtModel/connectedProjects"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/getProject">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/getProject/project"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/getPackageRoot">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/getPackageRoot/resource"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/getProjects"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/hasAxdtNature">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/hasAxdtNature/project"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/newBuilderCommand">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/newBuilderCommand/description"/>
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/newBuilderCommand/builderId"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/getWorkspace"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtModel/connectHandle">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtModel/connectHandle/handle"/>
+        <genTypeParameters ecoreTypeParameter="Axdt.ecore#//AxdtModel/connectHandle/T"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtProject">
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/getRequiredProjectNames"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/getDefaultPackageRoot"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/getConfiguredSourcePaths"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/addToBuildSpec">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtProject/addToBuildSpec/builderId"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/removeFromBuildSpec">
+        <genParameters ecoreParameter="Axdt.ecore#//AxdtProject/removeFromBuildSpec/builderId"/>
+      </genOperations>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtProject/getPackageRoots"/>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtProjectSource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtProjectSource/project"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtProjectSource/outputLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtProjectSource/librariesLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtProjectSource/configLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Axdt.ecore#//AxdtProjectSource/connectedPackageRoots"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Axdt.ecore#//AxdtProjectSource/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtProjectHandle"/>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtPackageRoot">
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtPackageRoot/isExternal"/>
+      <genOperations ecoreOperation="Axdt.ecore#//AxdtPackageRoot/isArchive"/>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtPackageRootSource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Axdt.ecore#//AxdtPackageRootSource/resource"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Axdt.ecore#//AxdtPackageRootSource/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="Axdt.ecore#//AxdtPackageRootHandle"/>
+  </genPackages>
+</genmodel:GenModel>

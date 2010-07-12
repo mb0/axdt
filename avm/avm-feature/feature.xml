@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.axdt.avm.feature"
+      label="%featureName"
+      version="0.0.8.qualifier"
+      provider-name="%providerName">
+
+   <description url="%descriptionUrl">
+      %description
+   </description>
+
+   <copyright url="%copyrightUrl">
+      %copyright
+   </copyright>
+
+   <license url="%licenseUrl">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateName" url="http://update.axdt.org/"/>
+   </url>
+
+   <plugin
+         id="org.axdt.avm.integration"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.avm.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.avm.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

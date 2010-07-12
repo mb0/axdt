@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+   <extension
+         point="org.axdt.core.compiler.axdtCompiler">
+      <compiler
+            class="org.axdt.flex4.compiler.Flex4Compiler"
+            id="org.axdt.flex4.compiler"
+            language="As3"
+            name="%flexCompilerName">
+      </compiler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+         <category name="Axdt" id="org.axdt.category"></category>
+		<wizard name="Flex config File" icon="icons/flexconfig_file.gif"
+			category="org.axdt.category" class="org.axdt.flex4.wizards.NewFlexConfigFileWizard"
+			id="org.axdt.flex4.wizards.newFlexConfigWizard">
+		</wizard>
+   </extension>
+	<extension point="org.eclipse.wst.xml.core.catalogContributions">
+		<catalogContribution>
+			<public publicId="http://www.adobe.com/2006/flex-config"
+				uri="xsd/flex-config.xsd" />
+		</catalogContribution>
+	</extension>
+	<extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.axdt.core.ui.perspective">
+         <newWizardShortcut
+               id="org.axdt.flex4.wizards.newFlexConfigWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+    </extension>
+</fragment>
