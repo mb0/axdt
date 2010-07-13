@@ -100,13 +100,22 @@
          </actionSet>
       </perspectiveExtension>
    </extension>
-   
    <extension
-         point="org.eclipse.ui.ide.projectNatureImages">
-      <image
-            icon="icons/nature.gif"
-            natureId="org.axdt.as3.imp.nature"
-            id="org.axdt.core.ui.nature_img">
-      </image>
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            icon="icons/ovr16/nature_ovr.gif"
+            id="org.axdt.core.ui.nature_img"
+            label="As3 Nature"
+            lightweight="true"
+            location="TOP_RIGHT"
+            state="true">
+         <enablement>
+            <objectState
+                  name="nature"
+                  value="org.axdt.as3.imp.nature">
+            </objectState>
+         </enablement>
+      </decorator>
    </extension>
 </plugin>
