@@ -12,8 +12,6 @@ import org.axdt.as3.model.As3Interface;
 import org.axdt.as3.model.As3Namespace;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Program;
-import org.axdt.as3.model.As3Variable;
-import org.axdt.as3.model.As3VariableDefinition;
 import org.axdt.as3.model.IAttribute;
 import org.axdt.avm.model.AvmParameter;
 import org.axdt.avm.model.AvmTypeReference;

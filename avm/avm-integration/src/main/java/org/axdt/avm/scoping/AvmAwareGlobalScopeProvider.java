@@ -22,7 +22,12 @@ public class AvmAwareGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		IScope result = definitionScopeProvider.getScope(context, reference);
+		IScope result;
+		try {
+			result = definitionScopeProvider.getScope(context, reference);
+		} catch (IllegalStateException e) {
+			result = IScope.NULLSCOPE;
+		}
 		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();

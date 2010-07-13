@@ -9,8 +9,8 @@ import org.axdt.as3.formatting.As3ValueSerializer;
 import org.axdt.as3.resource.As3ResourceDescriptionManager;
 import org.axdt.as3.scoping.As3ImportScopeProvider;
 import org.axdt.as3.validation.As3DiagnosticConverter;
+import org.axdt.avm.naming.AvmQualifiedNameProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -33,10 +33,8 @@ public class As3RuntimeModule extends org.axdt.as3.AbstractAs3RuntimeModule {
 			.annotatedWith(Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate"))
 			.to(As3ImportScopeProvider.class);
 	}
-	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		//return As3QualifiedNameProvider.class;
-		return DefaultDeclarativeQualifiedNameProvider.class;
+		return AvmQualifiedNameProvider.class;
 	}
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {

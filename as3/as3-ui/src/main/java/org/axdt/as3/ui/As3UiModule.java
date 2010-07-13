@@ -13,6 +13,7 @@ import org.axdt.as3.ui.folding.As3FoldingRegionProvider;
 import org.axdt.as3.ui.folding.As3FoldingStructureProvider;
 import org.axdt.as3.ui.matching.As3BracketMatcher;
 import org.axdt.as3.ui.preferences.As3EditorPreferences;
+import org.axdt.as3.ui.templates.As3CrossReferenceTemplateVariableResolver;
 import org.axdt.as3.ui.templates.As3TemplateProposalProvider;
 import org.axdt.as3.ui.wizards.As3ProjectCreator;
 import org.axdt.asdoc.access.AsdocDefinitionProviderFactory;
@@ -27,6 +28,7 @@ import org.axdt.avm.access.IAxdtProjectProvider;
 import org.axdt.avm.access.IDefinitionProvider;
 import org.axdt.avm.scoping.AbstractDefinitionScopeProvider;
 import org.axdt.avm.scoping.AvmAwareGlobalScopeProvider;
+import org.axdt.avm.ui.naming.AvmPrefixMatcher;
 import org.axdt.avm.ui.proposal.IAvmProposalProvider;
 import org.axdt.core.ui.img.AxdtImageHelper;
 import org.axdt.core.ui.preferences.CorePreferences;
@@ -34,18 +36,24 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -90,13 +98,14 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends IBracketMatcher> bindIBracketMatcher() {
 		return As3BracketMatcher.class;
 	}
+	@Override
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return As3ImageHelper.class;
 	}
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return As3LocationInFileProvider.class;
 	}
-
+	@Override
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return As3TemplateProposalProvider.class;
 	}
@@ -112,9 +121,19 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends IAvmProposalProvider> bindIAvmProposalProvider() {
 		return AsdocProposalProvider.class;
 	}
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher> bindPrefixMatcher() {
-		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
+	@Override
+	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
+		return AvmPrefixMatcher.class;
 	}
+	public Class<? extends IQualifiedNameSupport> bindIQualifiedNameSupport() {
+		return AvmPrefixMatcher.class;
+	}
+	public void configureAvmPrefixMatcher_delegate(Binder binder) {
+		binder.bind(PrefixMatcher.class)
+			.annotatedWith(Names.named(AvmPrefixMatcher.DELEGATE_NAME))
+			.to(PrefixMatcher.CamelCase.class);
+	}
+	@Override
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return AvmResourceSetProvider.class;
 	}
@@ -123,6 +142,9 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return AvmAwareGlobalScopeProvider.class;
+	}
+	public Class<? extends CrossReferenceTemplateVariableResolver> bindCrossReferenceTemplateVariableResolver() {
+		return As3CrossReferenceTemplateVariableResolver.class;
 	}
 }
 class As3ImageHelper implements IImageHelper {

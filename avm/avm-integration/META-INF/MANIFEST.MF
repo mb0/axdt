@@ -10,5 +10,6 @@ Require-Bundle: org.axdt.core.runtime,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.avm.access,
+ org.axdt.avm.naming,
  org.axdt.avm.scoping,
  org.axdt.avm.util

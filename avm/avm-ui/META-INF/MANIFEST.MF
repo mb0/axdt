@@ -9,6 +9,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.axdt.avm.ui,
+ org.axdt.avm.ui.naming,
  org.axdt.avm.ui.proposal,
  org.axdt.avm.ui.provider
 Require-Bundle: org.eclipse.xtext.ui,
