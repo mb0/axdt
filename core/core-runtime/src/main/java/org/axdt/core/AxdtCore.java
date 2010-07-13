@@ -11,7 +11,7 @@ public class AxdtCore extends Plugin {
 	// TODO compatibility with flexmojos
 	public static final String NATURE_ÌD = "org.axdt.as3.imp.nature";
 	// TODO compatibility with flexmojos
-	public static final String BUILDER_ID = "org.axdt.as3.imp.builder";
+	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder";
 
 	private static AxdtCore AXDT_CORE_PLUGIN;
 
