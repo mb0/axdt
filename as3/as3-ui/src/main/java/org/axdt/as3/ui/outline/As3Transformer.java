@@ -6,7 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.axdt.as3.model.As3Class;
+import org.axdt.as3.model.As3FieldBinding;
+import org.axdt.as3.model.As3FieldDefinition;
 import org.axdt.as3.model.As3Interface;
+import org.axdt.as3.model.As3Namespace;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Program;
 import org.axdt.as3.model.As3Variable;
@@ -28,20 +31,23 @@ public class As3Transformer extends AbstractDeclarativeSemanticModelTransformer 
 	public ContentOutlineNode createNode(As3Program node, ContentOutlineNode parent) {
 		return parent;
 	}
-	public ContentOutlineNode createNode(As3VariableDefinition node, ContentOutlineNode parent) {
+	public ContentOutlineNode createNode(As3FieldDefinition node, ContentOutlineNode parent) {
 		return parent;
 	}
 	protected List<EObject> getChildren(As3Operation node) {
 		return Collections.emptyList();
 	}
-	protected List<EObject> getChildren(As3Variable node) {
+	protected List<EObject> getChildren(As3FieldBinding node) {
+		return Collections.emptyList();
+	}
+	protected List<EObject> getChildren(As3Namespace node) {
 		return Collections.emptyList();
 	}
 	protected List<EObject> getChildren(As3Class node) {
-		return Lists.<EObject>newArrayList(node.getDirectives());
+		return Lists.<EObject>newArrayList(node.getMembers());
 	}
 	protected List<EObject> getChildren(As3Interface node) {
-		return Lists.<EObject>newArrayList(node.getDirectives());
+		return Lists.<EObject>newArrayList(node.getMembers());
 	}
 	public boolean consumeNode(IAttribute local) {
 		return false;

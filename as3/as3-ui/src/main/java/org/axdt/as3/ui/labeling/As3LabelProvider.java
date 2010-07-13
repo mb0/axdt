@@ -11,13 +11,17 @@ import org.axdt.as3.model.As3FieldDefinition;
 import org.axdt.as3.model.As3Import;
 import org.axdt.as3.model.As3ImportList;
 import org.axdt.as3.model.As3Interface;
+import org.axdt.as3.model.As3Namespace;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Package;
 import org.axdt.as3.model.As3Parameter;
 import org.axdt.as3.model.As3PropertyIdentifier;
+import org.axdt.as3.model.As3Type;
 import org.axdt.as3.model.As3Variable;
+import org.axdt.avm.model.AvmDeclaredTypeReference;
 import org.axdt.avm.model.AvmGenericReference;
 import org.axdt.avm.model.AvmParameter;
+import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVisibility;
 import org.axdt.avm.model.AvmVoidReference;
@@ -43,11 +47,14 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
 	Object image(As3ImportList ele) {
     	return IMPORTS;
     }
+	Object text(As3ImportList ele) {
+    	return "imports";
+    }
     Object image(As3Import ele) {
     	return IMPORT;
     }
     Object text(As3Import ele) {
-    	return ele.getCanonicalName();
+    	return ele.getQualifiedName();
     }
     Object image(As3Class ele) {
     	return CLASS;
@@ -55,32 +62,38 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     Object image(As3Interface ele) {
     	return INTERFACE;
     }
+    Object text(As3Type ele) {
+    	return ele.getName();
+    }
     Object text(As3Operation ele) {
     	EList<As3Parameter> params = ele.getParameters();
     	StringBuilder result = new StringBuilder();
-    	result.append(ele.getName()).append('(');
-    	if (params != null && params.size() > 0) {
-	    	for (AvmParameter param:params) {
-	    		if (result.length() > 0) result.append(',');
-	    		result.append(getText(param));
-	    	}
-    	}
-    	result.append(')');
+    	result.append(ele.getName()).append(doGetText(params));
     	if (ele.getReturnType() != null) {
-    		result.append(':').append(getText(ele.getReturnType()));
+    		result.append(':').append(doGetText(ele.getReturnType()));
     	}
     	return result.toString();
+    }
+    Object text(List<AvmParameter> params) {
+    	if (params == null || params.size() == 0) return "()";
+    	StringBuilder result = new StringBuilder();
+    	for (AvmParameter param:params)
+    		( result.length() == 0 
+    		? result.append('(')
+    		: result.append(", ")
+    		).append(getText(param));
+    	return result.append(')').toString();
     }
     Object text(AvmTypeReference ele) {
     	if (ele instanceof AvmGenericReference) return "*";
     	if (ele instanceof AvmVoidReference) return "void";
     	if (ele.getType() == null) return "";
-    	return getText(ele.getType());
+    	return doGetText(ele.getType());
     }
     Object text(As3PropertyIdentifier ele) {
     	return ele.getName() != null
     		? ele.getName()
-    		: text(ele.getReference());
+    		: doGetText(ele.getReference());
     }
     Object text(EObject eObject) {
     	if (eObject == null) return null;
@@ -100,9 +113,6 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
 		return null;
     }
     Object image(As3Operation ele) {
-    	if (ele.eContainer() instanceof As3Interface) {
-    		return METHOD_PUBLIC;
-    	}
     	AvmVisibility visibility = ele.getVisibility();
 		if (AvmVisibility.PUBLIC.equals(visibility))
 			return METHOD_PUBLIC;
@@ -114,7 +124,23 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     }
     Object text(As3FieldBinding ele) {
     	return ele.getName()
-			+ (ele.getType() != null ? getText(ele.getType()) : "");
+			+ (ele.getType() != null ? ":"+getText(ele.getType()) : "");
+    }
+    Object text(AvmGenericReference ele) {
+    	return "*";
+    }
+    Object text(AvmVoidReference ele) {
+    	return "void";
+    }
+    Object text(AvmDeclaredTypeReference ele) {
+    	AvmType type = ele.getType();
+    	return type == null ? "null" : type.getName();
+    }
+    Object text(As3Namespace ele) {
+    	return ele.getName();
+    }
+    Object image(As3Namespace ele) {
+    	return NAMESPACE;
     }
     Object image(As3FieldBinding ele) {
 		As3FieldDefinition def = (As3FieldDefinition) ele.eContainer();
@@ -129,7 +155,7 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     }
     Object text(As3Variable ele) {
     	return ele.getName()
-			+ (ele.getType() != null ? getText(ele.getType()) : "");
+			+ (ele.getType() != null ? ":"+doGetText(ele.getType()) : "");
     }
     Object image(As3Variable ele) {
     	return VARIABLE;
