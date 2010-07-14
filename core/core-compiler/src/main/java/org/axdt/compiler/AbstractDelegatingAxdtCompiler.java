@@ -45,10 +45,12 @@ public abstract class AbstractDelegatingAxdtCompiler implements IAxdtCompiler {
 	}
 	public boolean compile(AxdtCompilerTarget target, IProgressMonitor monitor)
 			throws Exception {
-		return compile(target, getDefaultCompilerId(target), monitor);
+		return compile(target, null, monitor);
 	}
 	public boolean compile(AxdtCompilerTarget target, String compilerId, IProgressMonitor monitor)
 		throws Exception {
+		if (compilerId == null)
+			compilerId = getDefaultCompilerId(target);
 		if (compilerId != null) {
 			IAxdtCompiler compiler = getCompiler(compilerId);
 			return doCompile(compiler, target, monitor);

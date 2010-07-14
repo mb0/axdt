@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Control;
 
 public abstract class AbstractLauncherPreferenceTab extends AbstractFieldEditorPage implements ILaunchConfigurationTab {
 
-	private ILaunchConfigurationDialog fLaunchConfigurationDialog;
-	private boolean initialized;
+	protected ILaunchConfigurationDialog fLaunchConfigurationDialog;
+	protected boolean initialized;
 	
 	public AbstractLauncherPreferenceTab(PrefPage page) {
 		super(page);

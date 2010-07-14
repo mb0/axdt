@@ -33,4 +33,17 @@
          </newWizardShortcut>
       </perspectiveExtension>
     </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.axdt.core.ui.preferences"
+            class="org.axdt.flex4.preferences.Flex4PreferencePage"
+            id="org.axdt.flex4.preferences"
+            name="%flexPref"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.axdt.flex4.preferences.Flex4Preferences"/>
+   </extension>
 </fragment>

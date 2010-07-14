@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.core.variables,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.as3.debug.preferences
+Import-Package: org.apache.log4j

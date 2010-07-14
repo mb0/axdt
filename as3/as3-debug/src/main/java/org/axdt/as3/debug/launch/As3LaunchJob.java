@@ -4,6 +4,7 @@ import org.axdt.as3.debug.As3DebugPlugin;
 import org.axdt.as3.debug.IAs3DebugConstants;
 import org.axdt.as3.debug.compiler.As3DelegatingCompiler;
 import org.axdt.as3.debug.preferences.As3CompilerPreferences;
+import org.axdt.compiler.AxdtCompilerConfig;
 import org.axdt.compiler.AxdtCompilerTarget;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -53,8 +54,11 @@ public class As3LaunchJob extends Job implements IProcess {
 		AxdtCompilerTarget target = compiler.getTargetFor(file);
 		setTargetContext(target,As3CompilerPreferences.SEARCH_LIBS,true);
 		setTargetContext(target,As3CompilerPreferences.SEARCH_CONFIG,false);
-		setTargetContext(target,As3CompilerPreferences.FLEX3_COMPATIBILITY,false);
-		String compilerid = As3CompilerPreferences.getInstance().getString(configuration, As3CompilerPreferences.COMPILER_CHOICE);
+		setTargetContext(target,AxdtCompilerConfig.COMPATIBILITY_CHOICE,AxdtCompilerConfig.CHOICE_NONE);
+		setTargetContext(target,AxdtCompilerConfig.CACHE_CHOICE,AxdtCompilerConfig.CHOICE_NONE);
+		String compilerid = configuration.getAttribute(AxdtCompilerConfig.COMPILER_CHOICE, AxdtCompilerConfig.CHOICE_NONE);
+		if (AxdtCompilerConfig.CHOICE_NONE.equals(compilerid))
+			compilerid = null;
 		monitor.beginTask("Compiling Targets", 100);
 		boolean successful = compiler.compile(target, compilerid, monitor);
 		monitor.done();
@@ -62,6 +66,9 @@ public class As3LaunchJob extends Job implements IProcess {
 		handleSuccess(target,successful);
 	}
 	protected void setTargetContext(AxdtCompilerTarget target, String key, boolean defaultValue) throws CoreException {
+		target.setContext(key, configuration.getAttribute(key, defaultValue));
+	}
+	protected void setTargetContext(AxdtCompilerTarget target, String key, String defaultValue) throws CoreException {
 		target.setContext(key, configuration.getAttribute(key, defaultValue));
 	}
 	protected void handleSuccess(AxdtCompilerTarget compilerTarget, boolean successful) {
