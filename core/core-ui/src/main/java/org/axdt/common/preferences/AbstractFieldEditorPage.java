@@ -29,13 +29,21 @@ public abstract class AbstractFieldEditorPage extends FieldEditorPreferencePage 
 		FieldSpec<?>[] specs = page.getFieldSpecs();
 		Composite tmp = content;
 		for (int index = 0; index < specs.length; index++) {
+			PrefGroup group = page.openGroup(index);
+			if (group != null && isExcluded(group)) {
+				index = group.getEnd()-1;
+				continue;
+			}
+			tmp = openGroup(group, tmp);
 			FieldSpec<?> spec = specs[index];
-			tmp = closeGroup(page.closeGroup(index), tmp);
-			tmp = openGroup(page.openGroup(index), tmp);
 			FieldEditor field = createFieldFromSpec(spec, tmp);
 			if (field != null) addField(field);
+			tmp = closeGroup(page.closeGroup(index+1), tmp);
 		}
-		closeGroup(page.closeGroup(specs.length), tmp);
+	}
+
+	protected boolean isExcluded(PrefGroup group) {
+		return false;
 	}
 
 	@Override

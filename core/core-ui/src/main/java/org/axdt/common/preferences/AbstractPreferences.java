@@ -64,11 +64,14 @@ public abstract class AbstractPreferences extends AbstractPreferenceInitializer 
 		groups.clear();
 	}
 
-	protected PrefGroup addGroup(String title, boolean keepLayout) {
+	protected PrefGroup addGroup(String title, boolean keepLayout, int flags) {
 		int index = endGroup();
-		lastGroup = new PrefGroup(title, keepLayout, index);
+		lastGroup = new PrefGroup(title, keepLayout, flags, index);
 		groups.add(lastGroup);
 		return lastGroup;
+	}
+	protected PrefGroup addGroup(String title, boolean keepLayout) {
+		return addGroup(title, keepLayout, 0);
 	}
 
 	protected int endGroup() {

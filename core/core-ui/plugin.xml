@@ -7,7 +7,6 @@
             class="org.axdt.core.ui.preferences.CorePreferencePage"
             id="org.axdt.core.ui.preferences"
             name="%axdtPrefBase">
-            
         </page>
    </extension>
    <extension
@@ -117,5 +116,27 @@
             </objectState>
          </enablement>
       </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+         <content-type
+               file-extensions="swf"
+               id="org.axdt.core.ui.swf.contentType"
+               name="Swf content-type"
+               priority="normal">
+         </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+      		launcher="org.axdt.core.ui.swf.SwfEditorLauncher"
+            default="true"
+            icon="icons/swf_obj.gif"
+            id="org.axdt.core.ui.swf.editorSupport"
+            name="Swf Browser">
+         <contentTypeBinding
+               contentTypeId="org.axdt.core.ui.swf.contentType">
+         </contentTypeBinding>
+     </editor>
    </extension>
 </plugin>

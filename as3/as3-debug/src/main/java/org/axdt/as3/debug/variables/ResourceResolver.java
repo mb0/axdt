@@ -13,6 +13,7 @@ public class ResourceResolver implements IDynamicVariableResolver {
 
 	public String resolveValue(IDynamicVariable variable, String argument)
 			throws CoreException {
+		// XXX dirty hack
 		IStringVariableManager manager = VariablesPlugin.getDefault()
 				.getStringVariableManager();
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();

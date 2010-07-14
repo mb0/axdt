@@ -18,6 +18,7 @@ Export-Package: org.axdt.common.preferences,
  org.axdt.core.ui,
  org.axdt.core.ui.img,
  org.axdt.core.ui.perspective,
- org.axdt.core.ui.preferences
+ org.axdt.core.ui.preferences,
+ org.axdt.core.ui.swf
 Bundle-Activator: org.axdt.core.ui.CoreUiActivator
 Bundle-ActivationPolicy: lazy

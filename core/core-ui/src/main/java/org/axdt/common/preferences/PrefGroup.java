@@ -1,16 +1,18 @@
 package org.axdt.common.preferences;
 
 public class PrefGroup {
+	
+	protected int flags;
+	protected String title;
+	protected boolean keepLayout;
+	protected int start;
+	protected int end;
 
-	private String title;
-	private boolean keepLayout;
-	private int start;
-	private int end;
-
-	public PrefGroup(String title, boolean keepLayout, int startIndex) {
+	public PrefGroup(String title, boolean keepLayout, int flags, int startIndex) {
 		this.title = title;
 		this.keepLayout = keepLayout;
-		start = startIndex;
+		this.start = startIndex;
+		this.flags = flags;
 	}
 
 	public void setEnd(int endIndex) {
@@ -31,5 +33,9 @@ public class PrefGroup {
 
 	public int getEnd() {
 		return end;
+	}
+
+	public int getFlags() {
+		return flags;
 	}
 }

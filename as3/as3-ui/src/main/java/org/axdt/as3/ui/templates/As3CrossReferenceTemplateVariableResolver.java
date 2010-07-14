@@ -14,6 +14,8 @@ public class As3CrossReferenceTemplateVariableResolver extends
 		CrossReferenceTemplateVariableResolver {
 	@Override
 	public List<String> resolveValues(TemplateVariable variable, XtextTemplateContext castedContext) {
+		// TODO do not resolve variables unless the template is actually applied
+		// if proposal it is a preview castedContext.isReadOnly() is false
 		return Lists.transform(super.resolveValues(variable, castedContext), new Function<String, String>() {
 			private int index;
 			public String apply(String from) {

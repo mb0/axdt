@@ -8,6 +8,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 public interface IAxdtPreferences extends IAxdtConfig {
 	String PAGE_DEFAULT = "PAGE_DEFAULT";
+	int EXCLUDE_IN_PREFERENCE = 1<<3;
+	int EXCLUDE_IN_PROPERTIES = 1<<4;
 
 	String getQualifier();
 	void initializeDefaultPreferences();

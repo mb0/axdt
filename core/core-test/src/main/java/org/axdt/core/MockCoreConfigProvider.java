@@ -6,6 +6,8 @@ import java.util.Map;
 import org.axdt.common.config.IAxdtConfig;
 import org.axdt.common.config.IAxdtConfigProvider;
 import org.axdt.core.config.ICoreConfig;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 
@@ -60,11 +62,6 @@ public class MockCoreConfigProvider implements IAxdtConfigProvider, ICoreConfig 
 		IPath path = res.getProject().getLocation();
 		return Lists.newArrayList(path.append("src"),path.append("test"));
 	}
-	public IPath getOutputLocation(IResource res) {
-		if (res == null || res.getProject() == null) return null;
-		IPath path = res.getProject().getLocation();
-		return path.append("bin");
-	}
 	
 	public List<IPath> getLibraryLocations(IResource res) {
 		if (res == null || res.getProject() == null) return null;
@@ -72,9 +69,14 @@ public class MockCoreConfigProvider implements IAxdtConfigProvider, ICoreConfig 
 		return Lists.newArrayList(path.append("foo"),path.append("bar"));
 	}
 	
-	public IPath getConfigLocation(IResource res) {
+	public IContainer getOutputResource(IResource res) {
 		if (res == null || res.getProject() == null) return null;
-		IPath path = res.getProject().getLocation();
-		return path.append("spam");
+		IProject path = res.getProject();
+		return path.getFolder("bin");
+	}
+	public IContainer getConfigResource(IResource res) {
+		if (res == null || res.getProject() == null) return null;
+		IProject path = res.getProject();
+		return path.getFolder("spam");
 	}
 }

@@ -44,6 +44,11 @@ public abstract class AbstractPreferencePage extends AbstractFieldEditorPage imp
 		return element;
 	}
 
+	@Override
+	protected boolean isExcluded(PrefGroup group) {
+		return 0 != (group.getFlags() & IAxdtPreferences.EXCLUDE_IN_PREFERENCE);
+	}
+
 	/**
 	 * only when used as property page
 	 * @see org.eclipse.ui.IWorkbenchPropertyPage#setElement(org.eclipse.core.runtime.IAdaptable)

@@ -30,17 +30,23 @@ public class As3CompilerTarget extends AxdtCompilerTarget {
 
 	@Override
 	public IPath getConfigLocation() {
-		return getConfig() != null ? getConfig().getConfigLocation(resource) : null;
+		return getConfig() != null
+				? getConfig().getConfigResource(resource).getLocation() 
+				: null;
 	}
 
 	@Override
 	public IPath getDeployLocation() {
-		return getConfig() != null ? getConfig().getOutputLocation(resource) : null;
+		return getConfig() != null
+				? getConfig().getOutputResource(resource).getLocation()
+				: null;
 	}
 
 	@Override
 	public List<IPath> getSourceLocations() {
-		return getConfig() != null ? getConfig().getSourceLocations(resource) : null;
+		return getConfig() != null 
+				? getConfig().getSourceLocations(resource) 
+				: null;
 	}
 
 	public List<File> getResolvedLibraries() {
