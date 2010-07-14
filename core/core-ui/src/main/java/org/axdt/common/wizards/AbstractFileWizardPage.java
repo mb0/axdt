@@ -149,7 +149,8 @@ public abstract class AbstractFileWizardPage extends WizardPage implements Modif
 
 	public String getFileName() {
 		String fileName = fileText.getText();
-		if (fileName.endsWith(getExtension())) fileName += getExtension();
+		if (!fileName.endsWith(getExtension())) 
+			fileName += getExtension();
 		return fileName;
 	}
 	protected void updateStatus(String message) {

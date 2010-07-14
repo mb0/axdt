@@ -14,10 +14,10 @@ import com.google.common.collect.Lists;
 
 public class As3CompilerPreferences extends AbstractPreferences {
 
-	public static final String COMPILER_CHOICE = "COMPILER_CHOICE";
-	public static final String GATHER_LIBS = "GATHER_LIBS";
-	public static final String SEARCH_CONFIG = "SEARCH_CONFIG";
-	public static final String FLEX3_COMPATIBILITY = "FLEX3_COMPATIBILITY";
+	public static final String COMPILER_CHOICE = "compiler";
+	public static final String SEARCH_LIBS = "searchLibraries";
+	public static final String SEARCH_CONFIG = "searchConfiguration";
+	public static final String FLEX3_COMPATIBILITY = "flex3Compatibility";
 
 	private static As3CompilerPreferences instance;
 
@@ -28,18 +28,21 @@ public class As3CompilerPreferences extends AbstractPreferences {
 		return instance;
 	}
 	public As3CompilerPreferences() {
-		super("Preferences for the As3 compilers");
+		super("Compiler preferences");
 	}
 	public String getQualifier() {
 		return As3DebugPlugin.PLUGIN_ID;
 	}
 
 	public void initializeFieldSpecs() {
-		add(COMPILER_CHOICE,"Select Default Compiler",getCompilerChoices());
-		add(GATHER_LIBS, "Automatically add all swc files in the lib folder.", true);
-		add(FLEX3_COMPATIBILITY, "Use Flex3 compatibility mode.", false);
-		addGroup("Search and apply the ${target_name}-config.xml:", true);
-		add(SEARCH_CONFIG, "In the config folder.", false);
+		addGroup("Compiler", false);
+		add(COMPILER_CHOICE,"Use ",getCompilerChoices());
+		addGroup("Configuration", true);
+		add(SEARCH_CONFIG, "Search the config folder for ${target_name}-config.xml", false);
+		addHelp("Axdt always searches the target's folder.");
+		add(FLEX3_COMPATIBILITY, "Use Flex3 compatibility mode", false);
+		addGroup("Libraries", true);
+		add(SEARCH_LIBS, "Search the library folders for Swc files", true);
 		// TODO add help link
 	}
 	private String[][] getCompilerChoices() {

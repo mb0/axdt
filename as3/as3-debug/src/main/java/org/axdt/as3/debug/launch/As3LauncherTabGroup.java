@@ -30,7 +30,6 @@ class LaucherCompilerPreferences extends As3CompilerPreferences {
 	public void initializeFieldSpecs() {
 		addGroup(null, false);
 		add(IAs3DebugConstants.TARGET, "Build target", "", new String[]{"as","mxml"});
-		addGroup(null, false);
 		super.initializeFieldSpecs();
 	}
 }

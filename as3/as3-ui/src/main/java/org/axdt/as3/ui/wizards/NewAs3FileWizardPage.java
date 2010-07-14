@@ -30,6 +30,7 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 	public NewAs3FileWizardPage(ISelection selection) {
 		super("wizardPage", selection);
 	}
+
 	@Override
 	public void createContent(Composite parent) {
 		createContainerContent(parent);
@@ -37,16 +38,19 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		createFileContent(parent);
 		createTemplateContent(parent);
 	}
+
 	@Override
 	protected void createContainerContentLable(Composite parent) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setText("Source &folder:");
 	}
+
 	@Override
 	protected void createFileContentLable(Composite parent) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setText("File &name:");
 	}
+
 	protected void createPackageContent(Composite parent) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setText("&Package:");
@@ -55,12 +59,14 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		packageText.addModifyListener(this);
 		new Label(parent, SWT.NULL);
 	}
+
 	protected void createTemplateContent(Composite parent) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setText("Template:");
 		SelectionAdapter adapter = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if (e.widget instanceof Button) return;
+				if (e.widget instanceof Button)
+					return;
 				Button b = (Button) e.widget;
 				template = b.getText().replaceAll("&", "");
 			}
@@ -69,12 +75,13 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		group.setLayout(new RowLayout());
 		createTemplateRadioButton(group, "&Simple", adapter);
-		createTemplateRadioButton(group, "&Class", adapter)
-				.setSelection(true);
+		createTemplateRadioButton(group, "&Class", adapter).setSelection(true);
 		createTemplateRadioButton(group, "&Interface", adapter);
 		createTemplateRadioButton(group, "&Example", adapter);
 	}
-	protected Button createTemplateRadioButton(Composite group, String name, SelectionAdapter adapter) {
+
+	protected Button createTemplateRadioButton(Composite group, String name,
+			SelectionAdapter adapter) {
 		Button button = new Button(group, SWT.RADIO);
 		button.setText(name);
 		button.addSelectionListener(adapter);
@@ -86,17 +93,21 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		packageText.setSelection(packageText.getText().length());
 		packageText.setFocus();
 	}
+
 	protected IPath computeRootPath(IResource res, Iterable<IPath> sourcePaths) {
 		if (res.getType() == IResource.PROJECT) {
 			Iterator<IPath> iterator = sourcePaths.iterator();
 			return iterator.hasNext() ? iterator.next() : null;
 		}
-		for (IPath path:sourcePaths) {
-			if (path.isPrefixOf(res.getFullPath())) return path;
+		IPath fullPath = res.getFullPath();
+		for (IPath path : sourcePaths) {
+			if (path.isPrefixOf(fullPath))
+				return path;
 		}
 		return null;
 	}
-	protected String computePackageName(IResource res, IContainer cont) {
+
+	protected String computePackageName(IResource res, IResource cont) {
 		IPath result = res.getFullPath();
 		if (res.getType() == IResource.FILE)
 			result = result.removeLastSegments(0);
@@ -104,20 +115,23 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		result = result.removeFirstSegments(matchingSegments);
 		return Join.join(".", result.segments());
 	}
+
 	@Override
 	protected void initializeWithSelection(IResource resource) {
-		AxdtProject axdtProject = AxdtCore.getModel().getProject(resource.getProject());
+		AxdtProject axdtProject = AxdtCore.getModel().getProject(
+				resource.getProject());
 		Iterable<IPath> sourcePaths = axdtProject.getConfiguredSourcePaths();
 		IPath rootPath = computeRootPath(resource, sourcePaths);
-		if (rootPath == null) return;
+		if (rootPath == null)
+			return;
 		IWorkspaceRoot wsroot = resource.getWorkspace().getRoot();
-		IContainer cont = wsroot.getContainerForLocation(rootPath);
+		IResource cont = wsroot.findMember(rootPath);
 		if (cont != null) {
 			String pack = computePackageName(resource, cont);
-			if (pack != null && pack.length() > 0) 
+			if (pack != null && pack.length() > 0)
 				packageText.setText(pack);
 		} else {
-			if (resource instanceof IContainer) 
+			if (resource instanceof IContainer)
 				cont = (IContainer) resource;
 			else
 				cont = resource.getParent();
@@ -128,28 +142,28 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 	@Override
 	protected void dialogChanged() {
 		String fileName = getFileName();
-		if (fileName.indexOf('.') == fileName.length()-getExtension().length()) {
+		int indexOf = fileName.indexOf('.');
+		if (indexOf > 0 && !fileName.matches("^[^.]+\\" + getExtension() + "$")) {
 			updateStatus("Type name must not contain dots");
 		} else {
 			super.dialogChanged();
 		}
 	}
 
-
 	public String getPackageName() {
 		return packageText.getText();
 	}
+
 	public IPath getPackagePath() {
-		return getContainerPath()
-				.append(getPackageName().replace('.', '/'))
+		return getContainerPath().append(getPackageName().replace('.', '/'))
 				.addTrailingSeparator();
 	}
 
 	@Override
 	public IPath getFilePath() {
-		return getPackagePath().append(getFileName() + getExtension());
+		return getPackagePath().append(getFileName());
 	}
-	
+
 	public String getTemplate() {
 		return template;
 	}

@@ -5,14 +5,14 @@ import org.axdt.compiler.AbstractDelegatingAxdtCompiler;
 import org.axdt.compiler.AxdtCompilerTarget;
 import org.eclipse.core.resources.IFile;
 
-public class As3CompilerDelegate extends AbstractDelegatingAxdtCompiler {
-	private static As3CompilerDelegate instance = null;
+public class As3DelegatingCompiler extends AbstractDelegatingAxdtCompiler {
+	private static As3DelegatingCompiler instance = null;
 	/**
 	 * @return the singleton as3 compiler delegate
 	 */
-	public static As3CompilerDelegate getInstance() {
+	public static As3DelegatingCompiler getInstance() {
 		if (instance == null) {
-			instance = new As3CompilerDelegate();
+			instance = new As3DelegatingCompiler();
 		}
 		return instance;
 	}

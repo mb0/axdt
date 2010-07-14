@@ -84,7 +84,13 @@ public class NewFlexConfigFileWizard extends AbstractFileWizard {
 	private InputStream openContentStream() {
 		String contents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 				+ "<flex-config xmlns= \"http://www.adobe.com/2006/flex-config\">\n"
-				+ "\t\n"
+				+ "\t<metadata>\n"
+				+ "\t\t<title>Your Application</title>\n"
+				+ "\t\t<description>Developed using Axdt</description>\n"
+				+ "\t\t<publisher>unknown</publisher>\n"
+				+ "\t\t<creator>unknown</creator>\n"
+				+ "\t\t<language>EN</language>\n"
+				+ "\t</metadata>\n"
 				+ "</flex-config>";
 		return new ByteArrayInputStream(contents.getBytes());
 	}

@@ -29,7 +29,8 @@ public class NewMxmlWizardPage extends AbstractFileWizardPage {
 	@Override
 	protected void dialogChanged() {
 		String fileName = getFileName();
-		if (fileName.indexOf('.') == fileName.length()-getExtension().length()) {
+		int indexOf = fileName.indexOf('.');
+		if (indexOf > 0 && !fileName.matches("^[^.]+\\"+getExtension()+"$")) {
 			updateStatus("Type name must not contain dots");
 		} else {
 			super.dialogChanged();

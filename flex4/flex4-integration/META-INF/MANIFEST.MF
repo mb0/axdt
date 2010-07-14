@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.axdt.as3.debug,
  org.axdt.core.ui
 Export-Package: org.axdt.flex4.compiler
+Import-Package: org.apache.log4j

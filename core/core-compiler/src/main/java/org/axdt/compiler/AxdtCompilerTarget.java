@@ -34,7 +34,7 @@ public class AxdtCompilerTarget {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T getAdapter(String key, Class<T> clazz) {
+	public <T> T getContextValue(String key, Class<T> clazz) {
 		Object context = contexts.get(key);
 		if (context != null && clazz.isAssignableFrom(context.getClass())) {
 			return (T) context;

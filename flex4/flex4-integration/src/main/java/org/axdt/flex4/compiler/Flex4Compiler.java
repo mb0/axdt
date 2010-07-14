@@ -39,7 +39,7 @@ public class Flex4Compiler extends AbstractAxdtCompiler {
 	}
 
 	protected Application getApplication(AxdtCompilerTarget target) throws FileNotFoundException {
-		Application result = target.getAdapter(APPLICATION, Application.class);
+		Application result = target.getContextValue(APPLICATION, Application.class);
 		if (result == null) {
 			result = createApplication(target);
 			target.setContext(APPLICATION, result);
@@ -50,29 +50,28 @@ public class Flex4Compiler extends AbstractAxdtCompiler {
 	protected void configureApplication(Application app, AxdtCompilerTarget target) {
 		app.setOutput(target.getDeployFileLocation().toFile());
 		Configuration config = app.getDefaultConfiguration();
-		config.setConfiguration(getGlobalConfigFile(target));
 		config.addSourcePath(AxdtCompilerTarget.pathsToFileArray(target.getSourceLocations()));
-		boolean gatherLibs = target.getAdapter(As3CompilerPreferences.GATHER_LIBS, Boolean.class);
+		boolean gatherLibs = target.getContextValue(As3CompilerPreferences.SEARCH_LIBS, Boolean.class);
 		if (gatherLibs) {
 			List<File> libraries = target.getResolvedLibraries();
 			if (!libraries.isEmpty()) config.addLibraryPath(libraries.toArray(new File[libraries.size()]));
 		}
+		if (target.getContextValue(As3CompilerPreferences.FLEX3_COMPATIBILITY, Boolean.class))
+			config.setCompatibilityVersion(3, 0, 0);
 		File configConfigFile = getConfigConfigFile(target);
 		if (configConfigFile != null)
 			config.addConfiguration(configConfigFile);
 		app.setConfiguration(config);
 	}
 	
-	private File getConfigConfigFile(AxdtCompilerTarget target) {
-		// TODO Auto-generated method stub
-		return null;
+	protected File getConfigConfigFile(AxdtCompilerTarget target) {
+		boolean search = target.getContextValue(As3CompilerPreferences.SEARCH_CONFIG, Boolean.class);
+		if (!search) return null;
+		File file = target.getConfigFileLocation().toFile();
+		if (!file.exists()) return null;
+		return file;
 	}
-
-	private File getGlobalConfigFile(AxdtCompilerTarget target) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	private Application createApplication(AxdtCompilerTarget target) throws FileNotFoundException {
 		return new Application(target.getTargetFileLocation().toFile());
 	}

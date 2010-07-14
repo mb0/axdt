@@ -2,7 +2,7 @@ package org.axdt.as3.debug.launch;
 
 import org.axdt.as3.debug.As3DebugPlugin;
 import org.axdt.as3.debug.IAs3DebugConstants;
-import org.axdt.as3.debug.compiler.As3CompilerDelegate;
+import org.axdt.as3.debug.compiler.As3DelegatingCompiler;
 import org.axdt.as3.debug.preferences.As3CompilerPreferences;
 import org.axdt.compiler.AxdtCompilerTarget;
 import org.eclipse.core.resources.IFile;
@@ -49,13 +49,14 @@ public class As3LaunchJob extends Job implements IProcess {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		String pathString = configuration.getAttribute(IAs3DebugConstants.TARGET, "");
 		IFile file = root.getFile(new Path(pathString));
-		As3CompilerDelegate delegate = As3CompilerDelegate.getInstance();
-		AxdtCompilerTarget target = delegate.getTargetFor(file);
-		setTargetContext(target,As3CompilerPreferences.GATHER_LIBS,true);
+		As3DelegatingCompiler compiler = As3DelegatingCompiler.getInstance();
+		AxdtCompilerTarget target = compiler.getTargetFor(file);
+		setTargetContext(target,As3CompilerPreferences.SEARCH_LIBS,true);
 		setTargetContext(target,As3CompilerPreferences.SEARCH_CONFIG,false);
+		setTargetContext(target,As3CompilerPreferences.FLEX3_COMPATIBILITY,false);
 		String compilerid = As3CompilerPreferences.getInstance().getString(configuration, As3CompilerPreferences.COMPILER_CHOICE);
 		monitor.beginTask("Compiling Targets", 100);
-		boolean successful = delegate.compile(target, compilerid, monitor);
+		boolean successful = compiler.compile(target, compilerid, monitor);
 		monitor.done();
 		terminated = true;
 		handleSuccess(target,successful);
