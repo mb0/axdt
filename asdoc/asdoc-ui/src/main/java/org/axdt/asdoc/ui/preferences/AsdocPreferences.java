@@ -12,6 +12,8 @@ public class AsdocPreferences extends AbstractPreferences {
 	public final static String ASDOC_URIS = "ASDOC_URIS";
 	private static AsdocPreferences instance;
 
+	public final static String DEFAULT_ASDOC = "http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/";
+
 	public static AsdocPreferences getInstance() {
 		if (instance == null)
 			new AsdocPreferences();
@@ -29,7 +31,7 @@ public class AsdocPreferences extends AbstractPreferences {
 	}
 
 	public void initializeFieldSpecs() {
-		add(new DocTableField(ASDOC_URIS, "Asdoc URLs", "http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/"));
+		add(new DocTableField(ASDOC_URIS, "Asdoc URLs", DEFAULT_ASDOC));
 		// TODO add help link instead
 		addHelp("Add the root url of an asdoc like 'http://asunit.org/docs/asunit3/'.");
 		addHelp("Urls can point into zip encoded archives 'jar:file:/home/mb0/doc.zip!/langref/'");
