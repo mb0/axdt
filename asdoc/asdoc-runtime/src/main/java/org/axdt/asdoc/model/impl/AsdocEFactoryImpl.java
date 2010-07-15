@@ -62,7 +62,8 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 		switch (eClass.getClassifierID()) {
 			case AsdocEPackage.ASDOC_PACKAGE: return createAsdocPackage();
 			case AsdocEPackage.ASDOC_ROOT: return createAsdocRoot();
-			case AsdocEPackage.ASDOC_TYPE: return createAsdocType();
+			case AsdocEPackage.ASDOC_CLASS: return createAsdocClass();
+			case AsdocEPackage.ASDOC_INTERFACE: return createAsdocInterface();
 			case AsdocEPackage.ASDOC_FIELD: return createAsdocField();
 			case AsdocEPackage.ASDOC_PROPERTY: return createAsdocProperty();
 			case AsdocEPackage.ASDOC_NAMESPACE: return createAsdocNamespace();
@@ -129,9 +130,19 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AsdocType createAsdocType() {
-		AsdocTypeImpl asdocType = new AsdocTypeImpl();
-		return asdocType;
+	public AsdocClass createAsdocClass() {
+		AsdocClassImpl asdocClass = new AsdocClassImpl();
+		return asdocClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AsdocInterface createAsdocInterface() {
+		AsdocInterfaceImpl asdocInterface = new AsdocInterfaceImpl();
+		return asdocInterface;
 	}
 
 	/**

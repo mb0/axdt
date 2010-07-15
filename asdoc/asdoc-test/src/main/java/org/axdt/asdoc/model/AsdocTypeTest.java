@@ -8,8 +8,6 @@ package org.axdt.asdoc.model;
 
 import java.util.Iterator;
 
-import junit.textui.TestRunner;
-
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmTypeReference;
@@ -24,21 +22,16 @@ import com.google.common.collect.Iterators;
  * The following operations are tested:
  * <ul>
  *   <li>{@link org.axdt.avm.model.AvmDeclaredType#getSuperTypes() <em>Get Super Types</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmDeclaredType#getExtendedClass() <em>Get Extended Class</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmType#isDynamic() <em>Is Dynamic</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmType#isFinal() <em>Is Final</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmType#isInterface() <em>Is Interface</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmType#isClass() <em>Is Class</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class AsdocTypeTest extends AsdocDefinitionTest {
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(AsdocTypeTest.class);
-	}
+public abstract class AsdocTypeTest extends AsdocDefinitionTest {
 
 	/**
 	 * Constructs a new Asdoc Type test case with the given name.
@@ -62,28 +55,6 @@ public class AsdocTypeTest extends AsdocDefinitionTest {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(AsdocEFactory.eINSTANCE.createAsdocType());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
-	/**
 	 * Tests the '{@link org.axdt.avm.model.AvmDeclaredType#getSuperTypes() <em>Get Super Types</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,42 +73,64 @@ public class AsdocTypeTest extends AsdocDefinitionTest {
 		assertFalse(iter.hasNext());
 		
 		AvmTypeReference ref2 = AvmEFactory.eINSTANCE.createAvmDeclaredTypeReference();
-		getFixture().setExtendedClass(ref2);
+		getFixture().getExtendedInterfaces().add(ref2);
 		iter = getFixture().getSuperTypes().iterator();
-		assertSame(ref2, iter.next());
 		assertSame(ref1, iter.next());
-		assertFalse(iter.hasNext());
-		
-		AvmTypeReference ref3 = AvmEFactory.eINSTANCE.createAvmDeclaredTypeReference();
-		getFixture().getExtendedInterfaces().add(ref3);
-		iter = getFixture().getSuperTypes().iterator();
 		assertSame(ref2, iter.next());
-		assertSame(ref1, iter.next());
-		assertSame(ref3, iter.next());
 		assertFalse(iter.hasNext());
 	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDeclaredType#getExtendedClass() <em>Get Extended Class</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDeclaredType#getExtendedClass()
+	 */
+	public void testGetExtendedClass() {
+		assertNull(getFixture().getExtendedClass());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmType#isDynamic() <em>Is Dynamic</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmType#isDynamic()
+	 */
+	public void testIsDynamic() {
+		assertFalse(getFixture().isDynamic());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmType#isFinal() <em>Is Final</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmType#isFinal()
+	 */
+	public void testIsFinal() {
+		assertFalse(getFixture().isFinal());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmType#isInterface() <em>Is Interface</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmType#isInterface()
+	 */
+	public abstract void testIsInterface();
 
 	/**
 	 * Tests the '{@link org.axdt.avm.model.AvmType#isClass() <em>Is Class</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.axdt.avm.model.AvmType#isClass()
-	 * @generated NOT
 	 */
-	public void testIsClass() {
-		assertTrue(getFixture().isClass() != getFixture().isInterface());
-		assertTrue(getFixture().isClass());
-		getFixture().setInterface(true);
-		assertTrue(getFixture().isClass() != getFixture().isInterface());
-		assertFalse(getFixture().isClass());
-	}
+	public abstract void testIsClass();
 
 	/**
 	 * Tests the '{@link org.axdt.avm.DeclaredType#getExtendedInterfaces() <em>Get Extended Interfaces</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.axdt.avm.DeclaredType#getExtendedInterfaces()
-	 * @generated NOT
 	 */
 	public void testGetExtendedInterfaces() {
 		assertNotNull(getFixture().getExtendedInterfaces());

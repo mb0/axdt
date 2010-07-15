@@ -115,6 +115,14 @@ public class AsdocEAdapterFactory extends AdapterFactoryImpl {
 				return createAsdocTypeAdapter();
 			}
 			@Override
+			public Adapter caseAsdocClass(AsdocClass object) {
+				return createAsdocClassAdapter();
+			}
+			@Override
+			public Adapter caseAsdocInterface(AsdocInterface object) {
+				return createAsdocInterfaceAdapter();
+			}
+			@Override
 			public Adapter caseAsdocField(AsdocField object) {
 				return createAsdocFieldAdapter();
 			}
@@ -321,6 +329,34 @@ public class AsdocEAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAsdocTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.asdoc.model.AsdocClass <em>Asdoc Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.asdoc.model.AsdocClass
+	 * @generated
+	 */
+	public Adapter createAsdocClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.asdoc.model.AsdocInterface <em>Asdoc Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.asdoc.model.AsdocInterface
+	 * @generated
+	 */
+	public Adapter createAsdocInterfaceAdapter() {
 		return null;
 	}
 

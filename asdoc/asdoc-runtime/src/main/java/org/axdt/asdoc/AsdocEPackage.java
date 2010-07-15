@@ -448,13 +448,21 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int ASDOC_ROOT__BASE_URI = ASDOC_PACKAGE_FEATURE_COUNT + 0;
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_ROOT__VERSION = ASDOC_PACKAGE_FEATURE_COUNT + 1;
+	/**
 	 * The number of structural features of the '<em>Asdoc Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_ROOT_FEATURE_COUNT = ASDOC_PACKAGE_FEATURE_COUNT + 1;
+	int ASDOC_ROOT_FEATURE_COUNT = ASDOC_PACKAGE_FEATURE_COUNT + 2;
 	/**
 	 * The meta object id for the '{@link org.axdt.asdoc.model.impl.AsdocTypeImpl <em>Asdoc Type</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -489,45 +497,13 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int ASDOC_TYPE__VISIBILITY = ASDOC_DEFINITION_FEATURE_COUNT + 0;
 	/**
-	 * The feature id for the '<em><b>Interface</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASDOC_TYPE__INTERFACE = ASDOC_DEFINITION_FEATURE_COUNT + 1;
-	/**
-	 * The feature id for the '<em><b>Dynamic</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASDOC_TYPE__DYNAMIC = ASDOC_DEFINITION_FEATURE_COUNT + 2;
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASDOC_TYPE__FINAL = ASDOC_DEFINITION_FEATURE_COUNT + 3;
-	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_TYPE__MEMBERS = ASDOC_DEFINITION_FEATURE_COUNT + 4;
-	/**
-	 * The feature id for the '<em><b>Extended Class</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASDOC_TYPE__EXTENDED_CLASS = ASDOC_DEFINITION_FEATURE_COUNT + 5;
+	int ASDOC_TYPE__MEMBERS = ASDOC_DEFINITION_FEATURE_COUNT + 1;
 	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -535,7 +511,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_TYPE__EXTENDED_INTERFACES = ASDOC_DEFINITION_FEATURE_COUNT + 6;
+	int ASDOC_TYPE__EXTENDED_INTERFACES = ASDOC_DEFINITION_FEATURE_COUNT + 2;
 	/**
 	 * The feature id for the '<em><b>Member Content Parsed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -543,7 +519,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_TYPE__MEMBER_CONTENT_PARSED = ASDOC_DEFINITION_FEATURE_COUNT + 7;
+	int ASDOC_TYPE__MEMBER_CONTENT_PARSED = ASDOC_DEFINITION_FEATURE_COUNT + 3;
 	/**
 	 * The number of structural features of the '<em>Asdoc Type</em>' class.
 	 * <!-- begin-user-doc -->
@@ -551,7 +527,161 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_TYPE_FEATURE_COUNT = ASDOC_DEFINITION_FEATURE_COUNT + 8;
+	int ASDOC_TYPE_FEATURE_COUNT = ASDOC_DEFINITION_FEATURE_COUNT + 4;
+	/**
+	 * The meta object id for the '{@link org.axdt.asdoc.model.impl.AsdocClassImpl <em>Asdoc Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.asdoc.model.impl.AsdocClassImpl
+	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocClass()
+	 * @generated
+	 */
+	int ASDOC_CLASS = 7;
+	/**
+	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__ASDOC = ASDOC_TYPE__ASDOC;
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__NAME = ASDOC_TYPE__NAME;
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__VISIBILITY = ASDOC_TYPE__VISIBILITY;
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__MEMBERS = ASDOC_TYPE__MEMBERS;
+	/**
+	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__EXTENDED_INTERFACES = ASDOC_TYPE__EXTENDED_INTERFACES;
+	/**
+	 * The feature id for the '<em><b>Member Content Parsed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__MEMBER_CONTENT_PARSED = ASDOC_TYPE__MEMBER_CONTENT_PARSED;
+	/**
+	 * The feature id for the '<em><b>Dynamic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__DYNAMIC = ASDOC_TYPE_FEATURE_COUNT + 0;
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__FINAL = ASDOC_TYPE_FEATURE_COUNT + 1;
+	/**
+	 * The feature id for the '<em><b>Extended Class</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS__EXTENDED_CLASS = ASDOC_TYPE_FEATURE_COUNT + 2;
+	/**
+	 * The number of structural features of the '<em>Asdoc Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_CLASS_FEATURE_COUNT = ASDOC_TYPE_FEATURE_COUNT + 3;
+	/**
+	 * The meta object id for the '{@link org.axdt.asdoc.model.impl.AsdocInterfaceImpl <em>Asdoc Interface</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.asdoc.model.impl.AsdocInterfaceImpl
+	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocInterface()
+	 * @generated
+	 */
+	int ASDOC_INTERFACE = 8;
+	/**
+	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__ASDOC = ASDOC_TYPE__ASDOC;
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__NAME = ASDOC_TYPE__NAME;
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__VISIBILITY = ASDOC_TYPE__VISIBILITY;
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__MEMBERS = ASDOC_TYPE__MEMBERS;
+	/**
+	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__EXTENDED_INTERFACES = ASDOC_TYPE__EXTENDED_INTERFACES;
+	/**
+	 * The feature id for the '<em><b>Member Content Parsed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE__MEMBER_CONTENT_PARSED = ASDOC_TYPE__MEMBER_CONTENT_PARSED;
+	/**
+	 * The number of structural features of the '<em>Asdoc Interface</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_INTERFACE_FEATURE_COUNT = ASDOC_TYPE_FEATURE_COUNT + 0;
 	/**
 	 * The meta object id for the '{@link org.axdt.asdoc.model.impl.AsdocFieldImpl <em>Asdoc Field</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -560,7 +690,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocField()
 	 * @generated
 	 */
-	int ASDOC_FIELD = 7;
+	int ASDOC_FIELD = 9;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -625,7 +755,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocProperty()
 	 * @generated
 	 */
-	int ASDOC_PROPERTY = 8;
+	int ASDOC_PROPERTY = 10;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -706,7 +836,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocNamespace()
 	 * @generated
 	 */
-	int ASDOC_NAMESPACE = 9;
+	int ASDOC_NAMESPACE = 11;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -755,7 +885,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocParameter()
 	 * @generated
 	 */
-	int ASDOC_PARAMETER = 10;
+	int ASDOC_PARAMETER = 12;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -804,7 +934,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocConstructor()
 	 * @generated
 	 */
-	int ASDOC_CONSTRUCTOR = 11;
+	int ASDOC_CONSTRUCTOR = 13;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -861,7 +991,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocOperation()
 	 * @generated
 	 */
-	int ASDOC_OPERATION = 12;
+	int ASDOC_OPERATION = 14;
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -950,7 +1080,7 @@ public interface AsdocEPackage extends EPackage {
 	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getParseLevel()
 	 * @generated
 	 */
-	int PARSE_LEVEL = 13;
+	int PARSE_LEVEL = 15;
 	/**
 	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocElement <em>Asdoc Element</em>}'.
 	 * <!-- begin-user-doc -->
@@ -1188,6 +1318,17 @@ public interface AsdocEPackage extends EPackage {
 	EAttribute getAsdocRoot_BaseUri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocRoot#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.axdt.asdoc.model.AsdocRoot#getVersion()
+	 * @see #getAsdocRoot()
+	 * @generated
+	 */
+	EAttribute getAsdocRoot_Version();
+
+	/**
 	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocType <em>Asdoc Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,39 +1350,6 @@ public interface AsdocEPackage extends EPackage {
 	EAttribute getAsdocType_Visibility();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocType#isInterface <em>Interface</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Interface</em>'.
-	 * @see org.axdt.asdoc.model.AsdocType#isInterface()
-	 * @see #getAsdocType()
-	 * @generated
-	 */
-	EAttribute getAsdocType_Interface();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocType#isDynamic <em>Dynamic</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Dynamic</em>'.
-	 * @see org.axdt.asdoc.model.AsdocType#isDynamic()
-	 * @see #getAsdocType()
-	 * @generated
-	 */
-	EAttribute getAsdocType_Dynamic();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocType#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.axdt.asdoc.model.AsdocType#isFinal()
-	 * @see #getAsdocType()
-	 * @generated
-	 */
-	EAttribute getAsdocType_Final();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.axdt.asdoc.model.AsdocType#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1251,17 +1359,6 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAsdocType_Members();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.axdt.asdoc.model.AsdocType#getExtendedClass <em>Extended Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Extended Class</em>'.
-	 * @see org.axdt.asdoc.model.AsdocType#getExtendedClass()
-	 * @see #getAsdocType()
-	 * @generated
-	 */
-	EReference getAsdocType_ExtendedClass();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.axdt.asdoc.model.AsdocType#getExtendedInterfaces <em>Extended Interfaces</em>}'.
@@ -1284,6 +1381,59 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAsdocType_MemberContentParsed();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocClass <em>Asdoc Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Asdoc Class</em>'.
+	 * @see org.axdt.asdoc.model.AsdocClass
+	 * @generated
+	 */
+	EClass getAsdocClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocClass#isDynamic <em>Dynamic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dynamic</em>'.
+	 * @see org.axdt.asdoc.model.AsdocClass#isDynamic()
+	 * @see #getAsdocClass()
+	 * @generated
+	 */
+	EAttribute getAsdocClass_Dynamic();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocClass#isFinal <em>Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Final</em>'.
+	 * @see org.axdt.asdoc.model.AsdocClass#isFinal()
+	 * @see #getAsdocClass()
+	 * @generated
+	 */
+	EAttribute getAsdocClass_Final();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.axdt.asdoc.model.AsdocClass#getExtendedClass <em>Extended Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Extended Class</em>'.
+	 * @see org.axdt.asdoc.model.AsdocClass#getExtendedClass()
+	 * @see #getAsdocClass()
+	 * @generated
+	 */
+	EReference getAsdocClass_ExtendedClass();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocInterface <em>Asdoc Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Asdoc Interface</em>'.
+	 * @see org.axdt.asdoc.model.AsdocInterface
+	 * @generated
+	 */
+	EClass getAsdocInterface();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocField <em>Asdoc Field</em>}'.
@@ -1676,6 +1826,14 @@ public interface AsdocEPackage extends EPackage {
 		EAttribute ASDOC_ROOT__BASE_URI = eINSTANCE.getAsdocRoot_BaseUri();
 
 		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASDOC_ROOT__VERSION = eINSTANCE.getAsdocRoot_Version();
+
+		/**
 		 * The meta object literal for the '{@link org.axdt.asdoc.model.impl.AsdocTypeImpl <em>Asdoc Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1694,44 +1852,12 @@ public interface AsdocEPackage extends EPackage {
 		EAttribute ASDOC_TYPE__VISIBILITY = eINSTANCE.getAsdocType_Visibility();
 
 		/**
-		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASDOC_TYPE__INTERFACE = eINSTANCE.getAsdocType_Interface();
-
-		/**
-		 * The meta object literal for the '<em><b>Dynamic</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASDOC_TYPE__DYNAMIC = eINSTANCE.getAsdocType_Dynamic();
-
-		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASDOC_TYPE__FINAL = eINSTANCE.getAsdocType_Final();
-
-		/**
 		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference ASDOC_TYPE__MEMBERS = eINSTANCE.getAsdocType_Members();
-
-		/**
-		 * The meta object literal for the '<em><b>Extended Class</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASDOC_TYPE__EXTENDED_CLASS = eINSTANCE.getAsdocType_ExtendedClass();
 
 		/**
 		 * The meta object literal for the '<em><b>Extended Interfaces</b></em>' containment reference list feature.
@@ -1748,6 +1874,50 @@ public interface AsdocEPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ASDOC_TYPE__MEMBER_CONTENT_PARSED = eINSTANCE.getAsdocType_MemberContentParsed();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.asdoc.model.impl.AsdocClassImpl <em>Asdoc Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.asdoc.model.impl.AsdocClassImpl
+		 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocClass()
+		 * @generated
+		 */
+		EClass ASDOC_CLASS = eINSTANCE.getAsdocClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASDOC_CLASS__DYNAMIC = eINSTANCE.getAsdocClass_Dynamic();
+
+		/**
+		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASDOC_CLASS__FINAL = eINSTANCE.getAsdocClass_Final();
+
+		/**
+		 * The meta object literal for the '<em><b>Extended Class</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASDOC_CLASS__EXTENDED_CLASS = eINSTANCE.getAsdocClass_ExtendedClass();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.asdoc.model.impl.AsdocInterfaceImpl <em>Asdoc Interface</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.asdoc.model.impl.AsdocInterfaceImpl
+		 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getAsdocInterface()
+		 * @generated
+		 */
+		EClass ASDOC_INTERFACE = eINSTANCE.getAsdocInterface();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.asdoc.model.impl.AsdocFieldImpl <em>Asdoc Field</em>}' class.

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.xml.xpath.XPathExpression;
 
 import org.apache.log4j.Logger;
+import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocType;
@@ -84,7 +85,9 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 				}
 				logger.info("found class: '"+classDetail+"'");
 			} else if ("Inheritance".equals(detail)) {
-				parseInheritance(type, valueNode);
+				if (!(type instanceof AsdocClass))
+					logger.warn("found inheritance but got no class");
+				else parseInheritance((AsdocClass) type, valueNode);
 			} else if ("Implements".equals(detail)) {
 				parseImplements(type, valueNode);
 			} else if ("Subclasses".equals(detail)) {
@@ -157,7 +160,7 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 		return lastDot < 0 ? rawLinkOrName
 				: rawLinkOrName.replaceFirst("^(?:([^.]+(?:[.][^.]+)*)[.])?([^.]+)$", "$1::$2");
 	}
-	protected void parseInheritance(AsdocType type, Node valueNode) {
+	protected void parseInheritance(AsdocClass type, Node valueNode) {
 		NodeList nodes = valueNode.getChildNodes();
 		String qualifier = type.getQualifier();
 		for (int i = 0; i < nodes.getLength(); i++) {

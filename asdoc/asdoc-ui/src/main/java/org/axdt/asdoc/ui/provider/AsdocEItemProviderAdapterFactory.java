@@ -120,26 +120,49 @@ public class AsdocEItemProviderAdapterFactory extends AsdocEAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.axdt.asdoc.model.AsdocType} instances.
+	 * This keeps track of the one adapter used for all {@link org.axdt.asdoc.model.AsdocClass} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AsdocTypeItemProvider asdocTypeItemProvider;
+	protected AsdocClassItemProvider asdocClassItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.axdt.asdoc.model.AsdocType}.
+	 * This creates an adapter for a {@link org.axdt.asdoc.model.AsdocClass}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAsdocTypeAdapter() {
-		if (asdocTypeItemProvider == null) {
-			asdocTypeItemProvider = new AsdocTypeItemProvider(this);
+	public Adapter createAsdocClassAdapter() {
+		if (asdocClassItemProvider == null) {
+			asdocClassItemProvider = new AsdocClassItemProvider(this);
 		}
 
-		return asdocTypeItemProvider;
+		return asdocClassItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.axdt.asdoc.model.AsdocInterface} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AsdocInterfaceItemProvider asdocInterfaceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.axdt.asdoc.model.AsdocInterface}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAsdocInterfaceAdapter() {
+		if (asdocInterfaceItemProvider == null) {
+			asdocInterfaceItemProvider = new AsdocInterfaceItemProvider(this);
+		}
+
+		return asdocInterfaceItemProvider;
 	}
 
 	/**
@@ -381,7 +404,8 @@ public class AsdocEItemProviderAdapterFactory extends AsdocEAdapterFactory imple
 	public void dispose() {
 		if (asdocPackageItemProvider != null) asdocPackageItemProvider.dispose();
 		if (asdocRootItemProvider != null) asdocRootItemProvider.dispose();
-		if (asdocTypeItemProvider != null) asdocTypeItemProvider.dispose();
+		if (asdocClassItemProvider != null) asdocClassItemProvider.dispose();
+		if (asdocInterfaceItemProvider != null) asdocInterfaceItemProvider.dispose();
 		if (asdocFieldItemProvider != null) asdocFieldItemProvider.dispose();
 		if (asdocPropertyItemProvider != null) asdocPropertyItemProvider.dispose();
 		if (asdocNamespaceItemProvider != null) asdocNamespaceItemProvider.dispose();

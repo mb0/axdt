@@ -37,7 +37,8 @@ public class AsdocETests extends TestSuite {
 		TestSuite suite = new AsdocETests("asdoc Tests");
 		suite.addTestSuite(AsdocPackageTest.class);
 		suite.addTestSuite(AsdocRootTest.class);
-		suite.addTestSuite(AsdocTypeTest.class);
+		suite.addTestSuite(AsdocClassTest.class);
+		suite.addTestSuite(AsdocInterfaceTest.class);
 		suite.addTestSuite(AsdocFieldTest.class);
 		suite.addTestSuite(AsdocPropertyTest.class);
 		suite.addTestSuite(AsdocNamespaceTest.class);

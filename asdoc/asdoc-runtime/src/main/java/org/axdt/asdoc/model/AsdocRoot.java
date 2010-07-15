@@ -17,6 +17,7 @@ package org.axdt.asdoc.model;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.AsdocRoot#getBaseUri <em>Base Uri</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.AsdocRoot#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,6 +47,33 @@ public interface AsdocRoot extends AsdocPackage {
 	 * @generated
 	 */
 	void setBaseUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(int)
+	 * @see org.axdt.asdoc.AsdocEPackage#getAsdocRoot_Version()
+	 * @model default="1"
+	 * @generated
+	 */
+	int getVersion();
+
+	/**
+	 * Sets the value of the '{@link org.axdt.asdoc.model.AsdocRoot#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(int value);
 
 	/**
 	 * <!-- begin-user-doc -->

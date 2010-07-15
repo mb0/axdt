@@ -8,10 +8,12 @@ package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.AsdocEPackage;
+import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocConstructor;
 import org.axdt.asdoc.model.AsdocElement;
 import org.axdt.asdoc.model.AsdocExecutable;
 import org.axdt.asdoc.model.AsdocField;
+import org.axdt.asdoc.model.AsdocInterface;
 import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocDefinition;
 import org.axdt.asdoc.model.AsdocNamespace;
@@ -86,6 +88,20 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * @generated
 	 */
 	private EClass asdocTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass asdocClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass asdocInterfaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -403,6 +419,15 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAsdocRoot_Version() {
+		return (EAttribute)asdocRootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAsdocType() {
 		return asdocTypeEClass;
 	}
@@ -421,44 +446,8 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsdocType_Interface() {
-		return (EAttribute)asdocTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAsdocType_Dynamic() {
-		return (EAttribute)asdocTypeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAsdocType_Final() {
-		return (EAttribute)asdocTypeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAsdocType_Members() {
-		return (EReference)asdocTypeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAsdocType_ExtendedClass() {
-		return (EReference)asdocTypeEClass.getEStructuralFeatures().get(5);
+		return (EReference)asdocTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -467,7 +456,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * @generated
 	 */
 	public EReference getAsdocType_ExtendedInterfaces() {
-		return (EReference)asdocTypeEClass.getEStructuralFeatures().get(6);
+		return (EReference)asdocTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -476,7 +465,52 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * @generated
 	 */
 	public EAttribute getAsdocType_MemberContentParsed() {
-		return (EAttribute)asdocTypeEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)asdocTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAsdocClass() {
+		return asdocClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAsdocClass_Dynamic() {
+		return (EAttribute)asdocClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAsdocClass_Final() {
+		return (EAttribute)asdocClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAsdocClass_ExtendedClass() {
+		return (EReference)asdocClassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAsdocInterface() {
+		return asdocInterfaceEClass;
 	}
 
 	/**
@@ -687,16 +721,20 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 
 		asdocRootEClass = createEClass(ASDOC_ROOT);
 		createEAttribute(asdocRootEClass, ASDOC_ROOT__BASE_URI);
+		createEAttribute(asdocRootEClass, ASDOC_ROOT__VERSION);
 
 		asdocTypeEClass = createEClass(ASDOC_TYPE);
 		createEAttribute(asdocTypeEClass, ASDOC_TYPE__VISIBILITY);
-		createEAttribute(asdocTypeEClass, ASDOC_TYPE__INTERFACE);
-		createEAttribute(asdocTypeEClass, ASDOC_TYPE__DYNAMIC);
-		createEAttribute(asdocTypeEClass, ASDOC_TYPE__FINAL);
 		createEReference(asdocTypeEClass, ASDOC_TYPE__MEMBERS);
-		createEReference(asdocTypeEClass, ASDOC_TYPE__EXTENDED_CLASS);
 		createEReference(asdocTypeEClass, ASDOC_TYPE__EXTENDED_INTERFACES);
 		createEAttribute(asdocTypeEClass, ASDOC_TYPE__MEMBER_CONTENT_PARSED);
+
+		asdocClassEClass = createEClass(ASDOC_CLASS);
+		createEAttribute(asdocClassEClass, ASDOC_CLASS__DYNAMIC);
+		createEAttribute(asdocClassEClass, ASDOC_CLASS__FINAL);
+		createEReference(asdocClassEClass, ASDOC_CLASS__EXTENDED_CLASS);
+
+		asdocInterfaceEClass = createEClass(ASDOC_INTERFACE);
 
 		asdocFieldEClass = createEClass(ASDOC_FIELD);
 		createEAttribute(asdocFieldEClass, ASDOC_FIELD__CONSTANT);
@@ -768,6 +806,8 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		asdocRootEClass.getESuperTypes().add(this.getAsdocPackage());
 		asdocTypeEClass.getESuperTypes().add(this.getAsdocDefinition());
 		asdocTypeEClass.getESuperTypes().add(theAvmEPackage.getAvmDeclaredType());
+		asdocClassEClass.getESuperTypes().add(this.getAsdocType());
+		asdocInterfaceEClass.getESuperTypes().add(this.getAsdocType());
 		asdocFieldEClass.getESuperTypes().add(this.getAsdocMember());
 		asdocFieldEClass.getESuperTypes().add(theAvmEPackage.getAvmField());
 		asdocPropertyEClass.getESuperTypes().add(this.getAsdocField());
@@ -819,6 +859,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 
 		initEClass(asdocRootEClass, AsdocRoot.class, "AsdocRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsdocRoot_BaseUri(), ecorePackage.getEString(), "baseUri", null, 0, 1, AsdocRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsdocRoot_Version(), ecorePackage.getEInt(), "version", "1", 0, 1, AsdocRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(asdocRootEClass, this.getAsdocPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "fqn", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -826,15 +867,18 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		op = addEOperation(asdocRootEClass, this.getAsdocPackage(), "createPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "fqn", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(asdocTypeEClass, AsdocType.class, "AsdocType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(asdocTypeEClass, AsdocType.class, "AsdocType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsdocType_Visibility(), theAvmEPackage.getAvmVisibility(), "visibility", "3", 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsdocType_Interface(), ecorePackage.getEBoolean(), "interface", "false", 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getAsdocType_Dynamic(), ecorePackage.getEBoolean(), "dynamic", "false", 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getAsdocType_Final(), ecorePackage.getEBoolean(), "final", "false", 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getAsdocType_Members(), this.getAsdocMember(), null, "members", null, 0, -1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAsdocType_ExtendedClass(), theAvmEPackage.getAvmTypeReference(), null, "extendedClass", null, 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsdocType_ExtendedInterfaces(), theAvmEPackage.getAvmTypeReference(), null, "extendedInterfaces", null, 0, -1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsdocType_MemberContentParsed(), ecorePackage.getEBoolean(), "memberContentParsed", "false", 0, 1, AsdocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(asdocClassEClass, AsdocClass.class, "AsdocClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAsdocClass_Dynamic(), ecorePackage.getEBoolean(), "dynamic", "false", 0, 1, AsdocClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getAsdocClass_Final(), ecorePackage.getEBoolean(), "final", "false", 0, 1, AsdocClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getAsdocClass_ExtendedClass(), theAvmEPackage.getAvmTypeReference(), null, "extendedClass", null, 0, 1, AsdocClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(asdocInterfaceEClass, AsdocInterface.class, "AsdocInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(asdocFieldEClass, AsdocField.class, "AsdocField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsdocField_Constant(), ecorePackage.getEBoolean(), "constant", null, 0, 1, AsdocField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

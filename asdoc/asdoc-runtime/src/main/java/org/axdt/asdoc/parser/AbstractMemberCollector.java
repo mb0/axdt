@@ -348,7 +348,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		return ref;
 	}
 	protected AvmType getTypeProxy(String name) {
-		AvmDeclaredType proxy = asFactory.createAsdocType();
+		AvmDeclaredType proxy = asFactory.createAsdocClass();
 		String uri = IDefinitionProvider.PROTOCOL+":/types/"+ name;
 		((InternalEObject) proxy).eSetProxyURI(URI.createURI(uri));
 		return proxy;

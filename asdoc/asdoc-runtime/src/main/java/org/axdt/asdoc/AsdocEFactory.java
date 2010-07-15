@@ -6,15 +6,16 @@
  */
 package org.axdt.asdoc;
 
+import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocConstructor;
 import org.axdt.asdoc.model.AsdocField;
+import org.axdt.asdoc.model.AsdocInterface;
 import org.axdt.asdoc.model.AsdocNamespace;
 import org.axdt.asdoc.model.AsdocOperation;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocParameter;
 import org.axdt.asdoc.model.AsdocProperty;
 import org.axdt.asdoc.model.AsdocRoot;
-import org.axdt.asdoc.model.AsdocType;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -53,13 +54,22 @@ public interface AsdocEFactory extends EFactory {
 	AsdocRoot createAsdocRoot();
 
 	/**
-	 * Returns a new object of class '<em>Asdoc Type</em>'.
+	 * Returns a new object of class '<em>Asdoc Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Asdoc Type</em>'.
+	 * @return a new object of class '<em>Asdoc Class</em>'.
 	 * @generated
 	 */
-	AsdocType createAsdocType();
+	AsdocClass createAsdocClass();
+
+	/**
+	 * Returns a new object of class '<em>Asdoc Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Asdoc Interface</em>'.
+	 * @generated
+	 */
+	AsdocInterface createAsdocInterface();
 
 	/**
 	 * Returns a new object of class '<em>Asdoc Field</em>'.

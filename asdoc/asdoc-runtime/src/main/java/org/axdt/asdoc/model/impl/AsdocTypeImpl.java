@@ -35,11 +35,7 @@ import com.google.common.collect.Lists;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#isInterface <em>Interface</em>}</li>
- *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#isDynamic <em>Dynamic</em>}</li>
- *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#getMembers <em>Members</em>}</li>
- *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#getExtendedClass <em>Extended Class</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#getExtendedInterfaces <em>Extended Interfaces</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocTypeImpl#isMemberContentParsed <em>Member Content Parsed</em>}</li>
  * </ul>
@@ -47,7 +43,7 @@ import com.google.common.collect.Lists;
  *
  * @generated
  */
-public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
+public abstract class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	/**
 	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -69,66 +65,6 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	protected AvmVisibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInterface()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INTERFACE_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isInterface() <em>Interface</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInterface()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int INTERFACE_EFLAG = 1 << 0;
-
-	/**
-	 * The default value of the '{@link #isDynamic() <em>Dynamic</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDynamic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean DYNAMIC_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isDynamic() <em>Dynamic</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDynamic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int DYNAMIC_EFLAG = 1 << 1;
-
-	/**
-	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FINAL_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int FINAL_EFLAG = 1 << 2;
-
-	/**
 	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,16 +73,6 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	 * @ordered
 	 */
 	protected EList<AsdocMember> members;
-
-	/**
-	 * The cached value of the '{@link #getExtendedClass() <em>Extended Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExtendedClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected AvmTypeReference extendedClass;
 
 	/**
 	 * The cached value of the '{@link #getExtendedInterfaces() <em>Extended Interfaces</em>}' containment reference list.
@@ -176,7 +102,7 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MEMBER_CONTENT_PARSED_EFLAG = 1 << 3;
+	protected static final int MEMBER_CONTENT_PARSED_EFLAG = 1 << 0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,65 +147,20 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public boolean isInterface() {
-		return (flags & INTERFACE_EFLAG) != 0;
-	}
+	public abstract boolean isInterface();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setInterface(boolean newInterface) {
-		boolean oldInterface = (flags & INTERFACE_EFLAG) != 0;
-		if (newInterface) flags |= INTERFACE_EFLAG; else flags &= ~INTERFACE_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_TYPE__INTERFACE, oldInterface, newInterface));
-	}
+	public abstract boolean isDynamic();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public boolean isDynamic() {
-		return (flags & DYNAMIC_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDynamic(boolean newDynamic) {
-		boolean oldDynamic = (flags & DYNAMIC_EFLAG) != 0;
-		if (newDynamic) flags |= DYNAMIC_EFLAG; else flags &= ~DYNAMIC_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_TYPE__DYNAMIC, oldDynamic, newDynamic));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFinal() {
-		return (flags & FINAL_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFinal(boolean newFinal) {
-		boolean oldFinal = (flags & FINAL_EFLAG) != 0;
-		if (newFinal) flags |= FINAL_EFLAG; else flags &= ~FINAL_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_TYPE__FINAL, oldFinal, newFinal));
-	}
+	public abstract boolean isFinal();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,44 +188,9 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public AvmTypeReference getExtendedClass() {
-		return extendedClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExtendedClass(AvmTypeReference newExtendedClass, NotificationChain msgs) {
-		AvmTypeReference oldExtendedClass = extendedClass;
-		extendedClass = newExtendedClass;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS, oldExtendedClass, newExtendedClass);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExtendedClass(AvmTypeReference newExtendedClass) {
-		if (newExtendedClass != extendedClass) {
-			NotificationChain msgs = null;
-			if (extendedClass != null)
-				msgs = ((InternalEObject)extendedClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS, null, msgs);
-			if (newExtendedClass != null)
-				msgs = ((InternalEObject)newExtendedClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS, null, msgs);
-			msgs = basicSetExtendedClass(newExtendedClass, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS, newExtendedClass, newExtendedClass));
+		return null;
 	}
 
 	/**
@@ -382,11 +228,8 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
-	public boolean isClass() {
-		return !isInterface();
-	}
+	public abstract boolean isClass();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -398,8 +241,6 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 		switch (featureID) {
 			case AsdocEPackage.ASDOC_TYPE__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
-			case AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS:
-				return basicSetExtendedClass(null, msgs);
 			case AsdocEPackage.ASDOC_TYPE__EXTENDED_INTERFACES:
 				return ((InternalEList<?>)getExtendedInterfaces()).basicRemove(otherEnd, msgs);
 		}
@@ -416,16 +257,8 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 		switch (featureID) {
 			case AsdocEPackage.ASDOC_TYPE__VISIBILITY:
 				return getVisibility();
-			case AsdocEPackage.ASDOC_TYPE__INTERFACE:
-				return isInterface();
-			case AsdocEPackage.ASDOC_TYPE__DYNAMIC:
-				return isDynamic();
-			case AsdocEPackage.ASDOC_TYPE__FINAL:
-				return isFinal();
 			case AsdocEPackage.ASDOC_TYPE__MEMBERS:
 				return getMembers();
-			case AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS:
-				return getExtendedClass();
 			case AsdocEPackage.ASDOC_TYPE__EXTENDED_INTERFACES:
 				return getExtendedInterfaces();
 			case AsdocEPackage.ASDOC_TYPE__MEMBER_CONTENT_PARSED:
@@ -446,21 +279,9 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 			case AsdocEPackage.ASDOC_TYPE__VISIBILITY:
 				setVisibility((AvmVisibility)newValue);
 				return;
-			case AsdocEPackage.ASDOC_TYPE__INTERFACE:
-				setInterface((Boolean)newValue);
-				return;
-			case AsdocEPackage.ASDOC_TYPE__DYNAMIC:
-				setDynamic((Boolean)newValue);
-				return;
-			case AsdocEPackage.ASDOC_TYPE__FINAL:
-				setFinal((Boolean)newValue);
-				return;
 			case AsdocEPackage.ASDOC_TYPE__MEMBERS:
 				getMembers().clear();
 				getMembers().addAll((Collection<? extends AsdocMember>)newValue);
-				return;
-			case AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS:
-				setExtendedClass((AvmTypeReference)newValue);
 				return;
 			case AsdocEPackage.ASDOC_TYPE__EXTENDED_INTERFACES:
 				getExtendedInterfaces().clear();
@@ -484,20 +305,8 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 			case AsdocEPackage.ASDOC_TYPE__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
-			case AsdocEPackage.ASDOC_TYPE__INTERFACE:
-				setInterface(INTERFACE_EDEFAULT);
-				return;
-			case AsdocEPackage.ASDOC_TYPE__DYNAMIC:
-				setDynamic(DYNAMIC_EDEFAULT);
-				return;
-			case AsdocEPackage.ASDOC_TYPE__FINAL:
-				setFinal(FINAL_EDEFAULT);
-				return;
 			case AsdocEPackage.ASDOC_TYPE__MEMBERS:
 				getMembers().clear();
-				return;
-			case AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS:
-				setExtendedClass((AvmTypeReference)null);
 				return;
 			case AsdocEPackage.ASDOC_TYPE__EXTENDED_INTERFACES:
 				getExtendedInterfaces().clear();
@@ -519,16 +328,8 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 		switch (featureID) {
 			case AsdocEPackage.ASDOC_TYPE__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
-			case AsdocEPackage.ASDOC_TYPE__INTERFACE:
-				return ((flags & INTERFACE_EFLAG) != 0) != INTERFACE_EDEFAULT;
-			case AsdocEPackage.ASDOC_TYPE__DYNAMIC:
-				return ((flags & DYNAMIC_EFLAG) != 0) != DYNAMIC_EDEFAULT;
-			case AsdocEPackage.ASDOC_TYPE__FINAL:
-				return ((flags & FINAL_EFLAG) != 0) != FINAL_EDEFAULT;
 			case AsdocEPackage.ASDOC_TYPE__MEMBERS:
 				return members != null && !members.isEmpty();
-			case AsdocEPackage.ASDOC_TYPE__EXTENDED_CLASS:
-				return extendedClass != null;
 			case AsdocEPackage.ASDOC_TYPE__EXTENDED_INTERFACES:
 				return extendedInterfaces != null && !extendedInterfaces.isEmpty();
 			case AsdocEPackage.ASDOC_TYPE__MEMBER_CONTENT_PARSED:
@@ -549,12 +350,6 @@ public class AsdocTypeImpl extends AsdocDefinitionImpl implements AsdocType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (visibility: ");
 		result.append(visibility);
-		result.append(", interface: ");
-		result.append((flags & INTERFACE_EFLAG) != 0);
-		result.append(", dynamic: ");
-		result.append((flags & DYNAMIC_EFLAG) != 0);
-		result.append(", final: ");
-		result.append((flags & FINAL_EFLAG) != 0);
 		result.append(", memberContentParsed: ");
 		result.append((flags & MEMBER_CONTENT_PARSED_EFLAG) != 0);
 		result.append(')');

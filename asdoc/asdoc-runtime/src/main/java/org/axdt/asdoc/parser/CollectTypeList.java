@@ -97,8 +97,9 @@ public class CollectTypeList extends AbstractCollector {
 
 		AsdocType createType(Node link, String href) {
 			String name = href.split("\\.")[0].trim();
-			AsdocType type = asFactory.createAsdocType();
-			type.setInterface(isInterface(link));
+			AsdocType type = isInterface(link)
+					? asFactory.createAsdocInterface()
+					: asFactory.createAsdocClass();
 			type.setName(name);
 			return type;
 		}

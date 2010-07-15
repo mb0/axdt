@@ -146,7 +146,7 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		assertEquals("avm:/types/"+expectedName, eProxyURI.toString());
 	}
 	private AsdocType createType(AsdocPackage pack, String name) {
-		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocType();
+		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName(name);
 		pack.getTypes().add(type);
 		return type;

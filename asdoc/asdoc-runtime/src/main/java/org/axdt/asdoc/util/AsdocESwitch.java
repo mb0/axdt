@@ -189,6 +189,36 @@ public class AsdocESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AsdocEPackage.ASDOC_CLASS: {
+				AsdocClass asdocClass = (AsdocClass)theEObject;
+				T result = caseAsdocClass(asdocClass);
+				if (result == null) result = caseAsdocType(asdocClass);
+				if (result == null) result = caseAsdocDefinition(asdocClass);
+				if (result == null) result = caseAvmDeclaredType(asdocClass);
+				if (result == null) result = caseAsdocElement(asdocClass);
+				if (result == null) result = caseAvmDeclaredElement(asdocClass);
+				if (result == null) result = caseAvmType(asdocClass);
+				if (result == null) result = caseAvmElement(asdocClass);
+				if (result == null) result = caseAvmIdentifiable(asdocClass);
+				if (result == null) result = caseAvmDefinition(asdocClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AsdocEPackage.ASDOC_INTERFACE: {
+				AsdocInterface asdocInterface = (AsdocInterface)theEObject;
+				T result = caseAsdocInterface(asdocInterface);
+				if (result == null) result = caseAsdocType(asdocInterface);
+				if (result == null) result = caseAsdocDefinition(asdocInterface);
+				if (result == null) result = caseAvmDeclaredType(asdocInterface);
+				if (result == null) result = caseAsdocElement(asdocInterface);
+				if (result == null) result = caseAvmDeclaredElement(asdocInterface);
+				if (result == null) result = caseAvmType(asdocInterface);
+				if (result == null) result = caseAvmElement(asdocInterface);
+				if (result == null) result = caseAvmIdentifiable(asdocInterface);
+				if (result == null) result = caseAvmDefinition(asdocInterface);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AsdocEPackage.ASDOC_FIELD: {
 				AsdocField asdocField = (AsdocField)theEObject;
 				T result = caseAsdocField(asdocField);
@@ -391,6 +421,36 @@ public class AsdocESwitch<T> {
 	 * @generated
 	 */
 	public T caseAsdocType(AsdocType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Asdoc Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Asdoc Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAsdocClass(AsdocClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Asdoc Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Asdoc Interface</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAsdocInterface(AsdocInterface object) {
 		return null;
 	}
 

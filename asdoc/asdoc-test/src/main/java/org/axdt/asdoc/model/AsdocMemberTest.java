@@ -47,7 +47,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		assertEquals("file://tmp/test/package.html"+expectedNamePart("naMe"),getFixture().getFullUri());
 		root.getMembers().remove(getFixture());
 		assertNull(getFixture().getFullUri());
-		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocType();
+		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName("Test");
 		type.getMembers().add(getFixture());
 	}
@@ -64,7 +64,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		assertNull(getFixture().getFullUri());
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
 		root.setBaseUri("file://tmp/test/");
-		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocType();
+		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName("Test");
 		type.getMembers().add(getFixture());
 		assertNull(getFixture().getFullUri());
@@ -77,7 +77,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
 		root.setBaseUri("file://tmp/test/");
 		AsdocPackage pack = root.createPackage("org.nicegui");
-		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocType();
+		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName("Test");
 		pack.getTypes().add(type);
 		type.getMembers().add(getFixture());
@@ -96,7 +96,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		assertEquals("foo.bar::test", getFixture().getCanonicalName());
 		pack.getMembers().remove(getFixture());
 		assertEquals("test", getFixture().getCanonicalName());
-		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocType();
+		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName("Test");
 		type.getMembers().add(getFixture());
 		assertEquals("Test#test", getFixture().getCanonicalName());
