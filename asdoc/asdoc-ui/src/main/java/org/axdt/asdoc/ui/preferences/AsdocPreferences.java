@@ -29,7 +29,7 @@ public class AsdocPreferences extends AbstractPreferences {
 	}
 
 	public void initializeFieldSpecs() {
-		add(new DocTableField(ASDOC_URIS, "Asdoc URLs", ""));
+		add(new DocTableField(ASDOC_URIS, "Asdoc URLs", "http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/"));
 		// TODO add help link instead
 		addHelp("Add the root url of an asdoc like 'http://asunit.org/docs/asunit3/'.");
 		addHelp("Urls can point into zip encoded archives 'jar:file:/home/mb0/doc.zip!/langref/'");

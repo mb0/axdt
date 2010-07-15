@@ -1,9 +1,10 @@
 package org.axdt.compiler.console;
 
 import java.net.URI;
+import java.net.URL;
 
 import org.apache.log4j.Logger;
-import org.eclipse.swt.program.Program;
+import org.axdt.core.ui.swf.SwfEditorLauncher;
 import org.eclipse.ui.console.IHyperlink;
 
 public class ErrorCodeHyperlink implements IHyperlink {
@@ -16,17 +17,17 @@ public class ErrorCodeHyperlink implements IHyperlink {
 	}
 
 	public void linkEntered() {
-		String uri = getURI();
-		if (uri != null)
-			Program.launch(uri + errorCode);
+		URL url = getURL();
+		if (url != null)
+			new SwfEditorLauncher().open(url);
 	}
 
-	protected String getURI() {
+	protected URL getURL() {
 		if (resolver == null)
 			return null;
 		try {
 			URI uri = resolver.resolveCode(errorCode);
-			return uri == null ? null : uri.toString();
+			return uri == null ? null : uri.toURL();
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error("error resolving error code", e);
 			return null;

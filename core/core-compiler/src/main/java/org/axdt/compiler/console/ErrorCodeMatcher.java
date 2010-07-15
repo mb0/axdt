@@ -15,10 +15,14 @@ public class ErrorCodeMatcher extends PatternMatchAdapter {
 		try {
 			String text = getMatchedText(event);
 			int code = Integer.parseInt(text.substring(1));
-			ErrorCodeHyperlink link = new ErrorCodeHyperlink(code, null);
+			ErrorCodeHyperlink link = new ErrorCodeHyperlink(code, getResolver());
 			console.addHyperlink(link, event.getOffset(), event.getLength());
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error("error matching error code in console output", e);
 		}
+	}
+
+	protected IErrorCodeUriResolver getResolver() {
+		return IErrorCodeUriResolver.Provider.getInstance().getResolver();
 	}
 }
