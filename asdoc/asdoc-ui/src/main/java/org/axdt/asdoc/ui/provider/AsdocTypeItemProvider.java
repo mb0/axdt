@@ -141,6 +141,11 @@ public class AsdocTypeItemProvider
 		return super.getChildFeature(object, child);
 	}
 
+	@Override
+	public Object getImage(Object object) {
+		return super.getImage(object);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -6,6 +6,8 @@
  */
 package org.axdt.asdoc.model;
 
+import org.axdt.avm.model.AvmInterface;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,5 +19,5 @@ package org.axdt.asdoc.model;
  * @model
  * @generated
  */
-public interface AsdocInterface extends AsdocType {
+public interface AsdocInterface extends AsdocType, AvmInterface {
 } // AsdocInterface

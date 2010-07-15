@@ -6,6 +6,7 @@
  */
 package org.axdt.as3.model;
 
+import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmTypeReference;
 
 /**
@@ -25,7 +26,7 @@ import org.axdt.avm.model.AvmTypeReference;
  * @see org.axdt.as3.As3EPackage#getAs3Class()
  * @generated
  */
-public interface As3Class extends As3Type {
+public interface As3Class extends As3Type, AvmClass {
 	/**
 	 * Returns the value of the '<em><b>Dynamic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

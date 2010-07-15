@@ -6,6 +6,7 @@
  */
 package org.axdt.asdoc.model;
 
+import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmTypeReference;
 
 /**
@@ -26,7 +27,7 @@ import org.axdt.avm.model.AvmTypeReference;
  * @model
  * @generated
  */
-public interface AsdocClass extends AsdocType {
+public interface AsdocClass extends AsdocType, AvmClass {
 	/**
 	 * Returns the value of the '<em><b>Dynamic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

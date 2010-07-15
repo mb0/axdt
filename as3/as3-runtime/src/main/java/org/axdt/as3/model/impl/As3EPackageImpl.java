@@ -3828,7 +3828,9 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3TypeEClass.getESuperTypes().add(theAvmEPackage.getAvmDeclaredType());
 		as3TypeEClass.getESuperTypes().add(this.getIDirective());
 		as3ClassEClass.getESuperTypes().add(this.getAs3Type());
+		as3ClassEClass.getESuperTypes().add(theAvmEPackage.getAvmClass());
 		as3InterfaceEClass.getESuperTypes().add(this.getAs3Type());
+		as3InterfaceEClass.getESuperTypes().add(theAvmEPackage.getAvmInterface());
 		as3NamespaceEClass.getESuperTypes().add(this.getAs3Member());
 		as3NamespaceEClass.getESuperTypes().add(theAvmEPackage.getAvmNamespace());
 		as3VariableEClass.getESuperTypes().add(this.getAs3Identifiable());

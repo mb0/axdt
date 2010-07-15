@@ -27,8 +27,8 @@
     <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocElement">
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocElement/getFullUri"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocNamed">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocNamed/name"/>
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocDefinition/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocMember">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocMember/visibility"/>
@@ -57,8 +57,9 @@
       </genOperations>
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocPackage/getRoot"/>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocRoot">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocRoot">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocRoot/baseUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocRoot/version"/>
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocRoot/getPackage">
         <genParameters ecoreParameter="Asdoc.ecore#//AsdocRoot/getPackage/fqn"/>
       </genOperations>
@@ -66,31 +67,33 @@
         <genParameters ecoreParameter="Asdoc.ecore#//AsdocRoot/createPackage/fqn"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocType">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocType/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocType/interface"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocType/dynamic"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocType/final"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocType/members"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocType/extendedClass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocType/extendedInterfaces"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocType/memberContentParsed"/>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocField">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocClass/dynamic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocClass/final"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocClass/extendedClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocInterface"/>
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocField/constant"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocField/type"/>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocProperty">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocProperty">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocProperty/readonly"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocProperty/writeonly"/>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocNamespace"/>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocParameter">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocNamespace"/>
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocParameter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocParameter/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocParameter/rest"/>
     </genClasses>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocConstructor"/>
-    <genClasses ecoreClass="Asdoc.ecore#//AsdocOperation">
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocConstructor"/>
+    <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocOperation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocOperation/native"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocOperation/override"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Asdoc.ecore#//AsdocOperation/returnType"/>

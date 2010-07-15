@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.*;
+import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmConstructor;
 import org.axdt.avm.model.AvmDeclaredElement;
 import org.axdt.avm.model.AvmDeclaredType;
@@ -19,6 +20,7 @@ import org.axdt.avm.model.AvmElement;
 import org.axdt.avm.model.AvmExecutable;
 import org.axdt.avm.model.AvmField;
 import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmInterface;
 import org.axdt.avm.model.AvmMember;
 import org.axdt.avm.model.AvmNamespace;
 import org.axdt.avm.model.AvmOperation;
@@ -454,6 +456,7 @@ public class As3ESwitch<T> {
 				As3Class as3Class = (As3Class)theEObject;
 				T result = caseAs3Class(as3Class);
 				if (result == null) result = caseAs3Type(as3Class);
+				if (result == null) result = caseAvmClass(as3Class);
 				if (result == null) result = caseAs3Definition(as3Class);
 				if (result == null) result = caseAvmDeclaredType(as3Class);
 				if (result == null) result = caseIDirective(as3Class);
@@ -472,6 +475,7 @@ public class As3ESwitch<T> {
 				As3Interface as3Interface = (As3Interface)theEObject;
 				T result = caseAs3Interface(as3Interface);
 				if (result == null) result = caseAs3Type(as3Interface);
+				if (result == null) result = caseAvmInterface(as3Interface);
 				if (result == null) result = caseAs3Definition(as3Interface);
 				if (result == null) result = caseAvmDeclaredType(as3Interface);
 				if (result == null) result = caseIDirective(as3Interface);
@@ -3841,6 +3845,36 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseAvmDeclaredType(AvmDeclaredType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmClass(AvmClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Interface</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmInterface(AvmInterface object) {
 		return null;
 	}
 

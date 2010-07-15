@@ -147,6 +147,28 @@ public class AvmESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AvmEPackage.AVM_CLASS: {
+				AvmClass avmClass = (AvmClass)theEObject;
+				T result = caseAvmClass(avmClass);
+				if (result == null) result = caseAvmDeclaredType(avmClass);
+				if (result == null) result = caseAvmDeclaredElement(avmClass);
+				if (result == null) result = caseAvmType(avmClass);
+				if (result == null) result = caseAvmDefinition(avmClass);
+				if (result == null) result = caseAvmIdentifiable(avmClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AvmEPackage.AVM_INTERFACE: {
+				AvmInterface avmInterface = (AvmInterface)theEObject;
+				T result = caseAvmInterface(avmInterface);
+				if (result == null) result = caseAvmDeclaredType(avmInterface);
+				if (result == null) result = caseAvmDeclaredElement(avmInterface);
+				if (result == null) result = caseAvmType(avmInterface);
+				if (result == null) result = caseAvmDefinition(avmInterface);
+				if (result == null) result = caseAvmIdentifiable(avmInterface);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AvmEPackage.AVM_MEMBER: {
 				AvmMember avmMember = (AvmMember)theEObject;
 				T result = caseAvmMember(avmMember);
@@ -475,6 +497,36 @@ public class AvmESwitch<T> {
 	 * @generated
 	 */
 	public T caseAvmDeclaredType(AvmDeclaredType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmClass(AvmClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Interface</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmInterface(AvmInterface object) {
 		return null;
 	}
 

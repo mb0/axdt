@@ -101,7 +101,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="-1"
         eType="#//IDirective" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="As3Class" eSuperTypes="#//As3Type">
+  <eClassifiers xsi:type="ecore:EClass" name="As3Class" eSuperTypes="#//As3Type ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" ordered="false"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" ordered="false"
@@ -109,7 +109,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendedClass" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="As3Interface" eSuperTypes="#//As3Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="As3Interface" eSuperTypes="#//As3Type ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmInterface"/>
   <eClassifiers xsi:type="ecore:EClass" name="As3Namespace" eSuperTypes="#//As3Member ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmNamespace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//IExpression"
         containment="true"/>

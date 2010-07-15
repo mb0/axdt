@@ -6,6 +6,8 @@
  */
 package org.axdt.as3.model;
 
+import org.axdt.avm.model.AvmInterface;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,5 +18,5 @@ package org.axdt.as3.model;
  * @see org.axdt.as3.As3EPackage#getAs3Interface()
  * @generated
  */
-public interface As3Interface extends As3Type {
+public interface As3Interface extends As3Type, AvmInterface {
 } // As3Interface

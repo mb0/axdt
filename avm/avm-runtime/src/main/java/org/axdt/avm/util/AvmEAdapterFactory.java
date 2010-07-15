@@ -102,6 +102,14 @@ public class AvmEAdapterFactory extends AdapterFactoryImpl {
 				return createAvmDeclaredTypeAdapter();
 			}
 			@Override
+			public Adapter caseAvmClass(AvmClass object) {
+				return createAvmClassAdapter();
+			}
+			@Override
+			public Adapter caseAvmInterface(AvmInterface object) {
+				return createAvmInterfaceAdapter();
+			}
+			@Override
 			public Adapter caseAvmMember(AvmMember object) {
 				return createAvmMemberAdapter();
 			}
@@ -354,6 +362,34 @@ public class AvmEAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAvmDeclaredTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.avm.model.AvmClass <em>Avm Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.avm.model.AvmClass
+	 * @generated
+	 */
+	public Adapter createAvmClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.avm.model.AvmInterface <em>Avm Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.avm.model.AvmInterface
+	 * @generated
+	 */
+	public Adapter createAvmInterfaceAdapter() {
 		return null;
 	}
 

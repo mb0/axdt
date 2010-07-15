@@ -183,7 +183,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVoidReference()
 	 * @generated
 	 */
-	int AVM_VOID_REFERENCE = 21;
+	int AVM_VOID_REFERENCE = 23;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.impl.AvmNullReferenceImpl <em>Avm Null Reference</em>}' class.
@@ -193,7 +193,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmNullReference()
 	 * @generated
 	 */
-	int AVM_NULL_REFERENCE = 22;
+	int AVM_NULL_REFERENCE = 24;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.impl.AvmGenericReferenceImpl <em>Avm Generic Reference</em>}' class.
@@ -203,7 +203,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmGenericReference()
 	 * @generated
 	 */
-	int AVM_GENERIC_REFERENCE = 23;
+	int AVM_GENERIC_REFERENCE = 25;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.impl.AvmDeclaredTypeReferenceImpl <em>Avm Declared Type Reference</em>}' class.
@@ -213,7 +213,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmDeclaredTypeReference()
 	 * @generated
 	 */
-	int AVM_DECLARED_TYPE_REFERENCE = 24;
+	int AVM_DECLARED_TYPE_REFERENCE = 26;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmDeclaredElement <em>Avm Declared Element</em>}' class.
@@ -254,6 +254,44 @@ public interface AvmEPackage extends EPackage {
 	int AVM_DECLARED_TYPE_FEATURE_COUNT = AVM_DECLARED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.axdt.avm.model.AvmClass <em>Avm Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmClass
+	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmClass()
+	 * @generated
+	 */
+	int AVM_CLASS = 8;
+
+	/**
+	 * The number of structural features of the '<em>Avm Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AVM_CLASS_FEATURE_COUNT = AVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.avm.model.AvmInterface <em>Avm Interface</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmInterface
+	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmInterface()
+	 * @generated
+	 */
+	int AVM_INTERFACE = 9;
+
+	/**
+	 * The number of structural features of the '<em>Avm Interface</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AVM_INTERFACE_FEATURE_COUNT = AVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmMember <em>Avm Member</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,7 +299,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmMember()
 	 * @generated
 	 */
-	int AVM_MEMBER = 8;
+	int AVM_MEMBER = 10;
 
 	/**
 	 * The number of structural features of the '<em>Avm Member</em>' class.
@@ -280,7 +318,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmField()
 	 * @generated
 	 */
-	int AVM_FIELD = 11;
+	int AVM_FIELD = 13;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmProperty <em>Avm Property</em>}' class.
@@ -290,7 +328,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmProperty()
 	 * @generated
 	 */
-	int AVM_PROPERTY = 12;
+	int AVM_PROPERTY = 14;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmNamespace <em>Avm Namespace</em>}' class.
@@ -300,7 +338,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmNamespace()
 	 * @generated
 	 */
-	int AVM_NAMESPACE = 13;
+	int AVM_NAMESPACE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmParameter <em>Avm Parameter</em>}' class.
@@ -310,7 +348,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmParameter()
 	 * @generated
 	 */
-	int AVM_PARAMETER = 14;
+	int AVM_PARAMETER = 16;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmExecutable <em>Avm Executable</em>}' class.
@@ -320,7 +358,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmExecutable()
 	 * @generated
 	 */
-	int AVM_EXECUTABLE = 9;
+	int AVM_EXECUTABLE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Avm Executable</em>' class.
@@ -339,7 +377,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVariable()
 	 * @generated
 	 */
-	int AVM_VARIABLE = 10;
+	int AVM_VARIABLE = 12;
 
 	/**
 	 * The number of structural features of the '<em>Avm Variable</em>' class.
@@ -394,7 +432,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmConstructor()
 	 * @generated
 	 */
-	int AVM_CONSTRUCTOR = 15;
+	int AVM_CONSTRUCTOR = 17;
 
 	/**
 	 * The number of structural features of the '<em>Avm Constructor</em>' class.
@@ -413,7 +451,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmOperation()
 	 * @generated
 	 */
-	int AVM_OPERATION = 16;
+	int AVM_OPERATION = 18;
 
 	/**
 	 * The number of structural features of the '<em>Avm Operation</em>' class.
@@ -432,7 +470,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmElement()
 	 * @generated
 	 */
-	int AVM_ELEMENT = 17;
+	int AVM_ELEMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -460,7 +498,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVoid()
 	 * @generated
 	 */
-	int AVM_VOID = 18;
+	int AVM_VOID = 20;
 
 	/**
 	 * The number of structural features of the '<em>Avm Void</em>' class.
@@ -479,7 +517,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmNull()
 	 * @generated
 	 */
-	int AVM_NULL = 19;
+	int AVM_NULL = 21;
 
 	/**
 	 * The number of structural features of the '<em>Avm Null</em>' class.
@@ -498,7 +536,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmGeneric()
 	 * @generated
 	 */
-	int AVM_GENERIC = 20;
+	int AVM_GENERIC = 22;
 
 	/**
 	 * The number of structural features of the '<em>Avm Generic</em>' class.
@@ -562,7 +600,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVisibility()
 	 * @generated
 	 */
-	int AVM_VISIBILITY = 25;
+	int AVM_VISIBILITY = 27;
 
 	/**
 	 * The meta object id for the '<em>List</em>' data type.
@@ -572,7 +610,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 26;
+	int LIST = 28;
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmIdentifiable <em>Avm Identifiable</em>}'.
@@ -704,6 +742,26 @@ public interface AvmEPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAvmDeclaredType();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmClass <em>Avm Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Avm Class</em>'.
+	 * @see org.axdt.avm.model.AvmClass
+	 * @generated
+	 */
+	EClass getAvmClass();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmInterface <em>Avm Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Avm Interface</em>'.
+	 * @see org.axdt.avm.model.AvmInterface
+	 * @generated
+	 */
+	EClass getAvmInterface();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmMember <em>Avm Member</em>}'.
@@ -1016,6 +1074,26 @@ public interface AvmEPackage extends EPackage {
 		 * @generated
 		 */
 		EClass AVM_DECLARED_TYPE = eINSTANCE.getAvmDeclaredType();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.avm.model.AvmClass <em>Avm Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.avm.model.AvmClass
+		 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmClass()
+		 * @generated
+		 */
+		EClass AVM_CLASS = eINSTANCE.getAvmClass();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.avm.model.AvmInterface <em>Avm Interface</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.avm.model.AvmInterface
+		 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmInterface()
+		 * @generated
+		 */
+		EClass AVM_INTERFACE = eINSTANCE.getAvmInterface();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.avm.model.AvmMember <em>Avm Member</em>}' class.

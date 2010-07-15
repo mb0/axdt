@@ -178,6 +178,7 @@ class AvmTypeScope extends AvmScope<AvmDeclaredType> {
 	}
 
 	protected AvmDeclaredType getSuperType(AvmDeclaredType type) {
+		// TODO how to handle interfaces ?
 		AvmTypeReference ref = type.getExtendedClass();
 		if (ref != null) {
 			AvmType parent = ref.getType();

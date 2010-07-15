@@ -807,7 +807,9 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		asdocTypeEClass.getESuperTypes().add(this.getAsdocDefinition());
 		asdocTypeEClass.getESuperTypes().add(theAvmEPackage.getAvmDeclaredType());
 		asdocClassEClass.getESuperTypes().add(this.getAsdocType());
+		asdocClassEClass.getESuperTypes().add(theAvmEPackage.getAvmClass());
 		asdocInterfaceEClass.getESuperTypes().add(this.getAsdocType());
+		asdocInterfaceEClass.getESuperTypes().add(theAvmEPackage.getAvmInterface());
 		asdocFieldEClass.getESuperTypes().add(this.getAsdocMember());
 		asdocFieldEClass.getESuperTypes().add(theAvmEPackage.getAvmField());
 		asdocPropertyEClass.getESuperTypes().add(this.getAsdocField());

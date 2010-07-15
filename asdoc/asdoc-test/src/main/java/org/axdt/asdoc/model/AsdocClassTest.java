@@ -95,4 +95,12 @@ public class AsdocClassTest extends AsdocTypeTest {
 		assertSame(ref3, iter.next());
 		assertFalse(iter.hasNext());
 	}
+	
+	@Override
+	public void testGetExtendedClass() {
+		assertNull(getFixture().getExtendedClass());
+		AvmTypeReference ref1 = AvmEFactory.eINSTANCE.createAvmDeclaredTypeReference();
+		getFixture().setExtendedClass(ref1);
+		assertSame(ref1, getFixture().getExtendedClass());
+	}
 } //AsdocClassTest

@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.AvmEPackage;
+import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmConstructor;
 import org.axdt.avm.model.AvmDeclaredElement;
 import org.axdt.avm.model.AvmDeclaredType;
@@ -22,6 +23,7 @@ import org.axdt.avm.model.AvmField;
 import org.axdt.avm.model.AvmGeneric;
 import org.axdt.avm.model.AvmGenericReference;
 import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmInterface;
 import org.axdt.avm.model.AvmMember;
 import org.axdt.avm.model.AvmNamespace;
 import org.axdt.avm.model.AvmNull;
@@ -137,6 +139,20 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * @generated
 	 */
 	private EClass avmDeclaredTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass avmClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass avmInterfaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -426,6 +442,24 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAvmClass() {
+		return avmClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAvmInterface() {
+		return avmInterfaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAvmMember() {
 		return avmMemberEClass;
 	}
@@ -609,6 +643,10 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		avmDeclaredTypeEClass = createEClass(AVM_DECLARED_TYPE);
 
+		avmClassEClass = createEClass(AVM_CLASS);
+
+		avmInterfaceEClass = createEClass(AVM_INTERFACE);
+
 		avmMemberEClass = createEClass(AVM_MEMBER);
 
 		avmExecutableEClass = createEClass(AVM_EXECUTABLE);
@@ -688,6 +726,8 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmDeclaredElementEClass.getESuperTypes().add(this.getAvmDefinition());
 		avmDeclaredTypeEClass.getESuperTypes().add(this.getAvmDeclaredElement());
 		avmDeclaredTypeEClass.getESuperTypes().add(this.getAvmType());
+		avmClassEClass.getESuperTypes().add(this.getAvmDeclaredType());
+		avmInterfaceEClass.getESuperTypes().add(this.getAvmDeclaredType());
 		avmMemberEClass.getESuperTypes().add(this.getAvmDeclaredElement());
 		avmExecutableEClass.getESuperTypes().add(this.getAvmIdentifiable());
 		avmVariableEClass.getESuperTypes().add(this.getAvmIdentifiable());
@@ -790,6 +830,10 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		g2 = createEGenericType(t1);
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		initEClass(avmClassEClass, AvmClass.class, "AvmClass", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(avmInterfaceEClass, AvmInterface.class, "AvmInterface", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(avmMemberEClass, AvmMember.class, "AvmMember", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
