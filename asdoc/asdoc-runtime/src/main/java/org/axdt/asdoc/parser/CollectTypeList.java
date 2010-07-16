@@ -1,5 +1,7 @@
 package org.axdt.asdoc.parser;
 
+import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -32,10 +34,18 @@ public class CollectTypeList extends AbstractCollector {
 	public List<AvmDeclaredElement> collectTypes(AsdocPackage pack, boolean detail) throws Exception {
 		String uri = AsdocUris.types(pack, detail);
 		logger.info("loading : " + uri);
-		Node node = load(uri);
-		if (detail)
-			node = eval(findMain, node);
-		return eIter(findLinks, node, new TransformLink2Element(pack));
+		try {
+			Node node = load(uri);
+			if (detail) {
+				Node found = eval(findMain, node);
+				if (found == null)
+					found = eval(findFlex4Main, node);
+				node = found;
+			}
+			return eIter(findLinks, node, new TransformLink2Element(pack));
+		} catch (FileNotFoundException e) {
+			return Collections.emptyList();
+		}
 	}
 
 	protected static class TransformLink2Element implements

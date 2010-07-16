@@ -25,7 +25,7 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 
 	public CollectTypeInfo() {
 		super();
-		findTypeHeader = compileXPath("./html:table[@class='classHeaderTable']//html:tr");
+		findTypeHeader = compileXPath(".//html:table[@class='classHeaderTable']//html:tr");
 	}
 	public void collectAllTypeInfo(AsdocPackage pack) throws Exception {
 		collectTypeInfo(pack);
@@ -142,16 +142,19 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 				if (matcher.matches()) {
 					int parentLevel = matcher.group(1).length()/3;
 					String[] split = qualifier.split("\\.");
+					String subQuali = matcher.group(2);
+					if (split.length == parentLevel && subQuali == null || subQuali.length() == 0)
+						return matcher.group(3);
 					if (split.length >= parentLevel) {
 						String result = "";
 						for (int i = 0; i < split.length - parentLevel; i++)
 							result += i == 0 ? split[i] : "." + split[i];
-						if (matcher.group(2) != null)
-							result += (result.length() > 0 ? "." : "") + matcher.group(2).replace('/', '.');
+						if (subQuali != null)
+							result += (result.length() > 0 ? "." : "") + subQuali.replace('/', '.');
 						return result+"::"+matcher.group(3);
 					}
 				}
-				// else fall back to unqulified name
+				// else fall back to unqualified name
 			}
 			// if absolute we use an unqualified type name
 			return rawLinkOrName.replaceAll("^(?:.*/)?([^.]+)\\.html$", "$1").replace('/', '.');

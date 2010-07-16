@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.axdt.asdoc.AsdocEFactory;
+import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocConstructor;
 import org.axdt.asdoc.model.AsdocField;
 import org.axdt.asdoc.model.AsdocOperation;
@@ -31,6 +32,26 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		root = createRoot();
 		memPack = root.createPackage("foo.members");
 		parser = new CollectTypeInfo();
+	}
+	public void testGetProxyURI() throws Exception {
+		assertNull(parser.getProxyURI(null));
+		assertNull(parser.getProxyURI(""));
+		assertNull(parser.getProxyURI("*"));
+		assertNull(parser.getProxyURI("void"));
+		assertEquals("avm:/types/Foo",parser.getProxyURI("Foo").toString());
+		assertEquals("avm:/types/spam.egg::Foo",parser.getProxyURI("spam.egg::Foo").toString());
+		// TODO introduce parameterized type references
+		assertEquals("avm:/types/Vector",parser.getProxyURI("Vector.<String>").toString());
+	}
+	
+	public void testFlex4Members() throws Exception {
+		AsdocRoot root =  AsdocEFactory.eINSTANCE.createAsdocRoot("http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/");
+		AsdocClass class1 = AsdocEFactory.eINSTANCE.createAsdocClass();
+		class1.setName("Array");
+		root.getTypes().add(class1);
+		AvmDeclaredType type = parser.collectType(class1);
+		assertNotNull(type.getMembers());
+		assertFalse(type.getMembers().isEmpty());
 	}
 	
 	public void testMembers() throws Exception {
@@ -110,6 +131,9 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		));
 		assertEquals("asunit.framework::Test", parser.parseTypeName(
 				" ../../asunit/framework/Test.html ", "asunit.textui"
+		));
+		assertEquals("Object", parser.parseTypeName(
+				" ../../Object.html ", "asunit.textui"
 		));
 		assertEquals("Test", parser.parseTypeName(
 				" ../framework/Test.html ", null

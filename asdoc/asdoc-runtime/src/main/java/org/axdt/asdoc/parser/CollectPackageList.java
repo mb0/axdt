@@ -1,6 +1,8 @@
 package org.axdt.asdoc.parser;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.axdt.asdoc.model.AsdocPackage;
@@ -10,9 +12,9 @@ import org.w3c.dom.Node;
 import com.google.common.base.Function;
 
 public class CollectPackageList extends AbstractCollector {
-	
+
 	private static Logger logger = Logger.getLogger(CollectPackageList.class);
-	
+
 	public CollectPackageList() {
 		super();
 	}
@@ -27,31 +29,43 @@ public class CollectPackageList extends AbstractCollector {
 		return eIter(findLinks, node, new TransformLink2Package(root));
 	}
 
-	private final static class TransformLink2Package implements
+	public static class TransformLink2Package implements
 			Function<Node, AsdocPackage> {
 
 		private final AsdocRoot root;
+		private Pattern pattern;
 
 		public TransformLink2Package(AsdocRoot root) {
 			this.root = root;
+			pattern = Pattern.compile("^.*'(.*/" + AsdocUris.PACKAGE_DETAIL
+					+ ")'.*$");
 		}
 
 		public AsdocPackage apply(Node link) {
 			String href = attribute(link, "href");
-			if (!href.endsWith(AsdocUris.PACKAGE_DETAIL)) {
-				logger.debug("ignored link: " + href);
-				return null;
+			String fqn = getFQN(href);
+			if (fqn != null) {
+				AsdocPackage pack = root.createPackage(fqn);
+				pack.setTypeContentAvailable(true);
+				return pack;
 			}
-			AsdocPackage pack = root.createPackage(getFQN(href));
-			pack.setTypeContentAvailable(true);
-			return pack;
+			return null;
 		}
 
-		String getFQN(String href) {
+		public String getFQN(String href) {
+			if (href == null)
+				return null;
+			if (!href.endsWith(AsdocUris.PACKAGE_DETAIL)) {
+				Matcher matcher = pattern.matcher(href);
+				if (!matcher.matches()) {
+					logger.debug("ignored link: " + href);
+					return null;
+				}
+				href = matcher.group(1);
+			}
 			int lastSlash = href.lastIndexOf('/');
-			if (lastSlash < 0)
-				return "";
-			return href.substring(0, lastSlash).replace('/', '.');
+			return lastSlash < 0 ? ""
+					: href.substring(0, lastSlash).replace('/', '.');
 		}
 	}
 }

@@ -124,4 +124,12 @@ public class AsdocRootTest extends AsdocPackageTest {
 		getFixture().setBaseUri("file:///tmp/test/");
 		assertEquals(getFixture().getBaseUri(), getFixture().getFullUri());
 	}
+	@Override
+	public void testGetName() {
+		assertEquals("", getFixture().getName());
+	}
+	@Override
+	public void testGetCanonicalName() {
+		assertEquals("", getFixture().getCanonicalName());
+	}
 } //AsdocRootTest

@@ -1,5 +1,6 @@
 package org.axdt.asdoc.parser;
 
+import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.ParseLevel;
 import org.axdt.asdoc.util.AsdocEXMLProcessor;
@@ -32,6 +33,7 @@ public class AsdocParserTest extends AbstractCollectorTest {
 		parser.parseDoc(root, ParseLevel.MEMBER);
 		assertFalse(0 == root.eContents().size());
 	}
+
 	public void testSaveParseResult() throws Exception {
 		AsdocParser parser = new AsdocParser();
 		AsdocRoot root = createRoot();

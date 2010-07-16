@@ -29,7 +29,7 @@ public class AsdocTypeProviderTest extends TestCase implements IDocRootProvider 
 	public AsdocTypeProviderTest() throws Exception {
 		dataFolder = AbstractCollectorTest.getTestDocUri();
 		AsdocParser asdocParser = new AsdocParser();
-		asdocRoot = AsdocEFactory.eINSTANCE.createDocRoot(dataFolder);
+		asdocRoot = AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
 		asdocRoot = asdocParser.parseDoc(asdocRoot, ParseLevel.MEMBER);
 	}
 	public Iterable<AsdocRoot> initializeAsdocs(Object[] docItems) {

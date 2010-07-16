@@ -2,6 +2,7 @@ package org.axdt.asdoc.parser;
 
 import java.util.List;
 
+import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.avm.model.AvmDeclaredElement;
@@ -9,7 +10,23 @@ import org.axdt.avm.model.AvmDeclaredElement;
 import com.google.common.collect.Lists;
 
 public class CollectTypeListTest extends AbstractCollectorTest {
-
+	public void testFlexClassList() throws Exception {
+		CollectTypeList parser = new CollectTypeList();
+		AsdocRoot root =  AsdocEFactory.eINSTANCE.createAsdocRoot("http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/");
+		List<String> expected = Lists.newArrayList("ArgumentError","arguments",
+				"Array", "Boolean", "Class", "Date",
+				"DefinitionError", "Error", "EvalError", "Function");
+		List<AvmDeclaredElement> list = parser.collectTypes(root, false);
+		assertClassListStart(expected, list);
+		
+		AsdocRoot root2 =  AsdocEFactory.eINSTANCE.createAsdocRoot("http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/");
+		List<AvmDeclaredElement> list2 = parser.collectTypes(root2, true);
+		assertClassListStart(expected, list2);
+		
+		int size = list.size();
+		assertEquals(size, list.size());
+		assertEquals(list.get(size-1).getName(), list2.get(size-1).getName());
+	}
 	public void testClassList() throws Exception {
 		CollectTypeList parser = new CollectTypeList();
 		AsdocRoot root = createRoot();
@@ -27,8 +44,12 @@ public class CollectTypeListTest extends AbstractCollectorTest {
 	}
 	private void assertClassList(List<String> expected,
 			List<AvmDeclaredElement> list) {
+		assertEquals(expected.size(), list.size());
+		assertClassListStart(expected, list);
+	}
+	private void assertClassListStart(List<String> expected,
+			List<AvmDeclaredElement> list) {
 		int size = expected.size();
-		assertEquals(size, list.size());
 		for (int i = 0; i < size; i++) {
 			assertEquals(expected.get(i), list.get(i).getName());
 		}

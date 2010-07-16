@@ -1,5 +1,6 @@
 package org.axdt.asdoc.parser;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.xpath.XPath;
@@ -21,10 +22,12 @@ public abstract class AbstractCollector {
 	
 	protected XPathExpression findMain;
 	protected XPathExpression findLinks;
+	protected XPathExpression findFlex4Main;
 
 	protected AsdocEFactory asFactory = AsdocEFactory.eINSTANCE;
 	
 	public AbstractCollector() {
+		findFlex4Main = compileXPath("//html:div[@class='maincontainer']//html:div[@class='content']");
 		findMain = compileXPath("//html:div[@class='MainContent']");
 		findLinks = compileXPath(".//html:a[@href]");
 	}
@@ -57,8 +60,8 @@ public abstract class AbstractCollector {
 	}
 	protected static <T> List<T> eIter(XPathExpression xexpr, Node node,
 			Function<Node, ? extends T> fun) throws Exception {
+		if (node == null) return Collections.emptyList();
 		List<T> result = Lists.newArrayList();
-		if (node == null) return result;
 		NodeList list = (NodeList) xexpr.evaluate(node, XPathConstants.NODESET);
 		int size = list.getLength();
 		for (int i = 0; i < size; i++) {

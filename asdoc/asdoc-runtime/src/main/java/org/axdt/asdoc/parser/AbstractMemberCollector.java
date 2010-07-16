@@ -45,7 +45,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		super();
 		findDetailBody = compileXPath("./html:div[@class='detailBody']");
 		findDetailType = compileXPath(".//html:td");
-		findDetailSpan = compileXPath("./html:span[0][@class='label']");
+		findDetailSpan = compileXPath(".//html:span[0][@class='label']");
 	}
 	protected boolean isDiv(Node node) {
 		return "div".equals(node.getNodeName());
@@ -105,7 +105,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		String childCode = getText(child);
 		AsdocMember member = createMember(result,memberHeader,childCode);
 		if (member == null) {
-			getLogger().error("member '"+result.getCanonicalName()+"' could not be created");
+			getLogger().info("member '"+result.getCanonicalName()+"' could not be created");
 			return null;
 		}
 		getLogger().info("found member "+ childCode);
@@ -292,9 +292,6 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		if (lastParen > 0) {
 			nameFound = nameFound.substring(0,nameFound.indexOf("("));
 		}
-		// ignore global constant -Infinity, we use an unary expression 
-		if (nameFound.charAt(0)=='-')
-			return null;
 		if (!name.equals(nameFound))
 			getLogger().error("operation name '"+name+"' in '"+parent.getCanonicalName()+"' does not match '"+nameFound+"'");
 		return result;
@@ -327,30 +324,46 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		if (last < 0) {
 			foundName = decl;
 		} else {
+			int first = decl.indexOf(":");
+			if (first != last)
+				last = first;
 			String resultType = decl.substring(last+1).trim();
 			result.setType(getTypeRef(resultType));
 			foundName = decl.substring(0,last).trim(); 
 		}
+		// ignore global constant -Infinity, we use an unary expression 
+		if (foundName.charAt(0)=='-')
+			return null;
 		if (!name.equals(foundName))
 			getLogger().error("member name does not match '"+name+"' '"+foundName+"'");
 		return result;
 	}
-	protected AvmTypeReference getTypeRef(String name) {
+	public URI getProxyURI(String name) {
+		if (name == null || "*".equals(name) || "void".equals(name))
+			return null;
+		name = name.trim();
+		if (name.length()==0) return null;
+		if (name.lastIndexOf(']')!=0)
+			name = name.replaceFirst("\\.<[^>]*>", "");
+		// check if we already got a qualified name
+		if (name.contains(":") && !name.contains("::"))
+			name = name.replaceFirst(":", "::");
+		String uri = IDefinitionProvider.PROTOCOL+":/types/"+ name;
+		return URI.createURI(uri);
+	}
+	public AvmTypeReference getTypeRef(String name) {
 		if ("*".equals(name))
 			return AvmEFactory.eINSTANCE.createAvmGenericReference();
 		if ("void".equals(name))
 			return AvmEFactory.eINSTANCE.createAvmVoidReference();
-		if (name.lastIndexOf(']')!=0)
-			name = name.replace(".<", ".[").replace('>', ']');
 		AvmDeclaredTypeReference ref = AvmEFactory.eINSTANCE.createAvmDeclaredTypeReference();
-		AvmType type = getTypeProxy(name);
+		AvmType type = getTypeProxy(getProxyURI(name));
 		ref.setType(type);
 		return ref;
 	}
-	protected AvmType getTypeProxy(String name) {
+	public AvmType getTypeProxy(URI uri) {
 		AvmDeclaredType proxy = asFactory.createAsdocClass();
-		String uri = IDefinitionProvider.PROTOCOL+":/types/"+ name;
-		((InternalEObject) proxy).eSetProxyURI(URI.createURI(uri));
+		((InternalEObject) proxy).eSetProxyURI(uri);
 		return proxy;
 	}
 	protected abstract Logger getLogger();

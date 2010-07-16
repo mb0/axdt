@@ -120,16 +120,6 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AsdocRoot createAsdocRoot() {
-		AsdocRootImpl asdocRoot = new AsdocRootImpl();
-		return asdocRoot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public AsdocClass createAsdocClass() {
 		AsdocClassImpl asdocClass = new AsdocClassImpl();
 		return asdocClass;
@@ -209,13 +199,15 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public AsdocRoot createDocRoot() {
+	public AsdocRoot createAsdocRoot() {
 		AsdocRootImpl docRoot = new AsdocRootImpl();
+		docRoot.setTypeContentAvailable(true);
+		docRoot.setGlobalContentAvailable(true);
 		docRoot.setCanonicalName("");
 		return docRoot;
 	}
-	public AsdocRoot createDocRoot(String uri) {
-		AsdocRoot asdocRoot = createDocRoot();
+	public AsdocRoot createAsdocRoot(String uri) {
+		AsdocRoot asdocRoot = createAsdocRoot();
 		asdocRoot.setBaseUri(uri);
 		return asdocRoot;
 	}

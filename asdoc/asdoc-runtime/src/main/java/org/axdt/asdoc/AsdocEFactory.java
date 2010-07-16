@@ -134,6 +134,6 @@ public interface AsdocEFactory extends EFactory {
 	 */
 	AsdocEPackage getAsdocEPackage();
 
-	AsdocRoot createDocRoot(String uri);
+	AsdocRoot createAsdocRoot(String uri);
 
 } //AsdocEFactory

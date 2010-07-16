@@ -60,7 +60,7 @@ public abstract class AbstractAsdocRootProvider implements IDocRootProvider {
 				root = (AsdocRoot) eobject;
 			}
 		} else {
-			root = AsdocEFactory.eINSTANCE.createDocRoot(url);
+			root = AsdocEFactory.eINSTANCE.createAsdocRoot(url);
 			resource.getContents().add(root);
 		}
 		return root;

@@ -30,7 +30,7 @@ public abstract class AbstractCollectorTest extends TestCase {
 		return classUri.replaceFirst(toReplace, "");
 	}
 	protected AsdocRoot createRoot() {
-		return AsdocEFactory.eINSTANCE.createDocRoot(dataFolder);
+		return AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
 	}
 	protected void assertEqualsElements(List<?> expected, List<?> list) {
 		int size = expected.size();

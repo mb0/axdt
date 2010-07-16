@@ -1,5 +1,7 @@
 package org.axdt.asdoc.parser;
 
+import java.io.FileNotFoundException;
+
 import org.apache.log4j.Logger;
 import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocPackage;
@@ -25,21 +27,30 @@ public class CollectGlobalInfo extends AbstractMemberCollector<AsdocPackage> {
 	public void collectGlobalInfo(final AsdocPackage pack) throws Exception {
 		String uri = pack.getFullUri()+AsdocUris.PACKAGE;
 		logger.info("loading: "+ uri);
-		Node node = load(uri);
-		eIter(findDetailBody,eval(findMain, node), new Function<Node, AvmMember>() {
-			public AvmMember apply(Node from) {
-				if (!from.hasChildNodes()) return null;
-				try {
-					AsdocMember member = parseMember(pack,from);
-					member.getName();
-					pack.getMembers().add(member);
-					return member;
-				} catch (Exception e) {
-					logger.error("error parsing type", e);
-					return null;
+		try {
+			Node node = load(uri);
+			Node found = eval(findMain, node);
+			if (found == null)
+				found = eval(findFlex4Main, node);
+			eIter(findDetailBody, found, new Function<Node, AvmMember>() {
+				public AvmMember apply(Node from) {
+					if (!from.hasChildNodes()) return null;
+					try {
+						AsdocMember member = parseMember(pack,from);
+						if (member != null) {
+							member.getName();
+							pack.getMembers().add(member);
+						}
+						return member;
+					} catch (Exception e) {
+						logger.error("error parsing type", e);
+						return null;
+					}
 				}
-			}
-		});
+			});
+		} catch (FileNotFoundException e) {
+			logger.info("file not found '"+uri.toString()+"'.");
+		}
 	}
 	
 	protected Logger getLogger() {
