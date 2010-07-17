@@ -1,6 +1,5 @@
 package org.axdt.asdoc.parser;
 
-import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.ParseLevel;
 import org.axdt.asdoc.util.AsdocEXMLProcessor;
@@ -21,7 +20,7 @@ public class AsdocParserTest extends AbstractCollectorTest {
 		assertEquals(ParseLevel.PACKAGE_VALUE, ParseLevel.PACKAGE_VALUE & ParseLevel.PACKAGE_VALUE);
 	}
 	public void testParserNoop() throws Exception {
-		AsdocRoot root = createRoot();
+		AsdocRoot root = createRoot("simple");
 		assertNotNull(root);
 		assertNotNull(root.eContents());
 		assertEquals(0, root.eContents().size());
@@ -29,14 +28,14 @@ public class AsdocParserTest extends AbstractCollectorTest {
 
 	public void testParser() throws Exception {
 		AsdocParser parser = new AsdocParser();
-		AsdocRoot root = createRoot();
+		AsdocRoot root = createRoot("simple");
 		parser.parseDoc(root, ParseLevel.MEMBER);
 		assertFalse(0 == root.eContents().size());
 	}
 
 	public void testSaveParseResult() throws Exception {
 		AsdocParser parser = new AsdocParser();
-		AsdocRoot root = createRoot();
+		AsdocRoot root = createRoot("simple");
 		parser.parseDoc(root, ParseLevel.MEMBER);
 		ResourceSet set = new AsdocEXMLProcessor().createResourceSet();
 		Resource resource = set.createResource(URI.createURI("file:/tmp/axdt-test/foo.asdoc"));

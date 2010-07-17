@@ -27,7 +27,7 @@ public class AsdocTypeProviderTest extends TestCase implements IDocRootProvider 
 	private AsdocRoot asdocRoot;
 	
 	public AsdocTypeProviderTest() throws Exception {
-		dataFolder = AbstractCollectorTest.getTestDocUri();
+		dataFolder = AbstractCollectorTest.getTestDocUri()+"simple";
 		AsdocParser asdocParser = new AsdocParser();
 		asdocRoot = AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
 		asdocRoot = asdocParser.parseDoc(asdocRoot, ParseLevel.MEMBER);

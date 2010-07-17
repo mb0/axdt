@@ -348,7 +348,9 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		// check if we already got a qualified name
 		if (name.contains(":") && !name.contains("::"))
 			name = name.replaceFirst(":", "::");
-		String uri = IDefinitionProvider.PROTOCOL+":/types/"+ name;
+		boolean isQualified = name.contains("::");
+		String partition = ":"+ (isQualified ? "/types/" : "/lookup/");
+		String uri = IDefinitionProvider.PROTOCOL + partition + name;
 		return URI.createURI(uri);
 	}
 	public AvmTypeReference getTypeRef(String name) {

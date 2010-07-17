@@ -2,7 +2,6 @@ package org.axdt.asdoc.parser;
 
 import java.util.ArrayList;
 
-import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocField;
 import org.axdt.asdoc.model.AsdocOperation;
 import org.axdt.asdoc.model.AsdocPackage;
@@ -17,7 +16,7 @@ import com.google.common.collect.Lists;
 public class CollectGlobalInfoTest extends AbstractCollectorTest {
 	public void testFlexGlobal() throws Exception {
 		CollectGlobalInfo parser = new CollectGlobalInfo();
-		AsdocRoot root =  AsdocEFactory.eINSTANCE.createAsdocRoot("http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/");
+		AsdocRoot root =  createRoot("flex4");
 		parser.collectGlobalInfo(root);
 		assertNotNull(root.getMembers());
 		assertFalse(root.getMembers().isEmpty());
@@ -28,7 +27,7 @@ public class CollectGlobalInfoTest extends AbstractCollectorTest {
 				AsdocField.class, AsdocOperation.class, AsdocField.class);
 
 		CollectGlobalInfo parser = new CollectGlobalInfo();
-		AsdocRoot root = createRoot();
+		AsdocRoot root = createRoot("simple");
 		AsdocPackage pack = root.createPackage("foo.globals");
 		parser.collectGlobalInfo(pack);
 		

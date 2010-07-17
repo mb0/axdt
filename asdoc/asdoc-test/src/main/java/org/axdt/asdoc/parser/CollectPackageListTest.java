@@ -11,13 +11,13 @@ import com.google.common.collect.Lists;
 public class CollectPackageListTest extends AbstractCollectorTest {
 	public void testParseList() throws Exception {
 		CollectPackageList parser = new CollectPackageList();
-		assertPackageList(parser.collectPackages(createRoot(), false));
-		assertPackageList(parser.collectPackages(createRoot(), true));
+		assertPackageList(parser.collectPackages(createRoot("simple"), false));
+		assertPackageList(parser.collectPackages(createRoot("simple"), true));
 	}
 
 	public void testParseListPersist() throws Exception {
 		CollectPackageList parser = new CollectPackageList();
-		AsdocRoot root = createRoot();
+		AsdocRoot root = createRoot("simple");
 		assertTrue(root.eContents().isEmpty());
 		assertPackageList(parser.collectPackages(root, false));
 		assertFalse(root.eContents().isEmpty());

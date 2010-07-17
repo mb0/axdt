@@ -77,7 +77,7 @@ class DescriptionCollector extends AsdocESwitch<Boolean> {
 	}
 	protected void collectDefinition(AvmDefinition identifiable, String prefix) {
 		String fqn = identifiable.getCanonicalName();
-		// we want the the mirror resource uri is used thus use a proxy 
+		// we use mirror resources thus return a proxy 
 		InternalEObject proxy = (InternalEObject) AsdocEFactory.eINSTANCE.create(identifiable.eClass());
 		proxy.eSetProxyURI(URI.createURI(prefix+fqn));
 		collected.add(EObjectDescription.create(fqn, proxy));

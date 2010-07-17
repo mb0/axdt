@@ -20,7 +20,7 @@ public abstract class AbstractCollectorTest extends TestCase {
 		dataFolder = getTestDocUri();
 	}
 	public static String getTestDocUri() {
-		return "jar:"+getProjectRootUri(AbstractCollectorTest.class)+"testdocs.zip!/simple";
+		return "jar:"+getProjectRootUri(AbstractCollectorTest.class)+"testdocs.zip!/";
 	}
 	public static String getProjectRootUri(Class<?> type) {
 		String classUri = type.getResource(type.getSimpleName()+".class").toExternalForm();
@@ -29,8 +29,8 @@ public abstract class AbstractCollectorTest extends TestCase {
 			: "target/classes/.*$";
 		return classUri.replaceFirst(toReplace, "");
 	}
-	protected AsdocRoot createRoot() {
-		return AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
+	protected AsdocRoot createRoot(String name) {
+		return AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder+name);
 	}
 	protected void assertEqualsElements(List<?> expected, List<?> list) {
 		int size = expected.size();

@@ -29,7 +29,7 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 	private CollectTypeInfo parser;
 
 	public CollectTypeInfoTest() {
-		root = createRoot();
+		root = createRoot("simple");
 		memPack = root.createPackage("foo.members");
 		parser = new CollectTypeInfo();
 	}
@@ -38,14 +38,14 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		assertNull(parser.getProxyURI(""));
 		assertNull(parser.getProxyURI("*"));
 		assertNull(parser.getProxyURI("void"));
-		assertEquals("avm:/types/Foo",parser.getProxyURI("Foo").toString());
+		assertEquals("avm:/lookup/Foo",parser.getProxyURI("Foo").toString());
 		assertEquals("avm:/types/spam.egg::Foo",parser.getProxyURI("spam.egg::Foo").toString());
 		// TODO introduce parameterized type references
-		assertEquals("avm:/types/Vector",parser.getProxyURI("Vector.<String>").toString());
+		assertEquals("avm:/lookup/Vector",parser.getProxyURI("Vector.<String>").toString());
 	}
 	
 	public void testFlex4Members() throws Exception {
-		AsdocRoot root =  AsdocEFactory.eINSTANCE.createAsdocRoot("http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/");
+		AsdocRoot root = createRoot("flex4");
 		AsdocClass class1 = AsdocEFactory.eINSTANCE.createAsdocClass();
 		class1.setName("Array");
 		root.getTypes().add(class1);
@@ -167,7 +167,10 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		assertNotNull(type);
 		assertTrue(type.eIsProxy());
 		URI eProxyURI = ((InternalEObject)type).eProxyURI();
-		assertEquals("avm:/types/"+expectedName, eProxyURI.toString());
+		String expectedUri = expectedName.contains("::")
+				? "avm:/types/"+expectedName
+				: "avm:/lookup/"+expectedName;
+		assertEquals(expectedUri, eProxyURI.toString());
 	}
 	private AsdocType createType(AsdocPackage pack, String name) {
 		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
