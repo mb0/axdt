@@ -261,21 +261,21 @@ public class AvmESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AvmEPackage.AVM_VOID: {
-				AvmVoid avmVoid = (AvmVoid)theEObject;
-				T result = caseAvmVoid(avmVoid);
-				if (result == null) result = caseAvmType(avmVoid);
-				if (result == null) result = caseAvmDefinition(avmVoid);
-				if (result == null) result = caseAvmIdentifiable(avmVoid);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AvmEPackage.AVM_NULL: {
 				AvmNull avmNull = (AvmNull)theEObject;
 				T result = caseAvmNull(avmNull);
 				if (result == null) result = caseAvmType(avmNull);
 				if (result == null) result = caseAvmDefinition(avmNull);
 				if (result == null) result = caseAvmIdentifiable(avmNull);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AvmEPackage.AVM_VOID: {
+				AvmVoid avmVoid = (AvmVoid)theEObject;
+				T result = caseAvmVoid(avmVoid);
+				if (result == null) result = caseAvmType(avmVoid);
+				if (result == null) result = caseAvmDefinition(avmVoid);
+				if (result == null) result = caseAvmIdentifiable(avmVoid);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

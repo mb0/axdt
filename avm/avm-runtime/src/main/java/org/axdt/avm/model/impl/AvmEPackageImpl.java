@@ -668,9 +668,9 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmElementEClass = createEClass(AVM_ELEMENT);
 		createEAttribute(avmElementEClass, AVM_ELEMENT__ASDOC);
 
-		avmVoidEClass = createEClass(AVM_VOID);
-
 		avmNullEClass = createEClass(AVM_NULL);
+
+		avmVoidEClass = createEClass(AVM_VOID);
 
 		avmGenericEClass = createEClass(AVM_GENERIC);
 
@@ -740,8 +740,8 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmConstructorEClass.getESuperTypes().add(this.getAvmExecutable());
 		avmOperationEClass.getESuperTypes().add(this.getAvmMember());
 		avmOperationEClass.getESuperTypes().add(this.getAvmExecutable());
-		avmVoidEClass.getESuperTypes().add(this.getAvmType());
 		avmNullEClass.getESuperTypes().add(this.getAvmType());
+		avmVoidEClass.getESuperTypes().add(this.getAvmType());
 		avmGenericEClass.getESuperTypes().add(this.getAvmType());
 		avmVoidReferenceEClass.getESuperTypes().add(this.getAvmTypeReference());
 		avmNullReferenceEClass.getESuperTypes().add(this.getAvmTypeReference());
@@ -891,9 +891,9 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		initEClass(avmElementEClass, AvmElement.class, "AvmElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAvmElement_Asdoc(), ecorePackage.getEString(), "asdoc", null, 0, 1, AvmElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(avmVoidEClass, AvmVoid.class, "AvmVoid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(avmNullEClass, AvmNull.class, "AvmNull", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(avmVoidEClass, AvmVoid.class, "AvmVoid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(avmGenericEClass, AvmGeneric.class, "AvmGeneric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

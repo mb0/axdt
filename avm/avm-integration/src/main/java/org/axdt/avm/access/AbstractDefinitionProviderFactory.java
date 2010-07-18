@@ -8,7 +8,7 @@ public abstract class AbstractDefinitionProviderFactory implements IDefinitionPr
 	public IDefinitionProvider findDefinitionProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
-		return (IDefinitionProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get("as3");//ClassURIHelper.PROTOCOL);
+		return (IDefinitionProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(IDefinitionProvider.PROTOCOL);
 	}
 
 	public IDefinitionProvider createDefinitionProvider() {

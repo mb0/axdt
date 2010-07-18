@@ -131,8 +131,8 @@
     <eLiterals name="PROTECTED" value="2"/>
     <eLiterals name="PRIVATE" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AvmVoid" eSuperTypes="#//AvmType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmNull" eSuperTypes="#//AvmType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AvmVoid" eSuperTypes="#//AvmType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmGeneric" eSuperTypes="#//AvmType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmVoidReference" eSuperTypes="#//AvmTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmNullReference" eSuperTypes="#//AvmTypeReference"/>

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * @generated
  */
 public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
+	
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
@@ -44,6 +45,9 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 		return new AvmEFactoryImpl();
 	}
 
+	protected AvmVoidImpl avmVoid = null;
+	protected AvmGenericImpl avmGeneric = null;
+
 	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
@@ -62,8 +66,8 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case AvmEPackage.AVM_VOID: return createAvmVoid();
 			case AvmEPackage.AVM_NULL: return createAvmNull();
+			case AvmEPackage.AVM_VOID: return createAvmVoid();
 			case AvmEPackage.AVM_GENERIC: return createAvmGeneric();
 			case AvmEPackage.AVM_VOID_REFERENCE: return createAvmVoidReference();
 			case AvmEPackage.AVM_NULL_REFERENCE: return createAvmNullReference();
@@ -151,10 +155,10 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public AvmVoid createAvmVoid() {
-		AvmVoidImpl avmVoid = new AvmVoidImpl();
+		if (avmVoid == null)
+			avmVoid = new AvmVoidImpl();
 		return avmVoid;
 	}
 
@@ -171,10 +175,10 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public AvmGeneric createAvmGeneric() {
-		AvmGenericImpl avmGeneric = new AvmGenericImpl();
+		if (avmGeneric == null)
+			avmGeneric = new AvmGenericImpl();
 		return avmGeneric;
 	}
 

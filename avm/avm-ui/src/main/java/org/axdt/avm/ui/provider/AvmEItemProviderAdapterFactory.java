@@ -335,8 +335,8 @@ public class AvmEItemProviderAdapterFactory extends AvmEAdapterFactory implement
 	 * @generated
 	 */
 	public void dispose() {
-		if (avmVoidItemProvider != null) avmVoidItemProvider.dispose();
 		if (avmNullItemProvider != null) avmNullItemProvider.dispose();
+		if (avmVoidItemProvider != null) avmVoidItemProvider.dispose();
 		if (avmGenericItemProvider != null) avmGenericItemProvider.dispose();
 		if (avmVoidReferenceItemProvider != null) avmVoidReferenceItemProvider.dispose();
 		if (avmNullReferenceItemProvider != null) avmNullReferenceItemProvider.dispose();

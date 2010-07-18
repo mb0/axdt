@@ -8,7 +8,6 @@ package org.axdt.avm.model;
 
 import junit.framework.TestCase;
 
-import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.AvmEPackage;
 
 /**
@@ -71,8 +70,7 @@ public abstract class AvmTypeReferenceTest extends TestCase {
 	 */
 	public void testGetType() {
 		assertEquals(AvmEPackage.eINSTANCE.getAvmNull(), getFixture().getType().eClass());
-		assertSame(getFixture().getType(), getFixture().getType());
-		assertSame(AvmEFactory.eINSTANCE.createAvmNullReference().getType(), getFixture().getType());
+		assertNotSame(getFixture().getType(), getFixture().getType());
 	}
 
 } //AvmTypeReferenceTest

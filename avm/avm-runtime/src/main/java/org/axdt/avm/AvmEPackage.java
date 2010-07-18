@@ -498,16 +498,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVoid()
 	 * @generated
 	 */
-	int AVM_VOID = 20;
-
-	/**
-	 * The number of structural features of the '<em>Avm Void</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AVM_VOID_FEATURE_COUNT = AVM_TYPE_FEATURE_COUNT + 0;
+	int AVM_VOID = 21;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.impl.AvmNullImpl <em>Avm Null</em>}' class.
@@ -517,7 +508,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmNull()
 	 * @generated
 	 */
-	int AVM_NULL = 21;
+	int AVM_NULL = 20;
 
 	/**
 	 * The number of structural features of the '<em>Avm Null</em>' class.
@@ -527,6 +518,15 @@ public interface AvmEPackage extends EPackage {
 	 * @ordered
 	 */
 	int AVM_NULL_FEATURE_COUNT = AVM_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Avm Void</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AVM_VOID_FEATURE_COUNT = AVM_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.impl.AvmGenericImpl <em>Avm Generic</em>}' class.

@@ -41,16 +41,11 @@ public class AvmGenericReferenceImpl extends AvmTypeReferenceImpl implements Avm
 		return AvmEPackage.Literals.AVM_GENERIC_REFERENCE;
 	}
 
-	protected static AvmGeneric cachedType = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public AvmGeneric getType() {
-		if (cachedType == null)
-			cachedType = AvmEFactory.eINSTANCE.createAvmGeneric(); 
-		return cachedType;
+		return AvmEFactory.eINSTANCE.createAvmGeneric(); 
 	}
-
 } //AvmGenericReferenceImpl

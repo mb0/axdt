@@ -19,14 +19,14 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.google.common.collect.Lists;
 
-public class AsdocTypeProviderTest extends TestCase implements IDocRootProvider {
+public class AsdocDefinitionProviderTest extends TestCase implements IDocRootProvider {
 	protected String dataFolder;
 	
 	private ResourceSet resourceSet;
-	private AsdocDefinitionProvider typeProvider;
+	private AsdocDefinitionProvider definitionProvider;
 	private AsdocRoot asdocRoot;
 	
-	public AsdocTypeProviderTest() throws Exception {
+	public AsdocDefinitionProviderTest() throws Exception {
 		dataFolder = AbstractCollectorTest.getTestDocUri()+"simple";
 		AsdocParser asdocParser = new AsdocParser();
 		asdocRoot = AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
@@ -43,24 +43,24 @@ public class AsdocTypeProviderTest extends TestCase implements IDocRootProvider 
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		typeProvider = new AsdocDefinitionProvider(this, resourceSet);
+		definitionProvider = new AsdocDefinitionProvider(this, resourceSet);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		resourceSet = null;
-		typeProvider = null;
+		definitionProvider = null;
 		super.tearDown();
 	}
 	
 	public void testSetup() {
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
-		assertSame(typeProvider, map.get(IDefinitionProvider.PROTOCOL));
+		assertSame(definitionProvider, map.get(IDefinitionProvider.PROTOCOL));
 	}
 
 	public void testCreateResourceWithProvider() throws Exception {
 		URI testUri = URI.createURI("avm:/types/Application");
-		AvmResource resource = typeProvider.createResource(testUri);
+		AvmResource resource = definitionProvider.createResource(testUri);
 		assertNotNull(resource);
 		assertFalse(resource.isLoaded());
 		// resource will stay empty
@@ -98,7 +98,7 @@ public class AsdocTypeProviderTest extends TestCase implements IDocRootProvider 
 	}
 	public void testCreateMirror() throws Exception {
 		URI uri = URI.createURI("avm:/types/Application");
-		IMirror mirror = typeProvider.createMirror(uri);
+		IMirror mirror = definitionProvider.createMirror(uri);
 		assertNotNull(mirror);
 		assertTrue(mirror instanceof AsdocMirror);
 		assertEquals("Application", ((AsdocMirror) mirror).getMirroredType().getCanonicalName());

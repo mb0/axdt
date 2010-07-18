@@ -34,8 +34,8 @@ public class AvmETests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new AvmETests("avm Tests");
-		suite.addTestSuite(AvmVoidTest.class);
 		suite.addTestSuite(AvmNullTest.class);
+		suite.addTestSuite(AvmVoidTest.class);
 		suite.addTestSuite(AvmGenericTest.class);
 		suite.addTestSuite(AvmVoidReferenceTest.class);
 		suite.addTestSuite(AvmNullReferenceTest.class);

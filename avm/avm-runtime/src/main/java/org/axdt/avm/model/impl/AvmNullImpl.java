@@ -77,4 +77,9 @@ public class AvmNullImpl extends MinimalEObjectImpl.Container implements AvmNull
 		return "Null";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		return obj instanceof AvmNull;
+	}
 } //AvmNullImpl

@@ -40,16 +40,12 @@ public class AvmNullReferenceImpl extends AvmTypeReferenceImpl implements AvmNul
 	protected EClass eStaticClass() {
 		return AvmEPackage.Literals.AVM_NULL_REFERENCE;
 	}
-	protected static AvmNull cachedType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public AvmNull getType() {
-		if (cachedType == null)
-			cachedType = AvmEFactory.eINSTANCE.createAvmNull();
-		return cachedType;
+		return AvmEFactory.eINSTANCE.createAvmNull();
 	}
 } //AvmNullReferenceImpl

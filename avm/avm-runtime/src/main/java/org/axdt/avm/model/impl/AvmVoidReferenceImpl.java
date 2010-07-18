@@ -41,16 +41,11 @@ public class AvmVoidReferenceImpl extends AvmTypeReferenceImpl implements AvmVoi
 		return AvmEPackage.Literals.AVM_VOID_REFERENCE;
 	}
 
-	protected static AvmVoid cachedType = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public AvmVoid getType() {
-		if (cachedType == null)
-			cachedType = AvmEFactory.eINSTANCE.createAvmVoid();
-		return cachedType;
+		return AvmEFactory.eINSTANCE.createAvmVoid();
 	}
-
 } //AvmVoidReferenceImpl

@@ -150,12 +150,12 @@ public class AvmEAdapterFactory extends AdapterFactoryImpl {
 				return createAvmElementAdapter();
 			}
 			@Override
-			public Adapter caseAvmVoid(AvmVoid object) {
-				return createAvmVoidAdapter();
-			}
-			@Override
 			public Adapter caseAvmNull(AvmNull object) {
 				return createAvmNullAdapter();
+			}
+			@Override
+			public Adapter caseAvmVoid(AvmVoid object) {
+				return createAvmVoidAdapter();
 			}
 			@Override
 			public Adapter caseAvmGeneric(AvmGeneric object) {

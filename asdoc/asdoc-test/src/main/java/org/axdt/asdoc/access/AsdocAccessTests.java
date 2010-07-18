@@ -9,7 +9,7 @@ public class AsdocAccessTests extends TestSuite {
 	}
 	public static Test suite() {
 		TestSuite suite = new AsdocAccessTests("access Tests");
-		suite.addTestSuite(AsdocTypeProviderTest.class);
+		suite.addTestSuite(AsdocDefinitionProviderTest.class);
 		return suite;
 	}
 }
