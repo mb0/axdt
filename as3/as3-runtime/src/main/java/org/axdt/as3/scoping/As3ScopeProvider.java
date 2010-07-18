@@ -16,13 +16,12 @@ import org.axdt.as3.model.As3FieldBinding;
 import org.axdt.as3.model.As3Package;
 import org.axdt.as3.model.As3Program;
 import org.axdt.as3.model.As3PropertyIdentifier;
+import org.axdt.as3.model.As3WithStatement;
 import org.axdt.as3.model.IIdentifier;
-import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.access.IDefinitionProvider;
+import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmDeclaredTypeReference;
-import org.axdt.avm.model.AvmField;
-import org.axdt.avm.model.AvmGenericReference;
 import org.axdt.avm.model.AvmIdentifiable;
 import org.axdt.avm.model.AvmMember;
 import org.axdt.avm.model.AvmType;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -84,6 +82,10 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 		return new AvmExecutableScope(ctx, getScope(ctx.eContainer(), ref));
 	}
 
+	IScope scope_AvmIdentifiable(As3WithStatement ctx, EReference ref) {
+		// TODO with statement needs its own scope 
+		return null;
+	}
 	IScope scope_AvmIdentifiable(As3AccessExpression ctx, EReference ref) {
 		return null;
 	}
@@ -187,7 +189,10 @@ class AvmTypeScope extends AvmScope<AvmDeclaredType> {
 				URI proxyURI = internal.eProxyURI();
 				// if it is an avm url, ecore cannot resolve it 
 				if (IDefinitionProvider.PROTOCOL.equals(proxyURI.scheme())) {
-					String qualifiedName = proxyURI.toString().replaceFirst(IDefinitionProvider.PROTOCOL+":/types/", "");
+					String urlString = proxyURI.toString();
+					String qualifiedName = urlString.replaceFirst(IDefinitionProvider.PROTOCOL+":/(types|lookup)/", "");
+					// TODO try to look up from definition provider if it is a qualified name
+					//      remember: definition provider only exposes asdoc types
 					// lets lookup the type name in the parent scope
 					IEObjectDescription description = parentScope.getContentByName(qualifiedName);
 					if (description != null) {
@@ -214,31 +219,48 @@ class AvmTypeScope extends AvmScope<AvmDeclaredType> {
 	}
 }
 
-class As3PropertyScope extends AvmScope<As3AccessExpression> {
-
+class As3PropertyScope extends AvmGenericScope<As3AccessExpression> {
 
 	public As3PropertyScope(As3AccessExpression element) {
-		super(element, IScope.NULLSCOPE);
+		super(element);
 	}
 
 	@Override
 	protected Iterable<? extends AvmIdentifiable> getCandidates() {
 		// TODO resolve expression type 
-		AvmType type = AvmEFactory.eINSTANCE.createAvmGeneric();
+		AvmType type = element.getExpression().resolveType();
 		if (type != null) {
-			IIdentifier identifier = element.getOperator().getIdentifier();
-			if (type.isDynamic() && identifier instanceof As3PropertyIdentifier) {
-				String text = getReferenceText((As3PropertyIdentifier) identifier);
-				if (text != null)
-					return Collections.singleton(getDynamicIdentifiable(text));
+			if (type.isClass() && type instanceof AvmClass) {
+				AvmClass classDef = (AvmClass) type;
+				return classDef.getMembers();
+			}
+			if (type.isDynamic()) {
+				IIdentifier identifier = element.getOperator().getIdentifier();
+				if (identifier instanceof As3PropertyIdentifier) {
+					As3PropertyIdentifier propIdent = (As3PropertyIdentifier) identifier;
+						String text = getReferenceText(propIdent);
+						if (text != null)
+							return Collections.singleton(getDynamicIdentifiable(text));
+				}
 			}
 		}
 		return Iterables.emptyIterable();
 	}
+}
+
+abstract class AvmGenericScope<T extends EObject> extends AvmScope<T> {
+
+	private static Resource tempResource = null;
+
+	public AvmGenericScope(T element) {
+		super(element, IScope.NULLSCOPE);
+	}
+
 	public String getReferenceText(As3PropertyIdentifier ident) {
 		CompositeNode node = NodeUtil.getNodeAdapter(ident).getParserNode();
 		return new LinkingHelper().getCrossRefNodeAsString(node, false);
 	}
+
 	public AvmIdentifiable getDynamicIdentifiable(final String value) {
 		Resource resource = getTempResource();
 		EObject find = null;
@@ -258,32 +280,6 @@ class As3PropertyScope extends AvmScope<As3AccessExpression> {
 		}
 		return field;
 	}
-	protected Resource getTempResource() {
-		if (tempResource != null)
-			return tempResource;
-		URI tempUri = URI.createPlatformPluginURI("generic.avm", false);
-		ResourceSet set = element.eResource().getResourceSet();
-		tempResource = set.getResource(tempUri, false);
-		if (tempResource == null)
-			tempResource = set.createResource(tempUri);
-		return tempResource;
-	}
-	private static Resource tempResource = null;
-}
-
-class AvmGenericScope<T extends EObject> extends AvmScope<T> {
-
-	private static Resource tempResource;
-
-	public AvmGenericScope(T element, EReference reference) {
-		super(element, IScope.NULLSCOPE);
-	}
-
-	@Override
-	protected Iterable<? extends AvmIdentifiable> getCandidates() {
-		return null;
-	}
-
 
 	protected Resource getTempResource() {
 		if (tempResource != null)
@@ -293,87 +289,6 @@ class AvmGenericScope<T extends EObject> extends AvmScope<T> {
 		tempResource = set.getResource(tempUri, false);
 		if (tempResource == null)
 			tempResource = set.createResource(tempUri);
-		return tempResource;
-	}
-}
-
-class PostfixScope extends AbstractScope {
-
-	protected final EObject expression;
-	protected final As3PropertyIdentifier context;
-	private Resource tempResource;
-
-	public PostfixScope(EObject eObject, As3PropertyIdentifier ctx) {
-		this.expression = eObject;
-		this.context = ctx;
-	}
-
-	public IScope getOuterScope() {
-		return IScope.NULLSCOPE;
-	}
-
-	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		List<IEObjectDescription> result = Lists.newArrayList();
-		if (expression instanceof As3PropertyIdentifier) {
-			As3PropertyIdentifier ident = (As3PropertyIdentifier) expression;
-			CompositeNode node = NodeUtil.getNodeAdapter(context)
-					.getParserNode();
-			String nodeText = new LinkingHelper().getCrossRefNodeAsString(node,
-					false);
-			AvmIdentifiable reference = ident.getReference();
-			if (reference == null || reference.eIsProxy()) {
-				result.add(getGenericDescription(nodeText));
-			} else {
-				if (reference instanceof AvmField) {
-					AvmField bind = (AvmField) reference;
-					AvmTypeReference type = bind.getType();
-					if (type == null || type instanceof AvmGenericReference)
-						result.add(getGenericDescription(nodeText));
-					else if (type.getType() instanceof As3PropertyIdentifier) {
-						As3PropertyIdentifier typeIdent = (As3PropertyIdentifier) type
-								.getType();
-						if ("*".equals(typeIdent.getName()))
-							result.add(getGenericDescription(nodeText));
-						else {
-							AvmIdentifiable typeTarget = typeIdent
-									.getReference();
-							if (typeTarget instanceof AvmDeclaredType) {
-								AvmDeclaredType classDef = (AvmDeclaredType) typeTarget;
-								for (EObject child : classDef.getMembers()) {
-									String name = SimpleAttributeResolver.NAME_RESOLVER
-											.apply(child);
-									result.add(EObjectDescription.create(name,
-											child));
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return result;
-	}
-
-	protected IEObjectDescription getGenericDescription(String name) {
-		As3PropertyIdentifier identifiable = As3EFactory.eINSTANCE
-				.createAs3PropertyIdentifier();
-		identifiable.setName(name);
-		getTempResource().getContents().add(identifiable);
-		return EObjectDescription.create(identifiable.getName(), identifiable);
-	}
-
-	protected Resource getTempResource() {
-		if (tempResource != null)
-			return tempResource;
-		URI tempUri = context.eResource().getURI()
-				.appendFileExtension("generic");
-		ResourceSet set = context.eResource().getResourceSet();
-		tempResource = set.getResource(tempUri, false);
-		if (tempResource == null)
-			tempResource = set.createResource(tempUri);
-		else
-			tempResource.getContents().clear();
 		return tempResource;
 	}
 }

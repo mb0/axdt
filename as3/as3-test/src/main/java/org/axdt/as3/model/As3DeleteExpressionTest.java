@@ -70,4 +70,9 @@ public class As3DeleteExpressionTest extends As3UnaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/Boolean", getFixture().resolveType());
+	}
+
 } //As3DeleteExpressionTest

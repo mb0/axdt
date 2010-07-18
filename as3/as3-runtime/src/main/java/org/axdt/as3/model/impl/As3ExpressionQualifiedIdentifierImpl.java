@@ -9,6 +9,8 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ExpressionQualifiedIdentifier;
 import org.axdt.as3.model.IExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -173,4 +175,9 @@ public class As3ExpressionQualifiedIdentifierImpl extends As3NonAttributeQualifi
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public AvmType resolveType() {
+		// TODO handle expresion qualified identifier
+		return AvmEFactory.eINSTANCE.createAvmGeneric();
+	}
 } //As3ExpressionQualifiedIdentifierImpl

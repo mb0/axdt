@@ -70,4 +70,31 @@ public class As3AdditiveExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	protected As3EFactory factory = As3EFactory.eINSTANCE;
+	
+	@Override
+	public void testResolveType() {
+		// number by default
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+	}
+	public void testResolveType_String() {
+		As3NumberLiteral left = factory.createAs3NumberLiteral();
+		left.setValue(13);
+		getFixture().setOperation("+");
+		getFixture().setLeft(left);
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+		As3StringLiteral right = factory.createAs3StringLiteral();
+		right.setValue("foo");
+		getFixture().setRight(right);
+		assertProxyType("avm:/types/String", getFixture().resolveType());
+	}
+	public void testResolveType_XML() {
+		As3XmlInitializer right = factory.createAs3XmlInitializer();
+		getFixture().setRight(right);
+		getFixture().setOperation("+");
+		assertProxyType("avm:/types/XML", getFixture().resolveType());
+		As3NumberLiteral left = factory.createAs3NumberLiteral();
+		left.setValue(13);
+		getFixture().setLeft(left);
+	}
 } //As3AdditiveExpressionTest

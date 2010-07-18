@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3MultiplicativeExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -38,5 +39,9 @@ public class As3MultiplicativeExpressionImpl extends As3BinaryExpressionImpl imp
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_MULTIPLICATIVE_EXPRESSION;
 	}
-
+	
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Number");
+	}
 } //As3MultiplicativeExpressionImpl

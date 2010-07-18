@@ -9,6 +9,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,6 +69,21 @@ public class As3LogicalExpressionTest extends As3BinaryExpressionTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	@Override
+	public void testResolveType() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		As3PropertyIdentifier left = createTypedIdent("Foo");
+		getFixture().setLeft(left);
+		As3PropertyIdentifier right = createTypedIdent("Foo");
+		getFixture().setRight(right);
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+		// TODO: find common super type
+		// needs type resolution
+		As3PropertyIdentifier right2 = createTypedIdent("Object");
+		getFixture().setRight(right2);
+		assertProxyType("avm:/types/Object", getFixture().resolveType());
 	}
 
 } //As3LogicalExpressionTest

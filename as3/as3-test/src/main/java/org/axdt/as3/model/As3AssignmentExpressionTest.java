@@ -9,6 +9,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,5 +70,42 @@ public class As3AssignmentExpressionTest extends As3BinaryExpressionTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	protected As3EFactory factory = As3EFactory.eINSTANCE;
 
+	@Override
+	public void testResolveType() {
+		// null by default
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		// if assignee is set resolve to its type
+		// let validation check for incompatible types
+		getFixture().setLeft(createTypedIdent("Foo"));
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+	}
+	public void testResolveType_Compound() {
+		As3PropertyIdentifier left = createTypedIdent("Foo");
+		getFixture().setLeft(left);
+		getFixture().setOperation("*=");
+		// if arithmetic or shift compound assign is used
+		// also resolve to assignee's type
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+	}
+	public void testResolveType_String() {
+		As3PropertyIdentifier left = createTypedIdent("Foo");
+		getFixture().setOperation("+=");
+		getFixture().setLeft(left);
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+		As3StringLiteral right = factory.createAs3StringLiteral();
+		right.setValue("foo");
+		getFixture().setRight(right);
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+	}
+	public void testResolveType_XML() {
+		As3PropertyIdentifier left = createTypedIdent("Foo");
+		getFixture().setOperation("+=");
+		getFixture().setLeft(left);
+		As3XmlInitializer right = factory.createAs3XmlInitializer();
+		getFixture().setRight(right);
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+	}
 } //As3AssignmentExpressionTest

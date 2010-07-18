@@ -8,8 +8,9 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3NullLiteral;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,16 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3NullLiteralImpl extends MinimalEObjectImpl.Container implements As3NullLiteral {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3NullLiteralImpl extends IExpressionImpl implements As3NullLiteral {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,4 +41,8 @@ public class As3NullLiteralImpl extends MinimalEObjectImpl.Container implements 
 		return As3EPackage.Literals.AS3_NULL_LITERAL;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return AvmEFactory.eINSTANCE.createAvmVoid();
+	}
 } //As3NullLiteralImpl

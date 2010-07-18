@@ -70,4 +70,9 @@ public class As3PostDecrementExpressionTest extends As3PostfixExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+	}
+
 } //As3PostDecrementExpressionTest

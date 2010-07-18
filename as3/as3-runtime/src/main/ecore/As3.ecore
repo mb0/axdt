@@ -9,7 +9,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IStatement" abstract="true" interface="true"
       eSuperTypes="#//IDirective"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IExpression" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IExpression" abstract="true">
+    <eOperations name="resolveType" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmType"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IAssignmentExpression" abstract="true"
       interface="true" eSuperTypes="#//IExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="IConditionalExpression" abstract="true"

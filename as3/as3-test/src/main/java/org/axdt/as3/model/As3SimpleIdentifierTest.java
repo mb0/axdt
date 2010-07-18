@@ -6,15 +6,19 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Simple Identifier</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
-public abstract class As3SimpleIdentifierTest extends TestCase {
+public abstract class As3SimpleIdentifierTest extends IExpressionTest {
 
 	/**
 	 * The fixture for this As3 Simple Identifier test case.
@@ -53,5 +57,13 @@ public abstract class As3SimpleIdentifierTest extends TestCase {
 	protected As3SimpleIdentifier getFixture() {
 		return fixture;
 	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public abstract void testResolveType();
 
 } //As3SimpleIdentifierTest

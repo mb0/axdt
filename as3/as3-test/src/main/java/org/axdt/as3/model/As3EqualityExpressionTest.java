@@ -70,4 +70,9 @@ public class As3EqualityExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/Boolean", getFixture().resolveType());
+	}
+
 } //As3EqualityExpressionTest

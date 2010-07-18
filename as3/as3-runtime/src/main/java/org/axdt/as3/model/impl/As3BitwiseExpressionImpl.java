@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3BitwiseExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -37,6 +38,11 @@ public class As3BitwiseExpressionImpl extends As3BinaryExpressionImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_BITWISE_EXPRESSION;
+	}
+
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("int");
 	}
 
 } //As3BitwiseExpressionImpl

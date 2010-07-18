@@ -11,11 +11,18 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 This Expression</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class As3ThisExpressionTest extends TestCase {
@@ -89,4 +96,35 @@ public class As3ThisExpressionTest extends TestCase {
 		setFixture(null);
 	}
 
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+	}
+	public void testResolveType_Unbound() {
+		As3EFactory as3Fac = As3EFactory.eINSTANCE;
+		As3FunctionExpression func = as3Fac.createAs3FunctionExpression();
+		As3Block block = as3Fac.createAs3Block();
+		As3ExpressionStatement statement = as3Fac.createAs3ExpressionStatement();
+		statement.getExpressions().add(getFixture());
+		block.getDirectives().add(statement);
+		func.setBody(block);
+		assertEquals(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+	}
+	public void testResolveType_Operation() {
+		As3EFactory as3Fac = As3EFactory.eINSTANCE;
+		As3Class type = as3Fac.createAs3Class();
+		As3Operation func = as3Fac.createAs3Operation();
+		As3Block block = as3Fac.createAs3Block();
+		As3ExpressionStatement statement = as3Fac.createAs3ExpressionStatement();
+		statement.getExpressions().add(getFixture());
+		block.getDirectives().add(statement);
+		func.setBody(block);
+		type.getDirectives().add(func);
+		assertSame(type, getFixture().resolveType());
+	}
 } //As3ThisExpressionTest

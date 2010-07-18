@@ -9,14 +9,20 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Paren List Expression</b></em>'.
  * <!-- end-user-doc -->
- * @generated
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  */
-public class As3ParenListExpressionTest extends As3ExpressionListTest {
+public class As3ParenListExpressionTest extends IExpressionTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,6 +74,22 @@ public class As3ParenListExpressionTest extends As3ExpressionListTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		As3StringLiteral literal0 = As3EFactory.eINSTANCE.createAs3StringLiteral();
+		getFixture().getExpressions().add(literal0);
+		assertProxyType("avm:/types/String", getFixture().resolveType());
+		As3BooleanLiteral literal1 = As3EFactory.eINSTANCE.createAs3BooleanLiteral();
+		getFixture().getExpressions().add(literal1);
+		assertProxyType("avm:/types/Boolean", getFixture().resolveType());
 	}
 
 } //As3ParenListExpressionTest

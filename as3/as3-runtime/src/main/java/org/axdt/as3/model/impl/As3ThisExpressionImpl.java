@@ -7,9 +7,12 @@
 package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
+import org.axdt.as3.model.As3FunctionExpression;
 import org.axdt.as3.model.As3ThisExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,16 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3ThisExpressionImpl extends MinimalEObjectImpl.Container implements As3ThisExpression {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3ThisExpressionImpl extends IExpressionImpl implements As3ThisExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,6 +41,19 @@ public class As3ThisExpressionImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_THIS_EXPRESSION;
+	}
+
+	@Override
+	public AvmType resolveType() {
+		EObject current = eContainer();
+		while (current != null) {
+			if (current instanceof As3FunctionExpression)
+				return AvmEFactory.eINSTANCE.createAvmGeneric();
+			if (current instanceof AvmType)
+				return (AvmType) current; 
+			current = current.eContainer();
+		}
+		return AvmEFactory.eINSTANCE.createAvmNull();
 	}
 
 } //As3ThisExpressionImpl

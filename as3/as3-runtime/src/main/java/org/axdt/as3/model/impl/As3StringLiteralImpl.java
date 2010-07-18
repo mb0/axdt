@@ -8,10 +8,10 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3StringLiteral;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,16 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3StringLiteralImpl extends MinimalEObjectImpl.Container implements As3StringLiteral {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3StringLiteralImpl extends IExpressionImpl implements As3StringLiteral {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -168,6 +159,11 @@ public class As3StringLiteralImpl extends MinimalEObjectImpl.Container implement
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("String");
 	}
 
 } //As3StringLiteralImpl

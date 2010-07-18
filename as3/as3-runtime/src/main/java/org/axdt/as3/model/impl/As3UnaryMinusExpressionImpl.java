@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3UnaryMinusExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,8 @@ public class As3UnaryMinusExpressionImpl extends As3UnaryExpressionImpl implemen
 		return As3EPackage.Literals.AS3_UNARY_MINUS_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Number");
+	}
 } //As3UnaryMinusExpressionImpl

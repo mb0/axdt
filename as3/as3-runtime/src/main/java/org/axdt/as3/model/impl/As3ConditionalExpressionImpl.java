@@ -10,12 +10,13 @@ import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ConditionalExpression;
 import org.axdt.as3.model.IExpression;
 import org.axdt.as3.model.ILogicalExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,16 +33,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3ConditionalExpressionImpl extends MinimalEObjectImpl.Container implements As3ConditionalExpression {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3ConditionalExpressionImpl extends IExpressionImpl implements As3ConditionalExpression {
 	/**
 	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -314,6 +306,19 @@ public class As3ConditionalExpressionImpl extends MinimalEObjectImpl.Container i
 				return elseStatement != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public AvmType resolveType() {
+		if (statement != null && elseStatement != null) {
+			AvmType ifType = statement.resolveType();
+			AvmType elseType = elseStatement.resolveType();
+			if (ifType != null && ifType.equals(elseType))
+				return elseType;
+			// TODO find common super type and generalize
+			return AvmEFactory.eINSTANCE.createAvmGeneric();
+		}
+		return AvmEFactory.eINSTANCE.createAvmNull();
 	}
 
 } //As3ConditionalExpressionImpl

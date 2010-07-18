@@ -6,19 +6,24 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Conditional Expression</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
-public class As3ConditionalExpressionTest extends TestCase {
+public class As3ConditionalExpressionTest extends IExpressionTest {
 
 	/**
 	 * The fixture for this As3 Conditional Expression test case.
@@ -87,6 +92,27 @@ public class As3ConditionalExpressionTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 * @generated
+	 */
+	public void testResolveType() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		As3PropertyIdentifier left = createTypedIdent("Foo");
+		getFixture().setStatement(left);
+		As3PropertyIdentifier right = createTypedIdent("Foo");
+		getFixture().setElseStatement(right);
+		assertProxyType("avm:/types/Foo", getFixture().resolveType());
+		// TODO: find common super type
+		// needs type resolution
+		As3PropertyIdentifier right2 = createTypedIdent("Object");
+		getFixture().setElseStatement(right2);
+		assertProxyType("avm:/types/Object", getFixture().resolveType());
 	}
 
 } //As3ConditionalExpressionTest

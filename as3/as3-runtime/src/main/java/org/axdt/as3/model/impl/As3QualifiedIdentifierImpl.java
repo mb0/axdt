@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,16 +30,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public abstract class As3QualifiedIdentifierImpl extends MinimalEObjectImpl.Container implements As3QualifiedIdentifier {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public abstract class As3QualifiedIdentifierImpl extends IExpressionImpl implements As3QualifiedIdentifier {
 	/**
 	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -6,8 +6,6 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
@@ -21,11 +19,11 @@ import org.axdt.as3.As3EFactory;
  * <ul>
  *   <li>{@link org.axdt.as3.model.As3Executable#getDeclarations() <em>Get Declarations</em>}</li>
  *   <li>{@link org.axdt.as3.model.As3Executable#getDirectives() <em>Get Directives</em>}</li>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
  * </ul>
  * </p>
- * @generated
  */
-public class As3FunctionExpressionTest extends TestCase {
+public class As3FunctionExpressionTest extends IExpressionTest {
 
 	/**
 	 * The fixture for this As3 Function Expression test case.
@@ -114,6 +112,16 @@ public class As3FunctionExpressionTest extends TestCase {
 	 */
 	public void testGetDirectives() {
 		assertNotNull(getFixture().getDirectives());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		assertProxyType("avm:/types/Function", getFixture().resolveType());
 	}
 
 	/**

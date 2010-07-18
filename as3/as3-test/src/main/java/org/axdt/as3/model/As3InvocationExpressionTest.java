@@ -9,6 +9,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,6 +69,19 @@ public class As3InvocationExpressionTest extends As3PostfixExpressionTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	@Override
+	public void testResolveType() {
+		As3EFactory factory = As3EFactory.eINSTANCE;
+		As3FunctionExpression function = factory.createAs3FunctionExpression();
+		function.setName("foo");
+		function.setReturnType(AvmEFactory.eINSTANCE.createAvmGenericReference());
+		As3PropertyIdentifier identifier = factory.createAs3PropertyIdentifier();
+		identifier.setReference(function);
+		getFixture().setExpression(identifier);
+		
+		assertSame(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
 	}
 
 } //As3InvocationExpressionTest

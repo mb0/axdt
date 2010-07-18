@@ -3952,7 +3952,9 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		initEClass(iStatementEClass, IStatement.class, "IStatement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(iExpressionEClass, IExpression.class, "IExpression", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(iExpressionEClass, IExpression.class, "IExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(iExpressionEClass, theAvmEPackage.getAvmType(), "resolveType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iAssignmentExpressionEClass, IAssignmentExpression.class, "IAssignmentExpression", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

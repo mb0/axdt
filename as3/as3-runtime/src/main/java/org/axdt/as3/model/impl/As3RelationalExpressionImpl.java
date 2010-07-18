@@ -8,6 +8,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3RelationalExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -38,5 +40,12 @@ public class As3RelationalExpressionImpl extends As3BinaryExpressionImpl impleme
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_RELATIONAL_EXPRESSION;
 	}
-
+	
+	@Override
+	public AvmType resolveType() {
+		// TODO resolve type from right class ref
+		if ("as".equals(getOperation()))
+			return AvmEFactory.eINSTANCE.createAvmGeneric();
+		return getClassProxy("Boolean");
+	}
 } //As3RelationalExpressionImpl

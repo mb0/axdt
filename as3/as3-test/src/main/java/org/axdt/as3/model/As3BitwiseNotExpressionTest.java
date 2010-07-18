@@ -70,4 +70,9 @@ public class As3BitwiseNotExpressionTest extends As3UnaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/int", getFixture().resolveType());
+	}
+
 } //As3BitwiseNotExpressionTest

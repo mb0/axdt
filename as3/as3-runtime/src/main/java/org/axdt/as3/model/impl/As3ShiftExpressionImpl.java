@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ShiftExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,10 @@ public class As3ShiftExpressionImpl extends As3BinaryExpressionImpl implements A
 		return As3EPackage.Literals.AS3_SHIFT_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		if (">>>".equals(getOperation()))
+			return getClassProxy("uint");
+		return getClassProxy("int");
+	}
 } //As3ShiftExpressionImpl

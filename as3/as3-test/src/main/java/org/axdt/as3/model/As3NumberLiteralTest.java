@@ -6,8 +6,6 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
@@ -16,9 +14,14 @@ import org.axdt.as3.As3EFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Number Literal</b></em>'.
  * <!-- end-user-doc -->
- * @generated
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  */
-public class As3NumberLiteralTest extends TestCase {
+public class As3NumberLiteralTest extends IExpressionTest {
 
 	/**
 	 * The fixture for this As3 Number Literal test case.
@@ -87,6 +90,32 @@ public class As3NumberLiteralTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		// TODO check number literal types
+		// if no value is set return int
+		assertProxyType("avm:/types/int", getFixture().resolveType());
+		// when there is a fraction use Number
+		getFixture().setValue(13.37);
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+		// when Integer and > 2147483647 use uint
+		getFixture().setValue(2147483648l);
+		assertProxyType("avm:/types/uint", getFixture().resolveType());
+		// else if >= -2147483648 return int
+		getFixture().setValue(-1337);
+		assertProxyType("avm:/types/int", getFixture().resolveType());
+		// in any other case use Number
+		getFixture().setValue(1e-2);
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+		getFixture().setValue(-2147483649l);
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
 	}
 
 } //As3NumberLiteralTest

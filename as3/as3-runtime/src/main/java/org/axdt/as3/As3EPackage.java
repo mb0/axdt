@@ -136,10 +136,10 @@ public interface As3EPackage extends EPackage {
 	int ISTATEMENT_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.axdt.as3.model.IExpression <em>IExpression</em>}' class.
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.IExpressionImpl <em>IExpression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.axdt.as3.model.IExpression
+	 * @see org.axdt.as3.model.impl.IExpressionImpl
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIExpression()
 	 * @generated
 	 */
@@ -7733,10 +7733,10 @@ public interface As3EPackage extends EPackage {
 		EClass ISTATEMENT = eINSTANCE.getIStatement();
 
 		/**
-		 * The meta object literal for the '{@link org.axdt.as3.model.IExpression <em>IExpression</em>}' class.
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.IExpressionImpl <em>IExpression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.axdt.as3.model.IExpression
+		 * @see org.axdt.as3.model.impl.IExpressionImpl
 		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIExpression()
 		 * @generated
 		 */

@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3EqualityExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,8 @@ public class As3EqualityExpressionImpl extends As3BinaryExpressionImpl implement
 		return As3EPackage.Literals.AS3_EQUALITY_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Boolean");
+	}
 } //As3EqualityExpressionImpl

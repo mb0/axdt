@@ -11,11 +11,11 @@ import java.util.Collection;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3LiteralField;
 import org.axdt.as3.model.As3ObjectInitializer;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -32,16 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class As3ObjectInitializerImpl extends MinimalEObjectImpl.Container implements As3ObjectInitializer {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3ObjectInitializerImpl extends IExpressionImpl implements As3ObjectInitializer {
 	/**
 	 * The cached value of the '{@link #getFields() <em>Fields</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -157,4 +148,8 @@ public class As3ObjectInitializerImpl extends MinimalEObjectImpl.Container imple
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Object");
+	}
 } //As3ObjectInitializerImpl

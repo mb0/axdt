@@ -70,4 +70,9 @@ public class As3UnaryMinusExpressionTest extends As3UnaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+	}
+
 } //As3UnaryMinusExpressionTest

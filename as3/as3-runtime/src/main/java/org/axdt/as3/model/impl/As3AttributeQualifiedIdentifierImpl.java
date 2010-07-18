@@ -8,6 +8,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3AttributeQualifiedIdentifier;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -37,6 +39,12 @@ public class As3AttributeQualifiedIdentifierImpl extends As3QualifiedIdentifierI
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_ATTRIBUTE_QUALIFIED_IDENTIFIER;
+	}
+
+	@Override
+	public AvmType resolveType() {
+		// TODO handle attribute qualified identifier
+		return AvmEFactory.eINSTANCE.createAvmGeneric();
 	}
 
 } //As3AttributeQualifiedIdentifierImpl

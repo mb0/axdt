@@ -6,7 +6,6 @@
  */
 package org.axdt.as3.model.impl;
 
-import java.lang.Iterable;
 import java.util.Collection;
 
 import org.axdt.as3.As3EPackage;
@@ -19,6 +18,7 @@ import org.axdt.as3.model.IDirective;
 import org.axdt.as3.model.IForInInit;
 import org.axdt.avm.model.AvmExecutable;
 import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -51,16 +50,7 @@ import com.google.common.collect.Lists;
  *
  * @generated
  */
-public class As3FunctionExpressionImpl extends MinimalEObjectImpl.Container implements As3FunctionExpression {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3FunctionExpressionImpl extends IExpressionImpl implements As3FunctionExpression {
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -458,4 +448,9 @@ public class As3FunctionExpressionImpl extends MinimalEObjectImpl.Container impl
 		return result.toString();
 	}
 
+
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Function");
+	}
 } //As3FunctionExpressionImpl

@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3DeleteExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,9 @@ public class As3DeleteExpressionImpl extends As3UnaryExpressionImpl implements A
 		return As3EPackage.Literals.AS3_DELETE_EXPRESSION;
 	}
 
+
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Boolean");
+	}
 } //As3DeleteExpressionImpl

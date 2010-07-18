@@ -9,6 +9,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,6 +69,11 @@ public class As3VoidExpressionTest extends As3UnaryExpressionTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	@Override
+	public void testResolveType() {
+		assertSame(AvmEFactory.eINSTANCE.createAvmVoid(), getFixture().resolveType());
 	}
 
 } //As3VoidExpressionTest

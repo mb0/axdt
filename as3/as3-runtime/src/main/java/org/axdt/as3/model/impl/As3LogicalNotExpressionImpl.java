@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3LogicalNotExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,8 @@ public class As3LogicalNotExpressionImpl extends As3UnaryExpressionImpl implemen
 		return As3EPackage.Literals.AS3_LOGICAL_NOT_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Boolean");
+	}
 } //As3LogicalNotExpressionImpl

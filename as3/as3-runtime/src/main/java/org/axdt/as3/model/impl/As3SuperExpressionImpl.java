@@ -8,8 +8,12 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3SuperExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmType;
+import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,16 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3SuperExpressionImpl extends MinimalEObjectImpl.Container implements As3SuperExpression {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3SuperExpressionImpl extends IExpressionImpl implements As3SuperExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,4 +44,18 @@ public class As3SuperExpressionImpl extends MinimalEObjectImpl.Container impleme
 		return As3EPackage.Literals.AS3_SUPER_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		EObject current = eContainer();
+		while (current != null) {
+			if (current instanceof AvmDeclaredType) {
+				AvmTypeReference extended = ((AvmDeclaredType) current).getExtendedClass();
+				if (extended == null)
+					break;
+				return extended.getType(); 
+			}
+			current = current.eContainer();
+		}
+		return AvmEFactory.eINSTANCE.createAvmNull();
+	}
 } //As3SuperExpressionImpl

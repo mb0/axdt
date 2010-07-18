@@ -9,12 +9,13 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3NewExpression;
 import org.axdt.as3.model.IPostfixExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,16 +30,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3NewExpressionImpl extends MinimalEObjectImpl.Container implements As3NewExpression {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3NewExpressionImpl extends IExpressionImpl implements As3NewExpression {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -181,6 +173,14 @@ public class As3NewExpressionImpl extends MinimalEObjectImpl.Container implement
 				return target != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public AvmType resolveType() {
+		IPostfixExpression expression = getTarget();
+		if (expression == null)
+			return AvmEFactory.eINSTANCE.createAvmNull();
+		return expression.resolveType();
 	}
 
 } //As3NewExpressionImpl

@@ -6,6 +6,7 @@
  */
 package org.axdt.as3.model;
 
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,5 +19,12 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface IExpression extends EObject {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	AvmType resolveType();
 
 } // IExpression

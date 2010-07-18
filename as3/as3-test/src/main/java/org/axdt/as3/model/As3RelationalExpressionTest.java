@@ -70,4 +70,10 @@ public class As3RelationalExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		// TODO test 'as' expression
+		assertProxyType("avm:/types/Boolean", getFixture().resolveType());
+	}
+
 } //As3RelationalExpressionTest

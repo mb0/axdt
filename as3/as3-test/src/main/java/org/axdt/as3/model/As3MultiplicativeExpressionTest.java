@@ -70,4 +70,9 @@ public class As3MultiplicativeExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/Number", getFixture().resolveType());
+	}
+
 } //As3MultiplicativeExpressionTest

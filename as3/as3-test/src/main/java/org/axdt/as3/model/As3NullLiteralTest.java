@@ -11,11 +11,19 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.model.AvmType;
+import org.axdt.avm.model.AvmVoid;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Null Literal</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class As3NullLiteralTest extends TestCase {
@@ -87,6 +95,19 @@ public class As3NullLiteralTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		// uses a static value and no type proxy
+		AvmType type = getFixture().resolveType();
+		assertNotNull(type);
+		assertTrue(type instanceof AvmVoid);
 	}
 
 } //As3NullLiteralTest

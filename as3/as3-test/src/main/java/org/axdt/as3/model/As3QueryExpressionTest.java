@@ -9,6 +9,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
+import org.axdt.avm.AvmEFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,4 +71,15 @@ public class As3QueryExpressionTest extends As3PostfixExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		getFixture().setExpression(createTypedIdent("Foo"));
+		assertEquals(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+	}
+	public void testResolveType_XML() {
+		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		getFixture().setExpression(createTypedIdent("XMLList"));
+		assertProxyType("avm:/types/XMLList", getFixture().resolveType());
+	}
 } //As3QueryExpressionTest

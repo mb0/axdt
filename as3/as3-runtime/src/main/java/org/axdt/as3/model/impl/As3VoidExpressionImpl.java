@@ -8,6 +8,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3VoidExpression;
+import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -37,6 +39,11 @@ public class As3VoidExpressionImpl extends As3UnaryExpressionImpl implements As3
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_VOID_EXPRESSION;
+	}
+
+	@Override
+	public AvmType resolveType() {
+		return AvmEFactory.eINSTANCE.createAvmVoid();
 	}
 
 } //As3VoidExpressionImpl

@@ -70,4 +70,9 @@ public class As3TypeOfExpressionTest extends As3UnaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/String", getFixture().resolveType());
+	}
+
 } //As3TypeOfExpressionTest

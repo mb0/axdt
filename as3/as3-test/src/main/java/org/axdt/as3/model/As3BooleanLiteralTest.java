@@ -6,8 +6,6 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
@@ -16,9 +14,14 @@ import org.axdt.as3.As3EFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Boolean Literal</b></em>'.
  * <!-- end-user-doc -->
- * @generated
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
+ * </ul>
+ * </p>
  */
-public class As3BooleanLiteralTest extends TestCase {
+public class As3BooleanLiteralTest extends IExpressionTest {
 
 	/**
 	 * The fixture for this As3 Boolean Literal test case.
@@ -87,6 +90,16 @@ public class As3BooleanLiteralTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IExpression#resolveType()
+	 */
+	public void testResolveType() {
+		assertProxyType("avm:/types/Boolean", getFixture().resolveType());
 	}
 
 } //As3BooleanLiteralTest

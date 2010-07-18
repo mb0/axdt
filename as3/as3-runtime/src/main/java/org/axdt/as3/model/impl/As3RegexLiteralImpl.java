@@ -8,10 +8,10 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3RegexLiteral;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,16 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class As3RegexLiteralImpl extends MinimalEObjectImpl.Container implements As3RegexLiteral {
-	/**
-	 * A set of bit flags representing the values of boolean attributes and whether unsettable features have been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected int flags = 0;
-
+public class As3RegexLiteralImpl extends IExpressionImpl implements As3RegexLiteral {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -170,4 +161,8 @@ public class As3RegexLiteralImpl extends MinimalEObjectImpl.Container implements
 		return result.toString();
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Regex");
+	}
 } //As3RegexLiteralImpl

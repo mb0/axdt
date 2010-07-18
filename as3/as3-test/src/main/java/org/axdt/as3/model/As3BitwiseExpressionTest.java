@@ -70,4 +70,9 @@ public class As3BitwiseExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		assertProxyType("avm:/types/int", getFixture().resolveType());
+	}
+
 } //As3BitwiseExpressionTest

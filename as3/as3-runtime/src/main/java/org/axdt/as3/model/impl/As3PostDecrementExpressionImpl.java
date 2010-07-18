@@ -8,6 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3PostDecrementExpression;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -39,4 +40,8 @@ public class As3PostDecrementExpressionImpl extends As3PostfixExpressionImpl imp
 		return As3EPackage.Literals.AS3_POST_DECREMENT_EXPRESSION;
 	}
 
+	@Override
+	public AvmType resolveType() {
+		return getClassProxy("Number");
+	}
 } //As3PostDecrementExpressionImpl

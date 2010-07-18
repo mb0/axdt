@@ -70,4 +70,10 @@ public class As3ShiftExpressionTest extends As3BinaryExpressionTest {
 		setFixture(null);
 	}
 
+	@Override
+	public void testResolveType() {
+		// TODO test unsigned shift >>>
+		assertProxyType("avm:/types/int", getFixture().resolveType());
+	}
+
 } //As3ShiftExpressionTest
