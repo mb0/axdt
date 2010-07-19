@@ -4,46 +4,36 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.axdt.asdoc.AsdocEFactory;
-import org.axdt.asdoc.model.AsdocRoot;
-import org.axdt.asdoc.model.ParseLevel;
-import org.axdt.asdoc.parser.AbstractCollectorTest;
-import org.axdt.asdoc.parser.AsdocParser;
+import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.access.AvmResource;
 import org.axdt.avm.access.IDefinitionProvider;
 import org.axdt.avm.access.IMirror;
+import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmDeclaredTypeReference;
+import org.axdt.avm.model.AvmNull;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.google.common.collect.Lists;
-
-public class AsdocDefinitionProviderTest extends TestCase implements IDocRootProvider {
-	protected String dataFolder;
-	
+public class AsdocDefinitionProviderTest extends TestCase {
 	private ResourceSet resourceSet;
 	private AsdocDefinitionProvider definitionProvider;
-	private AsdocRoot asdocRoot;
+	private MockAsdocRootProvider rootProvider;
 	
 	public AsdocDefinitionProviderTest() throws Exception {
-		dataFolder = AbstractCollectorTest.getTestDocUri()+"simple";
-		AsdocParser asdocParser = new AsdocParser();
-		asdocRoot = AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
-		asdocRoot = asdocParser.parseDoc(asdocRoot, ParseLevel.MEMBER);
-	}
-	public Iterable<AsdocRoot> initializeAsdocs(Object[] docItems) {
-		return Lists.newArrayList(asdocRoot);
-	}
-	public Iterable<AsdocRoot> getDocRoots(ResourceSet resourceSet) {
-		return Lists.newArrayList(asdocRoot);
+		rootProvider = MockAsdocRootProvider.getInstance();
 	}
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		definitionProvider = new AsdocDefinitionProvider(this, resourceSet);
+		definitionProvider = new AsdocDefinitionProvider(rootProvider, resourceSet);
 	}
 
 	@Override
@@ -102,5 +92,33 @@ public class AsdocDefinitionProviderTest extends TestCase implements IDocRootPro
 		assertNotNull(mirror);
 		assertTrue(mirror instanceof AsdocMirror);
 		assertEquals("Application", ((AsdocMirror) mirror).getMirroredType().getCanonicalName());
+	}
+	
+	public void testResolve() throws Exception {
+		AvmNull proxy = AvmEFactory.eINSTANCE.createAvmNull();
+		URI uri = URI.createURI("avm:/types/foo.bar::Bar");
+		((InternalEObject) proxy).eSetProxyURI(uri);
+		AvmDeclaredTypeReference ref = AvmEFactory.eINSTANCE.createAvmDeclaredTypeReference();
+		ref.setType(proxy);
+		// no resource set
+		ResourceSet set = null;
+		assertSame(proxy, EcoreUtil.resolve(proxy, set));
+		// with unsupported resource set
+		set = new ResourceSetImpl();
+		assertSame(proxy, EcoreUtil.resolve(proxy, set));
+		// with supported resource set
+		EObject resolved = EcoreUtil.resolve(proxy, resourceSet);
+		assertNotSame(proxy, resolved);
+		
+		AvmDeclaredType type = (AvmDeclaredType) resolved;
+		AvmType superProxy = type.getExtendedClass().getType();
+		// fails to resolve because it uses the asdoc resourceSet
+		EcoreUtil.resolveAll(type);
+		assertSame(superProxy, type.getExtendedClass().getType());
+		// this works because we use an avm aware resource set
+		EObject resolvedSuper = EcoreUtil.resolve(superProxy, resourceSet);
+		assertNotSame(superProxy, resolvedSuper);
+		// but the resolved type will not be saved in the asdoc resource
+		assertSame(superProxy, type.getExtendedClass().getType());
 	}
 }

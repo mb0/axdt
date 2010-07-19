@@ -49,8 +49,7 @@ public class AsdocDefinitionProvider extends AbstractDefinitionProvider implemen
 			return AvmEFactory.eINSTANCE.createAvmGeneric();
 		URI resourceUri = URI.createURI(PROTOCOL+":/types/"+name);
 		Resource resource = getResourceSet().getResource(resourceUri, true);
-		String fragment = name;
-		EObject eObject = resource.getEObject(fragment);
+		EObject eObject = resource.getEObject(null);
 		if (eObject instanceof AvmType)
 			return (AvmType) eObject;
 		throw new DefinitionNotFoundException("No such type available '" + name + "'");
@@ -61,8 +60,7 @@ public class AsdocDefinitionProvider extends AbstractDefinitionProvider implemen
 		assert(!name.startsWith("::"));
 		URI resourceUri = URI.createURI(PROTOCOL+":/members/"+name);
 		Resource resource = getResourceSet().getResource(resourceUri, true);
-		String fragment = name;
-		EObject eObject = resource.getEObject(fragment);
+		EObject eObject = resource.getEObject(null);
 		if (eObject instanceof AvmMember)
 			return (AvmMember) eObject;
 		throw new DefinitionNotFoundException("No such member available '" + name + "'");
