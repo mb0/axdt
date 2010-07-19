@@ -21,4 +21,40 @@
       <update label="%updateName" url="http://update.axdt.org/"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.text"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.google.collect"/>
+      <import plugin="org.axdt.avm.runtime"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="org.axdt.core.compiler"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.core.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.core.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

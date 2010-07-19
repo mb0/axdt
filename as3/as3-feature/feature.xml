@@ -1,25 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.axdt.as3.feature"
-      label="As3 Feature"
+      label="%featureName"
       version="0.0.8.qualifier"
-      provider-name="http://axdt.org">
+      provider-name="%providerName">
 
-   <description url="http://www.axdt.org/wiki">
-      Axdt is a set of plug-ins for the Eclipse Platform that enable you to write ActionScript3 code in an integrated environment. Axdt is based on Eclipse Xtext and utilizes the opensource FlexSDK.
+   <description url="%descriptionUrl">
+      %description
    </description>
 
-   <copyright url="http://mb0.org">
-      (c) Martin Schnabel mb0@mb0.org
+   <copyright url="%copyrightUrl">
+      %copyright
    </copyright>
 
-   <license url="http://www.eclipse.org/org/documents/epl-v10.php">
-      Eclipse Public License 1.0
-You can find a copy of the license text in any Axdt feature.
+   <license url="%licenseUrl">
+      %license
    </license>
 
    <url>
-      <update label="AXDT Updates" url="http://update.axdt.org/"/>
+      <update label="%updateName" url="http://update.axdt.org/"/>
    </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.variables"/>
+      <import plugin="org.axdt.core.compiler"/>
+      <import plugin="org.axdt.core.ui"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.axdt.asdoc.runtime"/>
+      <import plugin="org.axdt.avm.integration"/>
+      <import plugin="org.apache.commons.logging"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.antlr.runtime"/>
+      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.builder"/>
+      <import plugin="org.eclipse.xtend"/>
+      <import plugin="org.eclipse.xpand"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.eclipse.xtext.ui.shared"/>
+      <import plugin="org.axdt.asdoc.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui"/>
+   </requires>
+
+   <plugin
+         id="org.axdt.as3.debug"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.as3.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.axdt.as3.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

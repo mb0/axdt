@@ -22,4 +22,16 @@ You can find a copy of the license text in any Axdt feature.
       <update label="Axdt Updates" url="http://update.axdt.org/"/>
    </url>
 
+   <requires>
+      <import plugin="org.axdt.core.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="org.axdt.swc.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

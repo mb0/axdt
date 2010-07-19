@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.axdt.swc.ui;singleton:=true
 Bundle-Localization: plugin
-Bundle-Version: 0.0.7.1
+Bundle-Version: 0.0.8.qualifier
 Bundle-Activator: org.axdt.swc.ui.SwcUiActivator
 Bundle-Vendor: %pluginProvider
 Require-Bundle: org.axdt.core.ui,

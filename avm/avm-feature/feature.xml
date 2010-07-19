@@ -21,6 +21,14 @@
       <update label="%updateName" url="http://update.axdt.org/"/>
    </url>
 
+   <requires>
+      <import plugin="org.axdt.core.runtime"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.axdt.core.ui"/>
+   </requires>
+
    <plugin
          id="org.axdt.avm.integration"
          download-size="0"
