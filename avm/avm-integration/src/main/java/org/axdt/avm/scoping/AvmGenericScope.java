@@ -4,18 +4,19 @@ import org.axdt.avm.model.AvmField;
 import org.axdt.avm.model.AvmIdentifiable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 public abstract class AvmGenericScope<T extends EObject> extends AvmElementScope<T> {
 	private static Resource tempResource = null;
 
-	public AvmGenericScope(T element, IScope scope) {
-		super(element, scope);
+	public AvmGenericScope(T element, EReference ref, IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
 	}
 	public String getReferenceText(EObject reference) {
 		CompositeNode node = NodeUtil.getNodeAdapter(reference).getParserNode();

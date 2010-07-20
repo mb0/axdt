@@ -6,12 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.axdt.as3.model.As3Member;
 import org.axdt.as3.model.As3Package;
 import org.axdt.as3.model.As3Program;
-import org.axdt.as3.model.As3Type;
 import org.axdt.as3.util.As3ESwitch;
 import org.axdt.avm.model.AvmDefinition;
+import org.axdt.avm.model.AvmMember;
+import org.axdt.avm.model.AvmPackage;
+import org.axdt.avm.model.AvmType;
+import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -76,18 +78,18 @@ class DescriptionCollector extends As3ESwitch<Boolean> {
 		return collected;
 	}
 	@Override
-	public Boolean caseAs3Package(As3Package object) {
+	public Boolean caseAvmPackage(AvmPackage object) {
 		return true;
 	}
 	@Override
-	public Boolean caseAs3Type(As3Type object) {
+	public Boolean caseAvmType(AvmType object) {
 		collectDefinition(object);
 		return true;
 	}
 	@Override
-	public Boolean caseAs3Member(As3Member object) {
-		// TODO check if public
-		collectDefinition(object);
+	public Boolean caseAvmMember(AvmMember object) {
+		if (AvmVisibility.PUBLIC.equals(object.getVisibility()))
+			collectDefinition(object);
 		return false;
 	}
 	@Override

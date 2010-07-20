@@ -6,14 +6,15 @@ import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmIdentifiable;
 import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.common.collect.Iterables;
 
 public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScope<T> {
 
-	public AvmPropertyScope(T element, IScope scope) {
-		super(element, scope);
+	public AvmPropertyScope(T element, EReference ref, IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
 	}
 
 	@Override

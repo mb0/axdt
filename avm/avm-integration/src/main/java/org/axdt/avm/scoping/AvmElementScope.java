@@ -12,11 +12,13 @@ import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Function;
@@ -41,16 +43,26 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		}
 	}
 	
-	protected final IScope parentScope;
 	protected final T element;
+	protected final IScopeProvider scopeProvider;
+	protected final EReference ref;
+	protected IScope parentScope;
 
-	public AvmElementScope(T element, IScope parentScope) {
+	public AvmElementScope(T element, EReference ref, IScopeProvider scopeProvider) {
 		this.element = element;
-		this.parentScope = parentScope;
+		this.ref = ref;
+		this.scopeProvider = scopeProvider;
 	}
-
-	public IScope getOuterScope() {
+	protected IScope getParentScope() {
+		if (parentScope == null)
+			parentScope = createParentScope();
 		return parentScope;
+	}
+	protected IScope createParentScope() {
+		return scopeProvider.getScope(element.eContainer(), ref);
+	}
+	public IScope getOuterScope() {
+		return getParentScope();
 	}
 
 	@Override
@@ -67,7 +79,7 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 			if (urlString.startsWith("avm:/lookup/")) {
 				String lookupName = urlString.replaceFirst("avm:/lookup/", "");
 				// lets lookup the type name in the parent scope
-				IEObjectDescription description = parentScope.getContentByName(lookupName);
+				IEObjectDescription description = getParentScope().getContentByName(lookupName);
 				if (description != null) {
 					EObject descEObj = description.getEObjectOrProxy();
 					// if resolution was successful

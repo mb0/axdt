@@ -24,6 +24,7 @@ import org.axdt.avm.scoping.AvmTypeScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 import com.google.common.collect.Iterables;
@@ -46,7 +47,7 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	IScope scope_AvmIdentifiable(As3Program ctx, EReference ref) {
-		return new As3ProgramScope(ctx, getDelegate().getScope(ctx, ref));
+		return new As3ProgramScope(ctx, ref, this);
 	}
 
 	IScope scope_AvmIdentifiable(As3Package ctx, EReference ref) {
@@ -55,11 +56,11 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	IScope scope_AvmIdentifiable(As3Class ctx, EReference ref) {
-		return new AvmTypeScope(ctx, getScope(ctx.eContainer(), ref));
+		return new AvmTypeScope(ctx, ref, this);
 	}
 
 	IScope scope_AvmIdentifiable(As3Executable ctx, EReference ref) {
-		return new As3ExecutableScope(ctx, getScope(ctx.eContainer(), ref));
+		return new As3ExecutableScope(ctx, ref, this);
 	}
 
 	IScope scope_AvmIdentifiable(As3WithStatement ctx, EReference ref) {
@@ -75,7 +76,7 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (ctx.eContainingFeature() == pack.getAs3PostfixOperator_Identifier()
 				&& ctx.eContainer().eContainingFeature() == pack.getAs3AccessExpression_Operator()) {
 			As3AccessExpression access = (As3AccessExpression) ctx.eContainer().eContainer();
-			return new As3PropertyScope(access, getScope(access.eContainer(), ref));
+			return new As3PropertyScope(access, ref, this);
 		}
 		return null;
 	}
@@ -88,20 +89,28 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 
 class As3ProgramScope extends AvmElementScope<As3Program> {
 
-	public As3ProgramScope(As3Program element, IScope parentScope) {
-		super(element, parentScope);
+	public As3ProgramScope(As3Program element, EReference ref, IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
 	}
 
 	@Override
 	protected Iterable<? extends AvmIdentifiable> getCandidates() {
 		return Iterables.concat(element.getMembers(), element.getTypes());
 	}
+	@Override
+	protected IScope createParentScope() {
+		if (scopeProvider instanceof AbstractDeclarativeScopeProvider) {
+			AbstractDeclarativeScopeProvider provider = (AbstractDeclarativeScopeProvider) scopeProvider;
+			return provider.getDelegate().getScope(element, ref);
+		}
+		return IScope.NULLSCOPE;
+	}
 }
 
 class As3ExecutableScope extends AvmElementScope<As3Executable> {
 
-	public As3ExecutableScope(As3Executable element, IScope parentScope) {
-		super(element, parentScope);
+	public As3ExecutableScope(As3Executable element, EReference ref, IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
 	}
 
 	@Override
@@ -112,8 +121,8 @@ class As3ExecutableScope extends AvmElementScope<As3Executable> {
 }
 class As3PropertyScope extends AvmPropertyScope<As3AccessExpression> {
 
-	public As3PropertyScope(As3AccessExpression element, IScope scope) {
-		super(element, scope);
+	public As3PropertyScope(As3AccessExpression element, EReference ref, IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
 	}
 
 	@Override
