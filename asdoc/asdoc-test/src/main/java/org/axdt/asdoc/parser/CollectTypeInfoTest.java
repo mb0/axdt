@@ -52,6 +52,7 @@ public class CollectTypeInfoTest extends AbstractCollectorTest {
 		AvmDeclaredType type = parser.collectType(class1);
 		assertNotNull(type.getMembers());
 		assertFalse(type.getMembers().isEmpty());
+		assertTrue(type.isDynamic());
 	}
 	
 	public void testMembers() throws Exception {

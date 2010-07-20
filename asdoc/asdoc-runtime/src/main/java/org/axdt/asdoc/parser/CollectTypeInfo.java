@@ -1,8 +1,6 @@
 package org.axdt.asdoc.parser;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPathExpression;
 
@@ -77,6 +75,8 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 					// all documented types are expected to be public
 					if ("public".equals(word)) continue;
 					if ("class".equals(word)) continue;
+					if ("dynamic".equals(word))
+						((AsdocClass)type).setDynamic(true);
 					if (!classDetail.endsWith(word)){
 						logger.info("found unknown class word: '"+word+"'");
 					}else if (!word.equals(type.getName())) {
@@ -126,42 +126,6 @@ public class CollectTypeInfo extends AbstractMemberCollector<AvmDeclaredType> {
 				type.getExtendedInterfaces().add(getTypeRef(qname));
 			}
 		}
-	}
-	public String parseTypeName(String rawLinkOrName, String qualifier) {
-		if (rawLinkOrName == null) return null;
-		rawLinkOrName = rawLinkOrName.trim();
-		if (rawLinkOrName.length()==0) return null;
-		if (rawLinkOrName.endsWith(".html")) {
-			// if simple the target is in the same package
-			if (!rawLinkOrName.contains("/"))
-				return (qualifier == null || qualifier.length() < 1 ? "" :qualifier+"::")
-						+ rawLinkOrName.replace(".html", "");
-			// if relative calculate with current package
-			if (qualifier != null && rawLinkOrName.contains("..")) {
-				Matcher matcher = Pattern.compile("^((?:[.]{2}/)+)(?:((?:[^/]+/)*[^/]+)/)?([^.]+)\\.html$").matcher(rawLinkOrName);
-				if (matcher.matches()) {
-					int parentLevel = matcher.group(1).length()/3;
-					String[] split = qualifier.split("\\.");
-					String subQuali = matcher.group(2);
-					if (split.length == parentLevel && subQuali == null || subQuali.length() == 0)
-						return matcher.group(3);
-					if (split.length >= parentLevel) {
-						String result = "";
-						for (int i = 0; i < split.length - parentLevel; i++)
-							result += i == 0 ? split[i] : "." + split[i];
-						if (subQuali != null)
-							result += (result.length() > 0 ? "." : "") + subQuali.replace('/', '.');
-						return result+"::"+matcher.group(3);
-					}
-				}
-				// else fall back to unqualified name
-			}
-			// if absolute we use an unqualified type name
-			return rawLinkOrName.replaceAll("^(?:.*/)?([^.]+)\\.html$", "$1").replace('/', '.');
-		}
-		int lastDot = rawLinkOrName.lastIndexOf('.');
-		return lastDot < 0 ? rawLinkOrName
-				: rawLinkOrName.replaceFirst("^(?:([^.]+(?:[.][^.]+)*)[.])?([^.]+)$", "$1::$2");
 	}
 	protected void parseInheritance(AsdocClass type, Node valueNode) {
 		NodeList nodes = valueNode.getChildNodes();

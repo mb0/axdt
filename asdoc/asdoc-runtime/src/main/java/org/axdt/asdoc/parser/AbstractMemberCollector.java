@@ -1,6 +1,8 @@
 package org.axdt.asdoc.parser;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPathExpression;
 
@@ -16,12 +18,15 @@ import org.axdt.avm.access.IDefinitionProvider;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmDeclaredTypeReference;
 import org.axdt.avm.model.AvmDefinition;
+import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -103,7 +108,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		Node child = getReal(detail.getFirstChild());
 		// child contains declaration string
 		String childCode = getText(child);
-		AsdocMember member = createMember(result,memberHeader,childCode);
+		AsdocMember member = createMember(result,memberHeader,childCode, child);
 		if (member == null) {
 			getLogger().info("member '"+result.getCanonicalName()+"' could not be created");
 			return null;
@@ -245,16 +250,16 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			getLogger().error("type member header is expected to have 2 or 3 elements");
 		return result;
 	}
-	protected AsdocMember createMember(T parent, List<String> memberHeader, String code) {
+	protected AsdocMember createMember(T parent, List<String> memberHeader, String code, Node child) {
 		String type = memberHeader.get(1);
 		if ("constant".equals(type.toLowerCase()))
-			return createField(parent,memberHeader,code,true);
+			return createField(parent, memberHeader, code, child, true);
 		if ("property".equals(type))
-			return createField(parent,memberHeader,code,false);
-		return createFunction(parent,memberHeader,code);
+			return createField(parent, memberHeader, code, child, false);
+		return createFunction(parent, memberHeader, code, child);
 	}
 	protected AsdocExecutable createFunction(T parent, List<String> memberHeader,
-			String code) {
+			String code, Node child) {
 		String name = memberHeader.get(0);
 		name = name.replaceAll("\\W+", "");
 		AsdocExecutable result;
@@ -281,7 +286,8 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			int last = decl.lastIndexOf(":");
 			if (last > 0 && last > lastParen) {
 				String resultType = decl.substring(last+1).trim();
-				opr.setReturnType(getTypeRef(resultType));
+				String resultName = findLink(parent, resultType, child);
+				opr.setReturnType(getTypeRef(resultName));
 				nameFound = decl.substring(0,last).trim();
 			} else {
 				getLogger().error("operation '"+name+"' in '"+parent.getCanonicalName()+"' shoud have a return type");
@@ -296,8 +302,27 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			getLogger().error("operation name '"+name+"' in '"+parent.getCanonicalName()+"' does not match '"+nameFound+"'");
 		return result;
 	}
+	protected String findLink(T parent, String simpleName, Node child) {
+		NodeList list = child.getChildNodes();
+		for (int i = 0; i < list.getLength(); i++) {
+			Node node = list.item(i);
+			if (!"a".equals(node.getLocalName())) continue;
+			String nodeText = node.getTextContent();
+			if (simpleName.equals(nodeText))
+				return parseTypeName(attribute(node, "href"), getPackageName(parent));
+			else
+				nodeText.toString();
+		}
+		return simpleName;
+	}
+	protected String getPackageName(EObject parent) {
+		for (;parent != null; parent = parent.eContainer())
+			if (parent instanceof AvmPackage)
+				return ((AvmPackage) parent).getCanonicalName();
+		return null;
+	}
 	protected AsdocField createField(T parent, List<String> memberHeader,
-			String code, boolean constant) {
+			String code, Node child, boolean constant) {
 		String keyword = constant ? "const" : "var";
 		String name = memberHeader.get(0);
 		name = name.replaceAll("\\W+", "");
@@ -328,7 +353,8 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			if (first != last)
 				last = first;
 			String resultType = decl.substring(last+1).trim();
-			result.setType(getTypeRef(resultType));
+			String resultName = findLink(parent,resultType,child);
+			result.setType(getTypeRef(resultName));
 			foundName = decl.substring(0,last).trim(); 
 		}
 		// ignore global constant -Infinity, we use an unary expression 
@@ -369,4 +395,42 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		return proxy;
 	}
 	protected abstract Logger getLogger();
+	
+
+	public String parseTypeName(String rawLinkOrName, String qualifier) {
+		if (rawLinkOrName == null) return null;
+		rawLinkOrName = rawLinkOrName.trim();
+		if (rawLinkOrName.length()==0) return null;
+		if (rawLinkOrName.endsWith(".html")) {
+			// if simple the target is in the same package
+			if (!rawLinkOrName.contains("/"))
+				return (qualifier == null || qualifier.length() < 1 ? "" :qualifier+"::")
+						+ rawLinkOrName.replace(".html", "");
+			// if relative calculate with current package
+			if (qualifier != null && rawLinkOrName.contains("..")) {
+				Matcher matcher = Pattern.compile("^((?:[.]{2}/)+)(?:((?:[^/]+/)*[^/]+)/)?([^.]+)\\.html$").matcher(rawLinkOrName);
+				if (matcher.matches()) {
+					int parentLevel = matcher.group(1).length()/3;
+					String[] split = qualifier.split("\\.");
+					String subQuali = matcher.group(2);
+					if (split.length == parentLevel && subQuali == null || subQuali.length() == 0)
+						return matcher.group(3);
+					if (split.length >= parentLevel) {
+						String result = "";
+						for (int i = 0; i < split.length - parentLevel; i++)
+							result += i == 0 ? split[i] : "." + split[i];
+						if (subQuali != null)
+							result += (result.length() > 0 ? "." : "") + subQuali.replace('/', '.');
+						return result+"::"+matcher.group(3);
+					}
+				}
+				// else fall back to unqualified name
+			}
+			// if absolute we use an unqualified type name
+			return rawLinkOrName.replaceAll("^(?:.*/)?([^.]+)\\.html$", "$1").replace('/', '.');
+		}
+		int lastDot = rawLinkOrName.lastIndexOf('.');
+		return lastDot < 0 ? rawLinkOrName
+				: rawLinkOrName.replaceFirst("^(?:([^.]+(?:[.][^.]+)*)[.])?([^.]+)$", "$1::$2");
+	}
 }

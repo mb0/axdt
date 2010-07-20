@@ -56,8 +56,10 @@ public class As3ImportScopeProvider extends
 		if (context instanceof As3Program
 			|| context instanceof As3Package
 			|| context instanceof As3ImportList) {
+			// XXX explicit imports first ?
 			for (EObject child:context.eContents())
 				collectImportDefinitions(child, result);
+			// TODO we need to handle toplevel scope differently.
 			if (context instanceof As3Program) {
 				result.add(new As3QName("*"));
 			} else if (context instanceof As3Package) {
@@ -67,7 +69,9 @@ public class As3ImportScopeProvider extends
 			}
 		} else if (context instanceof As3Import) {
 			As3Import imprt = (As3Import) context;
-			result.add(new As3QName(imprt.getQualifier(), imprt.getName()));
+			String qualifier = imprt.getQualifier();
+			if (qualifier != null)
+				result.add(new As3QName(imprt.getQualifier(), imprt.getName()));
 		}
 	}
 

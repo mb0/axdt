@@ -18,8 +18,9 @@ public class As3QName extends QualifiedName {
 		public As3QName(String name) {
 			this(Collections.singletonList(""), name);
 		}
+
 		public As3QName(String quali, String name) {
-			this(Strings.split(quali, "."),name);
+			this(Strings.split(quali, "."), name);
 		}
 		public As3QName(List<String> quali, String name) {
 			super("");

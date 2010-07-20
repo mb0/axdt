@@ -7,6 +7,7 @@
 package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
+import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3PropertyIdentifier;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmExecutable;
@@ -51,15 +52,18 @@ public class As3PropertyIdentifierImpl extends As3SimpleIdentifierImpl implement
 		if (ref == null && name == null)
 			return AvmEFactory.eINSTANCE.createAvmNull();
 		// TODO when should a avm type resolve to Class ?
-		if (ref instanceof AvmType)
+		if (ref instanceof AvmType) {
 			return (AvmType) ref;
-		if (ref instanceof AvmVariable) {
+		} else if (ref instanceof AvmVariable) {
 			AvmTypeReference typeRef = ((AvmVariable) ref).getType();
-			return typeRef != null
-					? typeRef.getType()
-					: AvmEFactory.eINSTANCE.createAvmNull();
-		}
-		if (ref instanceof AvmExecutable) {
+			if (typeRef != null)
+			return typeRef.getType();
+		} else if (ref instanceof AvmExecutable) {
+			if (ref instanceof As3Operation) {
+				As3Operation operation = (As3Operation) ref;
+				if (operation.isGetter())
+					return operation.getReturnType().getType();
+			}
 			return getClassProxy("Function");
 		}
 		return AvmEFactory.eINSTANCE.createAvmGeneric();
