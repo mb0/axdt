@@ -6,7 +6,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 As3Program: {As3Program}
 	(LT* package=As3Package)?
-	(LT* directives+=PackageDirective)* LT*
+	(LT* directives+=IPackageDirective)* LT*
 	;
 // 14 Expressions
 // 14.1 Identifiers
@@ -23,11 +23,11 @@ Identifier
 	| 'native'
 	; 
 As3PropertyIdentifierFirst returns As3PropertyIdentifier
-	: reference=[avm::AvmIdentifiable|Identifier]
+	: reference=[avm::AvmReferable|Identifier]
 	;
 As3PropertyIdentifier
 	: name='*'
-	| name=Identifier
+	| reference=[avm::AvmReferable|Identifier]
 	;
 As3SimpleQualifiedIdentifier  
 	: qualifier=As3SimpleIdentifier LT* '::' 
@@ -199,7 +199,7 @@ ShiftExpression returns IArithmeticExpression
 // 14.16.4 Relational expressions
 IRelationalExpression
 	: ShiftExpression ({As3RelationalExpression.left=current}
-		LT* operation=('<'|'>'|'<='|'>='|'instanceof'|'is'|'as')
+		LT* operation=('<'|'>'|'<='|'>='|'instanceof'|'is'|'as'|'in')
 		LT* right=ShiftExpression
 	)*;
 // 14.16.5 Equality expressions
@@ -285,14 +285,14 @@ IStatement
 As3ExpressionStatement:
 	expressions+=IAssignmentExpression 
 	(LT* ',' LT* expressions+=IAssignmentExpression)* 
-	vsemi=VirtualSemi;
+	VirtualSemi;
 // 15.3 Super statement
 As3SuperStatement
-	: 'super' LT* arguments=As3Arguments vsemi=VirtualSemi;
+	: 'super' LT* arguments=As3Arguments VirtualSemi;
 // 15.4 Block statement
 As3Block 
 	: {As3Block}
-	'{' LT* (directives+=BlockDirective LT*)* '}';
+	'{' LT* (directives+=IBlockDirective LT*)* '}';
 // 15.5 Labeled statement
 As3LabeledStatement
 	: name=Identifier LT* ':' LT* statement=IStatement;
@@ -308,12 +308,12 @@ As3SwitchStatement
 ICaseElement
 	: {As3ExpressionCase} 'case' LT* expressions=As3ListExpression ':'
 	| {As3DefaultCase} 'default' LT* ':' 
-	| BlockDirective
+	| IBlockDirective
 	;
 // 15.7 Iteration statements
 // 15.7.1 Do-while statement
 As3DoStatement
-	: 'do' LT* statement=IStatement LT* 'while' LT* conditions=As3ParenListExpression vsemi=VirtualSemi;
+	: 'do' LT* statement=IStatement LT* 'while' LT* conditions=As3ParenListExpression VirtualSemi;
 // 15.7.2 While statement
 As3WhileStatement
 	: 'while' LT* conditions=As3ParenListExpression LT* statement=IStatement;
@@ -342,21 +342,21 @@ IForInInit
 // 15.8 Continue statement
 As3ContinueStatement
 	: {As3ContinueStatement}
-	'continue' (label=[As3LabeledStatement|Identifier])? vsemi=VirtualSemi;
+	'continue' (label=[As3LabeledStatement|Identifier])? VirtualSemi;
 // 15.9 Break statement
 As3BreakStatement
 	: {As3BreakStatement}
-	'break' (label=[As3LabeledStatement|Identifier])? vsemi=VirtualSemi;
+	'break' (label=[As3LabeledStatement|Identifier])? VirtualSemi;
 // 15.10 With statement
 As3WithStatement
 	: 'with' LT* target=As3ParenListExpression LT* statement=IStatement; 
 // 15.11 Return statement
 As3ReturnStatement
 	: {As3ReturnStatement}
-	'return' (expression=As3ListExpression)? vsemi=VirtualSemi;
+	'return' (expression=As3ListExpression)? VirtualSemi;
 // 15.12 Throw statement
 As3ThrowStatement
-	: 'throw' expression=As3ListExpression vsemi=VirtualSemi;
+	: 'throw' expression=As3ListExpression VirtualSemi;
 // 15.13 Try statement
 As3TryStatement
 	: 'try' LT* block=As3Block (LT* catches+=As3CatchClause)* (LT* 'finally' LT* finalBlock=As3Block)?;
@@ -367,32 +367,27 @@ As3DefaultXmlNamespaceStatement
 	: 'default' 'xml' 'namespace' LT* '=' LT* expression=NonAssignmentExpression;
 
 // 16 Directives
-PackageDirective returns IDirective
+IPackageDirective
 	: As3Class
 	| As3Interface
-	| As3Operation
-	| As3FieldDefinition
-	| As3Namespace
-	| As3Include
-	| As3Use
-	| As3ImportList
-	| IStatementNoVar
+	| ITypeDirective
 	;
-TypeDirective returns IDirective
+ITypeDirective
 	: As3Operation
 	| As3FieldDefinition
 	| As3Namespace
-	| As3Include
-	| As3Use
-	| As3ImportList
+	| StandardDirective
 	| IStatementNoVar
 	;
-BlockDirective returns IDirective
-	: As3Namespace
-	| As3Include
+IBlockDirective
+	: SimpleAs3Namespace
+	| StandardDirective
+	| IStatement
+	;
+StandardDirective returns IBlockDirective
+	: As3Include
 	| As3Use
 	| As3ImportList
-	| IStatement
 	;
 // 16.1 Attributes
 IAttribute
@@ -411,7 +406,7 @@ As3AttributeExpression:
 	)*;
 // 16.2 Import directive
 As3Import: 
-	'import' LT* qualifiedName=ImportFQN vsemi=VirtualSemi;
+	'import' LT* qualifiedName=ImportFQN VirtualSemi;
 
 ImportFQN : Identifier (LT* '.' LT* Identifier)* (LT* '.' LT*  '*')?;
 FQN : Identifier (LT* '.' LT* Identifier)*;
@@ -421,11 +416,11 @@ As3ImportList:
 
 // 16.3 Include directive
 As3Include:
-	'include' target=STRING vsemi=VirtualSemi;
+	'include' target=STRING VirtualSemi;
 
 // 16.4 Use directive
 As3Use:
-	'use' LT* 'namespace' LT* target=As3ListExpression vsemi=VirtualSemi;
+	'use' LT* 'namespace' LT* target=As3ListExpression VirtualSemi;
 
 // 17 Definitions
 // 17.1 Variable definition
@@ -436,7 +431,7 @@ As3FieldDefinition:
 	)
 	('var'|constant?='const') LT*
 	bindings+=As3FieldBinding (LT* ',' LT* bindings+=As3FieldBinding)*
-	vsemi=VirtualSemi;
+	VirtualSemi;
 As3FieldBinding:
 	name=Identifier 
 	( LT* type=VarTypeAssign LT* expression=IAssignmentExpression
@@ -445,7 +440,7 @@ As3FieldBinding:
 As3VariableDefinition:
 	('var'|constant?='const') LT*
 	bindings+=As3VariableAssign (LT* ',' LT* bindings+=As3VariableAssign)*
-	vsemi=VirtualSemi;
+	VirtualSemi;
 As3VariableAssign:
 	name=Identifier 
 	( LT* type=VarTypeAssign LT* expression=IAssignmentExpression
@@ -512,7 +507,7 @@ As3Class:
 	(LT* 'implements' LT* extendedInterfaces+=Inheritance
 		(LT* ',' LT* extendedInterfaces+=Inheritance)*
 	)? 
-	LT* '{' LT* (directives+=TypeDirective LT*)* '}';
+	LT* '{' LT* (directives+=ITypeDirective LT*)* '}';
 Inheritance returns avm::AvmDeclaredTypeReference
 	: type=[avm::AvmType|FQN];
 // 17.3.2 Class name
@@ -529,7 +524,7 @@ As3Interface:
 As3Package: 
 	{As3Package}
 	'package' (LT* canonicalName=FQN)? LT*
-	'{' (LT* directives+=PackageDirective)* LT* '}';
+	'{' (LT* directives+=IPackageDirective)* LT* '}';
 
 // 17.6 Namespace definition
 As3Namespace:
@@ -539,14 +534,14 @@ As3Namespace:
 	)
 	'namespace' LT* name=Identifier 
 	(LT* '=' LT* expression=NonAssignmentExpression )? 
-	vsemi=VirtualSemi;
-
-/* 
- this rule must be assigned when called
- in order to use a value converter to replace the
- line terminator with a semicolon
- */
+	VirtualSemi;
+SimpleAs3Namespace returns As3Namespace:
+	'namespace' LT* name=Identifier 
+	(LT* '=' LT* expression=NonAssignmentExpression )? 
+	VirtualSemi;
+// see http://new.axdt.org/ticket/13
 VirtualSemi returns ecore::EString: ';' | LT;
+
 // terminal rules
 terminal ID  : ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9'|'ä'|'ü'|'ö'|'ß')*;
 terminal NUMBER returns ecore::EDouble

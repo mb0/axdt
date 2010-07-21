@@ -25,14 +25,6 @@ import org.axdt.avm.AvmEFactory;
 public class As3NewExpressionTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 New Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3NewExpression fixture = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -52,23 +44,14 @@ public class As3NewExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 New Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3NewExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 New Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3NewExpression getFixture() {
-		return fixture;
+		return (As3NewExpression)fixture;
 	}
 
 	/**

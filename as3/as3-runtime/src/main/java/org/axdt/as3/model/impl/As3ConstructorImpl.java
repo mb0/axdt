@@ -14,13 +14,13 @@ import org.axdt.as3.model.As3Block;
 import org.axdt.as3.model.As3Class;
 import org.axdt.as3.model.As3Constructor;
 import org.axdt.as3.model.As3Executable;
-import org.axdt.as3.model.As3Identifiable;
 import org.axdt.as3.model.As3Parameter;
 import org.axdt.as3.model.IDirective;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmConstructor;
 import org.axdt.avm.model.AvmDeclaredTypeReference;
 import org.axdt.avm.model.AvmExecutable;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -148,11 +148,11 @@ public class As3ConstructorImpl extends As3MemberImpl implements As3Constructor 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public Iterable<As3Identifiable> getDeclarations() {
+	public Iterable<AvmReferable> getDeclarations() {
 		if (body != null)
 			return Lists.newArrayList(Iterators.filter(
 				EcoreUtil.getAllProperContents(body, false),
-				As3Identifiable.class
+				AvmReferable.class
 			));
 		return Iterables.emptyIterable();
 	}

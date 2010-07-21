@@ -8,29 +8,13 @@ package org.axdt.as3.model;
 
 import org.axdt.avm.AvmEFactory;
 
-import junit.framework.TestCase;
-
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Qualified Identifier</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
-public abstract class As3QualifiedIdentifierTest extends TestCase {
-
-	/**
-	 * The fixture for this As3 Qualified Identifier test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3QualifiedIdentifier fixture = null;
+public abstract class As3QualifiedIdentifierTest extends IExpressionTest {
 
 	/**
 	 * Constructs a new As3 Qualified Identifier test case with the given name.
@@ -43,23 +27,14 @@ public abstract class As3QualifiedIdentifierTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Qualified Identifier test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3QualifiedIdentifier fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Qualified Identifier test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3QualifiedIdentifier getFixture() {
-		return fixture;
+		return (As3QualifiedIdentifier)fixture;
 	}
 
 	/**

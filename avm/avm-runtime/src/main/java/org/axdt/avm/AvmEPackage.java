@@ -370,6 +370,25 @@ public interface AvmEPackage extends EPackage {
 	int AVM_EXECUTABLE_FEATURE_COUNT = AVM_IDENTIFIABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmReferable
+	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmReferable()
+	 * @generated
+	 */
+	int AVM_REFERABLE = 27;
+
+	/**
+	 * The number of structural features of the '<em>Avm Referable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AVM_REFERABLE_FEATURE_COUNT = AVM_IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmVariable <em>Avm Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -386,7 +405,7 @@ public interface AvmEPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AVM_VARIABLE_FEATURE_COUNT = AVM_IDENTIFIABLE_FEATURE_COUNT + 0;
+	int AVM_VARIABLE_FEATURE_COUNT = AVM_REFERABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Avm Field</em>' class.
@@ -600,7 +619,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmVisibility()
 	 * @generated
 	 */
-	int AVM_VISIBILITY = 27;
+	int AVM_VISIBILITY = 28;
 
 	/**
 	 * The meta object id for the '<em>List</em>' data type.
@@ -610,7 +629,7 @@ public interface AvmEPackage extends EPackage {
 	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 28;
+	int LIST = 29;
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmIdentifiable <em>Avm Identifiable</em>}'.
@@ -722,6 +741,16 @@ public interface AvmEPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAvmDeclaredTypeReference_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Avm Referable</em>'.
+	 * @see org.axdt.avm.model.AvmReferable
+	 * @generated
+	 */
+	EClass getAvmReferable();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmDeclaredElement <em>Avm Declared Element</em>}'.
@@ -1054,6 +1083,16 @@ public interface AvmEPackage extends EPackage {
 		 * @generated
 		 */
 		EReference AVM_DECLARED_TYPE_REFERENCE__TYPE = eINSTANCE.getAvmDeclaredTypeReference_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.avm.model.AvmReferable
+		 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmReferable()
+		 * @generated
+		 */
+		EClass AVM_REFERABLE = eINSTANCE.getAvmReferable();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.avm.model.AvmDeclaredElement <em>Avm Declared Element</em>}' class.

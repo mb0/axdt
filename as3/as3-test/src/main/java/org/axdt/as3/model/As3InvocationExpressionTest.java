@@ -74,7 +74,7 @@ public class As3InvocationExpressionTest extends As3PostfixExpressionTest {
 	@Override
 	public void testResolveType() {
 		As3EFactory factory = As3EFactory.eINSTANCE;
-		As3FunctionExpression function = factory.createAs3FunctionExpression();
+		As3Operation function = factory.createAs3Operation();
 		function.setName("foo");
 		function.setReturnType(AvmEFactory.eINSTANCE.createAvmGenericReference());
 		As3PropertyIdentifier identifier = factory.createAs3PropertyIdentifier();

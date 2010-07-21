@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3IncludeImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3IncludeImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
@@ -36,26 +35,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
@@ -101,27 +80,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_INCLUDE__VSEMI, oldVsemi, vsemi));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getTarget() {
 		return target;
 	}
@@ -146,8 +104,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_INCLUDE__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_INCLUDE__TARGET:
 				return getTarget();
 		}
@@ -162,9 +118,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_INCLUDE__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_INCLUDE__TARGET:
 				setTarget((String)newValue);
 				return;
@@ -180,9 +133,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_INCLUDE__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_INCLUDE__TARGET:
 				setTarget(TARGET_EDEFAULT);
 				return;
@@ -198,8 +148,6 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_INCLUDE__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_INCLUDE__TARGET:
 				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
 		}
@@ -216,9 +164,7 @@ public class As3IncludeImpl extends MinimalEObjectImpl.Container implements As3I
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(", target: ");
+		result.append(" (target: ");
 		result.append(target);
 		result.append(')');
 		return result.toString();

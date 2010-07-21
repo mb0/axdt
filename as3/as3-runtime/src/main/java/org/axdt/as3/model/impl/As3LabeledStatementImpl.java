@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3LabeledStatementImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3LabeledStatementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3LabeledStatementImpl#getStatement <em>Statement</em>}</li>
  * </ul>
@@ -40,26 +39,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -108,27 +87,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_LABELED_STATEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_LABELED_STATEMENT__VSEMI, oldVsemi, vsemi));
 	}
 
 	/**
@@ -217,8 +175,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_LABELED_STATEMENT__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_LABELED_STATEMENT__NAME:
 				return getName();
 			case As3EPackage.AS3_LABELED_STATEMENT__STATEMENT:
@@ -235,9 +191,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_LABELED_STATEMENT__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_LABELED_STATEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -256,9 +209,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_LABELED_STATEMENT__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_LABELED_STATEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -277,8 +227,6 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_LABELED_STATEMENT__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_LABELED_STATEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case As3EPackage.AS3_LABELED_STATEMENT__STATEMENT:
@@ -297,9 +245,7 @@ public class As3LabeledStatementImpl extends MinimalEObjectImpl.Container implem
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(", name: ");
+		result.append(" (name: ");
 		result.append(name);
 		result.append(')');
 		return result.toString();

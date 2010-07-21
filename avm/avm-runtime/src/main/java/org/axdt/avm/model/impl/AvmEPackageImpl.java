@@ -32,6 +32,7 @@ import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmParameter;
 import org.axdt.avm.model.AvmProperty;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVariable;
@@ -125,6 +126,13 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * @generated
 	 */
 	private EClass avmDeclaredTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass avmReferableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -424,6 +432,15 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAvmReferable() {
+		return avmReferableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAvmDeclaredElement() {
 		return avmDeclaredElementEClass;
 	}
@@ -683,6 +700,8 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmDeclaredTypeReferenceEClass = createEClass(AVM_DECLARED_TYPE_REFERENCE);
 		createEReference(avmDeclaredTypeReferenceEClass, AVM_DECLARED_TYPE_REFERENCE__TYPE);
 
+		avmReferableEClass = createEClass(AVM_REFERABLE);
+
 		// Create enums
 		avmVisibilityEEnum = createEEnum(AVM_VISIBILITY);
 
@@ -723,14 +742,16 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmPackageEClass.getESuperTypes().add(this.getAvmDefinitionContainer());
 		avmPackageEClass.getESuperTypes().add(this.getAvmDefinition());
 		avmTypeEClass.getESuperTypes().add(this.getAvmDefinition());
+		avmTypeEClass.getESuperTypes().add(this.getAvmReferable());
 		avmDeclaredElementEClass.getESuperTypes().add(this.getAvmDefinition());
 		avmDeclaredTypeEClass.getESuperTypes().add(this.getAvmDeclaredElement());
 		avmDeclaredTypeEClass.getESuperTypes().add(this.getAvmType());
 		avmClassEClass.getESuperTypes().add(this.getAvmDeclaredType());
 		avmInterfaceEClass.getESuperTypes().add(this.getAvmDeclaredType());
 		avmMemberEClass.getESuperTypes().add(this.getAvmDeclaredElement());
+		avmMemberEClass.getESuperTypes().add(this.getAvmReferable());
 		avmExecutableEClass.getESuperTypes().add(this.getAvmIdentifiable());
-		avmVariableEClass.getESuperTypes().add(this.getAvmIdentifiable());
+		avmVariableEClass.getESuperTypes().add(this.getAvmReferable());
 		avmFieldEClass.getESuperTypes().add(this.getAvmMember());
 		avmFieldEClass.getESuperTypes().add(this.getAvmVariable());
 		avmPropertyEClass.getESuperTypes().add(this.getAvmField());
@@ -747,6 +768,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmNullReferenceEClass.getESuperTypes().add(this.getAvmTypeReference());
 		avmGenericReferenceEClass.getESuperTypes().add(this.getAvmTypeReference());
 		avmDeclaredTypeReferenceEClass.getESuperTypes().add(this.getAvmTypeReference());
+		avmReferableEClass.getESuperTypes().add(this.getAvmIdentifiable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(avmIdentifiableEClass, AvmIdentifiable.class, "AvmIdentifiable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -905,6 +927,8 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		initEClass(avmDeclaredTypeReferenceEClass, AvmDeclaredTypeReference.class, "AvmDeclaredTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAvmDeclaredTypeReference_Type(), this.getAvmType(), null, "type", null, 0, 1, AvmDeclaredTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(avmReferableEClass, AvmReferable.class, "AvmReferable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(avmVisibilityEEnum, AvmVisibility.class, "AvmVisibility");

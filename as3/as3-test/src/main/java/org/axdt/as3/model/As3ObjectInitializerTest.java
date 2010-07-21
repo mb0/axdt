@@ -24,14 +24,6 @@ import org.axdt.as3.As3EFactory;
 public class As3ObjectInitializerTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Object Initializer test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3ObjectInitializer fixture = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -51,23 +43,14 @@ public class As3ObjectInitializerTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Object Initializer test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3ObjectInitializer fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Object Initializer test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3ObjectInitializer getFixture() {
-		return fixture;
+		return (As3ObjectInitializer)fixture;
 	}
 
 	/**

@@ -23,7 +23,7 @@ import org.axdt.avm.model.AvmMember;
  * @see org.axdt.as3.As3EPackage#getAs3Member()
  * @generated
  */
-public interface As3Member extends As3Definition, AvmMember, IDirective {
+public interface As3Member extends As3Definition, AvmMember, ITypeDirective {
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->

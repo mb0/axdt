@@ -5,9 +5,9 @@ import java.util.Set;
 
 import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmDeclaredType;
-import org.axdt.avm.model.AvmIdentifiable;
 import org.axdt.avm.model.AvmInterface;
 import org.axdt.avm.model.AvmMember;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.util.URI;
@@ -29,15 +29,15 @@ import com.google.inject.internal.Lists;
 
 public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 	
-	public final static Function<AvmIdentifiable, IEObjectDescription> GetDesciption = new Function<AvmIdentifiable, IEObjectDescription>() {
-		public IEObjectDescription apply(AvmIdentifiable from) {
+	public final static Function<AvmReferable, IEObjectDescription> GetDesciption = new Function<AvmReferable, IEObjectDescription>() {
+		public IEObjectDescription apply(AvmReferable from) {
 			return EObjectDescription.create(from.getName(), from);
 		}
 	};
 	
-	public final static class UniqueNames implements Predicate<AvmIdentifiable> {
+	public final static class UniqueNames implements Predicate<AvmReferable> {
 		private final Set<String> names = Sets.newHashSet();
-		public boolean apply(AvmIdentifiable input) {
+		public boolean apply(AvmReferable input) {
 			String name = input.getName();
 			return name != null && names.add(name);
 		}
@@ -70,7 +70,7 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		return Iterables.transform(getCandidates(), GetDesciption);
 	}
 
-	protected abstract Iterable<? extends AvmIdentifiable> getCandidates();
+	protected abstract Iterable<? extends AvmReferable> getCandidates();
 	
 	protected AvmType resolveType(AvmType type) {
 		if (type.eIsProxy()) {

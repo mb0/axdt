@@ -24,14 +24,6 @@ import org.axdt.as3.As3EFactory;
 public class As3NumberLiteralTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Number Literal test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3NumberLiteral fixture = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -51,23 +43,14 @@ public class As3NumberLiteralTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Number Literal test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3NumberLiteral fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Number Literal test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3NumberLiteral getFixture() {
-		return fixture;
+		return (As3NumberLiteral)fixture;
 	}
 
 	/**

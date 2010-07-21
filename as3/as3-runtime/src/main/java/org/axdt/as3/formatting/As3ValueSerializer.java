@@ -10,6 +10,9 @@ import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
 
 import com.google.inject.Inject;
 
+/**
+ * @author mb0
+ */
 public class As3ValueSerializer extends ValueSerializer {
 
 	@Inject
@@ -33,6 +36,8 @@ public class As3ValueSerializer extends ValueSerializer {
 			return "\n";
 		if ("GenericVarTypeAssign".equals(ruleName))
 			return "* =";
+		if ("VirtualSemi".equals(ruleName))
+			return ";";
 		return null;
 	}
 }

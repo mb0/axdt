@@ -10,12 +10,10 @@ import java.util.Collection;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ExpressionStatement;
 import org.axdt.as3.model.IExpression;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -27,7 +25,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3ExpressionStatementImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3ExpressionStatementImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
@@ -43,26 +40,6 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
@@ -91,27 +68,6 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_EXPRESSION_STATEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_EXPRESSION_STATEMENT__VSEMI, oldVsemi, vsemi));
 	}
 
 	/**
@@ -148,8 +104,6 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_EXPRESSION_STATEMENT__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_EXPRESSION_STATEMENT__EXPRESSIONS:
 				return getExpressions();
 		}
@@ -165,9 +119,6 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_EXPRESSION_STATEMENT__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_EXPRESSION_STATEMENT__EXPRESSIONS:
 				getExpressions().clear();
 				getExpressions().addAll((Collection<? extends IExpression>)newValue);
@@ -184,9 +135,6 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_EXPRESSION_STATEMENT__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_EXPRESSION_STATEMENT__EXPRESSIONS:
 				getExpressions().clear();
 				return;
@@ -202,28 +150,10 @@ public class As3ExpressionStatementImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_EXPRESSION_STATEMENT__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_EXPRESSION_STATEMENT__EXPRESSIONS:
 				return expressions != null && !expressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(')');
-		return result.toString();
 	}
 
 } //As3ExpressionStatementImpl

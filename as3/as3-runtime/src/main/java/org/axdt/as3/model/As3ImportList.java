@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @see org.axdt.as3.As3EPackage#getAs3ImportList()
  * @generated
  */
-public interface As3ImportList extends IDirective {
+public interface As3ImportList extends IBlockDirective {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
 	 * The list contents are of type {@link org.axdt.as3.model.As3Import}.

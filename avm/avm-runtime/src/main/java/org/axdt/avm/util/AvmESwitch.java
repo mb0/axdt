@@ -119,6 +119,7 @@ public class AvmESwitch<T> {
 				AvmType avmType = (AvmType)theEObject;
 				T result = caseAvmType(avmType);
 				if (result == null) result = caseAvmDefinition(avmType);
+				if (result == null) result = caseAvmReferable(avmType);
 				if (result == null) result = caseAvmIdentifiable(avmType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -143,6 +144,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(avmDeclaredType);
 				if (result == null) result = caseAvmType(avmDeclaredType);
 				if (result == null) result = caseAvmDefinition(avmDeclaredType);
+				if (result == null) result = caseAvmReferable(avmDeclaredType);
 				if (result == null) result = caseAvmIdentifiable(avmDeclaredType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -154,6 +156,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(avmClass);
 				if (result == null) result = caseAvmType(avmClass);
 				if (result == null) result = caseAvmDefinition(avmClass);
+				if (result == null) result = caseAvmReferable(avmClass);
 				if (result == null) result = caseAvmIdentifiable(avmClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -165,6 +168,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(avmInterface);
 				if (result == null) result = caseAvmType(avmInterface);
 				if (result == null) result = caseAvmDefinition(avmInterface);
+				if (result == null) result = caseAvmReferable(avmInterface);
 				if (result == null) result = caseAvmIdentifiable(avmInterface);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -173,6 +177,7 @@ public class AvmESwitch<T> {
 				AvmMember avmMember = (AvmMember)theEObject;
 				T result = caseAvmMember(avmMember);
 				if (result == null) result = caseAvmDeclaredElement(avmMember);
+				if (result == null) result = caseAvmReferable(avmMember);
 				if (result == null) result = caseAvmDefinition(avmMember);
 				if (result == null) result = caseAvmIdentifiable(avmMember);
 				if (result == null) result = defaultCase(theEObject);
@@ -188,6 +193,7 @@ public class AvmESwitch<T> {
 			case AvmEPackage.AVM_VARIABLE: {
 				AvmVariable avmVariable = (AvmVariable)theEObject;
 				T result = caseAvmVariable(avmVariable);
+				if (result == null) result = caseAvmReferable(avmVariable);
 				if (result == null) result = caseAvmIdentifiable(avmVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -198,6 +204,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmMember(avmField);
 				if (result == null) result = caseAvmVariable(avmField);
 				if (result == null) result = caseAvmDeclaredElement(avmField);
+				if (result == null) result = caseAvmReferable(avmField);
 				if (result == null) result = caseAvmDefinition(avmField);
 				if (result == null) result = caseAvmIdentifiable(avmField);
 				if (result == null) result = defaultCase(theEObject);
@@ -210,6 +217,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmMember(avmProperty);
 				if (result == null) result = caseAvmVariable(avmProperty);
 				if (result == null) result = caseAvmDeclaredElement(avmProperty);
+				if (result == null) result = caseAvmReferable(avmProperty);
 				if (result == null) result = caseAvmDefinition(avmProperty);
 				if (result == null) result = caseAvmIdentifiable(avmProperty);
 				if (result == null) result = defaultCase(theEObject);
@@ -220,6 +228,7 @@ public class AvmESwitch<T> {
 				T result = caseAvmNamespace(avmNamespace);
 				if (result == null) result = caseAvmMember(avmNamespace);
 				if (result == null) result = caseAvmDeclaredElement(avmNamespace);
+				if (result == null) result = caseAvmReferable(avmNamespace);
 				if (result == null) result = caseAvmDefinition(avmNamespace);
 				if (result == null) result = caseAvmIdentifiable(avmNamespace);
 				if (result == null) result = defaultCase(theEObject);
@@ -229,6 +238,7 @@ public class AvmESwitch<T> {
 				AvmParameter avmParameter = (AvmParameter)theEObject;
 				T result = caseAvmParameter(avmParameter);
 				if (result == null) result = caseAvmVariable(avmParameter);
+				if (result == null) result = caseAvmReferable(avmParameter);
 				if (result == null) result = caseAvmIdentifiable(avmParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -239,6 +249,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmMember(avmConstructor);
 				if (result == null) result = caseAvmExecutable(avmConstructor);
 				if (result == null) result = caseAvmDeclaredElement(avmConstructor);
+				if (result == null) result = caseAvmReferable(avmConstructor);
 				if (result == null) result = caseAvmDefinition(avmConstructor);
 				if (result == null) result = caseAvmIdentifiable(avmConstructor);
 				if (result == null) result = defaultCase(theEObject);
@@ -250,6 +261,7 @@ public class AvmESwitch<T> {
 				if (result == null) result = caseAvmMember(avmOperation);
 				if (result == null) result = caseAvmExecutable(avmOperation);
 				if (result == null) result = caseAvmDeclaredElement(avmOperation);
+				if (result == null) result = caseAvmReferable(avmOperation);
 				if (result == null) result = caseAvmDefinition(avmOperation);
 				if (result == null) result = caseAvmIdentifiable(avmOperation);
 				if (result == null) result = defaultCase(theEObject);
@@ -266,6 +278,7 @@ public class AvmESwitch<T> {
 				T result = caseAvmNull(avmNull);
 				if (result == null) result = caseAvmType(avmNull);
 				if (result == null) result = caseAvmDefinition(avmNull);
+				if (result == null) result = caseAvmReferable(avmNull);
 				if (result == null) result = caseAvmIdentifiable(avmNull);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -275,6 +288,7 @@ public class AvmESwitch<T> {
 				T result = caseAvmVoid(avmVoid);
 				if (result == null) result = caseAvmType(avmVoid);
 				if (result == null) result = caseAvmDefinition(avmVoid);
+				if (result == null) result = caseAvmReferable(avmVoid);
 				if (result == null) result = caseAvmIdentifiable(avmVoid);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -284,6 +298,7 @@ public class AvmESwitch<T> {
 				T result = caseAvmGeneric(avmGeneric);
 				if (result == null) result = caseAvmType(avmGeneric);
 				if (result == null) result = caseAvmDefinition(avmGeneric);
+				if (result == null) result = caseAvmReferable(avmGeneric);
 				if (result == null) result = caseAvmIdentifiable(avmGeneric);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -313,6 +328,13 @@ public class AvmESwitch<T> {
 				AvmDeclaredTypeReference avmDeclaredTypeReference = (AvmDeclaredTypeReference)theEObject;
 				T result = caseAvmDeclaredTypeReference(avmDeclaredTypeReference);
 				if (result == null) result = caseAvmTypeReference(avmDeclaredTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AvmEPackage.AVM_REFERABLE: {
+				AvmReferable avmReferable = (AvmReferable)theEObject;
+				T result = caseAvmReferable(avmReferable);
+				if (result == null) result = caseAvmIdentifiable(avmReferable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -467,6 +489,21 @@ public class AvmESwitch<T> {
 	 * @generated
 	 */
 	public T caseAvmDeclaredTypeReference(AvmDeclaredTypeReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmReferable(AvmReferable object) {
 		return null;
 	}
 

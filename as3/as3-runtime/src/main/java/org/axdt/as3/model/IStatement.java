@@ -16,5 +16,5 @@ package org.axdt.as3.model;
  * @see org.axdt.as3.As3EPackage#getIStatement()
  * @generated
  */
-public interface IStatement extends IDirective {
+public interface IStatement extends IBlockDirective {
 } // IStatement

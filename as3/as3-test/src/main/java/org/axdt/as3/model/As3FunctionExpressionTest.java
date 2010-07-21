@@ -26,14 +26,6 @@ import org.axdt.as3.As3EFactory;
 public class As3FunctionExpressionTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Function Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3FunctionExpression fixture = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -53,23 +45,14 @@ public class As3FunctionExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Function Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3FunctionExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Function Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3FunctionExpression getFixture() {
-		return fixture;
+		return (As3FunctionExpression)fixture;
 	}
 
 	/**

@@ -68,16 +68,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getICaseElement()
 	 * @generated
 	 */
-	int ICASE_ELEMENT = 16;
-
-	/**
-	 * The number of structural features of the '<em>ICase Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICASE_ELEMENT_FEATURE_COUNT = 0;
+	int ICASE_ELEMENT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.IDirective <em>IDirective</em>}' class.
@@ -90,22 +81,70 @@ public interface As3EPackage extends EPackage {
 	int IDIRECTIVE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDIRECTIVE__VSEMI = ICASE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>IDirective</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDIRECTIVE_FEATURE_COUNT = ICASE_ELEMENT_FEATURE_COUNT + 1;
+	int IDIRECTIVE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.IPackageDirective <em>IPackage Directive</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IPackageDirective
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIPackageDirective()
+	 * @generated
+	 */
+	int IPACKAGE_DIRECTIVE = 1;
+
+	/**
+	 * The number of structural features of the '<em>IPackage Directive</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IPACKAGE_DIRECTIVE_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.ITypeDirective <em>IType Directive</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.ITypeDirective
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getITypeDirective()
+	 * @generated
+	 */
+	int ITYPE_DIRECTIVE = 2;
+
+	/**
+	 * The number of structural features of the '<em>IType Directive</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITYPE_DIRECTIVE_FEATURE_COUNT = IPACKAGE_DIRECTIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.IBlockDirective <em>IBlock Directive</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.IBlockDirective
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIBlockDirective()
+	 * @generated
+	 */
+	int IBLOCK_DIRECTIVE = 3;
+
+	/**
+	 * The number of structural features of the '<em>IBlock Directive</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IBLOCK_DIRECTIVE_FEATURE_COUNT = ITYPE_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.IStatement <em>IStatement</em>}' class.
@@ -115,16 +154,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIStatement()
 	 * @generated
 	 */
-	int ISTATEMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ISTATEMENT__VSEMI = IDIRECTIVE__VSEMI;
+	int ISTATEMENT = 4;
 
 	/**
 	 * The number of structural features of the '<em>IStatement</em>' class.
@@ -133,7 +163,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ISTATEMENT_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 0;
+	int ISTATEMENT_FEATURE_COUNT = IBLOCK_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.IExpressionImpl <em>IExpression</em>}' class.
@@ -143,7 +173,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIExpression()
 	 * @generated
 	 */
-	int IEXPRESSION = 2;
+	int IEXPRESSION = 5;
 
 	/**
 	 * The number of structural features of the '<em>IExpression</em>' class.
@@ -162,7 +192,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIAssignmentExpression()
 	 * @generated
 	 */
-	int IASSIGNMENT_EXPRESSION = 3;
+	int IASSIGNMENT_EXPRESSION = 6;
 
 	/**
 	 * The number of structural features of the '<em>IAssignment Expression</em>' class.
@@ -181,7 +211,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIConditionalExpression()
 	 * @generated
 	 */
-	int ICONDITIONAL_EXPRESSION = 4;
+	int ICONDITIONAL_EXPRESSION = 7;
 
 	/**
 	 * The number of structural features of the '<em>IConditional Expression</em>' class.
@@ -200,7 +230,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getILogicalExpression()
 	 * @generated
 	 */
-	int ILOGICAL_EXPRESSION = 5;
+	int ILOGICAL_EXPRESSION = 8;
 
 	/**
 	 * The number of structural features of the '<em>ILogical Expression</em>' class.
@@ -219,7 +249,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIBitwiseExpression()
 	 * @generated
 	 */
-	int IBITWISE_EXPRESSION = 6;
+	int IBITWISE_EXPRESSION = 9;
 
 	/**
 	 * The number of structural features of the '<em>IBitwise Expression</em>' class.
@@ -238,7 +268,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIEqualityExpression()
 	 * @generated
 	 */
-	int IEQUALITY_EXPRESSION = 7;
+	int IEQUALITY_EXPRESSION = 10;
 
 	/**
 	 * The number of structural features of the '<em>IEquality Expression</em>' class.
@@ -257,7 +287,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIRelationalExpression()
 	 * @generated
 	 */
-	int IRELATIONAL_EXPRESSION = 8;
+	int IRELATIONAL_EXPRESSION = 11;
 
 	/**
 	 * The number of structural features of the '<em>IRelational Expression</em>' class.
@@ -276,7 +306,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIArithmeticExpression()
 	 * @generated
 	 */
-	int IARITHMETIC_EXPRESSION = 9;
+	int IARITHMETIC_EXPRESSION = 12;
 
 	/**
 	 * The number of structural features of the '<em>IArithmetic Expression</em>' class.
@@ -295,7 +325,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIUnaryExpression()
 	 * @generated
 	 */
-	int IUNARY_EXPRESSION = 10;
+	int IUNARY_EXPRESSION = 13;
 
 	/**
 	 * The number of structural features of the '<em>IUnary Expression</em>' class.
@@ -314,7 +344,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIPostfixExpression()
 	 * @generated
 	 */
-	int IPOSTFIX_EXPRESSION = 11;
+	int IPOSTFIX_EXPRESSION = 14;
 
 	/**
 	 * The number of structural features of the '<em>IPostfix Expression</em>' class.
@@ -333,7 +363,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIPrimaryExpression()
 	 * @generated
 	 */
-	int IPRIMARY_EXPRESSION = 12;
+	int IPRIMARY_EXPRESSION = 15;
 
 	/**
 	 * The number of structural features of the '<em>IPrimary Expression</em>' class.
@@ -352,7 +382,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIIdentifier()
 	 * @generated
 	 */
-	int IIDENTIFIER = 13;
+	int IIDENTIFIER = 16;
 
 	/**
 	 * The number of structural features of the '<em>IIdentifier</em>' class.
@@ -371,7 +401,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getILiteral()
 	 * @generated
 	 */
-	int ILITERAL = 14;
+	int ILITERAL = 17;
 
 	/**
 	 * The number of structural features of the '<em>ILiteral</em>' class.
@@ -390,7 +420,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getILiteralFieldName()
 	 * @generated
 	 */
-	int ILITERAL_FIELD_NAME = 15;
+	int ILITERAL_FIELD_NAME = 18;
 
 	/**
 	 * The number of structural features of the '<em>ILiteral Field Name</em>' class.
@@ -402,6 +432,15 @@ public interface As3EPackage extends EPackage {
 	int ILITERAL_FIELD_NAME_FEATURE_COUNT = 0;
 
 	/**
+	 * The number of structural features of the '<em>ICase Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ICASE_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.INonAttributeIdentifier <em>INon Attribute Identifier</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,7 +448,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getINonAttributeIdentifier()
 	 * @generated
 	 */
-	int INON_ATTRIBUTE_IDENTIFIER = 17;
+	int INON_ATTRIBUTE_IDENTIFIER = 20;
 
 	/**
 	 * The number of structural features of the '<em>INon Attribute Identifier</em>' class.
@@ -428,7 +467,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIAttribute()
 	 * @generated
 	 */
-	int IATTRIBUTE = 18;
+	int IATTRIBUTE = 21;
 
 	/**
 	 * The number of structural features of the '<em>IAttribute</em>' class.
@@ -447,7 +486,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIForInit()
 	 * @generated
 	 */
-	int IFOR_INIT = 19;
+	int IFOR_INIT = 22;
 
 	/**
 	 * The number of structural features of the '<em>IFor Init</em>' class.
@@ -466,7 +505,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIForInInit()
 	 * @generated
 	 */
-	int IFOR_IN_INIT = 20;
+	int IFOR_IN_INIT = 23;
 
 	/**
 	 * The number of structural features of the '<em>IFor In Init</em>' class.
@@ -485,7 +524,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Element()
 	 * @generated
 	 */
-	int AS3_ELEMENT = 21;
+	int AS3_ELEMENT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -513,7 +552,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Identifiable()
 	 * @generated
 	 */
-	int AS3_IDENTIFIABLE = 22;
+	int AS3_IDENTIFIABLE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -541,7 +580,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Definition()
 	 * @generated
 	 */
-	int AS3_DEFINITION = 23;
+	int AS3_DEFINITION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -605,7 +644,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Member()
 	 * @generated
 	 */
-	int AS3_MEMBER = 24;
+	int AS3_MEMBER = 27;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -653,22 +692,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_MEMBER__NAME = AS3_DEFINITION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_MEMBER__VSEMI = AS3_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_MEMBER__STATIC = AS3_DEFINITION_FEATURE_COUNT + 1;
+	int AS3_MEMBER__STATIC = AS3_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>As3 Member</em>' class.
@@ -677,7 +707,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_MEMBER_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 2;
+	int AS3_MEMBER_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.As3Executable <em>As3 Executable</em>}' class.
@@ -687,7 +717,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Executable()
 	 * @generated
 	 */
-	int AS3_EXECUTABLE = 25;
+	int AS3_EXECUTABLE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -715,7 +745,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Parameter()
 	 * @generated
 	 */
-	int AS3_PARAMETER = 39;
+	int AS3_PARAMETER = 42;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ParameterAssignImpl <em>As3 Parameter Assign</em>}' class.
@@ -725,7 +755,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ParameterAssign()
 	 * @generated
 	 */
-	int AS3_PARAMETER_ASSIGN = 40;
+	int AS3_PARAMETER_ASSIGN = 43;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3FieldBindingImpl <em>As3 Field Binding</em>}' class.
@@ -735,7 +765,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3FieldBinding()
 	 * @generated
 	 */
-	int AS3_FIELD_BINDING = 42;
+	int AS3_FIELD_BINDING = 45;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl <em>As3 Field Definition</em>}' class.
@@ -745,7 +775,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3FieldDefinition()
 	 * @generated
 	 */
-	int AS3_FIELD_DEFINITION = 43;
+	int AS3_FIELD_DEFINITION = 46;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ProgramImpl <em>As3 Program</em>}' class.
@@ -755,7 +785,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Program()
 	 * @generated
 	 */
-	int AS3_PROGRAM = 26;
+	int AS3_PROGRAM = 29;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -801,16 +831,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Import()
 	 * @generated
 	 */
-	int AS3_IMPORT = 27;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_IMPORT__VSEMI = IDIRECTIVE__VSEMI;
+	int AS3_IMPORT = 30;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -838,16 +859,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ImportList()
 	 * @generated
 	 */
-	int AS3_IMPORT_LIST = 28;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_IMPORT_LIST__VSEMI = IDIRECTIVE__VSEMI;
+	int AS3_IMPORT_LIST = 31;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -856,7 +868,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_IMPORT_LIST__IMPORTS = IDIRECTIVE_FEATURE_COUNT + 0;
+	int AS3_IMPORT_LIST__IMPORTS = IBLOCK_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>As3 Import List</em>' class.
@@ -865,7 +877,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_IMPORT_LIST_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 1;
+	int AS3_IMPORT_LIST_FEATURE_COUNT = IBLOCK_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3IncludeImpl <em>As3 Include</em>}' class.
@@ -875,16 +887,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Include()
 	 * @generated
 	 */
-	int AS3_INCLUDE = 29;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_INCLUDE__VSEMI = IDIRECTIVE__VSEMI;
+	int AS3_INCLUDE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' attribute.
@@ -893,7 +896,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_INCLUDE__TARGET = IDIRECTIVE_FEATURE_COUNT + 0;
+	int AS3_INCLUDE__TARGET = IBLOCK_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>As3 Include</em>' class.
@@ -902,7 +905,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_INCLUDE_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 1;
+	int AS3_INCLUDE_FEATURE_COUNT = IBLOCK_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3UseImpl <em>As3 Use</em>}' class.
@@ -912,16 +915,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Use()
 	 * @generated
 	 */
-	int AS3_USE = 30;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_USE__VSEMI = IDIRECTIVE__VSEMI;
+	int AS3_USE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -930,7 +924,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_USE__TARGET = IDIRECTIVE_FEATURE_COUNT + 0;
+	int AS3_USE__TARGET = IBLOCK_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>As3 Use</em>' class.
@@ -939,7 +933,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_USE_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 1;
+	int AS3_USE_FEATURE_COUNT = IBLOCK_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3PackageImpl <em>As3 Package</em>}' class.
@@ -949,7 +943,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Package()
 	 * @generated
 	 */
-	int AS3_PACKAGE = 31;
+	int AS3_PACKAGE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -995,7 +989,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Type()
 	 * @generated
 	 */
-	int AS3_TYPE = 32;
+	int AS3_TYPE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1043,22 +1037,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_TYPE__NAME = AS3_DEFINITION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_TYPE__VSEMI = AS3_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_TYPE__EXTENDED_INTERFACES = AS3_DEFINITION_FEATURE_COUNT + 1;
+	int AS3_TYPE__EXTENDED_INTERFACES = AS3_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Directives</b></em>' containment reference list.
@@ -1067,7 +1052,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_TYPE__DIRECTIVES = AS3_DEFINITION_FEATURE_COUNT + 2;
+	int AS3_TYPE__DIRECTIVES = AS3_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>As3 Type</em>' class.
@@ -1076,7 +1061,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_TYPE_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 3;
+	int AS3_TYPE_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ClassImpl <em>As3 Class</em>}' class.
@@ -1086,7 +1071,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Class()
 	 * @generated
 	 */
-	int AS3_CLASS = 33;
+	int AS3_CLASS = 36;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1132,15 +1117,6 @@ public interface As3EPackage extends EPackage {
 	 * @ordered
 	 */
 	int AS3_CLASS__NAME = AS3_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__VSEMI = AS3_TYPE__VSEMI;
 
 	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
@@ -1204,7 +1180,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Interface()
 	 * @generated
 	 */
-	int AS3_INTERFACE = 34;
+	int AS3_INTERFACE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1252,15 +1228,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_INTERFACE__NAME = AS3_TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_INTERFACE__VSEMI = AS3_TYPE__VSEMI;
-
-	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1295,7 +1262,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Namespace()
 	 * @generated
 	 */
-	int AS3_NAMESPACE = 35;
+	int AS3_NAMESPACE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1343,15 +1310,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_NAMESPACE__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_NAMESPACE__VSEMI = AS3_MEMBER__VSEMI;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1386,7 +1344,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Variable()
 	 * @generated
 	 */
-	int AS3_VARIABLE = 36;
+	int AS3_VARIABLE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1432,7 +1390,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3VariableAssign()
 	 * @generated
 	 */
-	int AS3_VARIABLE_ASSIGN = 37;
+	int AS3_VARIABLE_ASSIGN = 40;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1487,16 +1445,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3VariableDefinition()
 	 * @generated
 	 */
-	int AS3_VARIABLE_DEFINITION = 38;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_VARIABLE_DEFINITION__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_VARIABLE_DEFINITION = 41;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1614,7 +1563,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ParameterRest()
 	 * @generated
 	 */
-	int AS3_PARAMETER_REST = 41;
+	int AS3_PARAMETER_REST = 44;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1698,15 +1647,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_FIELD_BINDING__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_BINDING__VSEMI = AS3_MEMBER__VSEMI;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1743,22 +1683,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_FIELD_BINDING_FEATURE_COUNT = AS3_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_DEFINITION__VSEMI = IDIRECTIVE__VSEMI;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__STATIC = IDIRECTIVE_FEATURE_COUNT + 0;
+	int AS3_FIELD_DEFINITION__STATIC = ITYPE_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1767,7 +1698,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__CONSTANT = IDIRECTIVE_FEATURE_COUNT + 1;
+	int AS3_FIELD_DEFINITION__CONSTANT = ITYPE_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -1776,7 +1707,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__BINDINGS = IDIRECTIVE_FEATURE_COUNT + 2;
+	int AS3_FIELD_DEFINITION__BINDINGS = ITYPE_DIRECTIVE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
@@ -1785,7 +1716,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__METADATA = IDIRECTIVE_FEATURE_COUNT + 3;
+	int AS3_FIELD_DEFINITION__METADATA = ITYPE_DIRECTIVE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1794,7 +1725,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__VISIBILITY = IDIRECTIVE_FEATURE_COUNT + 4;
+	int AS3_FIELD_DEFINITION__VISIBILITY = ITYPE_DIRECTIVE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
@@ -1803,7 +1734,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY = IDIRECTIVE_FEATURE_COUNT + 5;
+	int AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY = ITYPE_DIRECTIVE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>As3 Field Definition</em>' class.
@@ -1812,7 +1743,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION_FEATURE_COUNT = IDIRECTIVE_FEATURE_COUNT + 6;
+	int AS3_FIELD_DEFINITION_FEATURE_COUNT = ITYPE_DIRECTIVE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3OperationImpl <em>As3 Operation</em>}' class.
@@ -1822,7 +1753,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Operation()
 	 * @generated
 	 */
-	int AS3_OPERATION = 44;
+	int AS3_OPERATION = 47;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -1868,15 +1799,6 @@ public interface As3EPackage extends EPackage {
 	 * @ordered
 	 */
 	int AS3_OPERATION__NAME = AS3_MEMBER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__VSEMI = AS3_MEMBER__VSEMI;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1976,7 +1898,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Constructor()
 	 * @generated
 	 */
-	int AS3_CONSTRUCTOR = 45;
+	int AS3_CONSTRUCTOR = 48;
 
 	/**
 	 * The feature id for the '<em><b>Asdoc</b></em>' attribute.
@@ -2024,15 +1946,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_CONSTRUCTOR__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONSTRUCTOR__VSEMI = AS3_MEMBER__VSEMI;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2076,7 +1989,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3MetadataTag()
 	 * @generated
 	 */
-	int AS3_METADATA_TAG = 46;
+	int AS3_METADATA_TAG = 49;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2113,7 +2026,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3MetadataParameter()
 	 * @generated
 	 */
-	int AS3_METADATA_PARAMETER = 47;
+	int AS3_METADATA_PARAMETER = 50;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2150,7 +2063,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3AttributeExpression()
 	 * @generated
 	 */
-	int AS3_ATTRIBUTE_EXPRESSION = 48;
+	int AS3_ATTRIBUTE_EXPRESSION = 51;
 
 	/**
 	 * The number of structural features of the '<em>As3 Attribute Expression</em>' class.
@@ -2169,7 +2082,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SimpleAttributeExpression()
 	 * @generated
 	 */
-	int AS3_SIMPLE_ATTRIBUTE_EXPRESSION = 49;
+	int AS3_SIMPLE_ATTRIBUTE_EXPRESSION = 52;
 
 	/**
 	 * The feature id for the '<em><b>Ident</b></em>' containment reference.
@@ -2197,7 +2110,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3QualifiedAttributeExpression()
 	 * @generated
 	 */
-	int AS3_QUALIFIED_ATTRIBUTE_EXPRESSION = 50;
+	int AS3_QUALIFIED_ATTRIBUTE_EXPRESSION = 53;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' containment reference.
@@ -2234,16 +2147,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3DefaultXmlNamespaceStatement()
 	 * @generated
 	 */
-	int AS3_DEFAULT_XML_NAMESPACE_STATEMENT = 51;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_DEFAULT_XML_NAMESPACE_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_DEFAULT_XML_NAMESPACE_STATEMENT = 54;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -2271,16 +2175,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3TryStatement()
 	 * @generated
 	 */
-	int AS3_TRY_STATEMENT = 52;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_TRY_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_TRY_STATEMENT = 55;
 
 	/**
 	 * The feature id for the '<em><b>Block</b></em>' containment reference.
@@ -2326,7 +2221,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3CatchClause()
 	 * @generated
 	 */
-	int AS3_CATCH_CLAUSE = 53;
+	int AS3_CATCH_CLAUSE = 56;
 
 	/**
 	 * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -2363,16 +2258,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ThrowStatement()
 	 * @generated
 	 */
-	int AS3_THROW_STATEMENT = 54;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_THROW_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_THROW_STATEMENT = 57;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -2400,16 +2286,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ReturnStatement()
 	 * @generated
 	 */
-	int AS3_RETURN_STATEMENT = 55;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_RETURN_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_RETURN_STATEMENT = 58;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -2437,16 +2314,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3WithStatement()
 	 * @generated
 	 */
-	int AS3_WITH_STATEMENT = 56;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_WITH_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_WITH_STATEMENT = 59;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2483,16 +2351,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3BreakStatement()
 	 * @generated
 	 */
-	int AS3_BREAK_STATEMENT = 57;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_BREAK_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_BREAK_STATEMENT = 60;
 
 	/**
 	 * The feature id for the '<em><b>Label Name</b></em>' attribute.
@@ -2529,16 +2388,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ContinueStatement()
 	 * @generated
 	 */
-	int AS3_CONTINUE_STATEMENT = 58;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONTINUE_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_CONTINUE_STATEMENT = 61;
 
 	/**
 	 * The feature id for the '<em><b>Label Name</b></em>' attribute.
@@ -2575,16 +2425,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3IterationStatement()
 	 * @generated
 	 */
-	int AS3_ITERATION_STATEMENT = 59;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_ITERATION_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_ITERATION_STATEMENT = 62;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2612,16 +2453,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ConditionalIterationStatement()
 	 * @generated
 	 */
-	int AS3_CONDITIONAL_ITERATION_STATEMENT = 60;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONDITIONAL_ITERATION_STATEMENT__VSEMI = AS3_ITERATION_STATEMENT__VSEMI;
+	int AS3_CONDITIONAL_ITERATION_STATEMENT = 63;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2658,16 +2490,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3DoStatement()
 	 * @generated
 	 */
-	int AS3_DO_STATEMENT = 61;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_DO_STATEMENT__VSEMI = AS3_CONDITIONAL_ITERATION_STATEMENT__VSEMI;
+	int AS3_DO_STATEMENT = 64;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2704,16 +2527,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3WhileStatement()
 	 * @generated
 	 */
-	int AS3_WHILE_STATEMENT = 62;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_WHILE_STATEMENT__VSEMI = AS3_CONDITIONAL_ITERATION_STATEMENT__VSEMI;
+	int AS3_WHILE_STATEMENT = 65;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2750,16 +2564,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ForStatement()
 	 * @generated
 	 */
-	int AS3_FOR_STATEMENT = 63;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FOR_STATEMENT__VSEMI = AS3_CONDITIONAL_ITERATION_STATEMENT__VSEMI;
+	int AS3_FOR_STATEMENT = 66;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2814,16 +2619,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ForInStatement()
 	 * @generated
 	 */
-	int AS3_FOR_IN_STATEMENT = 64;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FOR_IN_STATEMENT__VSEMI = AS3_ITERATION_STATEMENT__VSEMI;
+	int AS3_FOR_IN_STATEMENT = 67;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
@@ -2878,16 +2674,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ConditionalStatement()
 	 * @generated
 	 */
-	int AS3_CONDITIONAL_STATEMENT = 65;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONDITIONAL_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_CONDITIONAL_STATEMENT = 68;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference.
@@ -2915,16 +2702,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SwitchStatement()
 	 * @generated
 	 */
-	int AS3_SWITCH_STATEMENT = 66;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_SWITCH_STATEMENT__VSEMI = AS3_CONDITIONAL_STATEMENT__VSEMI;
+	int AS3_SWITCH_STATEMENT = 69;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference.
@@ -2961,7 +2739,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3CaseLabel()
 	 * @generated
 	 */
-	int AS3_CASE_LABEL = 67;
+	int AS3_CASE_LABEL = 70;
 
 	/**
 	 * The number of structural features of the '<em>As3 Case Label</em>' class.
@@ -2980,7 +2758,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3DefaultCase()
 	 * @generated
 	 */
-	int AS3_DEFAULT_CASE = 68;
+	int AS3_DEFAULT_CASE = 71;
 
 	/**
 	 * The number of structural features of the '<em>As3 Default Case</em>' class.
@@ -2999,7 +2777,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ExpressionCase()
 	 * @generated
 	 */
-	int AS3_EXPRESSION_CASE = 69;
+	int AS3_EXPRESSION_CASE = 72;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -3027,16 +2805,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3IfStatement()
 	 * @generated
 	 */
-	int AS3_IF_STATEMENT = 70;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_IF_STATEMENT__VSEMI = AS3_CONDITIONAL_STATEMENT__VSEMI;
+	int AS3_IF_STATEMENT = 73;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference.
@@ -3082,16 +2851,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3LabeledStatement()
 	 * @generated
 	 */
-	int AS3_LABELED_STATEMENT = 71;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_LABELED_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_LABELED_STATEMENT = 74;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3128,16 +2888,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Block()
 	 * @generated
 	 */
-	int AS3_BLOCK = 72;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_BLOCK__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_BLOCK = 75;
 
 	/**
 	 * The feature id for the '<em><b>Directives</b></em>' containment reference list.
@@ -3165,16 +2916,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SuperStatement()
 	 * @generated
 	 */
-	int AS3_SUPER_STATEMENT = 73;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_SUPER_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_SUPER_STATEMENT = 76;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference.
@@ -3202,16 +2944,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ExpressionStatement()
 	 * @generated
 	 */
-	int AS3_EXPRESSION_STATEMENT = 74;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_EXPRESSION_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_EXPRESSION_STATEMENT = 77;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -3239,16 +2972,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3EmptyStatement()
 	 * @generated
 	 */
-	int AS3_EMPTY_STATEMENT = 75;
-
-	/**
-	 * The feature id for the '<em><b>Vsemi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_EMPTY_STATEMENT__VSEMI = ISTATEMENT__VSEMI;
+	int AS3_EMPTY_STATEMENT = 78;
 
 	/**
 	 * The number of structural features of the '<em>As3 Empty Statement</em>' class.
@@ -3267,7 +2991,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ExpressionList()
 	 * @generated
 	 */
-	int AS3_EXPRESSION_LIST = 76;
+	int AS3_EXPRESSION_LIST = 79;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -3295,7 +3019,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ListExpression()
 	 * @generated
 	 */
-	int AS3_LIST_EXPRESSION = 77;
+	int AS3_LIST_EXPRESSION = 80;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -3323,7 +3047,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Arguments()
 	 * @generated
 	 */
-	int AS3_ARGUMENTS = 78;
+	int AS3_ARGUMENTS = 81;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -3351,7 +3075,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3BinaryExpression()
 	 * @generated
 	 */
-	int AS3_BINARY_EXPRESSION = 81;
+	int AS3_BINARY_EXPRESSION = 84;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3397,7 +3121,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3AssignmentExpression()
 	 * @generated
 	 */
-	int AS3_ASSIGNMENT_EXPRESSION = 79;
+	int AS3_ASSIGNMENT_EXPRESSION = 82;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3443,7 +3167,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ConditionalExpression()
 	 * @generated
 	 */
-	int AS3_CONDITIONAL_EXPRESSION = 80;
+	int AS3_CONDITIONAL_EXPRESSION = 83;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -3489,7 +3213,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3LogicalExpression()
 	 * @generated
 	 */
-	int AS3_LOGICAL_EXPRESSION = 82;
+	int AS3_LOGICAL_EXPRESSION = 85;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3535,7 +3259,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3BitwiseExpression()
 	 * @generated
 	 */
-	int AS3_BITWISE_EXPRESSION = 83;
+	int AS3_BITWISE_EXPRESSION = 86;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3581,7 +3305,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3EqualityExpression()
 	 * @generated
 	 */
-	int AS3_EQUALITY_EXPRESSION = 84;
+	int AS3_EQUALITY_EXPRESSION = 87;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3627,7 +3351,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3RelationalExpression()
 	 * @generated
 	 */
-	int AS3_RELATIONAL_EXPRESSION = 85;
+	int AS3_RELATIONAL_EXPRESSION = 88;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3673,7 +3397,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ShiftExpression()
 	 * @generated
 	 */
-	int AS3_SHIFT_EXPRESSION = 86;
+	int AS3_SHIFT_EXPRESSION = 89;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3719,7 +3443,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3AdditiveExpression()
 	 * @generated
 	 */
-	int AS3_ADDITIVE_EXPRESSION = 87;
+	int AS3_ADDITIVE_EXPRESSION = 90;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3765,7 +3489,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3MultiplicativeExpression()
 	 * @generated
 	 */
-	int AS3_MULTIPLICATIVE_EXPRESSION = 88;
+	int AS3_MULTIPLICATIVE_EXPRESSION = 91;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3811,7 +3535,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3UnaryExpression()
 	 * @generated
 	 */
-	int AS3_UNARY_EXPRESSION = 89;
+	int AS3_UNARY_EXPRESSION = 92;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3839,7 +3563,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3DeleteExpression()
 	 * @generated
 	 */
-	int AS3_DELETE_EXPRESSION = 90;
+	int AS3_DELETE_EXPRESSION = 93;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3867,7 +3591,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3VoidExpression()
 	 * @generated
 	 */
-	int AS3_VOID_EXPRESSION = 91;
+	int AS3_VOID_EXPRESSION = 94;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3895,7 +3619,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3TypeOfExpression()
 	 * @generated
 	 */
-	int AS3_TYPE_OF_EXPRESSION = 92;
+	int AS3_TYPE_OF_EXPRESSION = 95;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3923,7 +3647,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PreIncrementExpression()
 	 * @generated
 	 */
-	int AS3_PRE_INCREMENT_EXPRESSION = 93;
+	int AS3_PRE_INCREMENT_EXPRESSION = 96;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3951,7 +3675,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PreDecrementExpression()
 	 * @generated
 	 */
-	int AS3_PRE_DECREMENT_EXPRESSION = 94;
+	int AS3_PRE_DECREMENT_EXPRESSION = 97;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -3979,7 +3703,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3UnaryPlusExpression()
 	 * @generated
 	 */
-	int AS3_UNARY_PLUS_EXPRESSION = 95;
+	int AS3_UNARY_PLUS_EXPRESSION = 98;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4007,7 +3731,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3UnaryMinusExpression()
 	 * @generated
 	 */
-	int AS3_UNARY_MINUS_EXPRESSION = 96;
+	int AS3_UNARY_MINUS_EXPRESSION = 99;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4035,7 +3759,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3BitwiseNotExpression()
 	 * @generated
 	 */
-	int AS3_BITWISE_NOT_EXPRESSION = 97;
+	int AS3_BITWISE_NOT_EXPRESSION = 100;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4063,7 +3787,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3LogicalNotExpression()
 	 * @generated
 	 */
-	int AS3_LOGICAL_NOT_EXPRESSION = 98;
+	int AS3_LOGICAL_NOT_EXPRESSION = 101;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4091,7 +3815,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PostfixExpression()
 	 * @generated
 	 */
-	int AS3_POSTFIX_EXPRESSION = 99;
+	int AS3_POSTFIX_EXPRESSION = 102;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4119,7 +3843,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PostIncrementExpression()
 	 * @generated
 	 */
-	int AS3_POST_INCREMENT_EXPRESSION = 100;
+	int AS3_POST_INCREMENT_EXPRESSION = 103;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4147,7 +3871,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PostDecrementExpression()
 	 * @generated
 	 */
-	int AS3_POST_DECREMENT_EXPRESSION = 101;
+	int AS3_POST_DECREMENT_EXPRESSION = 104;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4175,7 +3899,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3InvocationExpression()
 	 * @generated
 	 */
-	int AS3_INVOCATION_EXPRESSION = 102;
+	int AS3_INVOCATION_EXPRESSION = 105;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4212,7 +3936,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3AccessExpression()
 	 * @generated
 	 */
-	int AS3_ACCESS_EXPRESSION = 103;
+	int AS3_ACCESS_EXPRESSION = 106;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4249,7 +3973,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3QueryExpression()
 	 * @generated
 	 */
-	int AS3_QUERY_EXPRESSION = 104;
+	int AS3_QUERY_EXPRESSION = 107;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4286,7 +4010,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PostfixOperator()
 	 * @generated
 	 */
-	int AS3_POSTFIX_OPERATOR = 105;
+	int AS3_POSTFIX_OPERATOR = 108;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -4323,7 +4047,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PropertyOperator()
 	 * @generated
 	 */
-	int AS3_PROPERTY_OPERATOR = 106;
+	int AS3_PROPERTY_OPERATOR = 109;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -4360,7 +4084,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3QueryOperator()
 	 * @generated
 	 */
-	int AS3_QUERY_OPERATOR = 107;
+	int AS3_QUERY_OPERATOR = 110;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -4397,7 +4121,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SimpleIdentifier()
 	 * @generated
 	 */
-	int AS3_SIMPLE_IDENTIFIER = 108;
+	int AS3_SIMPLE_IDENTIFIER = 111;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4434,7 +4158,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3PropertyIdentifier()
 	 * @generated
 	 */
-	int AS3_PROPERTY_IDENTIFIER = 109;
+	int AS3_PROPERTY_IDENTIFIER = 112;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4471,7 +4195,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3QualifiedIdentifier()
 	 * @generated
 	 */
-	int AS3_QUALIFIED_IDENTIFIER = 110;
+	int AS3_QUALIFIED_IDENTIFIER = 113;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -4508,7 +4232,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3AttributeQualifiedIdentifier()
 	 * @generated
 	 */
-	int AS3_ATTRIBUTE_QUALIFIED_IDENTIFIER = 111;
+	int AS3_ATTRIBUTE_QUALIFIED_IDENTIFIER = 114;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -4545,7 +4269,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NonAttributeQualifiedIdentifier()
 	 * @generated
 	 */
-	int AS3_NON_ATTRIBUTE_QUALIFIED_IDENTIFIER = 112;
+	int AS3_NON_ATTRIBUTE_QUALIFIED_IDENTIFIER = 115;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -4582,7 +4306,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SimpleQualifiedIdentifier()
 	 * @generated
 	 */
-	int AS3_SIMPLE_QUALIFIED_IDENTIFIER = 113;
+	int AS3_SIMPLE_QUALIFIED_IDENTIFIER = 116;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -4628,7 +4352,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ExpressionQualifiedIdentifier()
 	 * @generated
 	 */
-	int AS3_EXPRESSION_QUALIFIED_IDENTIFIER = 114;
+	int AS3_EXPRESSION_QUALIFIED_IDENTIFIER = 117;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference.
@@ -4674,7 +4398,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ThisExpression()
 	 * @generated
 	 */
-	int AS3_THIS_EXPRESSION = 115;
+	int AS3_THIS_EXPRESSION = 118;
 
 	/**
 	 * The number of structural features of the '<em>As3 This Expression</em>' class.
@@ -4693,7 +4417,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3SuperExpression()
 	 * @generated
 	 */
-	int AS3_SUPER_EXPRESSION = 116;
+	int AS3_SUPER_EXPRESSION = 119;
 
 	/**
 	 * The number of structural features of the '<em>As3 Super Expression</em>' class.
@@ -4712,7 +4436,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ParenListExpression()
 	 * @generated
 	 */
-	int AS3_PAREN_LIST_EXPRESSION = 117;
+	int AS3_PAREN_LIST_EXPRESSION = 120;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -4740,7 +4464,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3FunctionExpression()
 	 * @generated
 	 */
-	int AS3_FUNCTION_EXPRESSION = 118;
+	int AS3_FUNCTION_EXPRESSION = 121;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4795,7 +4519,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NewExpression()
 	 * @generated
 	 */
-	int AS3_NEW_EXPRESSION = 119;
+	int AS3_NEW_EXPRESSION = 122;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -4823,7 +4547,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ArrayInitializer()
 	 * @generated
 	 */
-	int AS3_ARRAY_INITIALIZER = 120;
+	int AS3_ARRAY_INITIALIZER = 123;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4851,7 +4575,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ArrayElement()
 	 * @generated
 	 */
-	int AS3_ARRAY_ELEMENT = 121;
+	int AS3_ARRAY_ELEMENT = 124;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -4879,7 +4603,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ObjectInitializer()
 	 * @generated
 	 */
-	int AS3_OBJECT_INITIALIZER = 122;
+	int AS3_OBJECT_INITIALIZER = 125;
 
 	/**
 	 * The feature id for the '<em><b>Fields</b></em>' containment reference list.
@@ -4907,7 +4631,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3LiteralField()
 	 * @generated
 	 */
-	int AS3_LITERAL_FIELD = 123;
+	int AS3_LITERAL_FIELD = 126;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -4944,7 +4668,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3XmlInitializer()
 	 * @generated
 	 */
-	int AS3_XML_INITIALIZER = 124;
+	int AS3_XML_INITIALIZER = 127;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -4972,7 +4696,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NullLiteral()
 	 * @generated
 	 */
-	int AS3_NULL_LITERAL = 125;
+	int AS3_NULL_LITERAL = 128;
 
 	/**
 	 * The number of structural features of the '<em>As3 Null Literal</em>' class.
@@ -4991,7 +4715,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3BooleanLiteral()
 	 * @generated
 	 */
-	int AS3_BOOLEAN_LITERAL = 126;
+	int AS3_BOOLEAN_LITERAL = 129;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -5019,7 +4743,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NumberLiteral()
 	 * @generated
 	 */
-	int AS3_NUMBER_LITERAL = 127;
+	int AS3_NUMBER_LITERAL = 130;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -5047,7 +4771,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3StringLiteral()
 	 * @generated
 	 */
-	int AS3_STRING_LITERAL = 128;
+	int AS3_STRING_LITERAL = 131;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -5075,7 +4799,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3RegexLiteral()
 	 * @generated
 	 */
-	int AS3_REGEX_LITERAL = 129;
+	int AS3_REGEX_LITERAL = 132;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -5104,7 +4828,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 130;
+	int ITERABLE = 133;
 
 
 	/**
@@ -5118,15 +4842,34 @@ public interface As3EPackage extends EPackage {
 	EClass getIDirective();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.IDirective#getVsemi <em>Vsemi</em>}'.
+	 * Returns the meta object for class '{@link org.axdt.as3.model.IPackageDirective <em>IPackage Directive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Vsemi</em>'.
-	 * @see org.axdt.as3.model.IDirective#getVsemi()
-	 * @see #getIDirective()
+	 * @return the meta object for class '<em>IPackage Directive</em>'.
+	 * @see org.axdt.as3.model.IPackageDirective
 	 * @generated
 	 */
-	EAttribute getIDirective_Vsemi();
+	EClass getIPackageDirective();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.ITypeDirective <em>IType Directive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IType Directive</em>'.
+	 * @see org.axdt.as3.model.ITypeDirective
+	 * @generated
+	 */
+	EClass getITypeDirective();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.IBlockDirective <em>IBlock Directive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IBlock Directive</em>'.
+	 * @see org.axdt.as3.model.IBlockDirective
+	 * @generated
+	 */
+	EClass getIBlockDirective();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.as3.model.IStatement <em>IStatement</em>}'.
@@ -7715,12 +7458,34 @@ public interface As3EPackage extends EPackage {
 		EClass IDIRECTIVE = eINSTANCE.getIDirective();
 
 		/**
-		 * The meta object literal for the '<em><b>Vsemi</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.axdt.as3.model.IPackageDirective <em>IPackage Directive</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.IPackageDirective
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIPackageDirective()
 		 * @generated
 		 */
-		EAttribute IDIRECTIVE__VSEMI = eINSTANCE.getIDirective_Vsemi();
+		EClass IPACKAGE_DIRECTIVE = eINSTANCE.getIPackageDirective();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.ITypeDirective <em>IType Directive</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.ITypeDirective
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getITypeDirective()
+		 * @generated
+		 */
+		EClass ITYPE_DIRECTIVE = eINSTANCE.getITypeDirective();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.IBlockDirective <em>IBlock Directive</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.IBlockDirective
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIBlockDirective()
+		 * @generated
+		 */
+		EClass IBLOCK_DIRECTIVE = eINSTANCE.getIBlockDirective();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.as3.model.IStatement <em>IStatement</em>}' class.

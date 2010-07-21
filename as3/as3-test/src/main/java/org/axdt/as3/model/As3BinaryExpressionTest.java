@@ -21,14 +21,6 @@ package org.axdt.as3.model;
 public abstract class As3BinaryExpressionTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Binary Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3BinaryExpression fixture = null;
-
-	/**
 	 * Constructs a new As3 Binary Expression test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,23 +31,14 @@ public abstract class As3BinaryExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Binary Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3BinaryExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Binary Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3BinaryExpression getFixture() {
-		return fixture;
+		return (As3BinaryExpression)fixture;
 	}
 
 	/**

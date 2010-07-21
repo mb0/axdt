@@ -24,6 +24,7 @@ import org.axdt.avm.model.AvmNamespace;
 import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmParameter;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVariable;
 import org.eclipse.emf.common.notify.Adapter;
@@ -90,6 +91,18 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIDirective(IDirective object) {
 				return createIDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseIPackageDirective(IPackageDirective object) {
+				return createIPackageDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseITypeDirective(ITypeDirective object) {
+				return createITypeDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseIBlockDirective(IBlockDirective object) {
+				return createIBlockDirectiveAdapter();
 			}
 			@Override
 			public Adapter caseIStatement(IStatement object) {
@@ -624,6 +637,10 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 				return createAvmDeclaredElementAdapter();
 			}
 			@Override
+			public Adapter caseAvmReferable(AvmReferable object) {
+				return createAvmReferableAdapter();
+			}
+			@Override
 			public Adapter caseAvmMember(AvmMember object) {
 				return createAvmMemberAdapter();
 			}
@@ -710,6 +727,48 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIDirectiveAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.IPackageDirective <em>IPackage Directive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.IPackageDirective
+	 * @generated
+	 */
+	public Adapter createIPackageDirectiveAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.ITypeDirective <em>IType Directive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.ITypeDirective
+	 * @generated
+	 */
+	public Adapter createITypeDirectiveAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.IBlockDirective <em>IBlock Directive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.IBlockDirective
+	 * @generated
+	 */
+	public Adapter createIBlockDirectiveAdapter() {
 		return null;
 	}
 
@@ -2572,6 +2631,20 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAvmDeclaredElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.avm.model.AvmReferable
+	 * @generated
+	 */
+	public Adapter createAvmReferableAdapter() {
 		return null;
 	}
 

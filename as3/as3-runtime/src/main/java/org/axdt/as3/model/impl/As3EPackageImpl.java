@@ -122,6 +122,7 @@ import org.axdt.as3.model.IArithmeticExpression;
 import org.axdt.as3.model.IAssignmentExpression;
 import org.axdt.as3.model.IAttribute;
 import org.axdt.as3.model.IBitwiseExpression;
+import org.axdt.as3.model.IBlockDirective;
 import org.axdt.as3.model.ICaseElement;
 import org.axdt.as3.model.IConditionalExpression;
 import org.axdt.as3.model.IDirective;
@@ -134,10 +135,12 @@ import org.axdt.as3.model.ILiteral;
 import org.axdt.as3.model.ILiteralFieldName;
 import org.axdt.as3.model.ILogicalExpression;
 import org.axdt.as3.model.INonAttributeIdentifier;
+import org.axdt.as3.model.IPackageDirective;
 import org.axdt.as3.model.IPostfixExpression;
 import org.axdt.as3.model.IPrimaryExpression;
 import org.axdt.as3.model.IRelationalExpression;
 import org.axdt.as3.model.IStatement;
+import org.axdt.as3.model.ITypeDirective;
 import org.axdt.as3.model.IUnaryExpression;
 import org.axdt.avm.AvmEPackage;
 import org.eclipse.emf.ecore.EAttribute;
@@ -162,6 +165,27 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	private EClass iDirectiveEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iPackageDirectiveEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iTypeDirectiveEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iBlockDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1151,8 +1175,26 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIDirective_Vsemi() {
-		return (EAttribute)iDirectiveEClass.getEStructuralFeatures().get(0);
+	public EClass getIPackageDirective() {
+		return iPackageDirectiveEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getITypeDirective() {
+		return iTypeDirectiveEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIBlockDirective() {
+		return iBlockDirectiveEClass;
 	}
 
 	/**
@@ -3380,7 +3422,12 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		// Create classes and their features
 		iDirectiveEClass = createEClass(IDIRECTIVE);
-		createEAttribute(iDirectiveEClass, IDIRECTIVE__VSEMI);
+
+		iPackageDirectiveEClass = createEClass(IPACKAGE_DIRECTIVE);
+
+		iTypeDirectiveEClass = createEClass(ITYPE_DIRECTIVE);
+
+		iBlockDirectiveEClass = createEClass(IBLOCK_DIRECTIVE);
 
 		iStatementEClass = createEClass(ISTATEMENT);
 
@@ -3790,8 +3837,11 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		iDirectiveEClass.getESuperTypes().add(this.getICaseElement());
-		iStatementEClass.getESuperTypes().add(this.getIDirective());
+		iPackageDirectiveEClass.getESuperTypes().add(this.getIDirective());
+		iTypeDirectiveEClass.getESuperTypes().add(this.getIPackageDirective());
+		iBlockDirectiveEClass.getESuperTypes().add(this.getITypeDirective());
+		iBlockDirectiveEClass.getESuperTypes().add(this.getICaseElement());
+		iStatementEClass.getESuperTypes().add(this.getIBlockDirective());
 		iAssignmentExpressionEClass.getESuperTypes().add(this.getIExpression());
 		iConditionalExpressionEClass.getESuperTypes().add(this.getIAssignmentExpression());
 		iLogicalExpressionEClass.getESuperTypes().add(this.getIConditionalExpression());
@@ -3813,26 +3863,27 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3DefinitionEClass.getESuperTypes().add(theAvmEPackage.getAvmDefinition());
 		as3MemberEClass.getESuperTypes().add(this.getAs3Definition());
 		as3MemberEClass.getESuperTypes().add(theAvmEPackage.getAvmMember());
-		as3MemberEClass.getESuperTypes().add(this.getIDirective());
+		as3MemberEClass.getESuperTypes().add(this.getITypeDirective());
 		as3ExecutableEClass.getESuperTypes().add(theAvmEPackage.getAvmExecutable());
 		as3ProgramEClass.getESuperTypes().add(this.getAs3Element());
 		as3ProgramEClass.getESuperTypes().add(theAvmEPackage.getAvmDefinitionContainer());
 		as3ImportEClass.getESuperTypes().add(this.getIDirective());
 		as3ImportEClass.getESuperTypes().add(theAvmEPackage.getAvmDefinition());
-		as3ImportListEClass.getESuperTypes().add(this.getIDirective());
-		as3IncludeEClass.getESuperTypes().add(this.getIDirective());
-		as3UseEClass.getESuperTypes().add(this.getIDirective());
+		as3ImportListEClass.getESuperTypes().add(this.getIBlockDirective());
+		as3IncludeEClass.getESuperTypes().add(this.getIBlockDirective());
+		as3UseEClass.getESuperTypes().add(this.getIBlockDirective());
 		as3PackageEClass.getESuperTypes().add(this.getAs3Identifiable());
 		as3PackageEClass.getESuperTypes().add(theAvmEPackage.getAvmPackage());
 		as3TypeEClass.getESuperTypes().add(this.getAs3Definition());
 		as3TypeEClass.getESuperTypes().add(theAvmEPackage.getAvmDeclaredType());
-		as3TypeEClass.getESuperTypes().add(this.getIDirective());
+		as3TypeEClass.getESuperTypes().add(this.getIPackageDirective());
 		as3ClassEClass.getESuperTypes().add(this.getAs3Type());
 		as3ClassEClass.getESuperTypes().add(theAvmEPackage.getAvmClass());
 		as3InterfaceEClass.getESuperTypes().add(this.getAs3Type());
 		as3InterfaceEClass.getESuperTypes().add(theAvmEPackage.getAvmInterface());
 		as3NamespaceEClass.getESuperTypes().add(this.getAs3Member());
 		as3NamespaceEClass.getESuperTypes().add(theAvmEPackage.getAvmNamespace());
+		as3NamespaceEClass.getESuperTypes().add(this.getIBlockDirective());
 		as3VariableEClass.getESuperTypes().add(this.getAs3Identifiable());
 		as3VariableEClass.getESuperTypes().add(theAvmEPackage.getAvmVariable());
 		as3VariableAssignEClass.getESuperTypes().add(this.getAs3Variable());
@@ -3845,7 +3896,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3ParameterRestEClass.getESuperTypes().add(this.getAs3Parameter());
 		as3FieldBindingEClass.getESuperTypes().add(this.getAs3Member());
 		as3FieldBindingEClass.getESuperTypes().add(theAvmEPackage.getAvmField());
-		as3FieldDefinitionEClass.getESuperTypes().add(this.getIDirective());
+		as3FieldDefinitionEClass.getESuperTypes().add(this.getITypeDirective());
 		as3OperationEClass.getESuperTypes().add(this.getAs3Member());
 		as3OperationEClass.getESuperTypes().add(this.getAs3Executable());
 		as3OperationEClass.getESuperTypes().add(theAvmEPackage.getAvmOperation());
@@ -3948,7 +3999,12 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(iDirectiveEClass, IDirective.class, "IDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIDirective_Vsemi(), ecorePackage.getEString(), "vsemi", null, 0, 1, IDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(iPackageDirectiveEClass, IPackageDirective.class, "IPackageDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iTypeDirectiveEClass, ITypeDirective.class, "ITypeDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iBlockDirectiveEClass, IBlockDirective.class, "IBlockDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(iStatementEClass, IStatement.class, "IStatement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4010,7 +4066,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		EOperation op = addEOperation(as3ExecutableEClass, null, "getDeclarations", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(this.getIterable());
-		EGenericType g2 = createEGenericType(this.getAs3Identifiable());
+		EGenericType g2 = createEGenericType(theAvmEPackage.getAvmReferable());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
@@ -4274,7 +4330,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		initEClass(as3SimpleIdentifierEClass, As3SimpleIdentifier.class, "As3SimpleIdentifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAs3SimpleIdentifier_Name(), ecorePackage.getEString(), "name", null, 0, 1, As3SimpleIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAs3SimpleIdentifier_Reference(), theAvmEPackage.getAvmIdentifiable(), null, "reference", null, 0, 1, As3SimpleIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAs3SimpleIdentifier_Reference(), theAvmEPackage.getAvmReferable(), null, "reference", null, 0, 1, As3SimpleIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3PropertyIdentifierEClass, As3PropertyIdentifier.class, "As3PropertyIdentifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

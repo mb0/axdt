@@ -6,7 +6,7 @@
  */
 package org.axdt.as3.model;
 
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,11 +59,11 @@ public interface As3SimpleIdentifier extends INonAttributeIdentifier {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference</em>' reference.
-	 * @see #setReference(AvmIdentifiable)
+	 * @see #setReference(AvmReferable)
 	 * @see org.axdt.as3.As3EPackage#getAs3SimpleIdentifier_Reference()
 	 * @generated
 	 */
-	AvmIdentifiable getReference();
+	AvmReferable getReference();
 
 	/**
 	 * Sets the value of the '{@link org.axdt.as3.model.As3SimpleIdentifier#getReference <em>Reference</em>}' reference.
@@ -73,6 +73,6 @@ public interface As3SimpleIdentifier extends INonAttributeIdentifier {
 	 * @see #getReference()
 	 * @generated
 	 */
-	void setReference(AvmIdentifiable value);
+	void setReference(AvmReferable value);
 
 } // As3SimpleIdentifier

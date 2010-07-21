@@ -12,18 +12,12 @@ import java.util.List;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Member;
 import org.axdt.as3.model.As3Type;
-import org.axdt.as3.model.ICaseElement;
 import org.axdt.as3.model.IDirective;
-import org.axdt.avm.model.AvmDeclaredElement;
-import org.axdt.avm.model.AvmDeclaredType;
-import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,7 +30,6 @@ import com.google.common.collect.Lists;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3TypeImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3TypeImpl#getExtendedInterfaces <em>Extended Interfaces</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3TypeImpl#getDirectives <em>Directives</em>}</li>
  * </ul>
@@ -45,26 +38,6 @@ import com.google.common.collect.Lists;
  * @generated
  */
 public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getExtendedInterfaces() <em>Extended Interfaces</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -102,27 +75,6 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_TYPE__VSEMI, oldVsemi, vsemi));
 	}
 
 	/**
@@ -234,8 +186,6 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_TYPE__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_TYPE__EXTENDED_INTERFACES:
 				return getExtendedInterfaces();
 			case As3EPackage.AS3_TYPE__DIRECTIVES:
@@ -253,9 +203,6 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_TYPE__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_TYPE__EXTENDED_INTERFACES:
 				getExtendedInterfaces().clear();
 				getExtendedInterfaces().addAll((Collection<? extends AvmTypeReference>)newValue);
@@ -276,9 +223,6 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_TYPE__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_TYPE__EXTENDED_INTERFACES:
 				getExtendedInterfaces().clear();
 				return;
@@ -297,102 +241,12 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_TYPE__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_TYPE__EXTENDED_INTERFACES:
 				return extendedInterfaces != null && !extendedInterfaces.isEmpty();
 			case As3EPackage.AS3_TYPE__DIRECTIVES:
 				return directives != null && !directives.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == AvmDeclaredElement.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == AvmType.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == AvmDeclaredType.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == ICaseElement.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == IDirective.class) {
-			switch (derivedFeatureID) {
-				case As3EPackage.AS3_TYPE__VSEMI: return As3EPackage.IDIRECTIVE__VSEMI;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == AvmDeclaredElement.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == AvmType.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == AvmDeclaredType.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == ICaseElement.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == IDirective.class) {
-			switch (baseFeatureID) {
-				case As3EPackage.IDIRECTIVE__VSEMI: return As3EPackage.AS3_TYPE__VSEMI;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(')');
-		return result.toString();
 	}
 
 } //As3TypeImpl

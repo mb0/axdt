@@ -8,7 +8,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3SimpleIdentifier;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -58,7 +58,7 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected AvmIdentifiable reference;
+	protected AvmReferable reference;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,12 +104,12 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public AvmIdentifiable getReference() {
+	public AvmReferable getReference() {
 		if (reference != null && reference.eIsProxy()) {
 			InternalEObject oldReference = (InternalEObject)reference;
 			EObject resolved = eResolveProxy(oldReference);
-			if (resolved instanceof AvmIdentifiable) {
-				reference = (AvmIdentifiable) resolved;
+			if (resolved instanceof AvmReferable) {
+				reference = (AvmReferable) resolved;
 				if (reference != oldReference) {
 					if (eNotificationRequired())
 						eNotify(new ENotificationImpl(this, Notification.RESOLVE, As3EPackage.AS3_SIMPLE_IDENTIFIER__REFERENCE, oldReference, reference));
@@ -124,7 +124,7 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AvmIdentifiable basicGetReference() {
+	public AvmReferable basicGetReference() {
 		return reference;
 	}
 
@@ -133,8 +133,8 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReference(AvmIdentifiable newReference) {
-		AvmIdentifiable oldReference = reference;
+	public void setReference(AvmReferable newReference) {
+		AvmReferable oldReference = reference;
 		reference = newReference;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_SIMPLE_IDENTIFIER__REFERENCE, oldReference, reference));
@@ -169,7 +169,7 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 				setName((String)newValue);
 				return;
 			case As3EPackage.AS3_SIMPLE_IDENTIFIER__REFERENCE:
-				setReference((AvmIdentifiable)newValue);
+				setReference((AvmReferable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -187,7 +187,7 @@ public abstract class As3SimpleIdentifierImpl extends IExpressionImpl implements
 				setName(NAME_EDEFAULT);
 				return;
 			case As3EPackage.AS3_SIMPLE_IDENTIFIER__REFERENCE:
-				setReference((AvmIdentifiable)null);
+				setReference((AvmReferable)null);
 				return;
 		}
 		super.eUnset(featureID);

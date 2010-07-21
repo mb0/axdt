@@ -22,7 +22,7 @@ package org.axdt.as3.model;
  * @see org.axdt.as3.As3EPackage#getAs3Include()
  * @generated
  */
-public interface As3Include extends IDirective {
+public interface As3Include extends IBlockDirective {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' attribute.
 	 * <!-- begin-user-doc -->

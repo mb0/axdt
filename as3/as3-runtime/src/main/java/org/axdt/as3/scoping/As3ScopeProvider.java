@@ -15,7 +15,7 @@ import org.axdt.as3.model.As3PropertyIdentifier;
 import org.axdt.as3.model.As3WithStatement;
 import org.axdt.as3.model.IIdentifier;
 import org.axdt.avm.model.AvmField;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.scoping.AvmElementScope;
@@ -46,32 +46,32 @@ public class As3ScopeProvider extends AbstractDeclarativeScopeProvider {
 		return getDelegate().getScope(ctx, ref);
 	}
 
-	IScope scope_AvmIdentifiable(As3Program ctx, EReference ref) {
+	IScope scope_AvmReferable(As3Program ctx, EReference ref) {
 		return new As3ProgramScope(ctx, ref, this);
 	}
 
-	IScope scope_AvmIdentifiable(As3Package ctx, EReference ref) {
+	IScope scope_AvmReferable(As3Package ctx, EReference ref) {
 		// XXX is covered by workspace scope !?
 		return null;
 	}
 
-	IScope scope_AvmIdentifiable(As3Class ctx, EReference ref) {
+	IScope scope_AvmReferable(As3Class ctx, EReference ref) {
 		return new AvmTypeScope(ctx, ref, this);
 	}
 
-	IScope scope_AvmIdentifiable(As3Executable ctx, EReference ref) {
+	IScope scope_AvmReferable(As3Executable ctx, EReference ref) {
 		return new As3ExecutableScope(ctx, ref, this);
 	}
 
-	IScope scope_AvmIdentifiable(As3WithStatement ctx, EReference ref) {
+	IScope scope_AvmReferable(As3WithStatement ctx, EReference ref) {
 		// TODO with statement needs its own scope 
 		return null;
 	}
-	IScope scope_AvmIdentifiable(As3AccessExpression ctx, EReference ref) {
+	IScope scope_AvmReferable(As3AccessExpression ctx, EReference ref) {
 		return null;
 	}
 
-	IScope scope_AvmIdentifiable(As3PropertyIdentifier ctx, EReference ref) {
+	IScope scope_AvmReferable(As3PropertyIdentifier ctx, EReference ref) {
 		As3EPackage pack = As3EPackage.eINSTANCE;
 		if (ctx.eContainingFeature() == pack.getAs3PostfixOperator_Identifier()
 				&& ctx.eContainer().eContainingFeature() == pack.getAs3AccessExpression_Operator()) {
@@ -94,7 +94,7 @@ class As3ProgramScope extends AvmElementScope<As3Program> {
 	}
 
 	@Override
-	protected Iterable<? extends AvmIdentifiable> getCandidates() {
+	protected Iterable<? extends AvmReferable> getCandidates() {
 		return Iterables.concat(element.getMembers(), element.getTypes());
 	}
 	@Override
@@ -114,7 +114,7 @@ class As3ExecutableScope extends AvmElementScope<As3Executable> {
 	}
 
 	@Override
-	protected Iterable<? extends AvmIdentifiable> getCandidates() {
+	protected Iterable<? extends AvmReferable> getCandidates() {
 		return Iterables.concat(element.getParameters(),
 				element.getDeclarations());
 	}

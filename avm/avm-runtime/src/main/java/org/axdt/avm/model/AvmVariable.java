@@ -17,7 +17,7 @@ package org.axdt.avm.model;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface AvmVariable extends AvmIdentifiable {
+public interface AvmVariable extends AvmReferable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -8,6 +8,7 @@ package org.axdt.as3.model;
 
 import java.lang.Iterable;
 import org.axdt.avm.model.AvmExecutable;
+import org.axdt.avm.model.AvmReferable;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -48,7 +49,7 @@ public interface As3Executable extends AvmExecutable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	Iterable<As3Identifiable> getDeclarations();
+	Iterable<AvmReferable> getDeclarations();
 
 	/**
 	 * <!-- begin-user-doc -->

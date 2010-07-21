@@ -15,23 +15,9 @@ import org.axdt.avm.AvmEFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Conditional Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
 public class As3ConditionalExpressionTest extends IExpressionTest {
-
-	/**
-	 * The fixture for this As3 Conditional Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3ConditionalExpression fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -53,23 +39,14 @@ public class As3ConditionalExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Conditional Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3ConditionalExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Conditional Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3ConditionalExpression getFixture() {
-		return fixture;
+		return (As3ConditionalExpression)fixture;
 	}
 
 	/**
@@ -94,13 +71,7 @@ public class As3ConditionalExpressionTest extends IExpressionTest {
 		setFixture(null);
 	}
 
-	/**
-	 * Tests the '{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.axdt.as3.model.IExpression#resolveType()
-	 * @generated
-	 */
+	@Override
 	public void testResolveType() {
 		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
 		As3PropertyIdentifier left = createTypedIdent("Foo");

@@ -26,6 +26,7 @@ import org.axdt.avm.model.AvmNamespace;
 import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmParameter;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVariable;
 import org.eclipse.emf.ecore.EClass;
@@ -108,15 +109,42 @@ public class As3ESwitch<T> {
 			case As3EPackage.IDIRECTIVE: {
 				IDirective iDirective = (IDirective)theEObject;
 				T result = caseIDirective(iDirective);
-				if (result == null) result = caseICaseElement(iDirective);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case As3EPackage.IPACKAGE_DIRECTIVE: {
+				IPackageDirective iPackageDirective = (IPackageDirective)theEObject;
+				T result = caseIPackageDirective(iPackageDirective);
+				if (result == null) result = caseIDirective(iPackageDirective);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case As3EPackage.ITYPE_DIRECTIVE: {
+				ITypeDirective iTypeDirective = (ITypeDirective)theEObject;
+				T result = caseITypeDirective(iTypeDirective);
+				if (result == null) result = caseIPackageDirective(iTypeDirective);
+				if (result == null) result = caseIDirective(iTypeDirective);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case As3EPackage.IBLOCK_DIRECTIVE: {
+				IBlockDirective iBlockDirective = (IBlockDirective)theEObject;
+				T result = caseIBlockDirective(iBlockDirective);
+				if (result == null) result = caseITypeDirective(iBlockDirective);
+				if (result == null) result = caseICaseElement(iBlockDirective);
+				if (result == null) result = caseIPackageDirective(iBlockDirective);
+				if (result == null) result = caseIDirective(iBlockDirective);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case As3EPackage.ISTATEMENT: {
 				IStatement iStatement = (IStatement)theEObject;
 				T result = caseIStatement(iStatement);
-				if (result == null) result = caseIDirective(iStatement);
+				if (result == null) result = caseIBlockDirective(iStatement);
+				if (result == null) result = caseITypeDirective(iStatement);
 				if (result == null) result = caseICaseElement(iStatement);
+				if (result == null) result = caseIPackageDirective(iStatement);
+				if (result == null) result = caseIDirective(iStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -360,13 +388,15 @@ public class As3ESwitch<T> {
 				T result = caseAs3Member(as3Member);
 				if (result == null) result = caseAs3Definition(as3Member);
 				if (result == null) result = caseAvmMember(as3Member);
-				if (result == null) result = caseIDirective(as3Member);
+				if (result == null) result = caseITypeDirective(as3Member);
 				if (result == null) result = caseAs3Identifiable(as3Member);
 				if (result == null) result = caseAvmDeclaredElement(as3Member);
-				if (result == null) result = caseICaseElement(as3Member);
+				if (result == null) result = caseAvmReferable(as3Member);
+				if (result == null) result = caseIPackageDirective(as3Member);
 				if (result == null) result = caseAs3Element(as3Member);
 				if (result == null) result = caseAvmIdentifiable(as3Member);
 				if (result == null) result = caseAvmDefinition(as3Member);
+				if (result == null) result = caseIDirective(as3Member);
 				if (result == null) result = caseAvmElement(as3Member);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -393,7 +423,6 @@ public class As3ESwitch<T> {
 				T result = caseAs3Import(as3Import);
 				if (result == null) result = caseIDirective(as3Import);
 				if (result == null) result = caseAvmDefinition(as3Import);
-				if (result == null) result = caseICaseElement(as3Import);
 				if (result == null) result = caseAvmIdentifiable(as3Import);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -401,24 +430,33 @@ public class As3ESwitch<T> {
 			case As3EPackage.AS3_IMPORT_LIST: {
 				As3ImportList as3ImportList = (As3ImportList)theEObject;
 				T result = caseAs3ImportList(as3ImportList);
-				if (result == null) result = caseIDirective(as3ImportList);
+				if (result == null) result = caseIBlockDirective(as3ImportList);
+				if (result == null) result = caseITypeDirective(as3ImportList);
 				if (result == null) result = caseICaseElement(as3ImportList);
+				if (result == null) result = caseIPackageDirective(as3ImportList);
+				if (result == null) result = caseIDirective(as3ImportList);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case As3EPackage.AS3_INCLUDE: {
 				As3Include as3Include = (As3Include)theEObject;
 				T result = caseAs3Include(as3Include);
-				if (result == null) result = caseIDirective(as3Include);
+				if (result == null) result = caseIBlockDirective(as3Include);
+				if (result == null) result = caseITypeDirective(as3Include);
 				if (result == null) result = caseICaseElement(as3Include);
+				if (result == null) result = caseIPackageDirective(as3Include);
+				if (result == null) result = caseIDirective(as3Include);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case As3EPackage.AS3_USE: {
 				As3Use as3Use = (As3Use)theEObject;
 				T result = caseAs3Use(as3Use);
-				if (result == null) result = caseIDirective(as3Use);
+				if (result == null) result = caseIBlockDirective(as3Use);
+				if (result == null) result = caseITypeDirective(as3Use);
 				if (result == null) result = caseICaseElement(as3Use);
+				if (result == null) result = caseIPackageDirective(as3Use);
+				if (result == null) result = caseIDirective(as3Use);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -440,15 +478,16 @@ public class As3ESwitch<T> {
 				T result = caseAs3Type(as3Type);
 				if (result == null) result = caseAs3Definition(as3Type);
 				if (result == null) result = caseAvmDeclaredType(as3Type);
-				if (result == null) result = caseIDirective(as3Type);
+				if (result == null) result = caseIPackageDirective(as3Type);
 				if (result == null) result = caseAs3Identifiable(as3Type);
 				if (result == null) result = caseAvmDeclaredElement(as3Type);
 				if (result == null) result = caseAvmType(as3Type);
-				if (result == null) result = caseICaseElement(as3Type);
+				if (result == null) result = caseIDirective(as3Type);
 				if (result == null) result = caseAs3Element(as3Type);
-				if (result == null) result = caseAvmIdentifiable(as3Type);
 				if (result == null) result = caseAvmDefinition(as3Type);
+				if (result == null) result = caseAvmReferable(as3Type);
 				if (result == null) result = caseAvmElement(as3Type);
+				if (result == null) result = caseAvmIdentifiable(as3Type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -459,15 +498,16 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAvmClass(as3Class);
 				if (result == null) result = caseAs3Definition(as3Class);
 				if (result == null) result = caseAvmDeclaredType(as3Class);
-				if (result == null) result = caseIDirective(as3Class);
+				if (result == null) result = caseIPackageDirective(as3Class);
 				if (result == null) result = caseAs3Identifiable(as3Class);
 				if (result == null) result = caseAvmDeclaredElement(as3Class);
 				if (result == null) result = caseAvmType(as3Class);
-				if (result == null) result = caseICaseElement(as3Class);
+				if (result == null) result = caseIDirective(as3Class);
 				if (result == null) result = caseAs3Element(as3Class);
-				if (result == null) result = caseAvmIdentifiable(as3Class);
 				if (result == null) result = caseAvmDefinition(as3Class);
+				if (result == null) result = caseAvmReferable(as3Class);
 				if (result == null) result = caseAvmElement(as3Class);
+				if (result == null) result = caseAvmIdentifiable(as3Class);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -478,15 +518,16 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAvmInterface(as3Interface);
 				if (result == null) result = caseAs3Definition(as3Interface);
 				if (result == null) result = caseAvmDeclaredType(as3Interface);
-				if (result == null) result = caseIDirective(as3Interface);
+				if (result == null) result = caseIPackageDirective(as3Interface);
 				if (result == null) result = caseAs3Identifiable(as3Interface);
 				if (result == null) result = caseAvmDeclaredElement(as3Interface);
 				if (result == null) result = caseAvmType(as3Interface);
-				if (result == null) result = caseICaseElement(as3Interface);
+				if (result == null) result = caseIDirective(as3Interface);
 				if (result == null) result = caseAs3Element(as3Interface);
-				if (result == null) result = caseAvmIdentifiable(as3Interface);
 				if (result == null) result = caseAvmDefinition(as3Interface);
+				if (result == null) result = caseAvmReferable(as3Interface);
 				if (result == null) result = caseAvmElement(as3Interface);
+				if (result == null) result = caseAvmIdentifiable(as3Interface);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -495,15 +536,19 @@ public class As3ESwitch<T> {
 				T result = caseAs3Namespace(as3Namespace);
 				if (result == null) result = caseAs3Member(as3Namespace);
 				if (result == null) result = caseAvmNamespace(as3Namespace);
+				if (result == null) result = caseIBlockDirective(as3Namespace);
 				if (result == null) result = caseAs3Definition(as3Namespace);
 				if (result == null) result = caseAvmMember(as3Namespace);
-				if (result == null) result = caseIDirective(as3Namespace);
+				if (result == null) result = caseITypeDirective(as3Namespace);
+				if (result == null) result = caseICaseElement(as3Namespace);
 				if (result == null) result = caseAs3Identifiable(as3Namespace);
 				if (result == null) result = caseAvmDeclaredElement(as3Namespace);
-				if (result == null) result = caseICaseElement(as3Namespace);
+				if (result == null) result = caseAvmReferable(as3Namespace);
+				if (result == null) result = caseIPackageDirective(as3Namespace);
 				if (result == null) result = caseAs3Element(as3Namespace);
 				if (result == null) result = caseAvmIdentifiable(as3Namespace);
 				if (result == null) result = caseAvmDefinition(as3Namespace);
+				if (result == null) result = caseIDirective(as3Namespace);
 				if (result == null) result = caseAvmElement(as3Namespace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -514,8 +559,9 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3Identifiable(as3Variable);
 				if (result == null) result = caseAvmVariable(as3Variable);
 				if (result == null) result = caseAs3Element(as3Variable);
-				if (result == null) result = caseAvmIdentifiable(as3Variable);
+				if (result == null) result = caseAvmReferable(as3Variable);
 				if (result == null) result = caseAvmElement(as3Variable);
+				if (result == null) result = caseAvmIdentifiable(as3Variable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -526,8 +572,9 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3Identifiable(as3VariableAssign);
 				if (result == null) result = caseAvmVariable(as3VariableAssign);
 				if (result == null) result = caseAs3Element(as3VariableAssign);
-				if (result == null) result = caseAvmIdentifiable(as3VariableAssign);
+				if (result == null) result = caseAvmReferable(as3VariableAssign);
 				if (result == null) result = caseAvmElement(as3VariableAssign);
+				if (result == null) result = caseAvmIdentifiable(as3VariableAssign);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -537,8 +584,11 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseIStatement(as3VariableDefinition);
 				if (result == null) result = caseIForInit(as3VariableDefinition);
 				if (result == null) result = caseIForInInit(as3VariableDefinition);
-				if (result == null) result = caseIDirective(as3VariableDefinition);
+				if (result == null) result = caseIBlockDirective(as3VariableDefinition);
+				if (result == null) result = caseITypeDirective(as3VariableDefinition);
 				if (result == null) result = caseICaseElement(as3VariableDefinition);
+				if (result == null) result = caseIPackageDirective(as3VariableDefinition);
+				if (result == null) result = caseIDirective(as3VariableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -550,8 +600,9 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3Identifiable(as3Parameter);
 				if (result == null) result = caseAvmVariable(as3Parameter);
 				if (result == null) result = caseAs3Element(as3Parameter);
-				if (result == null) result = caseAvmIdentifiable(as3Parameter);
+				if (result == null) result = caseAvmReferable(as3Parameter);
 				if (result == null) result = caseAvmElement(as3Parameter);
+				if (result == null) result = caseAvmIdentifiable(as3Parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -564,8 +615,9 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3Identifiable(as3ParameterAssign);
 				if (result == null) result = caseAvmVariable(as3ParameterAssign);
 				if (result == null) result = caseAs3Element(as3ParameterAssign);
-				if (result == null) result = caseAvmIdentifiable(as3ParameterAssign);
+				if (result == null) result = caseAvmReferable(as3ParameterAssign);
 				if (result == null) result = caseAvmElement(as3ParameterAssign);
+				if (result == null) result = caseAvmIdentifiable(as3ParameterAssign);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -578,8 +630,9 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3Identifiable(as3ParameterRest);
 				if (result == null) result = caseAvmVariable(as3ParameterRest);
 				if (result == null) result = caseAs3Element(as3ParameterRest);
-				if (result == null) result = caseAvmIdentifiable(as3ParameterRest);
+				if (result == null) result = caseAvmReferable(as3ParameterRest);
 				if (result == null) result = caseAvmElement(as3ParameterRest);
+				if (result == null) result = caseAvmIdentifiable(as3ParameterRest);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -590,14 +643,16 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAvmField(as3FieldBinding);
 				if (result == null) result = caseAs3Definition(as3FieldBinding);
 				if (result == null) result = caseAvmMember(as3FieldBinding);
-				if (result == null) result = caseIDirective(as3FieldBinding);
+				if (result == null) result = caseITypeDirective(as3FieldBinding);
 				if (result == null) result = caseAvmVariable(as3FieldBinding);
 				if (result == null) result = caseAs3Identifiable(as3FieldBinding);
 				if (result == null) result = caseAvmDeclaredElement(as3FieldBinding);
-				if (result == null) result = caseICaseElement(as3FieldBinding);
+				if (result == null) result = caseAvmReferable(as3FieldBinding);
+				if (result == null) result = caseIPackageDirective(as3FieldBinding);
 				if (result == null) result = caseAs3Element(as3FieldBinding);
 				if (result == null) result = caseAvmIdentifiable(as3FieldBinding);
 				if (result == null) result = caseAvmDefinition(as3FieldBinding);
+				if (result == null) result = caseIDirective(as3FieldBinding);
 				if (result == null) result = caseAvmElement(as3FieldBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -605,8 +660,9 @@ public class As3ESwitch<T> {
 			case As3EPackage.AS3_FIELD_DEFINITION: {
 				As3FieldDefinition as3FieldDefinition = (As3FieldDefinition)theEObject;
 				T result = caseAs3FieldDefinition(as3FieldDefinition);
+				if (result == null) result = caseITypeDirective(as3FieldDefinition);
+				if (result == null) result = caseIPackageDirective(as3FieldDefinition);
 				if (result == null) result = caseIDirective(as3FieldDefinition);
-				if (result == null) result = caseICaseElement(as3FieldDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -618,14 +674,16 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAvmOperation(as3Operation);
 				if (result == null) result = caseAs3Definition(as3Operation);
 				if (result == null) result = caseAvmMember(as3Operation);
-				if (result == null) result = caseIDirective(as3Operation);
+				if (result == null) result = caseITypeDirective(as3Operation);
 				if (result == null) result = caseAvmExecutable(as3Operation);
 				if (result == null) result = caseAs3Identifiable(as3Operation);
 				if (result == null) result = caseAvmDeclaredElement(as3Operation);
-				if (result == null) result = caseICaseElement(as3Operation);
+				if (result == null) result = caseAvmReferable(as3Operation);
+				if (result == null) result = caseIPackageDirective(as3Operation);
 				if (result == null) result = caseAs3Element(as3Operation);
 				if (result == null) result = caseAvmIdentifiable(as3Operation);
 				if (result == null) result = caseAvmDefinition(as3Operation);
+				if (result == null) result = caseIDirective(as3Operation);
 				if (result == null) result = caseAvmElement(as3Operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -638,14 +696,16 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAvmConstructor(as3Constructor);
 				if (result == null) result = caseAs3Definition(as3Constructor);
 				if (result == null) result = caseAvmMember(as3Constructor);
-				if (result == null) result = caseIDirective(as3Constructor);
+				if (result == null) result = caseITypeDirective(as3Constructor);
 				if (result == null) result = caseAvmExecutable(as3Constructor);
 				if (result == null) result = caseAs3Identifiable(as3Constructor);
 				if (result == null) result = caseAvmDeclaredElement(as3Constructor);
-				if (result == null) result = caseICaseElement(as3Constructor);
+				if (result == null) result = caseAvmReferable(as3Constructor);
+				if (result == null) result = caseIPackageDirective(as3Constructor);
 				if (result == null) result = caseAs3Element(as3Constructor);
 				if (result == null) result = caseAvmIdentifiable(as3Constructor);
 				if (result == null) result = caseAvmDefinition(as3Constructor);
+				if (result == null) result = caseIDirective(as3Constructor);
 				if (result == null) result = caseAvmElement(as3Constructor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -690,8 +750,11 @@ public class As3ESwitch<T> {
 				As3DefaultXmlNamespaceStatement as3DefaultXmlNamespaceStatement = (As3DefaultXmlNamespaceStatement)theEObject;
 				T result = caseAs3DefaultXmlNamespaceStatement(as3DefaultXmlNamespaceStatement);
 				if (result == null) result = caseIStatement(as3DefaultXmlNamespaceStatement);
-				if (result == null) result = caseIDirective(as3DefaultXmlNamespaceStatement);
+				if (result == null) result = caseIBlockDirective(as3DefaultXmlNamespaceStatement);
+				if (result == null) result = caseITypeDirective(as3DefaultXmlNamespaceStatement);
 				if (result == null) result = caseICaseElement(as3DefaultXmlNamespaceStatement);
+				if (result == null) result = caseIPackageDirective(as3DefaultXmlNamespaceStatement);
+				if (result == null) result = caseIDirective(as3DefaultXmlNamespaceStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -699,8 +762,11 @@ public class As3ESwitch<T> {
 				As3TryStatement as3TryStatement = (As3TryStatement)theEObject;
 				T result = caseAs3TryStatement(as3TryStatement);
 				if (result == null) result = caseIStatement(as3TryStatement);
-				if (result == null) result = caseIDirective(as3TryStatement);
+				if (result == null) result = caseIBlockDirective(as3TryStatement);
+				if (result == null) result = caseITypeDirective(as3TryStatement);
 				if (result == null) result = caseICaseElement(as3TryStatement);
+				if (result == null) result = caseIPackageDirective(as3TryStatement);
+				if (result == null) result = caseIDirective(as3TryStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -714,8 +780,11 @@ public class As3ESwitch<T> {
 				As3ThrowStatement as3ThrowStatement = (As3ThrowStatement)theEObject;
 				T result = caseAs3ThrowStatement(as3ThrowStatement);
 				if (result == null) result = caseIStatement(as3ThrowStatement);
-				if (result == null) result = caseIDirective(as3ThrowStatement);
+				if (result == null) result = caseIBlockDirective(as3ThrowStatement);
+				if (result == null) result = caseITypeDirective(as3ThrowStatement);
 				if (result == null) result = caseICaseElement(as3ThrowStatement);
+				if (result == null) result = caseIPackageDirective(as3ThrowStatement);
+				if (result == null) result = caseIDirective(as3ThrowStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -723,8 +792,11 @@ public class As3ESwitch<T> {
 				As3ReturnStatement as3ReturnStatement = (As3ReturnStatement)theEObject;
 				T result = caseAs3ReturnStatement(as3ReturnStatement);
 				if (result == null) result = caseIStatement(as3ReturnStatement);
-				if (result == null) result = caseIDirective(as3ReturnStatement);
+				if (result == null) result = caseIBlockDirective(as3ReturnStatement);
+				if (result == null) result = caseITypeDirective(as3ReturnStatement);
 				if (result == null) result = caseICaseElement(as3ReturnStatement);
+				if (result == null) result = caseIPackageDirective(as3ReturnStatement);
+				if (result == null) result = caseIDirective(as3ReturnStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -732,8 +804,11 @@ public class As3ESwitch<T> {
 				As3WithStatement as3WithStatement = (As3WithStatement)theEObject;
 				T result = caseAs3WithStatement(as3WithStatement);
 				if (result == null) result = caseIStatement(as3WithStatement);
-				if (result == null) result = caseIDirective(as3WithStatement);
+				if (result == null) result = caseIBlockDirective(as3WithStatement);
+				if (result == null) result = caseITypeDirective(as3WithStatement);
 				if (result == null) result = caseICaseElement(as3WithStatement);
+				if (result == null) result = caseIPackageDirective(as3WithStatement);
+				if (result == null) result = caseIDirective(as3WithStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -741,8 +816,11 @@ public class As3ESwitch<T> {
 				As3BreakStatement as3BreakStatement = (As3BreakStatement)theEObject;
 				T result = caseAs3BreakStatement(as3BreakStatement);
 				if (result == null) result = caseIStatement(as3BreakStatement);
-				if (result == null) result = caseIDirective(as3BreakStatement);
+				if (result == null) result = caseIBlockDirective(as3BreakStatement);
+				if (result == null) result = caseITypeDirective(as3BreakStatement);
 				if (result == null) result = caseICaseElement(as3BreakStatement);
+				if (result == null) result = caseIPackageDirective(as3BreakStatement);
+				if (result == null) result = caseIDirective(as3BreakStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -750,8 +828,11 @@ public class As3ESwitch<T> {
 				As3ContinueStatement as3ContinueStatement = (As3ContinueStatement)theEObject;
 				T result = caseAs3ContinueStatement(as3ContinueStatement);
 				if (result == null) result = caseIStatement(as3ContinueStatement);
-				if (result == null) result = caseIDirective(as3ContinueStatement);
+				if (result == null) result = caseIBlockDirective(as3ContinueStatement);
+				if (result == null) result = caseITypeDirective(as3ContinueStatement);
 				if (result == null) result = caseICaseElement(as3ContinueStatement);
+				if (result == null) result = caseIPackageDirective(as3ContinueStatement);
+				if (result == null) result = caseIDirective(as3ContinueStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -759,8 +840,11 @@ public class As3ESwitch<T> {
 				As3IterationStatement as3IterationStatement = (As3IterationStatement)theEObject;
 				T result = caseAs3IterationStatement(as3IterationStatement);
 				if (result == null) result = caseIStatement(as3IterationStatement);
-				if (result == null) result = caseIDirective(as3IterationStatement);
+				if (result == null) result = caseIBlockDirective(as3IterationStatement);
+				if (result == null) result = caseITypeDirective(as3IterationStatement);
 				if (result == null) result = caseICaseElement(as3IterationStatement);
+				if (result == null) result = caseIPackageDirective(as3IterationStatement);
+				if (result == null) result = caseIDirective(as3IterationStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -769,8 +853,11 @@ public class As3ESwitch<T> {
 				T result = caseAs3ConditionalIterationStatement(as3ConditionalIterationStatement);
 				if (result == null) result = caseAs3IterationStatement(as3ConditionalIterationStatement);
 				if (result == null) result = caseIStatement(as3ConditionalIterationStatement);
-				if (result == null) result = caseIDirective(as3ConditionalIterationStatement);
+				if (result == null) result = caseIBlockDirective(as3ConditionalIterationStatement);
+				if (result == null) result = caseITypeDirective(as3ConditionalIterationStatement);
 				if (result == null) result = caseICaseElement(as3ConditionalIterationStatement);
+				if (result == null) result = caseIPackageDirective(as3ConditionalIterationStatement);
+				if (result == null) result = caseIDirective(as3ConditionalIterationStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -780,8 +867,11 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3ConditionalIterationStatement(as3DoStatement);
 				if (result == null) result = caseAs3IterationStatement(as3DoStatement);
 				if (result == null) result = caseIStatement(as3DoStatement);
-				if (result == null) result = caseIDirective(as3DoStatement);
+				if (result == null) result = caseIBlockDirective(as3DoStatement);
+				if (result == null) result = caseITypeDirective(as3DoStatement);
 				if (result == null) result = caseICaseElement(as3DoStatement);
+				if (result == null) result = caseIPackageDirective(as3DoStatement);
+				if (result == null) result = caseIDirective(as3DoStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -791,8 +881,11 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3ConditionalIterationStatement(as3WhileStatement);
 				if (result == null) result = caseAs3IterationStatement(as3WhileStatement);
 				if (result == null) result = caseIStatement(as3WhileStatement);
-				if (result == null) result = caseIDirective(as3WhileStatement);
+				if (result == null) result = caseIBlockDirective(as3WhileStatement);
+				if (result == null) result = caseITypeDirective(as3WhileStatement);
 				if (result == null) result = caseICaseElement(as3WhileStatement);
+				if (result == null) result = caseIPackageDirective(as3WhileStatement);
+				if (result == null) result = caseIDirective(as3WhileStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -802,8 +895,11 @@ public class As3ESwitch<T> {
 				if (result == null) result = caseAs3ConditionalIterationStatement(as3ForStatement);
 				if (result == null) result = caseAs3IterationStatement(as3ForStatement);
 				if (result == null) result = caseIStatement(as3ForStatement);
-				if (result == null) result = caseIDirective(as3ForStatement);
+				if (result == null) result = caseIBlockDirective(as3ForStatement);
+				if (result == null) result = caseITypeDirective(as3ForStatement);
 				if (result == null) result = caseICaseElement(as3ForStatement);
+				if (result == null) result = caseIPackageDirective(as3ForStatement);
+				if (result == null) result = caseIDirective(as3ForStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -812,8 +908,11 @@ public class As3ESwitch<T> {
 				T result = caseAs3ForInStatement(as3ForInStatement);
 				if (result == null) result = caseAs3IterationStatement(as3ForInStatement);
 				if (result == null) result = caseIStatement(as3ForInStatement);
-				if (result == null) result = caseIDirective(as3ForInStatement);
+				if (result == null) result = caseIBlockDirective(as3ForInStatement);
+				if (result == null) result = caseITypeDirective(as3ForInStatement);
 				if (result == null) result = caseICaseElement(as3ForInStatement);
+				if (result == null) result = caseIPackageDirective(as3ForInStatement);
+				if (result == null) result = caseIDirective(as3ForInStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -821,8 +920,11 @@ public class As3ESwitch<T> {
 				As3ConditionalStatement as3ConditionalStatement = (As3ConditionalStatement)theEObject;
 				T result = caseAs3ConditionalStatement(as3ConditionalStatement);
 				if (result == null) result = caseIStatement(as3ConditionalStatement);
-				if (result == null) result = caseIDirective(as3ConditionalStatement);
+				if (result == null) result = caseIBlockDirective(as3ConditionalStatement);
+				if (result == null) result = caseITypeDirective(as3ConditionalStatement);
 				if (result == null) result = caseICaseElement(as3ConditionalStatement);
+				if (result == null) result = caseIPackageDirective(as3ConditionalStatement);
+				if (result == null) result = caseIDirective(as3ConditionalStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -831,8 +933,11 @@ public class As3ESwitch<T> {
 				T result = caseAs3SwitchStatement(as3SwitchStatement);
 				if (result == null) result = caseAs3ConditionalStatement(as3SwitchStatement);
 				if (result == null) result = caseIStatement(as3SwitchStatement);
-				if (result == null) result = caseIDirective(as3SwitchStatement);
+				if (result == null) result = caseIBlockDirective(as3SwitchStatement);
+				if (result == null) result = caseITypeDirective(as3SwitchStatement);
 				if (result == null) result = caseICaseElement(as3SwitchStatement);
+				if (result == null) result = caseIPackageDirective(as3SwitchStatement);
+				if (result == null) result = caseIDirective(as3SwitchStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -864,8 +969,11 @@ public class As3ESwitch<T> {
 				T result = caseAs3IfStatement(as3IfStatement);
 				if (result == null) result = caseAs3ConditionalStatement(as3IfStatement);
 				if (result == null) result = caseIStatement(as3IfStatement);
-				if (result == null) result = caseIDirective(as3IfStatement);
+				if (result == null) result = caseIBlockDirective(as3IfStatement);
+				if (result == null) result = caseITypeDirective(as3IfStatement);
 				if (result == null) result = caseICaseElement(as3IfStatement);
+				if (result == null) result = caseIPackageDirective(as3IfStatement);
+				if (result == null) result = caseIDirective(as3IfStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -873,8 +981,11 @@ public class As3ESwitch<T> {
 				As3LabeledStatement as3LabeledStatement = (As3LabeledStatement)theEObject;
 				T result = caseAs3LabeledStatement(as3LabeledStatement);
 				if (result == null) result = caseIStatement(as3LabeledStatement);
-				if (result == null) result = caseIDirective(as3LabeledStatement);
+				if (result == null) result = caseIBlockDirective(as3LabeledStatement);
+				if (result == null) result = caseITypeDirective(as3LabeledStatement);
 				if (result == null) result = caseICaseElement(as3LabeledStatement);
+				if (result == null) result = caseIPackageDirective(as3LabeledStatement);
+				if (result == null) result = caseIDirective(as3LabeledStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -882,8 +993,11 @@ public class As3ESwitch<T> {
 				As3Block as3Block = (As3Block)theEObject;
 				T result = caseAs3Block(as3Block);
 				if (result == null) result = caseIStatement(as3Block);
-				if (result == null) result = caseIDirective(as3Block);
+				if (result == null) result = caseIBlockDirective(as3Block);
+				if (result == null) result = caseITypeDirective(as3Block);
 				if (result == null) result = caseICaseElement(as3Block);
+				if (result == null) result = caseIPackageDirective(as3Block);
+				if (result == null) result = caseIDirective(as3Block);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -891,8 +1005,11 @@ public class As3ESwitch<T> {
 				As3SuperStatement as3SuperStatement = (As3SuperStatement)theEObject;
 				T result = caseAs3SuperStatement(as3SuperStatement);
 				if (result == null) result = caseIStatement(as3SuperStatement);
-				if (result == null) result = caseIDirective(as3SuperStatement);
+				if (result == null) result = caseIBlockDirective(as3SuperStatement);
+				if (result == null) result = caseITypeDirective(as3SuperStatement);
 				if (result == null) result = caseICaseElement(as3SuperStatement);
+				if (result == null) result = caseIPackageDirective(as3SuperStatement);
+				if (result == null) result = caseIDirective(as3SuperStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -900,8 +1017,11 @@ public class As3ESwitch<T> {
 				As3ExpressionStatement as3ExpressionStatement = (As3ExpressionStatement)theEObject;
 				T result = caseAs3ExpressionStatement(as3ExpressionStatement);
 				if (result == null) result = caseIStatement(as3ExpressionStatement);
-				if (result == null) result = caseIDirective(as3ExpressionStatement);
+				if (result == null) result = caseIBlockDirective(as3ExpressionStatement);
+				if (result == null) result = caseITypeDirective(as3ExpressionStatement);
 				if (result == null) result = caseICaseElement(as3ExpressionStatement);
+				if (result == null) result = caseIPackageDirective(as3ExpressionStatement);
+				if (result == null) result = caseIDirective(as3ExpressionStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -909,8 +1029,11 @@ public class As3ESwitch<T> {
 				As3EmptyStatement as3EmptyStatement = (As3EmptyStatement)theEObject;
 				T result = caseAs3EmptyStatement(as3EmptyStatement);
 				if (result == null) result = caseIStatement(as3EmptyStatement);
-				if (result == null) result = caseIDirective(as3EmptyStatement);
+				if (result == null) result = caseIBlockDirective(as3EmptyStatement);
+				if (result == null) result = caseITypeDirective(as3EmptyStatement);
 				if (result == null) result = caseICaseElement(as3EmptyStatement);
+				if (result == null) result = caseIPackageDirective(as3EmptyStatement);
+				if (result == null) result = caseIDirective(as3EmptyStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1760,6 +1883,51 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseIDirective(IDirective object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IPackage Directive</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IPackage Directive</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIPackageDirective(IPackageDirective object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IType Directive</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IType Directive</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseITypeDirective(ITypeDirective object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IBlock Directive</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IBlock Directive</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIBlockDirective(IBlockDirective object) {
 		return null;
 	}
 
@@ -3755,6 +3923,21 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseAvmDeclaredElement(AvmDeclaredElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmReferable(AvmReferable object) {
 		return null;
 	}
 

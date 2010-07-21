@@ -23,7 +23,7 @@ import org.axdt.avm.model.AvmNamespace;
  * @see org.axdt.as3.As3EPackage#getAs3Namespace()
  * @generated
  */
-public interface As3Namespace extends As3Member, AvmNamespace {
+public interface As3Namespace extends As3Member, AvmNamespace, IBlockDirective {
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

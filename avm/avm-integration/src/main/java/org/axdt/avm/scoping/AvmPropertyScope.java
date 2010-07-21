@@ -3,7 +3,7 @@ package org.axdt.avm.scoping;
 import java.util.Collections;
 
 import org.axdt.avm.model.AvmDeclaredType;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -18,9 +18,9 @@ public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScop
 	}
 
 	@Override
-	protected Iterable<? extends AvmIdentifiable> getCandidates() {
+	protected Iterable<? extends AvmReferable> getCandidates() {
 		AvmType type = getQualifierType();
-		Iterable<AvmIdentifiable> dynIdent = null;
+		Iterable<AvmReferable> dynIdent = null;
 		if (type != null) {
 			type = resolveType(type);
 			if (type.isDynamic()) {
@@ -33,7 +33,7 @@ public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScop
 			}
 			if (type instanceof AvmDeclaredType) {
 				AvmDeclaredType typeDec = (AvmDeclaredType) type;
-				Iterable<? extends AvmIdentifiable> members = getAllMembers(typeDec);
+				Iterable<? extends AvmReferable> members = getAllMembers(typeDec);
 				if (dynIdent != null)
 					members = Iterables.concat(members, dynIdent);
 				return Iterables.filter(members, new UniqueNames());

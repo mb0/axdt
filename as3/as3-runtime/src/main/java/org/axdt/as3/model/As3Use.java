@@ -22,7 +22,7 @@ package org.axdt.as3.model;
  * @see org.axdt.as3.As3EPackage#getAs3Use()
  * @generated
  */
-public interface As3Use extends IDirective {
+public interface As3Use extends IBlockDirective {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

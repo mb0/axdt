@@ -6,8 +6,6 @@
  */
 package org.axdt.as3.model;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
@@ -17,23 +15,9 @@ import org.axdt.avm.AvmEFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 This Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
-public class As3ThisExpressionTest extends TestCase {
-
-	/**
-	 * The fixture for this As3 This Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3ThisExpression fixture = null;
+public class As3ThisExpressionTest extends IExpressionTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,23 +39,14 @@ public class As3ThisExpressionTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this As3 This Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3ThisExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 This Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3ThisExpression getFixture() {
-		return fixture;
+		return (As3ThisExpression)fixture;
 	}
 
 	/**

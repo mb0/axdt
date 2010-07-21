@@ -20,14 +20,6 @@ package org.axdt.as3.model;
 public abstract class As3PostfixExpressionTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Postfix Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3PostfixExpression fixture = null;
-
-	/**
 	 * Constructs a new As3 Postfix Expression test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,23 +30,14 @@ public abstract class As3PostfixExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Postfix Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3PostfixExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Postfix Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3PostfixExpression getFixture() {
-		return fixture;
+		return (As3PostfixExpression)fixture;
 	}
 
 	/**

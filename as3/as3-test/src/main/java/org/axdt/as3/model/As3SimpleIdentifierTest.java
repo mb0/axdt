@@ -10,23 +10,9 @@ package org.axdt.as3.model;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Simple Identifier</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
 public abstract class As3SimpleIdentifierTest extends IExpressionTest {
-
-	/**
-	 * The fixture for this As3 Simple Identifier test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3SimpleIdentifier fixture = null;
 
 	/**
 	 * Constructs a new As3 Simple Identifier test case with the given name.
@@ -39,23 +25,14 @@ public abstract class As3SimpleIdentifierTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Simple Identifier test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3SimpleIdentifier fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Simple Identifier test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3SimpleIdentifier getFixture() {
-		return fixture;
+		return (As3SimpleIdentifier)fixture;
 	}
 
 	/**

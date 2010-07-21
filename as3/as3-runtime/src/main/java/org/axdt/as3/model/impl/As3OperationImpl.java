@@ -12,12 +12,12 @@ import java.util.Collection;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Block;
 import org.axdt.as3.model.As3Executable;
-import org.axdt.as3.model.As3Identifiable;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Parameter;
 import org.axdt.as3.model.IDirective;
 import org.axdt.avm.model.AvmExecutable;
 import org.axdt.avm.model.AvmOperation;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -398,11 +398,11 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public Iterable<As3Identifiable> getDeclarations() {
+	public Iterable<AvmReferable> getDeclarations() {
 		if (body != null)
 			return Lists.newArrayList(Iterators.filter(
 				EcoreUtil.getAllProperContents(body, false),
-				As3Identifiable.class
+				AvmReferable.class
 			));
 		return Iterables.emptyIterable();
 	}

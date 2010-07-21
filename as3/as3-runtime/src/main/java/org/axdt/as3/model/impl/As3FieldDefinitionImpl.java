@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getBindings <em>Bindings</em>}</li>
@@ -52,26 +51,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
@@ -180,27 +159,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_FIELD_DEFINITION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__VSEMI, oldVsemi, vsemi));
 	}
 
 	/**
@@ -359,8 +317,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
 				return isStatic();
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
@@ -386,9 +342,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
@@ -421,9 +374,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -454,8 +404,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
 				return ((flags & STATIC_EFLAG) != 0) != STATIC_EDEFAULT;
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
@@ -482,9 +430,7 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(", static: ");
+		result.append(" (static: ");
 		result.append((flags & STATIC_EFLAG) != 0);
 		result.append(", constant: ");
 		result.append((flags & CONSTANT_EFLAG) != 0);

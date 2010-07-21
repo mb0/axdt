@@ -24,14 +24,6 @@ import org.axdt.as3.As3EFactory;
 public class As3RegexLiteralTest extends IExpressionTest {
 
 	/**
-	 * The fixture for this As3 Regex Literal test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3RegexLiteral fixture = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -51,23 +43,14 @@ public class As3RegexLiteralTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Regex Literal test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3RegexLiteral fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Regex Literal test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3RegexLiteral getFixture() {
-		return fixture;
+		return (As3RegexLiteral)fixture;
 	}
 
 	/**

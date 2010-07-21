@@ -248,6 +248,15 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parse("for(var i:int = 1;i<100;i++){}");
 		assertParseResult(result);
 	}
+	public void testForInStatement() throws Exception {
+		IParseResult result;
+		result = parse("for(i in list)run();");
+		assertParseResult(result);
+		result = parse("for(var i:* in list){}");
+		assertParseResult(result);
+		result = parse("for each(i in list){}");
+		assertParseResult(result);
+	}
 	public void testAssignmentExpression() throws Exception {
 		IParseResult result;
 		result = parse("i = j = 0;");

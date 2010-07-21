@@ -1,7 +1,7 @@
 package org.axdt.avm.scoping;
 
 import org.axdt.avm.model.AvmDeclaredType;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -14,7 +14,7 @@ public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 	}
 
 	@Override
-	protected Iterable<? extends AvmIdentifiable> getCandidates() {
+	protected Iterable<? extends AvmReferable> getCandidates() {
 		return Iterables.filter(getAllMembers(element), new UniqueNames());
 	}
 }

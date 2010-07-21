@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @see org.axdt.as3.As3EPackage#getAs3Type()
  * @generated
  */
-public interface As3Type extends As3Definition, AvmDeclaredType, IDirective {
+public interface As3Type extends As3Definition, AvmDeclaredType, IPackageDirective {
 	/**
 	 * Returns the value of the '<em><b>Extended Interfaces</b></em>' containment reference list.
 	 * The list contents are of type {@link org.axdt.avm.model.AvmTypeReference}.

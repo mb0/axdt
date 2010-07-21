@@ -19,7 +19,7 @@ public abstract class AbstractDefinitionScopeProvider extends AbstractScopeProvi
 		if (resourceSet == null)
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
-		if (EcoreUtil2.isAssignableFrom(referenceType, AvmEPackage.Literals.AVM_IDENTIFIABLE)) {
+		if (EcoreUtil2.isAssignableFrom(referenceType, AvmEPackage.Literals.AVM_REFERABLE)) {
 			return createDefinitionScope(getDefinitionProvider(resourceSet));
 		} else if (EcoreUtil2.isAssignableFrom(referenceType, AvmEPackage.Literals.AVM_TYPE)) {
 			return createTypeScope(getDefinitionProvider(resourceSet));

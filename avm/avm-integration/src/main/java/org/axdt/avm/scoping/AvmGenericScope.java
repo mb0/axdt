@@ -1,7 +1,7 @@
 package org.axdt.avm.scoping;
 
 import org.axdt.avm.model.AvmField;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -23,7 +23,7 @@ public abstract class AvmGenericScope<T extends EObject> extends AvmElementScope
 		return new LinkingHelper().getCrossRefNodeAsString(node, false);
 	}
 
-	public AvmIdentifiable getDynamicIdentifiable(final String value) {
+	public AvmReferable getDynamicIdentifiable(final String value) {
 		Resource resource = getTempResource();
 		EObject find = null;
 		for (EObject obj: resource.getContents()) {

@@ -60,12 +60,12 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("1++;\n2++;", "\n\n1++\n\n2++\n\n");
 	}
 	public void testIgnoreLineBreaks() throws Exception {
-		assertFormatDefault("a();\nb();", "a();b();");
-		assertFormatDefault("a();\nb();", "a();\nb();");
-		assertFormatDefault("a();\nb();", "a();\n\n\nb();");
 		assertFormat("a();\nb();", "a();b();");
 		assertFormat("a();\nb();", "a();\nb();");
 		assertFormat("a();\n\nb();", "a();\n\n\nb();");
+		assertFormatDefault("a();\nb();", "a();b();");
+		assertFormatDefault("a();\nb();", "a();\nb();");
+		assertFormatDefault("a();\nb();", "a();\n\n\nb();");
 	}
 	public void testLiterals() throws Exception {
 		assertFormatDefault("{a:'b', 'b':5, c:d};", "{a:'b','b':5,c:d} ; ");
@@ -97,7 +97,7 @@ public class As3FormatterTest extends AbstractXtextTests {
 	}
 	public void testComments() throws Exception {
 		assertFormatDefault("a++; //comment", "a++;//comment");
-		assertFormatDefault("a++; /* ml comment */ a++;", "a++;/* ml comment */a++;");
+		assertFormat("a++;\n/* ml comment */ a++;", "a++;/* ml comment */a++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n/* ml comment */\na++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n\n\n/* ml comment */\n\n\na++;");
 		assertFormat("a++;\n\n/* ml comment */\n\na++;", "a++;\n\n\n/* ml comment */\n\n\na++;");

@@ -11,7 +11,7 @@ import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3PropertyIdentifier;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmExecutable;
-import org.axdt.avm.model.AvmIdentifiable;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVariable;
@@ -48,7 +48,7 @@ public class As3PropertyIdentifierImpl extends As3SimpleIdentifierImpl implement
 
 	@Override
 	public AvmType resolveType() {
-		AvmIdentifiable ref = getReference();
+		AvmReferable ref = getReference();
 		if (ref == null && name == null)
 			return AvmEFactory.eINSTANCE.createAvmNull();
 		// TODO when should a avm type resolve to Class ?

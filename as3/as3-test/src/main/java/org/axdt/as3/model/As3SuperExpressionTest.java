@@ -16,23 +16,9 @@ import org.axdt.avm.model.AvmTypeReference;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Super Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.axdt.as3.model.IExpression#resolveType() <em>Resolve Type</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
 public class As3SuperExpressionTest extends IExpressionTest {
-
-	/**
-	 * The fixture for this As3 Super Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected As3SuperExpression fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,23 +40,14 @@ public class As3SuperExpressionTest extends IExpressionTest {
 	}
 
 	/**
-	 * Sets the fixture for this As3 Super Expression test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(As3SuperExpression fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this As3 Super Expression test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected As3SuperExpression getFixture() {
-		return fixture;
+		return (As3SuperExpression)fixture;
 	}
 
 	/**

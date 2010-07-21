@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @see org.axdt.as3.As3EPackage#getAs3FieldDefinition()
  * @generated
  */
-public interface As3FieldDefinition extends IDirective {
+public interface As3FieldDefinition extends ITypeDirective {
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.axdt.avm.model.AvmVisibility}.

@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3IterationStatementImpl#getVsemi <em>Vsemi</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3IterationStatementImpl#getStatement <em>Statement</em>}</li>
  * </ul>
  * </p>
@@ -39,26 +38,6 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VSEMI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVsemi() <em>Vsemi</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVsemi()
-	 * @generated
-	 * @ordered
-	 */
-	protected String vsemi = VSEMI_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' containment reference.
@@ -87,27 +66,6 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_ITERATION_STATEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVsemi() {
-		return vsemi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVsemi(String newVsemi) {
-		String oldVsemi = vsemi;
-		vsemi = newVsemi;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_ITERATION_STATEMENT__VSEMI, oldVsemi, vsemi));
 	}
 
 	/**
@@ -175,8 +133,6 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_ITERATION_STATEMENT__VSEMI:
-				return getVsemi();
 			case As3EPackage.AS3_ITERATION_STATEMENT__STATEMENT:
 				return getStatement();
 		}
@@ -191,9 +147,6 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_ITERATION_STATEMENT__VSEMI:
-				setVsemi((String)newValue);
-				return;
 			case As3EPackage.AS3_ITERATION_STATEMENT__STATEMENT:
 				setStatement((IStatement)newValue);
 				return;
@@ -209,9 +162,6 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_ITERATION_STATEMENT__VSEMI:
-				setVsemi(VSEMI_EDEFAULT);
-				return;
 			case As3EPackage.AS3_ITERATION_STATEMENT__STATEMENT:
 				setStatement((IStatement)null);
 				return;
@@ -227,28 +177,10 @@ public abstract class As3IterationStatementImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_ITERATION_STATEMENT__VSEMI:
-				return VSEMI_EDEFAULT == null ? vsemi != null : !VSEMI_EDEFAULT.equals(vsemi);
 			case As3EPackage.AS3_ITERATION_STATEMENT__STATEMENT:
 				return statement != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (vsemi: ");
-		result.append(vsemi);
-		result.append(')');
-		return result.toString();
 	}
 
 } //As3IterationStatementImpl
