@@ -3,6 +3,7 @@ package org.axdt.common.config;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.axdt.common.IAxdtExtension;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -10,10 +11,8 @@ import org.eclipse.core.runtime.Platform;
 
 import com.google.common.collect.Maps;
 
-public interface IAxdtConfigProvider {
+public interface IAxdtConfigProvider extends IAxdtExtension {
 	String EXTENSION_ID = "org.axdt.core.runtime.configProvider";
-	String EXTENSION_CONFIG_ID = "id";
-	String EXTENSION_CONFIG_CLASS = "class";
 	
 	IAxdtConfig getAxdtConfig(String name);
 	
@@ -31,7 +30,7 @@ public interface IAxdtConfigProvider {
 			IConfigurationElement contribution = getConfiguration(configId);
 			if (contribution == null) return null;
 			try {
-				Object extension = contribution.createExecutableExtension(EXTENSION_CONFIG_CLASS);
+				Object extension = contribution.createExecutableExtension(CLASS_ATTRIBUTE);
 				if (extension != null && extension instanceof IAxdtConfig)
 					return (IAxdtConfig) extension;
 			} catch (CoreException e) {
@@ -43,7 +42,7 @@ public interface IAxdtConfigProvider {
 			if (configId == null) return null;
 			IExtensionRegistry registry = Platform.getExtensionRegistry();
 			for (IConfigurationElement element : registry.getConfigurationElementsFor(EXTENSION_ID)) {
-				if (configId.equals(element.getAttribute(EXTENSION_CONFIG_ID)))
+				if (configId.equals(element.getAttribute(ID_ATTRIBUTE)))
 					return element;
 			}
 			return null;

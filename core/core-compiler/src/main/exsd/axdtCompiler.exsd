@@ -6,7 +6,7 @@
          <meta.schema plugin="org.axdt.core.compiler" id="axdtCompiler" name="Axdt compiler contribution"/>
       </appinfo>
       <documentation>
-         Allows the contribution of compiler for the Axdt project.
+         Allows the contribution of compilers for the Axdt projects.
       </documentation>
    </annotation>
 

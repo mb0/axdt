@@ -6,7 +6,7 @@
       <launchConfigurationType
             delegate="org.axdt.as3.debug.launch.As3LaunchDelegate"
             name="%launcherName"
-            modes="run" public="true"
+            modes="run,debug" public="true"
             id="org.axdt.as3.debug.launch.type"/>
    </extension>
    <extension
@@ -31,7 +31,7 @@
             icon="icons/launcher.gif"
             id="org.axdt.as3.debug.launch.shortcut"
             label="%shortcutLabel"
-            modes="run">
+            modes="run,debug">
          <configurationType
                id="org.axdt.as3.debug.launch.type">
          </configurationType>
@@ -39,6 +39,10 @@
             <contextLabel
                   label="%runContextLabel"
                   mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="%debugContextLabel"
+                  mode="debug">
             </contextLabel>
             <enablement>
                <with variable="selection">

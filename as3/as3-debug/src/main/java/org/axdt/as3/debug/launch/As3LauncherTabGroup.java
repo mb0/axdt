@@ -11,46 +11,54 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.swt.graphics.Image;
 
+/**
+ * @author mb0
+ */
 public class As3LauncherTabGroup extends AbstractLaunchConfigurationTabGroup {
 
 	public As3LauncherTabGroup() {
 	}
 
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-			new AS3LauncherTabMain(),
-			new AS3LauncherTabBrowser(),
-			new CommonTab()
-		};
-		setTabs(tabs);
+		setTabs(new ILaunchConfigurationTab[] {
+				new AS3LauncherTabMain(),
+				new AS3LauncherTabBrowser(),
+				new CommonTab() });
 	}
 }
+
 class LaucherCompilerPreferences extends As3CompilerPreferences {
 	@Override
 	public void initializeFieldSpecs() {
 		addGroup(null, false);
-		add(IAs3DebugConstants.TARGET, "Build target", "", new String[]{"as","mxml"});
+		add(IAs3DebugConstants.TARGET, "Build target", "", new String[] {
+				"as", "mxml" });
 		super.initializeFieldSpecs();
 	}
 }
+
 class AS3LauncherTabMain extends AbstractLauncherPreferenceTab {
 
 	public AS3LauncherTabMain() {
 		super(new LaucherCompilerPreferences());
 	}
+
 	public Image getImage() {
-		return As3DebugPlugin.getDefault().getImageRegistry().get(As3DebugPlugin.MAIN_TAB_IMAGE);
+		return As3DebugPlugin.getDefault().getImageRegistry()
+				.get(As3DebugPlugin.MAIN_TAB_IMAGE);
 	}
+
 	public String getName() {
 		return "Main";
 	}
 }
+
 class AS3LauncherTabBrowser extends AbstractLauncherPreferenceTab {
 
 	public AS3LauncherTabBrowser() {
 		super(As3DebugPreferences.getInstance());
 	}
-	
+
 	public String getName() {
 		return "Browser";
 	}

@@ -4,9 +4,11 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
+import org.axdt.common.IAxdtExtension;
+
 import com.google.common.collect.Lists;
 
-public interface IErrorCodeUriResolver {
+public interface IErrorCodeUriResolver extends IAxdtExtension {
 
 	String EXTENSION_ID = "org.axdt.compiler.console.errorCodeUriResolver";
 

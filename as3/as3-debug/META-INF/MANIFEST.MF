@@ -11,5 +11,6 @@ Require-Bundle: org.eclipse.core.variables,
  org.axdt.core.ui
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.axdt.as3.debug.preferences
+Export-Package: org.axdt.as3.debug.launch.jobs,
+ org.axdt.as3.debug.preferences
 Import-Package: org.apache.log4j

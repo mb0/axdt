@@ -24,6 +24,24 @@
       </provider>
    </extension>
    <extension
+         point="org.axdt.core.runtime.swfPlayer">
+      <player
+            id="org.axdt.core.ui.swf.internalEditor"
+            class="org.axdt.core.ui.swf.InternalBrowserEditor"
+            name="Internal editor">
+      </player>
+      <player
+            id="org.axdt.core.ui.swf.internalView"
+            class="org.axdt.core.ui.swf.InternalBrowserView"
+            name="Internal view">
+      </player>
+      <player
+            id="org.axdt.core.ui.swf.external"
+            class="org.axdt.core.ui.swf.ExternalBrowser"
+            name="External browser">
+      </player>
+   </extension>
+   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             name="%axdtPerspective"

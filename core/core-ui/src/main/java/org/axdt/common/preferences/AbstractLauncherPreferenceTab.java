@@ -117,4 +117,9 @@ public abstract class AbstractLauncherPreferenceTab extends AbstractFieldEditorP
 	protected ILaunchManager getLaunchManager() {
 		return DebugPlugin.getDefault().getLaunchManager();
 	}
+	
+	@Override
+	protected boolean isExcluded(PrefGroup group) {
+		return 0 != (group.getFlags() & IAxdtPreferences.EXCLUDE_IN_LAUNCH);
+	}
 }

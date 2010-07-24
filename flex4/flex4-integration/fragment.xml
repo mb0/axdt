@@ -11,6 +11,15 @@
       </compiler>
    </extension>
    <extension
+         point="org.axdt.core.compiler.axdtDebugger">
+      <debugger
+            class="org.axdt.flex4.debugger.Flex4Debugger"
+            id="org.axdt.flex4.debugger"
+            language="As3"
+            name="%flexDebuggerName">
+      </debugger>
+   </extension>
+   <extension
          point="org.eclipse.ui.newWizards">
          <category name="Axdt" id="org.axdt.category"></category>
 		<wizard name="Flex config File" icon="icons/flexconfig_file.gif"
@@ -21,7 +30,7 @@
 	<extension point="org.eclipse.wst.xml.core.catalogContributions">
 		<catalogContribution>
 			<public publicId="http://www.adobe.com/2006/flex-config"
-				uri="xsd/flex-config.xsd" />
+				uri="src/main/xsd/flex-config.xsd" />
 		</catalogContribution>
 	</extension>
 	<extension

@@ -3,9 +3,10 @@ package org.axdt.as3.debug.compiler;
 import java.io.File;
 import java.util.List;
 
-import org.axdt.compiler.AxdtCompilerTarget;
 import org.axdt.core.AxdtCore;
 import org.axdt.core.config.ICoreConfig;
+import org.axdt.launch.AxdtCompilerTarget;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 
@@ -17,8 +18,6 @@ public class As3CompilerTarget extends AxdtCompilerTarget {
 
 	public As3CompilerTarget(IResource resource) {
 		super(resource);
-		axdtConfig = AxdtCore.getPlugin().getAxdtConfig(ICoreConfig.ID,
-				ICoreConfig.class);
 	}
 
 	protected ICoreConfig getConfig() {
@@ -29,16 +28,16 @@ public class As3CompilerTarget extends AxdtCompilerTarget {
 	}
 
 	@Override
-	public IPath getConfigLocation() {
+	public IContainer getConfigContainer() {
 		return getConfig() != null
-				? getConfig().getConfigResource(resource).getLocation() 
+				? getConfig().getConfigResource(resource) 
 				: null;
 	}
 
 	@Override
-	public IPath getDeployLocation() {
+	public IContainer getDeployContainer() {
 		return getConfig() != null
-				? getConfig().getOutputResource(resource).getLocation()
+				? getConfig().getOutputResource(resource)
 				: null;
 	}
 

@@ -3,4 +3,5 @@
 <plugin>
    <extension-point id="errorCodeUriResolver" name="%errorCodeUriResolverName" schema="src/main/exsd/errorCodeUriResolver.exsd"/>
    <extension-point id="axdtCompiler" name="%axdtCompilerName" schema="src/main/exsd/axdtCompiler.exsd"/>
+   <extension-point id="axdtDebugger" name="%axdtDebuggerName" schema="src/main/exsd/axdtDebugger.exsd"/>
 </plugin>

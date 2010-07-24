@@ -3,37 +3,28 @@ package org.axdt.core.ui.swf;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.axdt.core.config.ISwfConfig;
+import org.axdt.core.swf.IAxdtSwfPlayer;
+import org.axdt.core.swf.IAxdtSwfPlayerInstance;
 import org.axdt.core.ui.preferences.CorePreferences;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IEditorLauncher;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.browser.IWebBrowser;
-import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 
+/**
+ * @author mb0
+ */
 public class SwfEditorLauncher implements IEditorLauncher {
 
-	public static final String SHARED_ID = "org.axdt.core.ui.swf";
-	protected static final int DEFAULT_STYLE = IWorkbenchBrowserSupport.LOCATION_BAR
-			| IWorkbenchBrowserSupport.NAVIGATION_BAR;
-
-	protected int style;
-	protected String browserChoice;
+	protected String playerId;
 
 	public SwfEditorLauncher() {
-		this(null, DEFAULT_STYLE);
-	}
-	
-	public SwfEditorLauncher(String browserChoice) {
-		this(browserChoice, DEFAULT_STYLE);
+		this(CorePreferences.CHOICE_PREFERENCE);
 	}
 
-	public SwfEditorLauncher(String browserChoice, int style) {
-		this.browserChoice = browserChoice;
-		this.style = style;
+	public SwfEditorLauncher(String playerId) {
+		this.playerId = playerId;
 	}
 
 	public void open(IPath file) {
@@ -45,48 +36,41 @@ public class SwfEditorLauncher implements IEditorLauncher {
 					e.getLocalizedMessage());
 		}
 	}
-	
-	public void open(URL url) {
-		if (browserChoice == null)
-			browserChoice = getDefaultBrowserChoice();
-		IWorkbenchBrowserSupport support = PlatformUI.getWorkbench()
-				.getBrowserSupport();
+
+	public IAxdtSwfPlayerInstance open(URL url) {
+		CorePreferences corePref = CorePreferences.getInstance();
+		if (CorePreferences.CHOICE_PREFERENCE.equals(playerId)
+				|| playerId == null) {
+			IPreferenceStore store = corePref.getStore();
+			playerId = store.getString(CorePreferences.OPEN_PLAYER);
+		}
+		IAxdtSwfPlayer player = corePref.getPlayer(playerId);
 		try {
-			// XXX browser sharing noop on ubuntu ?!
-			if (!support.isInternalWebBrowserAvailable() || isExternal()
-					|| ISwfConfig.CHOICE_EXTERNAL.equals(browserChoice))
-				setExternal(true);
-			else if (isView() || ISwfConfig.CHOICE_VIEW.equals(browserChoice))
-				setView(true);
-			String id = isExternal() ? SHARED_ID : browserChoice+""+url.getPath();
-			IWebBrowser browser = support.createBrowser(style, id, null, null);
-			browser.openURL(url);
-		} catch (PartInitException e) {
+			return player.launch(url);
+		} catch (Exception e) {
 			MessageDialog.openError(PlatformUI.getWorkbench().getDisplay()
-					.getActiveShell(), "Error opening browser",
+					.getActiveShell(), "Error opening player",
 					e.getLocalizedMessage());
+			return null;
 		}
 	}
 
-	protected String getDefaultBrowserChoice() {
-		CorePreferences preferences = CorePreferences.getInstance();
-		IPreferenceStore store = preferences.getStore();
-		return store.getString(CorePreferences.OPEN_BROWSER);
-	}
+	public static class Runner implements Runnable {
 
-	public boolean isExternal() {
-		return 0 != (style & IWorkbenchBrowserSupport.AS_EXTERNAL);
-	}
+		protected final String playerId;
+		protected final URL url;
+		protected IAxdtSwfPlayerInstance playerInstance;
 
-	public void setExternal(boolean value) {
-		style |= IWorkbenchBrowserSupport.AS_EXTERNAL;
-	}
-
-	public boolean isView() {
-		return 0 != (style & IWorkbenchBrowserSupport.AS_VIEW);
-	}
-
-	public void setView(boolean value) {
-		style |= IWorkbenchBrowserSupport.AS_VIEW;
+		public Runner(String playerId, URL url) {
+			this.playerId = playerId;
+			this.url = url;
+		}
+		
+		public void run() {
+			playerInstance = new SwfEditorLauncher(playerId).open(url);
+		}
+		public IAxdtSwfPlayerInstance getPlayerInstance() {
+			return playerInstance;
+		}
 	}
 }

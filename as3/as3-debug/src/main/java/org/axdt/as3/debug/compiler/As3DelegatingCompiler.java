@@ -2,7 +2,7 @@ package org.axdt.as3.debug.compiler;
 
 import org.axdt.as3.debug.preferences.As3CompilerPreferences;
 import org.axdt.compiler.AbstractDelegatingAxdtCompiler;
-import org.axdt.compiler.AxdtCompilerTarget;
+import org.axdt.launch.AxdtCompilerTarget;
 import org.eclipse.core.resources.IFile;
 
 public class As3DelegatingCompiler extends AbstractDelegatingAxdtCompiler {

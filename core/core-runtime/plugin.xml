@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="configProvider" name="%configProvider" schema="src/main/exsd/configProvider.exsd"/>
+   <extension-point id="swfPlayer" name="%swfPlayer" schema="src/main/exsd/swfPlayer.exsd"/>
    <extension
          id="org.axdt.as3.imp.nature"
          name="%axdtNature"

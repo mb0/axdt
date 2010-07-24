@@ -6,16 +6,11 @@
          <meta.schema plugin="org.axdt.core.runtime" id="configProvider" name="Axdt config provider"/>
       </appinfo>
       <documentation>
-         Allows the contributions to offer an axdt config provider.
+         Allows the contribution of axdt config providers.
       </documentation>
    </annotation>
 
    <element name="extension">
-      <annotation>
-         <appinfo>
-            <meta.element />
-         </appinfo>
-      </annotation>
       <complexType>
          <sequence>
             <element ref="provider" minOccurs="1" maxOccurs="unbounded"/>

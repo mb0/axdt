@@ -1,4 +1,4 @@
-package org.axdt.compiler;
+package org.axdt.launch;
 
 import java.io.File;
 import java.util.Collections;
@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.axdt.compiler.AxdtCompilerConfig;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -13,7 +15,11 @@ import org.eclipse.core.runtime.IPath;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
+/**
+ * @author mb0
+ */
 public class AxdtCompilerTarget {
+
 	protected final IResource resource;
 	protected final Map<String, Object> contexts;
 
@@ -49,7 +55,7 @@ public class AxdtCompilerTarget {
 	public IProject getProject() {
 		return resource.getProject();
 	}
-	
+
 	public IPath getTargetFileLocation() {
 		return resource.getLocation();
 	}
@@ -69,44 +75,61 @@ public class AxdtCompilerTarget {
 	public String getConfigFileName() {
 		return String.format("%s-config.xml", getTargetName());
 	}
-	
-	public IPath getDeployLocation() {
-		return getProject().getLocation();
+
+	public IContainer getDeployContainer() {
+		return getProject();
 	}
-	public IPath getConfigLocation() {
-		return getProject().getLocation();
+
+	public IContainer getConfigContainer() {
+		return getProject();
 	}
+
 	public List<IPath> getSourceLocations() {
 		return Lists.newArrayList(getProject().getLocation());
 	}
+
 	public List<IPath> getLibraryLocations() {
 		return Collections.singletonList(getProject().getLocation());
 	}
+
 	public List<File> getResolvedLibraries() {
 		return Collections.emptyList();
 	}
+
 	public IPath getDeployFileLocation() {
-		return getDeployLocation().append(getDeployFileName());
+		return getDeployContainer().getLocation().append(getDeployFileName());
 	}
 
 	public IPath getConfigFileLocation() {
-		return getConfigLocation().append(getConfigFileName());
+		return getConfigContainer().getLocation().append(getConfigFileName());
 	}
+
 	public static File[] pathsToFileArray(List<IPath> paths) {
 		List<File> list = Lists.transform(paths, new Path2File());
 		return list.toArray(new File[list.size()]);
 	}
+
 	public static List<IPath> resourcesToPaths(List<IResource> resources) {
 		return Lists.transform(resources, new Resource2Path());
 	}
+
 	private static class Path2File implements Function<IPath, File> {
 		public File apply(IPath from) {
 			return new File(from.toOSString());
 		}
 	}
+
 	private static class Resource2Path implements Function<IResource, IPath> {
 		public IPath apply(IResource from) {
 			return from.getLocation();
 		}
+	}
+
+	public String getLaunchMode() {
+		return getContextValue(AxdtCompilerConfig.LAUNCH_MODE, String.class);
+	}
+
+	public void setLaunchMode(String launchMode) {
+		setContext(AxdtCompilerConfig.LAUNCH_MODE, launchMode);
 	}
 }

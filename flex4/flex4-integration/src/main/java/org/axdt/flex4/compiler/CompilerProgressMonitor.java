@@ -5,9 +5,13 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 
 import flex2.tools.oem.ProgressMeter;
 
-public class CompilerProgressMonitor extends SubProgressMonitor implements ProgressMeter {
+/**
+ * @author mb0
+ */
+public class CompilerProgressMonitor extends SubProgressMonitor implements
+		ProgressMeter {
 	private final String name;
-	
+
 	public CompilerProgressMonitor(IProgressMonitor monitor, String name) {
 		super(monitor, 100);
 		this.name = name;

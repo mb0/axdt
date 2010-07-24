@@ -6,7 +6,7 @@
          <meta.schema plugin="org.axdt.core.compiler" id="errorCodeUriResolver" name="Axdt error code uri resolver contribution"/>
       </appinfo>
       <documentation>
-         Allows the contribution of error code uri resolvers for an axdt compiler output.
+         Allows the contribution of error code uri resolvers for axdt compiler output.
       </documentation>
    </annotation>
 

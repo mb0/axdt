@@ -13,9 +13,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.axdt.avm.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.axdt.common.config,
+Export-Package: org.axdt.common,
+ org.axdt.common.config,
  org.axdt.core,
  org.axdt.core.config,
  org.axdt.core.model,
+ org.axdt.core.swf,
  org.axdt.core.util
 Import-Package: org.apache.log4j
