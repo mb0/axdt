@@ -3,8 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 	<groupId>org.axdt</groupId>
 	<artifactId>org.axdt</artifactId>
+	<name>Axdt</name>
 	<version>0.0.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
@@ -17,25 +21,77 @@
 		<module>swc</module>
 		<module>update</module>
 	</modules>
+	<properties>
+		<maven.test.skip>true</maven.test.skip>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+		<tycho-version>0.9.0</tycho-version>
+	</properties>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+	<url>http://axdt.org</url>
+	<inceptionYear>2010</inceptionYear>
+	<issueManagement>
+		<system>Trac</system>
+		<url>http://new.axdt.org/report</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:git:git://axdt.org/newaxdt.git</connection>
+		<developerConnection>scm:git:ssh://git@axdt.org/newaxdt.git</developerConnection>
+		<url>http://new.axdt.org/browser</url>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.sonatype.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
-				<version>0.9.0</version>
+				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
+					<groupId>org.sonatype.tycho</groupId>
+					<artifactId>maven-osgi-lifecycle-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.tycho</groupId>
+					<artifactId>maven-osgi-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
 					<configuration>
 						<source>1.5</source>
 						<target>1.5</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.sonatype.tycho</groupId>
+					<artifactId>maven-osgi-packaging-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<!-- workaround for TYCHO-349 or TYCHO-313 -->
+						<strictVersions>false</strictVersions>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+	<developers>
+		<developer>
+			<id>mb0</id>
+			<name>Martin Schnabel</name>
+		</developer>
+	</developers>
 </project>
