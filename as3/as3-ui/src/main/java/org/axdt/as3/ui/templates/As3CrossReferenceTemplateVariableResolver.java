@@ -9,18 +9,25 @@ import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-
+/**
+ * This resolver simply fixes how canonical names are abbreviated
+ * 
+ * @author mb0
+ */
 public class As3CrossReferenceTemplateVariableResolver extends
 		CrossReferenceTemplateVariableResolver {
+	
 	@Override
-	public List<String> resolveValues(TemplateVariable variable, XtextTemplateContext castedContext) {
-		// TODO do not resolve variables unless the template is actually applied
-		// if proposal it is a preview castedContext.isReadOnly() is false
-		return Lists.transform(super.resolveValues(variable, castedContext), new Function<String, String>() {
-			private int index;
-			public String apply(String from) {
-				return (index = from.indexOf("::")) > 0 ? from.substring(index+2) : from;
-			}
-		});
+	public List<String> resolveValues(TemplateVariable variable,
+			XtextTemplateContext castedContext) {
+		return Lists.transform(super.resolveValues(variable, castedContext),
+				new Function<String, String>() {
+					private int index;
+
+					public String apply(String from) {
+						return (index = from.indexOf("::")) > 0 ? from
+								.substring(index + 2) : from;
+					}
+				});
 	}
 }
