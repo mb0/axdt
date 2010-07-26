@@ -1,7 +1,6 @@
 package org.axdt.avm.scoping;
 
 import java.util.List;
-import java.util.Set;
 
 import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmDeclaredType;
@@ -22,9 +21,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.google.inject.internal.Lists;
 
 public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
@@ -34,14 +31,6 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 			return EObjectDescription.create(from.getName(), from);
 		}
 	};
-	
-	public final static class UniqueNames implements Predicate<AvmReferable> {
-		private final Set<String> names = Sets.newHashSet();
-		public boolean apply(AvmReferable input) {
-			String name = input.getName();
-			return name != null && names.add(name);
-		}
-	}
 	
 	protected final T element;
 	protected final IScopeProvider scopeProvider;

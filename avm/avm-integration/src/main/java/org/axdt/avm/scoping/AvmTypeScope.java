@@ -5,8 +5,6 @@ import org.axdt.avm.model.AvmReferable;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
-import com.google.common.collect.Iterables;
-
 public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 
 	public AvmTypeScope(AvmDeclaredType element, EReference ref, IScopeProvider scopeProvider) {
@@ -15,6 +13,6 @@ public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 
 	@Override
 	protected Iterable<? extends AvmReferable> getCandidates() {
-		return Iterables.filter(getAllMembers(element), new UniqueNames());
+		return getAllMembers(element);
 	}
 }

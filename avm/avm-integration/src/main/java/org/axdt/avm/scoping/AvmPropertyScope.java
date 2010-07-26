@@ -36,7 +36,7 @@ public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScop
 				Iterable<? extends AvmReferable> members = getAllMembers(typeDec);
 				if (dynIdent != null)
 					members = Iterables.concat(members, dynIdent);
-				return Iterables.filter(members, new UniqueNames());
+				return members;
 			}
 		}
 		if (dynIdent != null) return dynIdent;

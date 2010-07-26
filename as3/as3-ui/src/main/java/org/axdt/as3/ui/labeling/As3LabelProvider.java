@@ -136,8 +136,13 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     	return NAMESPACE;
     }
     Object image(AvmField ele) {
-		As3FieldDefinition def = (As3FieldDefinition) ele.eContainer();
-		AvmVisibility visibility = def.getVisibility();
+    	AvmVisibility visibility = null;
+    	if (ele.eContainer() instanceof As3FieldDefinition) {
+			As3FieldDefinition def = (As3FieldDefinition) ele.eContainer();
+			visibility = def.getVisibility();
+    	} else {
+    		visibility = ele.getVisibility();
+    	}
 		if (AvmVisibility.PUBLIC.equals(visibility))
 			return FIELD_PUBLIC;
 		if (AvmVisibility.PRIVATE.equals(visibility))
