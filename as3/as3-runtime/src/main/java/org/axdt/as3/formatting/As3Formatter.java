@@ -107,6 +107,12 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 		c.setNoSpace().around(f.getAs3QueryOperatorAccess().getFullStopFullStopKeyword_0_0());
 		c.setNoLinewrap().after(f.getAs3DoStatementAccess().getStatementIStatementParserRuleCall_2_0());
 		c.setLinewrap(1,1,2).after(f.getAs3ImportListRule());
+		c.setLinewrap(1).before(f.getAs3PackageRule());
+		c.setLinewrap(1).before(f.getAs3ClassRule());
+		c.setLinewrap(1).before(f.getAs3InterfaceRule());
+		c.setLinewrap(1).before(f.getAs3OperationRule());
+		c.setLinewrap(1).before(f.getAs3OperationSignatureRule());
+		c.setLinewrap(1).before(f.getAs3FieldDefinitionRule());
 	}
 
 	@Override

@@ -84,7 +84,7 @@ class DescriptionCollector extends As3ESwitch<Boolean> {
 	@Override
 	public Boolean caseAvmType(AvmType object) {
 		collectDefinition(object);
-		return true;
+		return false;
 	}
 	@Override
 	public Boolean caseAvmMember(AvmMember object) {
