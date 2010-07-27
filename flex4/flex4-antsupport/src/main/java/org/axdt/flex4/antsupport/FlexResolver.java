@@ -39,7 +39,7 @@ public class FlexResolver implements IAntPropertyValueProvider, IValueVariableIn
 		return getBundleURL(path).getPath().replaceFirst("/$", "");
 	}
 	public URL getBundleURL(IPath path) {
-		Bundle bundle = Platform.getBundle("org.axdt.flex4sdk");
+		Bundle bundle = Platform.getBundle("org.axdt.flex4.sdk");
 		URL[] urls = FileLocator.findEntries(bundle, path);
 		if (urls.length < 1)
 			return null;

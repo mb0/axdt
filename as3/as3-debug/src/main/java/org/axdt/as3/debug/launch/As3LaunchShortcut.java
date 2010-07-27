@@ -77,7 +77,9 @@ public class As3LaunchShortcut implements ILaunchShortcut {
 					+ IAs3DebugConstants.CONFIGURATION_TYPE);
 			return null;
 		}
-		String name = manager.generateLaunchConfigurationName(file.getName());
+		 // XXX we want compatibility with eclipse 3.5
+		@SuppressWarnings("deprecation")
+		String name = manager.generateUniqueLaunchConfigurationNameFrom(file.getName());
 		try {
 			ILaunchConfigurationWorkingCopy workingCopy = configType.newInstance(null, name);
 			workingCopy.setAttribute(IAs3DebugConstants.TARGET, file.getFullPath().toString());
