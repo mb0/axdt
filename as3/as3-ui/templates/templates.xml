@@ -55,7 +55,7 @@ default:
 	break;
 }</template>
 <template name="toString" autoinsert="false" context="org.axdt.as3.As3.As3Operation" deleted="false" description="To string function" enabled="true" id="org.axdt.as3.templates.toString"
->public function toString():String {
+>override public function toString():String {
 	return "${cursor}";
 }</template>
 <template name="try" autoinsert="false" context="org.axdt.as3.As3.As3ExpressionStatement" deleted="false" description="Try statement" enabled="true" id="org.axdt.as3.templates.try"

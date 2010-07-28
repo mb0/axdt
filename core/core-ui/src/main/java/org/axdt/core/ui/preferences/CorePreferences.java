@@ -48,7 +48,7 @@ public class CorePreferences extends AbstractPreferences implements
 	}
 
 	public void initializeFieldSpecs() {
-		
+
 		addGroup("Project folders", true);
 		add(SOURCE_PATHS, "&Source paths", "src test");
 		add(OUTPUT_PATH, "&Deploy path", "deploy");
@@ -114,12 +114,14 @@ public class CorePreferences extends AbstractPreferences implements
 
 	private List<IPath> getRelativePaths(IPath base, IResource context,
 			String configName) {
-		String[] paths = getProjectStore(context).getString(configName).split(
-				"[,; ]");
 		List<IPath> result = Lists.newArrayList();
-		for (String path : paths)
+		for (String path : getStringList(context, configName))
 			result.add(base.append(path));
 		return result;
+	}
+
+	public String[] getStringList(IResource context, String configName) {
+		return getProjectStore(context).getString(configName).split("[,; ]");
 	}
 
 	protected IProject checkProject(IResource res) {
