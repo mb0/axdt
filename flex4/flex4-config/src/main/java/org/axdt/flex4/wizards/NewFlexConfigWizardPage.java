@@ -12,17 +12,18 @@ public class NewFlexConfigWizardPage extends AbstractFileWizardPage {
 	}
 
 	protected void initializeWithSelection(IResource resource) {
-		IContainer container;
+		IContainer container = null;
 		if (resource instanceof IContainer) {
 			container = (IContainer) resource;
-			fileText.setText("");
 		} else {
-			IResource res = (IResource) resource;
-			container = res.getParent();
-			fileText.setText(res.getFullPath().removeFileExtension().lastSegment()+"-config.xml");
+			if (containerText.getText().trim().length() == 0)
+				container = resource.getParent();
+			fileText.setText(resource.getFullPath().removeFileExtension().lastSegment()+"-config.xml");
 		}
-		String cont = container.getFullPath().toString() + "/";
-		containerText.setText(cont);
+		if (container != null) {
+			String cont = container.getFullPath().toString() + "/";
+			containerText.setText(cont);
+		}
 	}
 	@Override
 	public String getExtension() {

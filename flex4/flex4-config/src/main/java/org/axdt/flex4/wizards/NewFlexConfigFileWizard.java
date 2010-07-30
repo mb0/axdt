@@ -3,8 +3,11 @@ package org.axdt.flex4.wizards;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.axdt.common.wizards.AbstractFileWizard;
+import org.axdt.core.model.AxdtProject;
+import org.axdt.core.ui.preferences.CorePreferences;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -12,6 +15,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -71,7 +75,7 @@ public class NewFlexConfigFileWizard extends AbstractFileWizard {
 		if (container == null) container = (IContainer) resource;
 		
 		IFile file = container.getFile(new Path(fileName));
-		createInitialContent(file, openContentStream(), monitor);
+		createInitialContent(file, openContentStream(file), monitor);
 		monitor.worked(1);
 		
 		monitor.setTaskName("Opening file for editing...");
@@ -80,18 +84,40 @@ public class NewFlexConfigFileWizard extends AbstractFileWizard {
 	}
 	/**
 	 * We will initialize file contents with a sample text.
+	 * @param file 
 	 */
-	private InputStream openContentStream() {
-		String contents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-				+ "<flex-config xmlns= \"http://www.adobe.com/2006/flex-config\">\n"
-				+ "\t<metadata>\n"
-				+ "\t\t<title>Your Application</title>\n"
-				+ "\t\t<description>Developed using Axdt</description>\n"
-				+ "\t\t<publisher>unknown</publisher>\n"
-				+ "\t\t<creator>unknown</creator>\n"
-				+ "\t\t<language>EN</language>\n"
-				+ "\t</metadata>\n"
-				+ "</flex-config>";
-		return new ByteArrayInputStream(contents.getBytes());
+	private InputStream openContentStream(IFile file) {
+		IProject project = file.getProject();
+		Object adapter = project.getAdapter(AxdtProject.class);
+		StringBuilder buf = new StringBuilder();
+		buf.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+		buf.append("<flex-config xmlns= \"http://www.adobe.com/2006/flex-config\">\n");
+		buf.append("\t<compiler>\n");
+		CorePreferences pref = CorePreferences.getInstance();
+		if (adapter instanceof AxdtProject) {
+			IPath parent = file.getParent().getFullPath();
+			appendPathElements(buf, "source-path",parent,pref.getSourcePaths(file));
+			appendPathElements(buf, "library-path",parent,pref.getLibraryPaths(file));
+		}
+		buf.append("\t</compiler>\n");
+		buf.append("\t<metadata>\n");
+		buf.append("\t\t<title>Your Application</title>\n");
+		buf.append("\t\t<description>Developed using Axdt</description>\n");
+		buf.append("\t</metadata>\n");
+		buf.append("</flex-config>");
+		return new ByteArrayInputStream(buf.toString().getBytes());
+	}
+
+	private void appendPathElements(StringBuilder buf, String name, IPath parent,
+			List<IPath> paths) {
+		if (!paths.isEmpty()) {
+			buf.append("\t\t<").append(name).append(" append=\"true\">\n");
+			for (IPath path: paths) {
+				buf.append("\t\t\t<path-element>");
+				buf.append(path.makeRelativeTo(parent));
+				buf.append("</path-element>\n");
+			}
+			buf.append("\t\t</").append(name).append(">\n");
+		}
 	}
 }

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.axdt.flex4.config;singleton:=true
+Bundle-Version: 0.0.8.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.core.runtime,
+ org.axdt.core.ui,
+ org.eclipse.wst.common.core;bundle-version="1.0.0"
