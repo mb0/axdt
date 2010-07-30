@@ -12,4 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.variables,
  org.apache.ant,
  org.axdt.flex4.sdk;bundle-version="4.0.0";visibility:=reexport,
- org.eclipse.ant.core
+ org.eclipse.ant.core,
+ org.axdt.core.ui,
+ org.eclipse.ui.ide

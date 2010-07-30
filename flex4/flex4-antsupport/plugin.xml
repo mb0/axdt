@@ -61,4 +61,39 @@
             name="flex.frameworks">
       </variable>
    </extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category name="Axdt" id="org.axdt.category"></category>
+		<wizard name="Flex ant file"
+			category="org.axdt.category"
+			class="org.axdt.flex4.antsupport.NewFlexAntFileWizard"
+			id="org.axdt.flex4.antsupport.newFlexAntFileWizard"
+			icon="icons/flexant_file.gif">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension
+			targetID="org.axdt.core.ui.perspective">
+			<newWizardShortcut id="org.axdt.flex4.antsupport.newFlexAntFileWizard"/>
+		</perspectiveExtension>
+	</extension>
+	<extension
+		point="org.eclipse.ui.navigator.navigatorContent">
+		<commonWizard
+			type="new"
+			menuGroupId="axdt.new"
+			wizardId="org.axdt.flex4.antsupport.newFlexAntFileWizard"
+			associatedExtensionId="org.axdt.core.ui.navigatorContent">
+			<enablement>
+				<or>
+					<adapt type="org.eclipse.core.resources.IProject" >
+						<test property="org.eclipse.core.resources.projectNature" value="org.axdt.as3.imp.nature"/>
+					</adapt>
+					<adapt type="org.eclipse.core.resources.IFile" />	
+					<adapt type="org.eclipse.core.resources.IFolder" />
+				</or>
+			</enablement>
+		</commonWizard>
+	</extension>
 </plugin>
