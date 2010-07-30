@@ -32,4 +32,14 @@
             class="org.axdt.core.AxdtEPackage"
             genModel="src/main/ecore/Axdt.genmodel"/>
    </extension>
+	<extension
+		 point="org.eclipse.core.runtime.adapters">
+		<factory
+			 adaptableType="org.eclipse.core.resources.IResource"
+			 class="org.axdt.core.adapter.AxdtElementAdapterFactory">
+			<adapter type="org.axdt.core.model.AxdtElement"/>
+			<adapter type="org.axdt.core.model.AxdtProject"/>
+			<adapter type="org.axdt.core.model.AxdtPackageRoot"/>
+		</factory>
+	</extension>
 </plugin>

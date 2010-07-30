@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.debug.ui;visibility:=reexport,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
- org.axdt.core.runtime;visibility:=reexport
+ org.axdt.core.runtime;visibility:=reexport,
+ org.eclipse.ui.navigator,
+ org.eclipse.ui.navigator.resources
 Export-Package: org.axdt.common.preferences,
  org.axdt.common.preferences.fields,
  org.axdt.common.wizards,

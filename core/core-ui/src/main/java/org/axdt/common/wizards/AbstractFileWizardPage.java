@@ -71,7 +71,7 @@ public abstract class AbstractFileWizardPage extends WizardPage implements Modif
 		if (dialog.open() == ContainerSelectionDialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length >= 1) {
-				initializeWithSelection(root.getFolder((IPath) result[0]));
+				initializeWithSelection(root.findMember((IPath) result[0]));
 			}
 		}
 	}

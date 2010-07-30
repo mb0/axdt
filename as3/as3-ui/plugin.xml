@@ -222,4 +222,25 @@
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
+	<extension point="org.eclipse.ui.navigator.navigatorContent">
+		<commonWizard type="new" menuGroupId="1st.group"
+			wizardId="org.axdt.as3.ui.wizards.newAs3ProjectWizard"
+			associatedExtensionId="org.axdt.core.ui.navigatorContent">
+			<enablement></enablement>
+		</commonWizard>
+		<commonWizard type="new" menuGroupId="axdt.new"
+			wizardId="org.axdt.as3.ui.wizards.newAs3FileWizard"
+			associatedExtensionId="org.axdt.core.ui.navigatorContent">
+			<enablement>
+				<or>
+					<adapt type="org.eclipse.core.resources.IProject">
+						<test property="org.eclipse.core.resources.projectNature"
+							value="org.axdt.as3.imp.nature" />
+					</adapt>
+					<adapt type="org.eclipse.core.resources.IFile" />
+					<adapt type="org.eclipse.core.resources.IFolder" />
+				</or>
+			</enablement>
+		</commonWizard>
+	</extension>
 </plugin>

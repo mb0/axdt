@@ -90,7 +90,10 @@ public class CorePreferences extends AbstractPreferences implements
 		IPath projectLocation = checkProject(res).getLocation();
 		return getRelativePaths(projectLocation, res, SOURCE_PATHS);
 	}
-
+	public List<IPath> getLibraryPaths(IResource res) {
+		IPath projectLocation = checkProject(res).getFullPath();
+		return getRelativePaths(projectLocation, res, LIBRARY_PATHS);
+	}
 	public List<IPath> getLibraryLocations(IResource res) {
 		IPath projectLocation = checkProject(res).getLocation();
 		return getRelativePaths(projectLocation, res, LIBRARY_PATHS);

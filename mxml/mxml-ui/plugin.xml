@@ -21,7 +21,7 @@
 	<extension point="org.eclipse.wst.xml.core.catalogContributions">
 		<catalogContribution>
 			<public publicId="http://www.adobe.com/2006/mxml"
-				uri="xsd/flex3.xsd"/>
+				uri="src/main/xsd/flex3.xsd"/>
 		</catalogContribution>
 	</extension>
 	<extension
@@ -33,4 +33,22 @@
          </newWizardShortcut>
       </perspectiveExtension>
     </extension>
+	<extension
+		point="org.eclipse.ui.navigator.navigatorContent">
+		<commonWizard
+			type="new"
+			menuGroupId="axdt.new"
+			wizardId="org.axdt.mxml.ui.wizards.newMxmlWizard"
+			associatedExtensionId="org.axdt.core.ui.navigatorContent">
+			<enablement>
+				<or>
+					<adapt type="org.eclipse.core.resources.IProject" >
+						<test property="org.eclipse.core.resources.projectNature" value="org.axdt.as3.imp.nature"/>
+					</adapt>
+					<adapt type="org.eclipse.core.resources.IFile" />	
+					<adapt type="org.eclipse.core.resources.IFolder" />
+				</or>
+			</enablement>
+		</commonWizard>
+	</extension>
 </plugin>

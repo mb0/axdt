@@ -157,4 +157,70 @@
          </contentTypeBinding>
      </editor>
    </extension>
+	<extension
+		point="org.eclipse.ui.navigator.viewer">
+		<viewerContentBinding
+			viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+			<includes>
+				<contentExtension pattern="org.axdt.core.ui.navigatorContent" />
+				<contentExtension pattern="org.axdt.core.ui.filters.*" />
+			</includes>
+		</viewerContentBinding>
+	</extension>
+	<extension
+		point="org.eclipse.ui.navigator.navigatorContent">
+		<navigatorContent
+			id="org.axdt.core.ui.navigatorContent"
+			name="Axdt navigator content"
+			icon="icons/perspective.gif"
+			activeByDefault="true"
+			contentProvider="org.eclipse.ui.model.WorkbenchContentProvider"
+			labelProvider="org.eclipse.ui.model.WorkbenchLabelProvider">
+			<triggerPoints>
+				<or>
+					<adapt type="org.eclipse.core.resources.IProject" >
+						<test property="org.eclipse.core.resources.projectNature" value="org.axdt.as3.imp.nature"/>
+					</adapt>
+					<instanceof value="org.eclipse.core.resources.IResource" />
+ 				</or>
+ 			</triggerPoints>
+ 			<possibleChildren>
+ 				<instanceof value="org.eclipse.core.resources.IResource" />
+ 			</possibleChildren>
+ 			<commonSorter
+				class="org.axdt.core.ui.navigator.AxdtNavigatorSorter"
+				id="org.axdt.core.ui.navigatorSorter">
+				<parentExpression>
+					<instanceof value="org.eclipse.core.resources.IResource"/>
+				</parentExpression>
+			</commonSorter>
+ 		</navigatorContent>
+		<commonFilter
+			id="org.axdt.core.ui.filters.noAxdtNatureProject"
+ 			name="Non Axdt projects"
+ 			description="Filter all non Axdt projects" 
+ 			activeByDefault="false">
+ 			<filterExpression>
+ 				<and>
+ 					<adapt type="org.eclipse.core.resources.IProject"/>
+					<not><test property="org.eclipse.core.resources.projectNature" value="org.axdt.as3.imp.nature"/></not>	            
+ 				</and>
+ 			</filterExpression>
+		</commonFilter>
+	</extension>
+	<extension
+		point="org.eclipse.ui.decorators">
+		<decorator
+			id="org.axdt.core.ui.packageRootDecorator"
+			label="Axdt package root decorator"
+			adaptable="true"
+			icon="icons/ovr16/pack_ovr.gif"
+			lightweight="true"
+			location="BOTTOM_RIGHT"
+			state="true">
+			<enablement>
+				<objectClass name="org.axdt.core.model.AxdtPackageRoot" />
+			</enablement>
+		</decorator>
+	</extension>
 </plugin>
