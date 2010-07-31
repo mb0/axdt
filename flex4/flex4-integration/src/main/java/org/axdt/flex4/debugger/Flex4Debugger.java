@@ -83,14 +83,14 @@ public class Flex4Debugger implements IAxdtDebugger {
 		}
 
 		public void dispose() throws IOException {
-			if (player != null)
-				player.terminate();
 			if (session != null)
 				session.terminate();
-			if (console != null)
-				console.destroy();
 			if (sessionManager != null)
-				sessionManager.stopListening();
+				try {
+					sessionManager.stopListening();
+				} catch (Exception e) {}
+			if (player != null)
+				player.terminate();
 		}
 	}
 

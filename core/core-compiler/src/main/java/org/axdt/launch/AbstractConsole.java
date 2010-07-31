@@ -66,11 +66,11 @@ public abstract class AbstractConsole extends MessageConsole {
 	}
 
 	public void append(String str, Color color) {
-		MessageConsoleStream stream = newMessageStream();
-		if (color != null)
-			stream.setColor(color);
-		stream.println(str);
 		try {
+			MessageConsoleStream stream = newMessageStream();
+			if (color != null)
+				stream.setColor(color);
+			stream.println(str);
 			stream.close();
 		} catch (IOException e) {
 			Logger.getLogger(getClass()).error("error closing console stream",
