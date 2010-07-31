@@ -9,77 +9,112 @@ import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.AsdocType;
 import org.axdt.asdoc.util.AsdocESwitch;
+import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.access.IDefinitionProvider;
 import org.axdt.avm.model.AvmDefinition;
 import org.axdt.avm.scoping.AvmDefinitionScope;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+/**
+ * @author mb0
+ */
 public class AsdocDefinitionScope extends AvmDefinitionScope {
 
-	public AsdocDefinitionScope(IAsdocDefinitionProvider definitionProvider, boolean onlyTypes) {
+	public AsdocDefinitionScope(IAsdocDefinitionProvider definitionProvider,
+			boolean onlyTypes) {
 		super(definitionProvider, onlyTypes);
 	}
+
 	@Override
 	public Iterable<IEObjectDescription> internalGetContents() {
-		return new DescriptionCollector(onlyTypes).collect(getDefinitionProvider().getDocRoots());
+		List<Iterable<IEObjectDescription>> contents = Lists.newArrayList();
+		for (AsdocRoot root : getDefinitionProvider().getDocRoots())
+			contents.add(getContents(root));
+		Iterable<IEObjectDescription> result = Iterables.concat(contents);
+		if (!onlyTypes)
+			return result;
+		return Iterables.filter(result, new Predicate<IEObjectDescription>() {
+			final EClass type = AvmEPackage.eINSTANCE.getAvmType();
+
+			public boolean apply(IEObjectDescription input) {
+				return type.isSuperTypeOf(input.getEClass());
+			}
+		});
 	}
+
+	public Iterable<IEObjectDescription> getContents(AsdocRoot root) {
+		String cacheKey = "allDescriptions@AsdocDefinitionScope";
+		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache()
+				.getOrCreate(root);
+		Iterable<IEObjectDescription> result = cache.get(cacheKey);
+		if (result == null) {
+			result = new DescriptionCollector().collect(root.eAllContents());
+			cache.set(cacheKey, result);
+		}
+		return result;
+	}
+
 	@Override
 	public IAsdocDefinitionProvider getDefinitionProvider() {
 		return (IAsdocDefinitionProvider) super.getDefinitionProvider();
 	}
 }
+
 class DescriptionCollector extends AsdocESwitch<Boolean> {
 	private final List<IEObjectDescription> collected = Lists.newArrayList();
-	private final boolean onlyTypes;
 
-	public DescriptionCollector(boolean onlyTypes) {
-		this.onlyTypes = onlyTypes;
+	public DescriptionCollector() {
 	}
 
-	public List<IEObjectDescription> collect(Iterable<AsdocRoot> docRoots) {
-		for (AsdocRoot root:docRoots)
-			collect(root.eAllContents());
-		return collected;
-	}
-
-	protected void collect(TreeIterator<EObject> contents) {
+	public List<IEObjectDescription> collect(TreeIterator<EObject> contents) {
 		while (contents.hasNext()) {
 			EObject next = contents.next();
 			Boolean traverse = doSwitch(next);
-			if (!traverse) contents.prune();
+			if (!traverse)
+				contents.prune();
 		}
+		return collected;
 	}
+
 	@Override
 	public Boolean caseAsdocPackage(AsdocPackage object) {
 		return true;
 	}
+
 	@Override
 	public Boolean caseAsdocType(AsdocType object) {
-		collectDefinition(object, IDefinitionProvider.PROTOCOL+":/types/");
+		collectDefinition(object, IDefinitionProvider.PROTOCOL + ":/types/");
 		return false;
 	}
+
 	@Override
 	public Boolean caseAsdocMember(AsdocMember object) {
-		if (!onlyTypes)
-			collectDefinition(object, IDefinitionProvider.PROTOCOL+":/members/");
+		collectDefinition(object, IDefinitionProvider.PROTOCOL + ":/members/");
 		return false;
 	}
+
 	@Override
 	public Boolean defaultCase(EObject object) {
 		return false;
 	}
+
 	protected void collectDefinition(AvmDefinition identifiable, String prefix) {
 		String fqn = identifiable.getCanonicalName();
-		// we use mirror resources thus return a proxy 
-		InternalEObject proxy = (InternalEObject) AsdocEFactory.eINSTANCE.create(identifiable.eClass());
-		proxy.eSetProxyURI(URI.createURI(prefix+fqn));
+		// we use mirror resources thus return a proxy
+		InternalEObject proxy = (InternalEObject) AsdocEFactory.eINSTANCE
+				.create(identifiable.eClass());
+		proxy.eSetProxyURI(URI.createURI(prefix + fqn));
 		collected.add(EObjectDescription.create(fqn, proxy));
 	}
 }
