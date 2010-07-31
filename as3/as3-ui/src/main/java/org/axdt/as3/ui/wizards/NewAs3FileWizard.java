@@ -82,51 +82,30 @@ public class NewAs3FileWizard extends AbstractFileWizard {
 		monitor.worked(1);
 	}
 	private InputStream openContentStream(String typeName, String packageName, String tempType) {
-		String contents = "";
-//		AS3Plugin plugin = AS3Plugin.getDefault();
-//		TemplateStore templateStore = plugin.getTemplateStore();
-//		TemplateContextType contextType = plugin.getCotextTypeRegistry().getContextType(
-//				AS3ContextType.CONTEXT_TYPE_ID);
-//		AS3TemplateContext context = new AS3TemplateContext(contextType, new Document(" "), 0, 0);
-//		try {
-//			StringBuffer buf = new StringBuffer("");
-//			if (!tempType.equals("Simple")) {
-//				String pattern;
-//				if (tempType.equals("Example")) {
-//					pattern = "import flash.display.*;\nimport flash.text.*;\n"
-//							+ "public class ${type_name} extends Sprite {\n"
-//							+ "\tpublic function ${type_name}() {\n"
-//							+ "\t\tvar txt:TextField = new TextField();\n"
-//							+ "\t\ttxt.width = 400;\n"
-//							+ "\t\ttxt.height = 400;\n"
-//							+ "\t\ttxt.multiline = true;\n"
-//							+ "\t\ttxt.wordWrap = true;\n"
-//							+ "\t\ttxt.defaultTextFormat = new TextFormat(\"_sans\", 40, 0xff9900);\n"
-//							+ "\t\ttxt.htmlText = '<p><b>Hello ${user}!</b></p>'\n"
-//							+ "\t\t\t+ '<p><i>Please</i> contribute some of your time to '\n"
-//							+ "\t\t\t+ '<u><b><a href=\"http://axdt.org\">AXDT</a></b></u>!</p>'\n"
-//							+ "\t\t\t+ '<p>Have fun!</p>';\n" + "\t\taddChild(txt);\n\t}\n}";
-//				} else {
-//					Template t1 = templateStore.findTemplateById("org.axdt.as3.templates.new"
-//							+ tempType);
-//					buf.append("public ");
-//					pattern = t1.getPattern();
-//				}
-//				StringTokenizer tokenizer = new StringTokenizer(pattern, "\r\n", false);
-//				if (tokenizer.hasMoreElements()) buf.append(tokenizer.nextToken() + "\n");
-//				while (tokenizer.hasMoreTokens())
-//					buf.append("\t" + tokenizer.nextToken() + "\n");
-//			}
-//			Template t = templateStore.findTemplateById("org.axdt.as3.templates.newPackage");
-//			Template template = new Template(t.getName(), t.getDescription(), t.getContextTypeId(),
-//					t.getPattern().replace("${cursor}", buf.toString()).replace("${package_name}",
-//							packageName).replace("${type_name}", typeName), false);
-//			TemplateBuffer templateBuffer = context.evaluate(template);
-//			contents = templateBuffer.getString();
-//		} catch (Exception e1) {
-			contents = "package " + packageName + "{\n\t// template error \n}";
-//			logger.error("Error loading template", e1);
-//		}
-		return new ByteArrayInputStream(contents.getBytes());
+		StringBuilder buf = new StringBuilder();
+		buf.append("package ");
+		packageName = packageName.trim();
+		if (packageName.length() > 0)
+			buf.append(packageName).append(' ');
+		buf.append("{\n");
+		if("Class".equals(tempType)) {
+			buf.append("\tpublic class ");
+			buf.append(typeName);
+			buf.append(" {\n");
+			buf.append("\t\tpublic function ");
+			buf.append(typeName);
+			buf.append("() {\n");
+			buf.append("\t\t\t\n");
+			buf.append("\t\t}\n");
+			buf.append("\t}\n");
+		} else if("Interface".equals(tempType)) {
+			buf.append("\tpublic interface ");
+			buf.append(typeName);
+			buf.append(" {\n\t\t\n\t}\n");
+		} else {
+			buf.append("\t\n");
+		}
+		buf.append("}\n");
+		return new ByteArrayInputStream(buf.toString().getBytes());
 	}
 }

@@ -105,7 +105,7 @@ public abstract class AbstractFileWizardPage extends WizardPage implements Modif
 			updateStatus("Container must be a project or folder.");
 		} else if (!container.isAccessible()) {
 			updateStatus("Container must be writable");
-		} else if (fileName.length() == 0) {
+		} else if (fileName.length() == 0 || fileName.length() <= getExtension().length()) {
 			updateStatus("File name must be specified");
 		} else if (fileName.replace('\\', '/').indexOf('/', 1) > 0) {
 			updateStatus("File name must not contain slashes");

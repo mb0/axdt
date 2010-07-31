@@ -65,8 +65,6 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		label.setText("Template:");
 		SelectionAdapter adapter = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if (e.widget instanceof Button)
-					return;
 				Button b = (Button) e.widget;
 				template = b.getText().replaceAll("&", "");
 			}
@@ -77,7 +75,7 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 		createTemplateRadioButton(group, "&Simple", adapter);
 		createTemplateRadioButton(group, "&Class", adapter).setSelection(true);
 		createTemplateRadioButton(group, "&Interface", adapter);
-		createTemplateRadioButton(group, "&Example", adapter);
+		template = "Class";
 	}
 
 	protected Button createTemplateRadioButton(Composite group, String name,
