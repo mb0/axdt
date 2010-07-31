@@ -9,7 +9,6 @@ import org.axdt.as3.resource.AvmResourceSetProvider;
 import org.axdt.as3.ui.autoedit.As3AutoEditStrategy;
 import org.axdt.as3.ui.coloring.As3HighlightingConfiguration;
 import org.axdt.as3.ui.coloring.As3TokenToAttributeIdMapper;
-import org.axdt.as3.ui.contentassist.antlr.As3ParserFix;
 import org.axdt.as3.ui.folding.As3FoldingRegionProvider;
 import org.axdt.as3.ui.folding.As3FoldingStructureProvider;
 import org.axdt.as3.ui.matching.As3BracketMatcher;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
@@ -147,9 +145,6 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public Class<? extends CrossReferenceTemplateVariableResolver> bindCrossReferenceTemplateVariableResolver() {
 		return As3CrossReferenceTemplateVariableResolver.class;
-	}
-	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-		return As3ParserFix.class;
 	}
 }
 class As3ImageHelper implements IImageHelper {
