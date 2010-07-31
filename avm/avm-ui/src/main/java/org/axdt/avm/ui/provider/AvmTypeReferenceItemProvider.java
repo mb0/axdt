@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.axdt.avm.ui.AvmUiActivator;
+import org.axdt.core.ui.img.AxdtImageHelper;
+import org.axdt.core.ui.img.AxdtImages;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -113,6 +115,7 @@ public class AvmTypeReferenceItemProvider
 
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/typeref_obj"));
+		AxdtImageHelper helper = AxdtImageHelper.getInstance();
+		return overlayImage(object, helper.getImage(AxdtImages.TYPE_REF));
 	}
 }

@@ -25,6 +25,11 @@ public interface AxdtImages {
 	String PARAMETER = "param_obj.gif";
 	String NAMESPACE = "namespace_obj.gif";
 	
+	String DECL_TYPE_REF = "decl_typeref_obj.gif";
+	String GENERIC = "generic_obj.gif";
+	String TYPE_REF = "typeref_obj.gif";
+	String VOID = "void_obj.gif";
+	
 	String CONSTRUCTOR_OVERRIDE = "ovr16/constr_ovr.gif";
 	String STATIC_OVERRIDE = "ovr16/static_ovr.gif";
 	String ASDOC_OVERRIDE = "ovr16/asdoc_ovr.gif";
