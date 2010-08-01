@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.avm.runtime/src/main/java"
-    editDirectory="/org.axdt.avm.ui/src/main/java" editorDirectory="/org.axdt.avm.editor/src"
-    modelPluginID="org.axdt.avm.runtime" modelName="Avm" editPluginClass="org.axdt.avm.ui.AvmUiActivator"
-    editorPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    testsDirectory="/org.axdt.avm.test/src/main/java" testSuiteClass="org.axdt.avm.AvmAllTests"
-    booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
-    copyrightFields="false" editPluginID="org.axdt.avm.ui" editorPluginID="org.axdt.avm.editor"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010 Martin Schnabel &lt;mb0@mb0.org> and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html"
+    modelDirectory="/org.axdt.avm.runtime/src/main/java" editDirectory="/org.axdt.avm.ui/src/main/java"
+    editorDirectory="/org.axdt.avm.editor/src" modelPluginID="org.axdt.avm.runtime"
+    modelName="Avm" editPluginClass="org.axdt.avm.ui.AvmUiActivator" editorPluginClass=""
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.axdt.avm.test/src/main/java"
+    testSuiteClass="org.axdt.avm.AvmAllTests" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.axdt.avm.ui" editorPluginID="org.axdt.avm.editor"
     testsPluginID="org.axdt.avm.test" language="">
   <foreignModel>Avm.ecore</foreignModel>
   <genPackages prefix="AvmE" basePackage="org.axdt" disposableProviderFactory="true"
@@ -101,8 +101,8 @@
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Avm.ecore#//AvmElement/asdoc"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Avm.ecore#//AvmVoid"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmNull"/>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmVoid"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmGeneric"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmVoidReference"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmNullReference"/>
@@ -110,5 +110,6 @@
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmDeclaredTypeReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Avm.ecore#//AvmDeclaredTypeReference/type"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Avm.ecore#//AvmReferable"/>
   </genPackages>
 </genmodel:GenModel>

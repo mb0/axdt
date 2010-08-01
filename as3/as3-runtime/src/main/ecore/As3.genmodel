@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.as3.runtime/src/main/java"
-    creationCommands="false" creationIcons="false" editDirectory="/org.axdt.as3.edit/src"
-    modelPluginID="org.axdt.as3.runtime" modelName="As3" editPluginClass="" editorPluginClass=""
-    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    suppressEMFModelTags="true" testsDirectory="/org.axdt.as3.test/src/main/java"
-    testSuiteClass="org.axdt.as3.As3AllTests" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" testsPluginID="org.axdt.as3.test"
-    usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010 Martin Schnabel &lt;mb0@mb0.org> and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html"
+    modelDirectory="/org.axdt.as3.runtime/src/main/java" creationCommands="false"
+    creationIcons="false" editDirectory="/org.axdt.as3.edit/src" modelPluginID="org.axdt.as3.runtime"
+    modelName="As3" editPluginClass="" editorPluginClass="" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" suppressEMFModelTags="true"
+    testsDirectory="/org.axdt.as3.test/src/main/java" testSuiteClass="org.axdt.as3.As3AllTests"
+    booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" testsPluginID="org.axdt.as3.test" usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm">
   <foreignModel>As3.ecore</foreignModel>
   <genPackages prefix="As3E" basePackage="org.axdt" disposableProviderFactory="true"
       interfacePackageSuffix="model" classPackageSuffix="model.impl" providerPackageSuffix="model.provider"
       presentationPackageSuffix="model.presentation" testsPackageSuffix="model" generateExampleClass="false"
       fileExtensions="ax3" ecorePackage="As3.ecore#/">
-    <genClasses image="false" ecoreClass="As3.ecore#//IDirective">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//IDirective/vsemi"/>
-    </genClasses>
+    <genDataTypes ecoreDataType="As3.ecore#//Iterable">
+      <genTypeParameters ecoreTypeParameter="As3.ecore#//Iterable/E"/>
+    </genDataTypes>
+    <genClasses image="false" ecoreClass="As3.ecore#//IDirective"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IPackageDirective"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//ITypeDirective"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//IBlockDirective"/>
     <genClasses image="false" ecoreClass="As3.ecore#//IStatement"/>
     <genClasses image="false" ecoreClass="As3.ecore#//IExpression">
-      <genOperations ecoreOperation="As3.ecore#//IExpression/evaluateType"/>
+      <genOperations ecoreOperation="As3.ecore#//IExpression/resolveType"/>
     </genClasses>
     <genClasses image="false" ecoreClass="As3.ecore#//IAssignmentExpression"/>
     <genClasses image="false" ecoreClass="As3.ecore#//IConditionalExpression"/>
@@ -39,21 +43,28 @@
     <genClasses image="false" ecoreClass="As3.ecore#//IAttribute"/>
     <genClasses ecoreClass="As3.ecore#//IForInit"/>
     <genClasses ecoreClass="As3.ecore#//IForInInit"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Element"/>
     <genClasses image="false" ecoreClass="As3.ecore#//As3Identifiable"/>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Definition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Definition/metadata"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Definition/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Definition/customVisibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Definition/name"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="As3.ecore#//As3Member">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/visibility"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/static"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Member/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="As3.ecore#//As3Executable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference As3.ecore#//As3Executable/parameters"/>
+      <genOperations ecoreOperation="As3.ecore#//As3Executable/getDeclarations"/>
+      <genOperations ecoreOperation="As3.ecore#//As3Executable/getDirectives"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3Program">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Program/package"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Program/directives"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Import/importedNamespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Import/qualifiedName"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3ImportList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ImportList/imports"/>
@@ -69,11 +80,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Package/canonicalName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="As3.ecore#//As3Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Type/visibility"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/extendedInterfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/directives"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Type/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Type/attributes"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3Class">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Class/dynamic"/>
@@ -83,36 +91,54 @@
     <genClasses ecoreClass="As3.ecore#//As3Interface"/>
     <genClasses ecoreClass="As3.ecore#//As3Namespace">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Namespace/expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Namespace/attributes"/>
     </genClasses>
-    <genClasses ecoreClass="As3.ecore#//As3VariableBinding">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableBinding/type"/>
+    <genClasses ecoreClass="As3.ecore#//As3Variable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Variable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Variable/name"/>
     </genClasses>
-    <genClasses ecoreClass="As3.ecore#//As3VariableBindingAssign">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableBindingAssign/expression"/>
+    <genClasses ecoreClass="As3.ecore#//As3VariableAssign">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableAssign/expression"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3VariableDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/constant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3VariableDefinition/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableDefinition/bindings"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3VariableDefinition/attributes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="As3.ecore#//As3Parameter"/>
+    <genClasses ecoreClass="As3.ecore#//As3ParameterAssign">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ParameterAssign/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3ParameterRest"/>
+    <genClasses ecoreClass="As3.ecore#//As3FieldBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FieldBinding/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FieldBinding/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3FieldDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3FieldDefinition/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3FieldDefinition/constant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FieldDefinition/bindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FieldDefinition/metadata"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3FieldDefinition/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FieldDefinition/customVisibility"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/final"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/getter"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/setter"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Operation/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3Operation/native"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3Constructor">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Constructor/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3Constructor/body"/>
     </genClasses>
-    <genClasses ecoreClass="As3.ecore#//As3BracketAttribute">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3BracketAttribute/expression"/>
+    <genClasses ecoreClass="As3.ecore#//As3MetadataTag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3MetadataTag/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3MetadataTag/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="As3.ecore#//As3MetadataParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3MetadataParameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3MetadataParameter/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="As3.ecore#//As3AttributeExpression"/>
     <genClasses ecoreClass="As3.ecore#//As3SimpleAttributeExpression">
@@ -120,7 +146,7 @@
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3QualifiedAttributeExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedAttributeExpression/qualifier"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedAttributeExpression/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3QualifiedAttributeExpression/identifier"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3DefaultXmlNamespaceStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3DefaultXmlNamespaceStatement/expression"/>
@@ -195,7 +221,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3SuperStatement/arguments"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3ExpressionStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionStatement/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3ExpressionStatement/expressions"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3EmptyStatement"/>
     <genClasses image="false" ecoreClass="As3.ecore#//As3ExpressionList">
@@ -276,6 +302,7 @@
     <genClasses ecoreClass="As3.ecore#//As3FunctionExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FunctionExpression/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3FunctionExpression/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute As3.ecore#//As3FunctionExpression/name"/>
     </genClasses>
     <genClasses ecoreClass="As3.ecore#//As3NewExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference As3.ecore#//As3NewExpression/target"/>

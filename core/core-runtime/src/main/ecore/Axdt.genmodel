@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.axdt.core.runtime/src/main/java"
-    modelPluginID="org.axdt.core.runtime" modelName="Axdt" editPluginClass="" editorPluginClass=""
-    rootImplementsInterface="" suppressEMFModelTags="true" testsDirectory="/org.axdt.core.test/src/main/java"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010 Martin Schnabel &lt;mb0@mb0.org> and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html"
+    modelDirectory="/org.axdt.core.runtime/src/main/java" modelPluginID="org.axdt.core.runtime"
+    modelName="Axdt" editPluginClass="" editorPluginClass="" rootImplementsInterface=""
+    suppressEMFModelTags="true" testsDirectory="/org.axdt.core.test/src/main/java"
     testSuiteClass="org.axdt.core.AxdtAllTests" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" testsPluginID="org.axdt.core.test"
     language="" usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm"
