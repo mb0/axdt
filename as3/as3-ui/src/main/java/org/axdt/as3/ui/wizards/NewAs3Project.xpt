@@ -1,10 +1,10 @@
 «IMPORT org::axdt::as3::ui::wizards»
 
-«DEFINE main FOR As3ProjectInfo»
+«DEFINE main FOR Object»
 «EXPAND model FOR this»
 «ENDDEFINE»
 
-«DEFINE model FOR As3ProjectInfo»
+«DEFINE model FOR Object»
 «FILE "src/Application.as"-»
 /*
  * This is an example Application

@@ -30,8 +30,10 @@ public class InternalBrowserEditor extends BrowserSupportPlayer {
 		@Override
 		protected IWebBrowser createBrowser() throws CoreException {
 			int style = IWorkbenchBrowserSupport.LOCATION_BAR
-					| IWorkbenchBrowserSupport.NAVIGATION_BAR;
-			return getSupport().createBrowser(style, target.getPath(), null, null);
+					| IWorkbenchBrowserSupport.NAVIGATION_BAR
+					| IWorkbenchBrowserSupport.AS_EDITOR;
+			return getSupport().createBrowser(style,
+					target.getPath() + "#editor", null, null);
 		}
 	}
 }

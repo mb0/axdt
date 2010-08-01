@@ -121,11 +121,11 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 	}
 	<T extends EObject> IScope getCachedScope(final T ctx, final EReference ref, final Class<? extends AvmElementScope<T>> type) {
 		return getCachedScope(ctx, ref, new Provider<IScope>() {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings("rawtypes")
 			public IScope get() {
 				try {
-					Constructor<IScope> constructor = type.getConstructors()[0];
-					return constructor.newInstance(ctx, ref, As3ScopeProvider.this);
+					Constructor constructor = type.getConstructors()[0];
+					return (IScope) constructor.newInstance(ctx, ref, As3ScopeProvider.this);
 				} catch (Exception e) {
 					logger.warn("error creating avm element scope", e);
 					return null;

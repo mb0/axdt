@@ -32,9 +32,13 @@ public abstract class BrowserSupportPlayer implements IAxdtSwfPlayer {
 		protected abstract IWebBrowser createBrowser() throws CoreException;
 
 		public void terminate() {
-			if (browser != null)
-				browser.close();
-			browser = null;
+			try {
+				if (browser != null) browser.close();
+			} catch (Exception e) {
+				// ignore
+			} finally {
+				browser = null;
+			}
 		}
 	}
 }

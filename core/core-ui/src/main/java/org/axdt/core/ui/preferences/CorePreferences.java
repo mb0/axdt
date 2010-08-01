@@ -50,7 +50,7 @@ public class CorePreferences extends AbstractPreferences implements
 	public void initializeFieldSpecs() {
 
 		addGroup("Project folders", true);
-		add(SOURCE_PATHS, "&Source paths", "src test");
+		add(SOURCE_PATHS, "&Source paths", "src");
 		add(OUTPUT_PATH, "&Deploy path", "deploy");
 		add(CONFIG_PATH, "&Config path", "config");
 		add(LIBRARY_PATHS, "&Library paths", "lib");

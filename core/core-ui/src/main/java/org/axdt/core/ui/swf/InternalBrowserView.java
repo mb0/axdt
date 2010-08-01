@@ -32,7 +32,8 @@ public class InternalBrowserView extends BrowserSupportPlayer {
 			int style = IWorkbenchBrowserSupport.LOCATION_BAR
 					| IWorkbenchBrowserSupport.NAVIGATION_BAR
 					| IWorkbenchBrowserSupport.AS_VIEW;
-			return getSupport().createBrowser(style, target.getPath(), null, null);
+			return getSupport().createBrowser(style,
+					target.getPath() + "#view", null, null);
 		}
 	}
 }

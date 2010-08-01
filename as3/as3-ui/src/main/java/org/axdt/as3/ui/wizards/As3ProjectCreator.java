@@ -10,11 +10,11 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.internal.xtend.type.baseimpl.BuiltinMetaModel;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
@@ -78,7 +78,7 @@ public class As3ProjectCreator extends AbstractProjectCreator {
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
 				output, null);
 		execCtx.getResourceManager().setFileEncoding("UTF-8");
-		execCtx.registerMetaModel(new JavaBeansMetaModel());
+		execCtx.registerMetaModel(new BuiltinMetaModel(null));
 
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::axdt::as3::ui::wizards::NewAs3Project::main",
