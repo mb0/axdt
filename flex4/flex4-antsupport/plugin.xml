@@ -64,7 +64,7 @@
 	<extension
 		point="org.eclipse.ui.newWizards">
 		<category name="Axdt" id="org.axdt.category"></category>
-		<wizard name="Flex ant file"
+		<wizard name="%antFile"
 			category="org.axdt.category"
 			class="org.axdt.flex4.antsupport.NewFlexAntFileWizard"
 			id="org.axdt.flex4.antsupport.newFlexAntFileWizard"

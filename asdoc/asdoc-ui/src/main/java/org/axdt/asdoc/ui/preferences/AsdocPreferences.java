@@ -31,7 +31,7 @@ public class AsdocPreferences extends AbstractPreferences {
 	}
 
 	public void initializeFieldSpecs() {
-		add(new DocTableField(ASDOC_URIS, "Asdoc URLs", DEFAULT_ASDOC));
+		add(new DocTableField(ASDOC_URIS, "Asdoc Urls", DEFAULT_ASDOC));
 		// TODO add help link instead
 		addHelp("Add the root url of an asdoc like 'http://asunit.org/docs/asunit3/'.");
 		addHelp("Urls can point into zip encoded archives 'jar:file:/home/mb0/doc.zip!/langref/'");

@@ -38,17 +38,17 @@ public class As3CompilerPreferences extends AbstractPreferences implements AxdtC
 
 	public void initializeFieldSpecs() {
 		addGroup("Compiler", true);
-		add(COMPILER_CHOICE, "Use ", getCompilerChoices());
-		add(COMPATIBILITY_CHOICE, "Compatibility mode",
+		add(COMPILER_CHOICE, "&Compiler choice", getCompilerChoices());
+		add(COMPATIBILITY_CHOICE, "Compatibility &mode",
 				getCompatibilityChoices());
-		add(CACHE_CHOICE, "Incremental cache",
+		add(CACHE_CHOICE, "&Incremental cache",
 				getCachingChoices());
 		
 		addGroup("Configuration", false);
 		add(SEARCH_CONFIG,
-				"Search the config folder for ${target_name}-config.xml", false);
+				"Search the config &folder for ${target_name}-config.xml", false);
 		addHelp("Axdt always searches the target's folder.");
-		add(SEARCH_LIBS, "Search the library folders for Swc files", true);
+		add(SEARCH_LIBS, "Search the &library folders for Swc files", true);
 		// TODO add help link
 	}
 

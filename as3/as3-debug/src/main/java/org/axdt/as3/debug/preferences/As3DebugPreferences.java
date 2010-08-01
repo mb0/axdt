@@ -55,7 +55,7 @@ public class As3DebugPreferences extends AbstractPreferences implements
 		add(OPEN_PLAYER, "&Use", getPlayerChoices());
 
 		addGroup("Debugger", true, EXCLUDE_IN_LAUNCH);
-		add(DEBUGGER_CHOICE, "Use ", getDebuggerChoices());
+		add(DEBUGGER_CHOICE, "&Debugger choice", getDebuggerChoices());
 	}
 
 	public String[][] getDebuggerChoices() {

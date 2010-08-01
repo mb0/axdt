@@ -46,10 +46,10 @@ public class Flex4Preferences extends AbstractPreferences {
 	}
 
 	public void initializeFieldSpecs() {
-		addGroup("Flex SDK", false);
+		addGroup("Flex SDK", true);
 		URL url = getDefaultConfig();
 		String path = url == null ? "ERROR" : url.getPath();
-		add(FLEX_CONFIG_FILE, "&Flex config file ", path);
+		add(FLEX_CONFIG_FILE, "Default &config", path);
 		// TODO add help link
 	}
 }

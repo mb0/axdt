@@ -56,7 +56,7 @@ public class CorePreferences extends AbstractPreferences implements
 		add(LIBRARY_PATHS, "&Library paths", "lib");
 
 		addGroup("When opening Swf files", true, EXCLUDE_IN_PROPERTIES);
-		add(OPEN_PLAYER, "&Use an", getPlayerChoices());
+		add(OPEN_PLAYER, "&Player choice", getPlayerChoices());
 	}
 
 	public String[][] getPlayerChoices() {

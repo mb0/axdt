@@ -45,6 +45,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 	protected XPathExpression findDetailBody;
 	protected XPathExpression findDetailType;
 	protected XPathExpression findDetailSpan;
+	protected List<String> noneVisibilityMods = Lists.newArrayList("AS3", "static", "override", "final");
 	
 	public AbstractMemberCollector() {
 		super();
@@ -219,14 +220,10 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 				result = AvmVisibility.PROTECTED;
 			} else if ("private".equals(mod)) {
 				result = AvmVisibility.PRIVATE;
-			} else if ("AS3".equals(mod)) {
-				// axdt operates in as3 mode thus this namespace is the default
-			} else if ("static".equals(mod)) {
-				// handled outside
-				continue;
-			}  else {
+			} else if (noneVisibilityMods.contains(mod)) {
+				// ignore or handled outside 
+			} else {
 				getLogger().error("member '"+target.getCanonicalName()+"' has unknown mod: "+ mod);
-				continue;
 			}
 		}
 		return result;
