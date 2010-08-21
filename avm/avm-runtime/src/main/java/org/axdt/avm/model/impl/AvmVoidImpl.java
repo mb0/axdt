@@ -7,6 +7,8 @@
 package org.axdt.avm.model.impl;
 
 import org.axdt.avm.AvmEPackage;
+import org.axdt.avm.model.AvmNull;
+import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVoid;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -83,6 +85,18 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	 */
 	public boolean isClass() {
 		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmType calculateCommonType(AvmType other) {
+		if (other == null)
+			return null;
+		if (other instanceof AvmNull)
+			return other;
+		return this;
 	}
 
 	/**

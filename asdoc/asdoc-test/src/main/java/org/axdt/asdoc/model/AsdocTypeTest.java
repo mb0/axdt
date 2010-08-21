@@ -11,7 +11,10 @@ import java.util.Iterator;
 
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmGeneric;
+import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.model.AvmVoid;
 
 import com.google.common.collect.Iterators;
 
@@ -28,6 +31,7 @@ import com.google.common.collect.Iterators;
  *   <li>{@link org.axdt.avm.model.AvmType#isFinal() <em>Is Final</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmType#isInterface() <em>Is Interface</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmType#isClass() <em>Is Class</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -126,6 +130,25 @@ public abstract class AsdocTypeTest extends AsdocDefinitionTest {
 	 * @see org.axdt.avm.model.AvmType#isClass()
 	 */
 	public abstract void testIsClass();
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType)
+	 */
+	public void testCalculateCommonType__AvmType() {
+		assertNull(getFixture().calculateCommonType(null));
+		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
+		assertEquals(nul, getFixture().calculateCommonType(nul));
+		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
+		assertEquals(voi, getFixture().calculateCommonType(voi));
+		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
+		assertEquals(generic, getFixture().calculateCommonType(generic));
+		assertEquals(getFixture(), getFixture().calculateCommonType(getFixture()));
+		// TODO test inheritance
+		// TODO special case interface -> Object
+	}
 
 	/**
 	 * Tests the '{@link org.axdt.avm.DeclaredType#getExtendedInterfaces() <em>Get Extended Interfaces</em>}' operation.

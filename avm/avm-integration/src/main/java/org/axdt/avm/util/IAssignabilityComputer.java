@@ -11,7 +11,7 @@ public interface IAssignabilityComputer {
 	 * Example:
 	 * 
 	 *   List<?> left = (List<? extends String>) right;
-	 * 
+	 * TODO: never used » remove
 	 */
 	public boolean isAssignableFrom(AvmTypeReference left, AvmTypeReference right);
 }

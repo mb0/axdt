@@ -38,6 +38,9 @@
     <eOperations name="isFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isInterface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="calculateCommonType" eType="#//AvmType">
+      <eParameters name="other" eType="#//AvmType"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AvmTypeReference" abstract="true">
     <eOperations name="getType" eType="#//AvmType"/>

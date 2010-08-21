@@ -6,6 +6,8 @@
  */
 package org.axdt.avm.model;
 
+import org.axdt.avm.AvmEFactory;
+
 import junit.framework.TestCase;
 
 /**
@@ -23,6 +25,7 @@ import junit.framework.TestCase;
  *   <li>{@link org.axdt.avm.model.AvmType#isFinal() <em>Is Final</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmType#isInterface() <em>Is Interface</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmType#isClass() <em>Is Class</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getQualifier() <em>Get Qualifier</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getName() <em>Get Name</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getVisibility() <em>Get Visibility</em>}</li>
@@ -152,6 +155,23 @@ public abstract class AvmDeclaredTypeTest extends TestCase {
 	 */
 	public void testIsClass() {
 		assertFalse(getFixture().isClass());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType)
+	 */
+	public void testCalculateCommonType__AvmType() {
+		assertNull(getFixture().calculateCommonType(null));
+		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
+		assertEquals(nul, getFixture().calculateCommonType(nul));
+		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
+		assertEquals(voi, getFixture().calculateCommonType(voi));
+		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
+		assertEquals(generic, getFixture().calculateCommonType(generic));
+		assertEquals(getFixture(), getFixture().calculateCommonType(getFixture()));
 	}
 
 	/**

@@ -50,4 +50,12 @@ public interface AvmType extends AvmDefinition, AvmReferable {
 	 */
 	boolean isClass();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	AvmType calculateCommonType(AvmType other);
+
 } // AvmType

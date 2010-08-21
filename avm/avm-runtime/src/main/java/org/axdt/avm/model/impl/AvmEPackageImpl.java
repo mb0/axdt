@@ -813,6 +813,9 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		addEOperation(avmTypeEClass, ecorePackage.getEBoolean(), "isClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(avmTypeEClass, this.getAvmType(), "calculateCommonType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAvmType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(avmTypeReferenceEClass, AvmTypeReference.class, "AvmTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(avmTypeReferenceEClass, this.getAvmType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);

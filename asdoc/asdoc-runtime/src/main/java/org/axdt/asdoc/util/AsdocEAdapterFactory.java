@@ -26,6 +26,7 @@ import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmParameter;
 import org.axdt.avm.model.AvmProperty;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVariable;
 import org.eclipse.emf.common.notify.Adapter;
@@ -164,6 +165,10 @@ public class AsdocEAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAvmDeclaredElement(AvmDeclaredElement object) {
 				return createAvmDeclaredElementAdapter();
+			}
+			@Override
+			public Adapter caseAvmReferable(AvmReferable object) {
+				return createAvmReferableAdapter();
 			}
 			@Override
 			public Adapter caseAvmMember(AvmMember object) {
@@ -508,6 +513,20 @@ public class AsdocEAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAvmDeclaredElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.avm.model.AvmReferable
+	 * @generated
+	 */
+	public Adapter createAvmReferableAdapter() {
 		return null;
 	}
 

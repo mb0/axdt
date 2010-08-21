@@ -8,6 +8,9 @@ package org.axdt.avm.model.impl;
 
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.model.AvmGeneric;
+import org.axdt.avm.model.AvmNull;
+import org.axdt.avm.model.AvmType;
+import org.axdt.avm.model.AvmVoid;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -83,6 +86,20 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	 */
 	public boolean isClass() {
 		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AvmType calculateCommonType(AvmType other) {
+		if (other == null)
+			return null;
+		if (other instanceof AvmNull
+				|| other instanceof AvmVoid)
+			return other;
+		return this;
 	}
 
 	/**

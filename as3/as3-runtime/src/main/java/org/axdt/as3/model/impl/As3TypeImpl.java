@@ -14,6 +14,8 @@ import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Member;
 import org.axdt.as3.model.As3Type;
 import org.axdt.as3.model.IDirective;
+import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -161,6 +163,25 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	 */
 	public boolean isClass() {
 		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmType calculateCommonType(AvmType other) {
+		if (other == null)
+			return null;
+		if (!(other instanceof AvmDeclaredType))
+			return other;
+		String canonicalName = getCanonicalName();
+		String otherName = other.getCanonicalName();
+		if (canonicalName == null ? otherName == null : canonicalName
+				.equals(otherName)) {
+			return this;
+		}
+		// TODO: handle inheritance
+		return null;
 	}
 
 	/**

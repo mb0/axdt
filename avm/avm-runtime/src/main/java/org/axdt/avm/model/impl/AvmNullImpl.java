@@ -8,6 +8,7 @@ package org.axdt.avm.model.impl;
 
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.model.AvmNull;
+import org.axdt.avm.model.AvmType;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -63,6 +64,16 @@ public class AvmNullImpl extends MinimalEObjectImpl.Container implements AvmNull
 
 	public boolean isClass() {
 		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmType calculateCommonType(AvmType other) {
+		if (other == null)
+			return null;
+		return this;
 	}
 
 	public String getQualifier() {

@@ -67,6 +67,7 @@ public class AsdocElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected boolean shouldComposeCreationImage() {
 		return true;
 	}

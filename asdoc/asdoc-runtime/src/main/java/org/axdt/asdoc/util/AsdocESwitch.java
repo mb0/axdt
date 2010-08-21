@@ -28,6 +28,7 @@ import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmParameter;
 import org.axdt.avm.model.AvmProperty;
+import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVariable;
 import org.eclipse.emf.ecore.EClass;
@@ -132,6 +133,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmMember(asdocMember);
 				if (result == null) result = caseAsdocElement(asdocMember);
 				if (result == null) result = caseAvmDeclaredElement(asdocMember);
+				if (result == null) result = caseAvmReferable(asdocMember);
 				if (result == null) result = caseAvmElement(asdocMember);
 				if (result == null) result = caseAvmIdentifiable(asdocMember);
 				if (result == null) result = caseAvmDefinition(asdocMember);
@@ -147,6 +149,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmMember(asdocExecutable);
 				if (result == null) result = caseAsdocElement(asdocExecutable);
 				if (result == null) result = caseAvmDeclaredElement(asdocExecutable);
+				if (result == null) result = caseAvmReferable(asdocExecutable);
 				if (result == null) result = caseAvmElement(asdocExecutable);
 				if (result == null) result = caseAvmIdentifiable(asdocExecutable);
 				if (result == null) result = caseAvmDefinition(asdocExecutable);
@@ -187,8 +190,9 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(asdocType);
 				if (result == null) result = caseAvmType(asdocType);
 				if (result == null) result = caseAvmElement(asdocType);
-				if (result == null) result = caseAvmIdentifiable(asdocType);
 				if (result == null) result = caseAvmDefinition(asdocType);
+				if (result == null) result = caseAvmReferable(asdocType);
+				if (result == null) result = caseAvmIdentifiable(asdocType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -203,8 +207,9 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(asdocClass);
 				if (result == null) result = caseAvmType(asdocClass);
 				if (result == null) result = caseAvmElement(asdocClass);
-				if (result == null) result = caseAvmIdentifiable(asdocClass);
 				if (result == null) result = caseAvmDefinition(asdocClass);
+				if (result == null) result = caseAvmReferable(asdocClass);
+				if (result == null) result = caseAvmIdentifiable(asdocClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -219,8 +224,9 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmDeclaredElement(asdocInterface);
 				if (result == null) result = caseAvmType(asdocInterface);
 				if (result == null) result = caseAvmElement(asdocInterface);
-				if (result == null) result = caseAvmIdentifiable(asdocInterface);
 				if (result == null) result = caseAvmDefinition(asdocInterface);
+				if (result == null) result = caseAvmReferable(asdocInterface);
+				if (result == null) result = caseAvmIdentifiable(asdocInterface);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,6 +240,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmVariable(asdocField);
 				if (result == null) result = caseAsdocElement(asdocField);
 				if (result == null) result = caseAvmDeclaredElement(asdocField);
+				if (result == null) result = caseAvmReferable(asdocField);
 				if (result == null) result = caseAvmElement(asdocField);
 				if (result == null) result = caseAvmIdentifiable(asdocField);
 				if (result == null) result = caseAvmDefinition(asdocField);
@@ -252,6 +259,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmVariable(asdocProperty);
 				if (result == null) result = caseAsdocElement(asdocProperty);
 				if (result == null) result = caseAvmDeclaredElement(asdocProperty);
+				if (result == null) result = caseAvmReferable(asdocProperty);
 				if (result == null) result = caseAvmElement(asdocProperty);
 				if (result == null) result = caseAvmIdentifiable(asdocProperty);
 				if (result == null) result = caseAvmDefinition(asdocProperty);
@@ -267,6 +275,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmMember(asdocNamespace);
 				if (result == null) result = caseAsdocElement(asdocNamespace);
 				if (result == null) result = caseAvmDeclaredElement(asdocNamespace);
+				if (result == null) result = caseAvmReferable(asdocNamespace);
 				if (result == null) result = caseAvmElement(asdocNamespace);
 				if (result == null) result = caseAvmIdentifiable(asdocNamespace);
 				if (result == null) result = caseAvmDefinition(asdocNamespace);
@@ -282,6 +291,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmDefinition(asdocParameter);
 				if (result == null) result = caseAvmVariable(asdocParameter);
 				if (result == null) result = caseAvmElement(asdocParameter);
+				if (result == null) result = caseAvmReferable(asdocParameter);
 				if (result == null) result = caseAvmIdentifiable(asdocParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -297,6 +307,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmMember(asdocConstructor);
 				if (result == null) result = caseAsdocElement(asdocConstructor);
 				if (result == null) result = caseAvmDeclaredElement(asdocConstructor);
+				if (result == null) result = caseAvmReferable(asdocConstructor);
 				if (result == null) result = caseAvmElement(asdocConstructor);
 				if (result == null) result = caseAvmIdentifiable(asdocConstructor);
 				if (result == null) result = caseAvmDefinition(asdocConstructor);
@@ -314,6 +325,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmMember(asdocOperation);
 				if (result == null) result = caseAsdocElement(asdocOperation);
 				if (result == null) result = caseAvmDeclaredElement(asdocOperation);
+				if (result == null) result = caseAvmReferable(asdocOperation);
 				if (result == null) result = caseAvmElement(asdocOperation);
 				if (result == null) result = caseAvmIdentifiable(asdocOperation);
 				if (result == null) result = caseAvmDefinition(asdocOperation);
@@ -606,6 +618,21 @@ public class AsdocESwitch<T> {
 	 * @generated
 	 */
 	public T caseAvmDeclaredElement(AvmDeclaredElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Avm Referable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAvmReferable(AvmReferable object) {
 		return null;
 	}
 

@@ -14,6 +14,8 @@ import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocType;
+import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.Notification;
@@ -231,6 +233,25 @@ public abstract class AsdocTypeImpl extends AsdocDefinitionImpl implements Asdoc
 	 * <!-- end-user-doc -->
 	 */
 	public abstract boolean isClass();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmType calculateCommonType(AvmType other) {
+		if (other == null)
+			return null;
+		if (!(other instanceof AvmDeclaredType))
+			return other;
+		String canonicalName = getCanonicalName();
+		String otherName = other.getCanonicalName();
+		if (canonicalName == null ? otherName == null : canonicalName
+				.equals(otherName)) {
+			return this;
+		}
+		// TODO: handle inheritance
+		return null;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
