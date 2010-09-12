@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -118,6 +119,9 @@ public class AxdtLaunchContext {
 				launch.addProcess(job);
 				job.schedule();
 				job.join();
+				IStatus result = job.getResult();
+				if (!result.isOK())
+					break;
 				job = getNextJob();
 			}
 		} catch (InterruptedException e) {

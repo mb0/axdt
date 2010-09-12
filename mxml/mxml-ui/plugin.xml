@@ -15,7 +15,7 @@
 			priority="high">
 		</content-type>
 		<file-association file-extensions="mxml"
-			content-type="org.axdt.mxml.mxml-content">
+			content-type="org.axdt.mxml.ui.mxml-content">
 		</file-association>
 	</extension>
 	<extension point="org.eclipse.wst.xml.core.catalogContributions">

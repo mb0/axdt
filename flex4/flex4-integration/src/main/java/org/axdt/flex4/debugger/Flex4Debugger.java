@@ -158,8 +158,10 @@ public class Flex4Debugger implements IAxdtDebugger {
 					if (ctx.firstBreak) {
 						ctx.firstBreak = false;
 						// TODO apply breakpoints
-						ctx.session.resume();
 					}
+					// TODO check how to tell whether this is a user break point
+					// if (((BreakEvent) event).line == 0)
+					ctx.session.resume();
 				} else {
 					ctx.console
 							.info(event.toString() + " " + event.information);

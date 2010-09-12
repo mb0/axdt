@@ -39,11 +39,9 @@ public abstract class AbstractLaunchJob extends Job implements IProcess {
 			IStatus status = doRun(monitor);
 			if (status == null) {
 				if (monitor.isCanceled() || this.isTerminated())
-					status = new Status(IStatus.CANCEL,
-							CoreUiActivator.PLUGIN_ID, "Canceled");
+					status = Status.CANCEL_STATUS;
 				else
-					status = new Status(IStatus.OK, CoreUiActivator.PLUGIN_ID,
-							"OK");
+					status = Status.OK_STATUS;
 			}
 			return status;
 		} catch (Exception e) {

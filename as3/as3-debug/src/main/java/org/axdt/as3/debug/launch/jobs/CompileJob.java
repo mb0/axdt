@@ -13,6 +13,7 @@ import org.axdt.launch.AxdtLaunchContext;
 import org.axdt.launch.JobMutexRule;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 
 /**
  * @author nkuebler
@@ -31,7 +32,7 @@ public class CompileJob extends AbstractLaunchJob {
 		boolean successful = As3DelegatingCompiler.getInstance().compile(
 				context, monitor);
 		if (!successful)
-			throw new IllegalStateException("compilation was not successful");
+			return Status.CANCEL_STATUS;
 		return null;
 	}
 }

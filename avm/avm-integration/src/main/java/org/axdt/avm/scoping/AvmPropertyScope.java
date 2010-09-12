@@ -40,7 +40,7 @@ public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScop
 			}
 		}
 		if (dynIdent != null) return dynIdent;
-		return Iterables.emptyIterable();
+		return Collections.emptySet();
 	}
 	
 	protected abstract AvmType getQualifierType();
