@@ -1868,6 +1868,18 @@ public class As3ESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case As3EPackage.AS3_CONDITIONAL_BLOCK: {
+				As3ConditionalBlock as3ConditionalBlock = (As3ConditionalBlock)theEObject;
+				T result = caseAs3ConditionalBlock(as3ConditionalBlock);
+				if (result == null) result = caseIStatement(as3ConditionalBlock);
+				if (result == null) result = caseIBlockDirective(as3ConditionalBlock);
+				if (result == null) result = caseITypeDirective(as3ConditionalBlock);
+				if (result == null) result = caseICaseElement(as3ConditionalBlock);
+				if (result == null) result = caseIPackageDirective(as3ConditionalBlock);
+				if (result == null) result = caseIDirective(as3ConditionalBlock);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -3864,6 +3876,21 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseAs3RegexLiteral(As3RegexLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>As3 Conditional Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>As3 Conditional Block</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAs3ConditionalBlock(As3ConditionalBlock object) {
 		return null;
 	}
 

@@ -12,14 +12,10 @@ As3Program: {As3Program}
 // 14.1 Identifiers
 Identifier
 	: ID
-	| 'dynamic'
 	| 'each'
 	| 'get'
 	| 'set'
-	| 'static'
-	| 'final'
 	| 'prototype'
-	| 'override'
 	| 'native'
 	; 
 As3PropertyIdentifierFirst returns As3PropertyIdentifier
@@ -29,19 +25,21 @@ As3PropertyIdentifier
 	: name='*'
 	| reference=[avm::AvmReferable|Identifier]
 	;
-As3SimpleQualifiedIdentifier  
-	: qualifier=As3SimpleIdentifier LT* '::' 
+As3SimpleQualifiedIdentifier returns IIdentifier
+	: As3SimpleIdentifier
+	({As3SimpleQualifiedIdentifier.qualifier = current}
+		LT* '::' 
 	LT* ( identifier=As3PropertyIdentifier
 		| '[' LT* expressions=As3ListExpression LT* ']'
 		)
-	;
+	)?;
 As3ExpressionQualifiedIdentifier
 	: '(' LT* qualifier=IAssignmentExpression LT* ')' LT* '::'
 	LT*	( identifier=As3PropertyIdentifier
 		| '[' LT* expressions=As3ListExpression LT* ']'
 		)
 	;
-As3NonAttributeQualifiedIdentifier
+As3NonAttributeQualifiedIdentifier returns IIdentifier
 	: As3SimpleQualifiedIdentifier
 	| As3ExpressionQualifiedIdentifier
 	;
@@ -51,17 +49,13 @@ AttributeQualifiedIdentifier returns As3AttributeQualifiedIdentifier
 		| '[' LT* expressions=As3ListExpression LT* ']'
 		)
 	;
-As3QualifiedIdentifier
-	: As3NonAttributeQualifiedIdentifier
-	| AttributeQualifiedIdentifier 
-	;
 As3SimpleIdentifier
-	: As3PropertyIdentifierFirst
+	: As3PropertyIdentifier
 	| ReservedNamespaceName
 	;
 IIdentifier
-	: As3SimpleIdentifier
-	| As3QualifiedIdentifier
+	: As3NonAttributeQualifiedIdentifier
+	| AttributeQualifiedIdentifier
 	;
 // 14.2 Primary expressions
 IPrimaryExpression
@@ -257,6 +251,7 @@ As3ListExpression:
 // 15 Statements
 IStatementNoVar returns IStatement
 	: As3Block
+	| As3ConditionalBlock
 	| As3IfStatement
 	| As3SwitchStatement
 	| As3WhileStatement
@@ -279,7 +274,8 @@ IStatement
 	: IStatementNoVar
 	| As3VariableDefinition
 	;
-	
+As3ConditionalBlock
+	: condition=As3SimpleQualifiedIdentifier body=As3Block;
 // 15.1 Empty statement
 // 15.2 Expression statement
 As3ExpressionStatement:
@@ -400,9 +396,9 @@ As3MetadataTag:
 As3MetadataParameter:
 	(name=Identifier '=')? value=ILiteral;
 As3AttributeExpression:
-	{As3SimpleAttributeExpression} ident=As3PropertyIdentifierFirst 
+	{As3SimpleAttributeExpression} ident=IIdentifier 
 	({As3QualifiedAttributeExpression.qualifier=current} 
-		'.' identifier=As3SimpleIdentifier
+		'.' identifier=IIdentifier
 	)*;
 // 16.2 Import directive
 As3Import: 
@@ -426,8 +422,9 @@ As3Use:
 // 17.1 Variable definition
 As3FieldDefinition:
 	(metadata+=As3MetadataTag)*
+	(customVisibility=As3AttributeExpression)?
 	( (static?="static")?
-	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	& (visibility=ReservedNamespace)?
 	)
 	('var'|constant?='const') LT*
 	bindings+=As3FieldBinding (LT* ',' LT* bindings+=As3FieldBinding)*
@@ -451,10 +448,11 @@ As3Variable:
 // 17.2 Function definition
 As3Operation:
 	(metadata+=As3MetadataTag)*
+	(customVisibility=As3AttributeExpression)?
 	( (static?="static")?
 	& (final?="final")?
 	& (override?="override")?
-	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	& (visibility=ReservedNamespace)?
 	)
 	'function' LT* 
 	(setter?='set'|getter?='get')? name=Identifier LT*
@@ -464,7 +462,8 @@ As3Operation:
 // 17.2.2 Function signature
 As3OperationSignature returns As3Operation:
 	(metadata+=As3MetadataTag)*
-	(visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	(customVisibility=As3AttributeExpression)?
+	(visibility=ReservedNamespace)?
 	'function' LT* 
 	(setter?='set'|getter?='get')? name=Identifier LT*
 	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
@@ -498,9 +497,10 @@ GenericVarTypeAssign: '*=';
 // 17.3 Class definition
 As3Class:
 	(metadata+=As3MetadataTag)*
+	(customVisibility=As3AttributeExpression)?
 	( (final?="final")?
 	& (dynamic?="dynamic")?
-	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	& (visibility=ReservedNamespace)?
 	)
 	'class' LT* name=Identifier 
 	(LT* 'extends' LT* extendedClass=Inheritance)?
@@ -514,7 +514,8 @@ Inheritance returns avm::AvmDeclaredTypeReference
 // 17.4 Interface definition
 As3Interface:
 	(metadata+=As3MetadataTag)*
-	(visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	(customVisibility=As3AttributeExpression)?
+	(visibility=ReservedNamespace)?
 	'interface' LT* name=Identifier 
 	(LT* 'extends' LT* extendedInterfaces+=Inheritance 
 		(LT* ',' LT* extendedInterfaces+=Inheritance)*
@@ -529,8 +530,9 @@ As3Package:
 // 17.6 Namespace definition
 As3Namespace:
 	(metadata+=As3MetadataTag)*
+	(customVisibility=As3AttributeExpression)?
 	( (static?="static")?
-	& (visibility=ReservedNamespace | customVisibility=As3AttributeExpression)?
+	& (visibility=ReservedNamespace)?
 	)
 	'namespace' LT* name=Identifier 
 	(LT* '=' LT* expression=NonAssignmentExpression )? 

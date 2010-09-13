@@ -156,9 +156,31 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parse("[Embed(source='demo.mpf',mimeType=\"application/octet-stream\")] var Levels:Class;");
 		assertParseResult(result);
 	}
+	public void testConditional() throws Exception {
+		IParseResult result;
+		result = parse("a::b { i++; }");
+		assertParseResult(result);
+		result = parse("a::b public class B{ }");
+		assertParseResult(result);
+		result = parse("a::b public interface J{ }");
+		assertParseResult(result);
+		result = parse("a::b private static var w;");
+		assertParseResult(result);
+		result = parse("a::b override protected function g():void {}");
+		assertParseResult(result);
+	}
 	public void testIdentifier() throws Exception {
 		IParseResult result;
 		result = parseExpression("ident");
+		assertParseResult(result);
+	}
+	public void testQualifiedIdentifier() throws Exception {
+		IParseResult result;
+		result = parseExpression("a::b");
+		assertParseResult(result);
+		result = parseExpression("a..b::c");
+		assertParseResult(result);
+		result = parseExpression("a..*::b");
 		assertParseResult(result);
 	}
 	public void testLiteral() throws Exception {

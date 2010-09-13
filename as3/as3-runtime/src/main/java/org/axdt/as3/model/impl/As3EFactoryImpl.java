@@ -153,6 +153,7 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 			case As3EPackage.AS3_NUMBER_LITERAL: return createAs3NumberLiteral();
 			case As3EPackage.AS3_STRING_LITERAL: return createAs3StringLiteral();
 			case As3EPackage.AS3_REGEX_LITERAL: return createAs3RegexLiteral();
+			case As3EPackage.AS3_CONDITIONAL_BLOCK: return createAs3ConditionalBlock();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -1096,6 +1097,16 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 	public As3RegexLiteral createAs3RegexLiteral() {
 		As3RegexLiteralImpl as3RegexLiteral = new As3RegexLiteralImpl();
 		return as3RegexLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public As3ConditionalBlock createAs3ConditionalBlock() {
+		As3ConditionalBlockImpl as3ConditionalBlock = new As3ConditionalBlockImpl();
+		return as3ConditionalBlock;
 	}
 
 	/**

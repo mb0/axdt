@@ -31,8 +31,8 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1,1,2).after(f.getVirtualSemiRule());
 		c.setNoSpace().before(f.getVirtualSemiRule());
 		
-		c.setLinewrap(1,1,2).after(f.getAs3OperationSignatureAccess().getSemicolonKeyword_13());
-		c.setNoSpace().before(f.getAs3OperationSignatureAccess().getSemicolonKeyword_13());
+		c.setLinewrap(1,1,2).after(f.getAs3OperationSignatureAccess().getSemicolonKeyword_14());
+		c.setNoSpace().before(f.getAs3OperationSignatureAccess().getSemicolonKeyword_14());
 
 		// colon
 		c.setNoSpace().around(f.getResultTypeAccess().getColonKeyword_0_1());
@@ -75,26 +75,26 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1,1,2).after(f.getAs3BlockAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap(1,1,1).after(f.getAs3BlockAccess().getRightCurlyBracketKeyword_4());
 		c.setLinewrap(0,0,1).before(f.getAs3BlockAccess().getLeftCurlyBracketKeyword_1());
-		c.setIndentation(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_8(), f
-				.getAs3ClassAccess().getRightCurlyBracketKeyword_11());
-		c.setLinewrap(1,2,2).after(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_8());
-		c.setLinewrap(0,0,1).before(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_8());
-		c.setLinewrap().after(f.getAs3ClassAccess().getRightCurlyBracketKeyword_11());
-		c.setIndentation(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_7(), f
-				.getAs3InterfaceAccess().getRightCurlyBracketKeyword_10());
-		c.setLinewrap(1,2,2).after(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_7());
-		c.setLinewrap(0,0,1).before(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_7());
-		c.setLinewrap().after(f.getAs3InterfaceAccess().getRightCurlyBracketKeyword_10());
+		c.setIndentation(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_9(), f
+				.getAs3ClassAccess().getRightCurlyBracketKeyword_12());
+		c.setLinewrap(1,2,2).after(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_9());
+		c.setLinewrap(0,0,1).before(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_9());
+		c.setLinewrap().after(f.getAs3ClassAccess().getRightCurlyBracketKeyword_12());
+		c.setIndentation(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_8(), f
+				.getAs3InterfaceAccess().getRightCurlyBracketKeyword_11());
+		c.setLinewrap(1,2,2).after(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_8());
+		c.setLinewrap(0,0,1).before(f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_8());
+		c.setLinewrap().after(f.getAs3InterfaceAccess().getRightCurlyBracketKeyword_11());
 		c.setIndentation(f.getAs3PackageAccess().getLeftCurlyBracketKeyword_4(), f
 				.getAs3PackageAccess().getRightCurlyBracketKeyword_7());
 		c.setLinewrap(1,2,2).after(f.getAs3PackageAccess().getLeftCurlyBracketKeyword_4());
 		c.setLinewrap(0,0,1).before(f.getAs3PackageAccess().getLeftCurlyBracketKeyword_4());
 		c.setLinewrap().after(f.getAs3PackageAccess().getRightCurlyBracketKeyword_7());
 		// indentations for auto line wrap
-		c.setIndentation(f.getAs3OperationAccess().getLeftParenthesisKeyword_7(),
-				f.getAs3OperationAccess().getRightParenthesisKeyword_10());
-		c.setIndentation(f.getAs3OperationAccess().getFunctionKeyword_2(),
-				f.getAs3OperationAccess().getBodyAssignment_13());
+		c.setIndentation(f.getAs3OperationAccess().getLeftParenthesisKeyword_8(),
+				f.getAs3OperationAccess().getRightParenthesisKeyword_11());
+		c.setIndentation(f.getAs3OperationAccess().getFunctionKeyword_3(),
+				f.getAs3OperationAccess().getBodyAssignment_14());
 		c.setIndentation(f.getAs3FunctionExpressionAccess().getLeftParenthesisKeyword_3(),
 				f.getAs3FunctionExpressionAccess().getRightParenthesisKeyword_6());
 		c.setIndentation(f.getAs3FunctionExpressionAccess().getFunctionKeyword_0(),
@@ -109,8 +109,8 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 		// misc
 		c.setNoSpace().before(f.getAs3PropertyOperatorAccess().getLeftSquareBracketKeyword_1_0());
 		c.setNoSpace().before(f.getAs3FunctionExpressionAccess().getLeftParenthesisKeyword_3());
-		c.setNoSpace().before(f.getAs3OperationAccess().getLeftParenthesisKeyword_7());
-		c.setNoSpace().before(f.getAs3OperationSignatureAccess().getLeftParenthesisKeyword_7());
+		c.setNoSpace().before(f.getAs3OperationAccess().getLeftParenthesisKeyword_8());
+		c.setNoSpace().before(f.getAs3OperationSignatureAccess().getLeftParenthesisKeyword_8());
 		c.setNoSpace().around(f.getAs3QueryOperatorAccess().getFullStopFullStopKeyword_0_0());
 		c.setNoLinewrap().after(f.getAs3DoStatementAccess().getStatementIStatementParserRuleCall_2_0());
 		c.setLinewrap(1,1,2).after(f.getAs3ImportListRule());

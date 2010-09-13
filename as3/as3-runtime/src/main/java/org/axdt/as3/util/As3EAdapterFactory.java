@@ -622,6 +622,10 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 				return createAs3RegexLiteralAdapter();
 			}
 			@Override
+			public Adapter caseAs3ConditionalBlock(As3ConditionalBlock object) {
+				return createAs3ConditionalBlockAdapter();
+			}
+			@Override
 			public Adapter caseAvmElement(AvmElement object) {
 				return createAvmElementAdapter();
 			}
@@ -2576,6 +2580,20 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAs3RegexLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.As3ConditionalBlock <em>As3 Conditional Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.As3ConditionalBlock
+	 * @generated
+	 */
+	public Adapter createAs3ConditionalBlockAdapter() {
 		return null;
 	}
 

@@ -21,6 +21,7 @@ import org.axdt.as3.model.As3BooleanLiteral;
 import org.axdt.as3.model.As3BreakStatement;
 import org.axdt.as3.model.As3CatchClause;
 import org.axdt.as3.model.As3Class;
+import org.axdt.as3.model.As3ConditionalBlock;
 import org.axdt.as3.model.As3ConditionalExpression;
 import org.axdt.as3.model.As3Constructor;
 import org.axdt.as3.model.As3ContinueStatement;
@@ -935,6 +936,15 @@ public interface As3EFactory extends EFactory {
 	 * @generated
 	 */
 	As3RegexLiteral createAs3RegexLiteral();
+
+	/**
+	 * Returns a new object of class '<em>As3 Conditional Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>As3 Conditional Block</em>'.
+	 * @generated
+	 */
+	As3ConditionalBlock createAs3ConditionalBlock();
 
 	/**
 	 * Returns the package supported by this factory.

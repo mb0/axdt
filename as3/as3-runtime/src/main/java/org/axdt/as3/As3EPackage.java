@@ -4822,6 +4822,43 @@ public interface As3EPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ConditionalBlockImpl <em>As3 Conditional Block</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.impl.As3ConditionalBlockImpl
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ConditionalBlock()
+	 * @generated
+	 */
+	int AS3_CONDITIONAL_BLOCK = 133;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_CONDITIONAL_BLOCK__CONDITION = ISTATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_CONDITIONAL_BLOCK__BODY = ISTATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>As3 Conditional Block</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_CONDITIONAL_BLOCK_FEATURE_COUNT = ISTATEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4829,7 +4866,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 133;
+	int ITERABLE = 134;
 
 
 	/**
@@ -7417,6 +7454,38 @@ public interface As3EPackage extends EPackage {
 	EAttribute getAs3RegexLiteral_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.As3ConditionalBlock <em>As3 Conditional Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>As3 Conditional Block</em>'.
+	 * @see org.axdt.as3.model.As3ConditionalBlock
+	 * @generated
+	 */
+	EClass getAs3ConditionalBlock();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3ConditionalBlock#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.axdt.as3.model.As3ConditionalBlock#getCondition()
+	 * @see #getAs3ConditionalBlock()
+	 * @generated
+	 */
+	EReference getAs3ConditionalBlock_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3ConditionalBlock#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.axdt.as3.model.As3ConditionalBlock#getBody()
+	 * @see #getAs3ConditionalBlock()
+	 * @generated
+	 */
+	EReference getAs3ConditionalBlock_Body();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.Iterable <em>Iterable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9689,6 +9758,32 @@ public interface As3EPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AS3_REGEX_LITERAL__VALUE = eINSTANCE.getAs3RegexLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3ConditionalBlockImpl <em>As3 Conditional Block</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.impl.As3ConditionalBlockImpl
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ConditionalBlock()
+		 * @generated
+		 */
+		EClass AS3_CONDITIONAL_BLOCK = eINSTANCE.getAs3ConditionalBlock();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_CONDITIONAL_BLOCK__CONDITION = eINSTANCE.getAs3ConditionalBlock_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_CONDITIONAL_BLOCK__BODY = eINSTANCE.getAs3ConditionalBlock_Body();
 
 		/**
 		 * The meta object literal for the '<em>Iterable</em>' data type.

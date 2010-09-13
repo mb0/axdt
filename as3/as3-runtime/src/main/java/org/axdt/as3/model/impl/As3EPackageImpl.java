@@ -27,6 +27,7 @@ import org.axdt.as3.model.As3BreakStatement;
 import org.axdt.as3.model.As3CaseLabel;
 import org.axdt.as3.model.As3CatchClause;
 import org.axdt.as3.model.As3Class;
+import org.axdt.as3.model.As3ConditionalBlock;
 import org.axdt.as3.model.As3ConditionalExpression;
 import org.axdt.as3.model.As3ConditionalIterationStatement;
 import org.axdt.as3.model.As3ConditionalStatement;
@@ -1090,6 +1091,13 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	private EClass as3RegexLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass as3ConditionalBlockEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3390,6 +3398,33 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAs3ConditionalBlock() {
+		return as3ConditionalBlockEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3ConditionalBlock_Condition() {
+		return (EReference)as3ConditionalBlockEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3ConditionalBlock_Body() {
+		return (EReference)as3ConditionalBlockEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIterable() {
 		return iterableEDataType;
 	}
@@ -3802,6 +3837,10 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3RegexLiteralEClass = createEClass(AS3_REGEX_LITERAL);
 		createEAttribute(as3RegexLiteralEClass, AS3_REGEX_LITERAL__VALUE);
 
+		as3ConditionalBlockEClass = createEClass(AS3_CONDITIONAL_BLOCK);
+		createEReference(as3ConditionalBlockEClass, AS3_CONDITIONAL_BLOCK__CONDITION);
+		createEReference(as3ConditionalBlockEClass, AS3_CONDITIONAL_BLOCK__BODY);
+
 		// Create data types
 		iterableEDataType = createEDataType(ITERABLE);
 	}
@@ -3997,6 +4036,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3StringLiteralEClass.getESuperTypes().add(this.getILiteral());
 		as3StringLiteralEClass.getESuperTypes().add(this.getILiteralFieldName());
 		as3RegexLiteralEClass.getESuperTypes().add(this.getILiteral());
+		as3ConditionalBlockEClass.getESuperTypes().add(this.getIStatement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(iDirectiveEClass, IDirective.class, "IDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4392,6 +4432,10 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		initEClass(as3RegexLiteralEClass, As3RegexLiteral.class, "As3RegexLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAs3RegexLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, As3RegexLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(as3ConditionalBlockEClass, As3ConditionalBlock.class, "As3ConditionalBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAs3ConditionalBlock_Condition(), this.getIIdentifier(), null, "condition", null, 0, 1, As3ConditionalBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAs3ConditionalBlock_Body(), this.getAs3Block(), null, "body", null, 0, 1, As3ConditionalBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

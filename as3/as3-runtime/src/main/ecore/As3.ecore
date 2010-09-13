@@ -443,4 +443,10 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Iterable" instanceClassName="java.lang.Iterable">
     <eTypeParameters name="E"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="As3ConditionalBlock" eSuperTypes="#//IStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//IIdentifier"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//As3Block"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>
