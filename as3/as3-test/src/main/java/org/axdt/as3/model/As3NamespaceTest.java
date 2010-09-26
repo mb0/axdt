@@ -11,6 +11,7 @@ import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
 import org.axdt.avm.model.AvmNamespaceTest;
+import org.axdt.avm.model.AvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,5 +86,9 @@ public class As3NamespaceTest extends AvmNamespaceTest {
 		As3Program prog = As3EFactory.eINSTANCE.createAs3Program();
 		prog.getDirectives().add(getFixture());
 		assertEquals("::spam",getFixture().getCanonicalName());
+	}
+	
+	public void testGetVisibility() {
+		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
 	}
 } //As3NamespaceTest

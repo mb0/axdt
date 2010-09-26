@@ -1880,6 +1880,19 @@ public class As3ESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case As3EPackage.AS3_RESERVED_ATTRIBUTE: {
+				As3ReservedAttribute as3ReservedAttribute = (As3ReservedAttribute)theEObject;
+				T result = caseAs3ReservedAttribute(as3ReservedAttribute);
+				if (result == null) result = caseIAttribute(as3ReservedAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case As3EPackage.AS3_ATTRIBUTES: {
+				As3Attributes as3Attributes = (As3Attributes)theEObject;
+				T result = caseAs3Attributes(as3Attributes);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -3891,6 +3904,36 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseAs3ConditionalBlock(As3ConditionalBlock object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>As3 Reserved Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>As3 Reserved Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAs3ReservedAttribute(As3ReservedAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>As3 Attributes</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>As3 Attributes</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAs3Attributes(As3Attributes object) {
 		return null;
 	}
 

@@ -626,6 +626,14 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 				return createAs3ConditionalBlockAdapter();
 			}
 			@Override
+			public Adapter caseAs3ReservedAttribute(As3ReservedAttribute object) {
+				return createAs3ReservedAttributeAdapter();
+			}
+			@Override
+			public Adapter caseAs3Attributes(As3Attributes object) {
+				return createAs3AttributesAdapter();
+			}
+			@Override
 			public Adapter caseAvmElement(AvmElement object) {
 				return createAvmElementAdapter();
 			}
@@ -2594,6 +2602,34 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAs3ConditionalBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.As3ReservedAttribute <em>As3 Reserved Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.As3ReservedAttribute
+	 * @generated
+	 */
+	public Adapter createAs3ReservedAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.As3Attributes <em>As3 Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.As3Attributes
+	 * @generated
+	 */
+	public Adapter createAs3AttributesAdapter() {
 		return null;
 	}
 

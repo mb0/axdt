@@ -61,10 +61,14 @@ public class As3FormatterTest extends AbstractXtextTests {
 	public void assertFormatDefault(String expected, String toformat) throws Exception {
 		assertEquals(expected, formatEObject(toformat));
 	}
-	public void testIgnoreLineBreaksPreserve() throws Exception {
+	public void testIgnoreLineBreaksProblem() throws Exception {
 		assertFormat("1++;\n\n2++;", "\n\n1++\n\n2++\n\n");
-		assertFormatPreserve("\n\n1++;\n\n2++;", "\n\n1++\n\n2++\n\n");
+	}
+	public void testIgnoreLineBreaksProblemDefault() throws Exception {
 		assertFormatDefault("1++;\n2++;", "\n\n1++\n\n2++\n\n");
+	}
+	public void testIgnoreLineBreaksProblemPreserve() throws Exception {
+		assertFormatPreserve("\n\n1++;\n\n2++;", "\n\n1++\n\n2++\n\n");
 	}
 	public void testIgnoreLineBreaks() throws Exception {
 		assertFormat("a();\nb();", "a();b();");
@@ -85,6 +89,11 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("a.b(c, d);", "a.b(c,d);");
 		assertFormatDefault("function(a:*, c:*):void {\n\ta++;\n};", "function(a:*,c:*):void{a++;};");
 	}
+	public void testMetadata() throws Exception {
+		assertFormatDefault("[Meta]\nclass A {\n}","[Meta]class A{}");
+		assertFormatPreserve("[Meta]class A{}","[Meta]class A{}");
+		assertFormat("[Meta(foo = \"bar\")]\nclass A {\n}","[Meta(foo=\"bar\")]class A{}");
+	}
 	public void testBlockStatement() throws Exception {
 		assertFormatDefault("{\n\t1++;\n\t2++;\n}", "{1++;\n2++;}");
 		assertFormatDefault("{\n\t1++;\n\t2++;\n}", "{1++;2++;}");
@@ -98,12 +107,16 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("do {\n\t1++;\n\t2++;\n} while (true);", "do{1++;2++;}while(true);");
 		assertFormatDefault("for (a in b) c(a);", "for(a in b)c(a);");
 		assertFormatDefault("for each (a in b) c(a);", "for each(a in b)c(a);");
-		// for now use explicit default modifiers
-		assertFormatDefault("public var i:* = 0;", "var i:*   =0;");
-		assertFormatDefault("public var i:* = 0;", "var i:*=0;");
+		assertFormatDefault("var i:* = 0;", "var i:*   =0;");
+		assertFormatDefault("var i:* = 0;", "var i:*=0;");
+	}
+	public void testEndComment() throws Exception {
+		assertFormat("1++;\n//comment", "1++;//comment");
+		assertFormatPreserve("1++;\n//comment", "1++;//comment");
+		// TODO eof comment not working
+		assertFormatDefault("1++; //comment", "1++;//comment");
 	}
 	public void testComments() throws Exception {
-		assertFormatDefault("a++; //comment", "a++;//comment");
 		assertFormat("a++;\n/* ml comment */ a++;", "a++;/* ml comment */a++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n/* ml comment */\na++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n\n\n/* ml comment */\n\n\na++;");
@@ -111,14 +124,24 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("a++;\n/** doc comment */\na++;", "a++;/** doc comment */a++;");
 		assertFormat("a++;\n\n/** doc comment */\na++;", "a++;\n\n\n/** doc comment */\n\n\na++;");
 	}
-	public void testDirecties() throws Exception {
+	public void testImportDirective() throws Exception {
 		assertFormatDefault("import a.b.c;\nimport c.b.a;","import a . b . c ; import c . b . a ; ");
-		assertFormatDefault("public class a {\n\tpublic function a() {\n\t\tsuper();\n\t}\n}", "class a{public function a(){super();}}");
+	}
+	public void testClassDirective() throws Exception {
+		assertFormat("public class a {\n}", "public class a{}");
+		assertFormatDefault("public class a {\n}", "public class a{}");
+		assertFormatDefault("package {\n\tpublic class a {\n\t}\n}", "package{public class a{}}");
+		assertFormatDefault("class a {\n\tpublic function a() {\n\t\tsuper();\n\t}\n}", "class a{public function a(){super();}}");
 		assertFormat("package {\n\tpublic class a {\n\t}\n}", "package{public class a{}}");
-		assertFormatDefault("public var a:b = new b();\na.c();\na.d[a.f()]..foo();", "var a:b=new b();a.c();a.d[a.f()]..foo();");
-		assertFormatDefault("package {\n\timport a.b;\n\timport foo.bar;\n\tpublic class a {\n\t}\n}", "package{import a.b;import foo.bar;public class a{}}");
-		assertFormatDefault("package {\n\n\timport a.b;\n\timport foo.bar;\n\tpublic class a {\n\n\t}\n}", "package{\n\n\n\nimport a.b;import foo.bar;\n\n\n\npublic class a{\n\n\n\n}}");
-		assertFormat("package {\n\n\timport a.b;\n\timport foo.bar;\n\n\tpublic class a {\n\n\t}\n}", "package{\n\n\n\nimport a.b;import foo.bar;\n\n\n\npublic class a{\n\n\n\n}}");
+		assertFormat("package {\n\n\timport a.b;\n\timport foo.bar;\n\n\tpublic class a {\n\n\t}\n}",
+				"package{\n\n\n\nimport a.b;import foo.bar;\n\n\n\npublic class a{\n\n\n\n}}");
+		assertFormatDefault("package {\n\timport a.b;\n\timport foo.bar;\n\tpublic class a {\n\t}\n}",
+				"package{import a.b;import foo.bar;public class a{}}");
+		assertFormatDefault("package {\n\n\timport a.b;\n\timport foo.bar;\n\tpublic class a {\n\n\t}\n}",
+				"package{\n\n\n\nimport a.b;import foo.bar;\n\n\n\npublic class a{\n\n\n\n}}");
+	}
+	public void testDirectives() throws Exception {
+		assertFormatDefault("var a:b = new b();\na.c();\na.d[a.f()]..foo();", "var a:b=new b();a.c();a.d[a.f()]..foo();");
 		assertFormat("package\n{\n\n\timport a.b;\n\timport foo.bar;\n\n\tpublic class a\n\t{\n\n\t}\n}", "package\n\n\n\n{\n\n\n\nimport a.b;import foo.bar;\n\n\n\npublic class a\n\n\n\n{\n\n\n\n}}");
 		assertFormat("interface a {\n\tfunction b():c;\n}", "interface a{function b():c;}");
 	}

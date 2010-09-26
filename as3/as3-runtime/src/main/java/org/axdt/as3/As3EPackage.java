@@ -593,40 +593,22 @@ public interface As3EPackage extends EPackage {
 	int AS3_DEFINITION__ASDOC = AS3_IDENTIFIABLE__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_DEFINITION__METADATA = AS3_IDENTIFIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_DEFINITION__VISIBILITY = AS3_IDENTIFIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_DEFINITION__CUSTOM_VISIBILITY = AS3_IDENTIFIABLE_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_DEFINITION__NAME = AS3_IDENTIFIABLE_FEATURE_COUNT + 3;
+	int AS3_DEFINITION__NAME = AS3_IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_DEFINITION__ATTRIBUTES = AS3_IDENTIFIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>As3 Definition</em>' class.
@@ -635,7 +617,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_DEFINITION_FEATURE_COUNT = AS3_IDENTIFIABLE_FEATURE_COUNT + 4;
+	int AS3_DEFINITION_FEATURE_COUNT = AS3_IDENTIFIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3MemberImpl <em>As3 Member</em>}' class.
@@ -657,33 +639,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_MEMBER__ASDOC = AS3_DEFINITION__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_MEMBER__METADATA = AS3_DEFINITION__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_MEMBER__VISIBILITY = AS3_DEFINITION__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_MEMBER__CUSTOM_VISIBILITY = AS3_DEFINITION__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -693,13 +648,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_MEMBER__NAME = AS3_DEFINITION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_MEMBER__STATIC = AS3_DEFINITION_FEATURE_COUNT + 0;
+	int AS3_MEMBER__ATTRIBUTES = AS3_DEFINITION__ATTRIBUTES;
 
 	/**
 	 * The number of structural features of the '<em>As3 Member</em>' class.
@@ -708,7 +663,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_MEMBER_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 1;
+	int AS3_MEMBER_FEATURE_COUNT = AS3_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.As3Executable <em>As3 Executable</em>}' class.
@@ -1002,33 +957,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_TYPE__ASDOC = AS3_DEFINITION__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_TYPE__METADATA = AS3_DEFINITION__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_TYPE__VISIBILITY = AS3_DEFINITION__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_TYPE__CUSTOM_VISIBILITY = AS3_DEFINITION__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1036,6 +964,15 @@ public interface As3EPackage extends EPackage {
 	 * @ordered
 	 */
 	int AS3_TYPE__NAME = AS3_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_TYPE__ATTRIBUTES = AS3_DEFINITION__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
@@ -1084,33 +1021,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_CLASS__ASDOC = AS3_TYPE__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__METADATA = AS3_TYPE__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__VISIBILITY = AS3_TYPE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__CUSTOM_VISIBILITY = AS3_TYPE__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1118,6 +1028,15 @@ public interface As3EPackage extends EPackage {
 	 * @ordered
 	 */
 	int AS3_CLASS__NAME = AS3_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_CLASS__ATTRIBUTES = AS3_TYPE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
@@ -1138,31 +1057,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_CLASS__DIRECTIVES = AS3_TYPE__DIRECTIVES;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__DYNAMIC = AS3_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CLASS__FINAL = AS3_TYPE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Extended Class</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_CLASS__EXTENDED_CLASS = AS3_TYPE_FEATURE_COUNT + 2;
+	int AS3_CLASS__EXTENDED_CLASS = AS3_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>As3 Class</em>' class.
@@ -1171,7 +1072,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_CLASS_FEATURE_COUNT = AS3_TYPE_FEATURE_COUNT + 3;
+	int AS3_CLASS_FEATURE_COUNT = AS3_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3InterfaceImpl <em>As3 Interface</em>}' class.
@@ -1193,33 +1094,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_INTERFACE__ASDOC = AS3_TYPE__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_INTERFACE__METADATA = AS3_TYPE__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_INTERFACE__VISIBILITY = AS3_TYPE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_INTERFACE__CUSTOM_VISIBILITY = AS3_TYPE__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1227,6 +1101,15 @@ public interface As3EPackage extends EPackage {
 	 * @ordered
 	 */
 	int AS3_INTERFACE__NAME = AS3_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_INTERFACE__ATTRIBUTES = AS3_TYPE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Extended Interfaces</b></em>' containment reference list.
@@ -1275,33 +1158,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_NAMESPACE__ASDOC = AS3_MEMBER__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_NAMESPACE__METADATA = AS3_MEMBER__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_NAMESPACE__VISIBILITY = AS3_MEMBER__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_NAMESPACE__CUSTOM_VISIBILITY = AS3_MEMBER__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1311,13 +1167,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_NAMESPACE__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_NAMESPACE__STATIC = AS3_MEMBER__STATIC;
+	int AS3_NAMESPACE__ATTRIBUTES = AS3_MEMBER__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1612,33 +1468,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_FIELD_BINDING__ASDOC = AS3_MEMBER__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_BINDING__METADATA = AS3_MEMBER__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_BINDING__VISIBILITY = AS3_MEMBER__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_BINDING__CUSTOM_VISIBILITY = AS3_MEMBER__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1648,13 +1477,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_FIELD_BINDING__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_BINDING__STATIC = AS3_MEMBER__STATIC;
+	int AS3_FIELD_BINDING__ATTRIBUTES = AS3_MEMBER__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1684,22 +1513,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_FIELD_BINDING_FEATURE_COUNT = AS3_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_DEFINITION__STATIC = ITYPE_DIRECTIVE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__CONSTANT = ITYPE_DIRECTIVE_FEATURE_COUNT + 1;
+	int AS3_FIELD_DEFINITION__CONSTANT = ITYPE_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -1708,34 +1528,16 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__BINDINGS = ITYPE_DIRECTIVE_FEATURE_COUNT + 2;
+	int AS3_FIELD_DEFINITION__BINDINGS = ITYPE_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION__METADATA = ITYPE_DIRECTIVE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_DEFINITION__VISIBILITY = ITYPE_DIRECTIVE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY = ITYPE_DIRECTIVE_FEATURE_COUNT + 5;
+	int AS3_FIELD_DEFINITION__ATTRIBUTES = ITYPE_DIRECTIVE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>As3 Field Definition</em>' class.
@@ -1744,7 +1546,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_FIELD_DEFINITION_FEATURE_COUNT = ITYPE_DIRECTIVE_FEATURE_COUNT + 6;
+	int AS3_FIELD_DEFINITION_FEATURE_COUNT = ITYPE_DIRECTIVE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3OperationImpl <em>As3 Operation</em>}' class.
@@ -1766,33 +1568,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_OPERATION__ASDOC = AS3_MEMBER__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__METADATA = AS3_MEMBER__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__VISIBILITY = AS3_MEMBER__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__CUSTOM_VISIBILITY = AS3_MEMBER__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1802,13 +1577,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_OPERATION__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION__STATIC = AS3_MEMBER__STATIC;
+	int AS3_OPERATION__ATTRIBUTES = AS3_MEMBER__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1820,31 +1595,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_OPERATION__PARAMETERS = AS3_MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Override</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__OVERRIDE = AS3_MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__FINAL = AS3_MEMBER_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Getter</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION__GETTER = AS3_MEMBER_FEATURE_COUNT + 3;
+	int AS3_OPERATION__GETTER = AS3_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Setter</b></em>' attribute.
@@ -1853,7 +1610,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION__SETTER = AS3_MEMBER_FEATURE_COUNT + 4;
+	int AS3_OPERATION__SETTER = AS3_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -1862,7 +1619,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION__RETURN_TYPE = AS3_MEMBER_FEATURE_COUNT + 5;
+	int AS3_OPERATION__RETURN_TYPE = AS3_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1871,16 +1628,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION__BODY = AS3_MEMBER_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Native</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_OPERATION__NATIVE = AS3_MEMBER_FEATURE_COUNT + 7;
+	int AS3_OPERATION__BODY = AS3_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>As3 Operation</em>' class.
@@ -1889,7 +1637,7 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_OPERATION_FEATURE_COUNT = AS3_MEMBER_FEATURE_COUNT + 8;
+	int AS3_OPERATION_FEATURE_COUNT = AS3_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ConstructorImpl <em>As3 Constructor</em>}' class.
@@ -1911,33 +1659,6 @@ public interface As3EPackage extends EPackage {
 	int AS3_CONSTRUCTOR__ASDOC = AS3_MEMBER__ASDOC;
 
 	/**
-	 * The feature id for the '<em><b>Metadata</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONSTRUCTOR__METADATA = AS3_MEMBER__METADATA;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONSTRUCTOR__VISIBILITY = AS3_MEMBER__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Custom Visibility</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS3_CONSTRUCTOR__CUSTOM_VISIBILITY = AS3_MEMBER__CUSTOM_VISIBILITY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1947,13 +1668,13 @@ public interface As3EPackage extends EPackage {
 	int AS3_CONSTRUCTOR__NAME = AS3_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AS3_CONSTRUCTOR__STATIC = AS3_MEMBER__STATIC;
+	int AS3_CONSTRUCTOR__ATTRIBUTES = AS3_MEMBER__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4859,6 +4580,107 @@ public interface As3EPackage extends EPackage {
 	int AS3_CONDITIONAL_BLOCK_FEATURE_COUNT = ISTATEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3ReservedAttributeImpl <em>As3 Reserved Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.impl.As3ReservedAttributeImpl
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ReservedAttribute()
+	 * @generated
+	 */
+	int AS3_RESERVED_ATTRIBUTE = 134;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__VISIBILITY = IATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__STATIC = IATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Override</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__OVERRIDE = IATTRIBUTE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Dynamic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__DYNAMIC = IATTRIBUTE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__FINAL = IATTRIBUTE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Native</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE__NATIVE = IATTRIBUTE_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>As3 Reserved Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_RESERVED_ATTRIBUTE_FEATURE_COUNT = IATTRIBUTE_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3AttributesImpl <em>As3 Attributes</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.impl.As3AttributesImpl
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Attributes()
+	 * @generated
+	 */
+	int AS3_ATTRIBUTES = 135;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_ATTRIBUTES__ATTRIBUTES = 0;
+
+	/**
+	 * The number of structural features of the '<em>As3 Attributes</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_ATTRIBUTES_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4866,7 +4688,7 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 134;
+	int ITERABLE = 136;
 
 
 	/**
@@ -5140,39 +4962,6 @@ public interface As3EPackage extends EPackage {
 	EClass getAs3Definition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.axdt.as3.model.As3Definition#getMetadata <em>Metadata</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Metadata</em>'.
-	 * @see org.axdt.as3.model.As3Definition#getMetadata()
-	 * @see #getAs3Definition()
-	 * @generated
-	 */
-	EReference getAs3Definition_Metadata();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Definition#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.axdt.as3.model.As3Definition#getVisibility()
-	 * @see #getAs3Definition()
-	 * @generated
-	 */
-	EAttribute getAs3Definition_Visibility();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3Definition#getCustomVisibility <em>Custom Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Custom Visibility</em>'.
-	 * @see org.axdt.as3.model.As3Definition#getCustomVisibility()
-	 * @see #getAs3Definition()
-	 * @generated
-	 */
-	EReference getAs3Definition_CustomVisibility();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Definition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5184,6 +4973,17 @@ public interface As3EPackage extends EPackage {
 	EAttribute getAs3Definition_Name();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3Definition#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Attributes</em>'.
+	 * @see org.axdt.as3.model.As3Definition#getAttributes()
+	 * @see #getAs3Definition()
+	 * @generated
+	 */
+	EReference getAs3Definition_Attributes();
+
+	/**
 	 * Returns the meta object for class '{@link org.axdt.as3.model.As3Member <em>As3 Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5192,17 +4992,6 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAs3Member();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Member#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.axdt.as3.model.As3Member#isStatic()
-	 * @see #getAs3Member()
-	 * @generated
-	 */
-	EAttribute getAs3Member_Static();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.as3.model.As3Executable <em>As3 Executable</em>}'.
@@ -5309,39 +5098,6 @@ public interface As3EPackage extends EPackage {
 	EClass getAs3FieldDefinition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3FieldDefinition#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.axdt.as3.model.As3FieldDefinition#getVisibility()
-	 * @see #getAs3FieldDefinition()
-	 * @generated
-	 */
-	EAttribute getAs3FieldDefinition_Visibility();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3FieldDefinition#getCustomVisibility <em>Custom Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Custom Visibility</em>'.
-	 * @see org.axdt.as3.model.As3FieldDefinition#getCustomVisibility()
-	 * @see #getAs3FieldDefinition()
-	 * @generated
-	 */
-	EReference getAs3FieldDefinition_CustomVisibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3FieldDefinition#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.axdt.as3.model.As3FieldDefinition#isStatic()
-	 * @see #getAs3FieldDefinition()
-	 * @generated
-	 */
-	EAttribute getAs3FieldDefinition_Static();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3FieldDefinition#isConstant <em>Constant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5364,15 +5120,15 @@ public interface As3EPackage extends EPackage {
 	EReference getAs3FieldDefinition_Bindings();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.axdt.as3.model.As3FieldDefinition#getMetadata <em>Metadata</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3FieldDefinition#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Metadata</em>'.
-	 * @see org.axdt.as3.model.As3FieldDefinition#getMetadata()
+	 * @return the meta object for the containment reference '<em>Attributes</em>'.
+	 * @see org.axdt.as3.model.As3FieldDefinition#getAttributes()
 	 * @see #getAs3FieldDefinition()
 	 * @generated
 	 */
-	EReference getAs3FieldDefinition_Metadata();
+	EReference getAs3FieldDefinition_Attributes();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.as3.model.As3Program <em>As3 Program</em>}'.
@@ -5565,28 +5321,6 @@ public interface As3EPackage extends EPackage {
 	EClass getAs3Class();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Class#isDynamic <em>Dynamic</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Dynamic</em>'.
-	 * @see org.axdt.as3.model.As3Class#isDynamic()
-	 * @see #getAs3Class()
-	 * @generated
-	 */
-	EAttribute getAs3Class_Dynamic();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Class#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.axdt.as3.model.As3Class#isFinal()
-	 * @see #getAs3Class()
-	 * @generated
-	 */
-	EAttribute getAs3Class_Final();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3Class#getExtendedClass <em>Extended Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5744,39 +5478,6 @@ public interface As3EPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAs3Operation_Body();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Operation#isNative <em>Native</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Native</em>'.
-	 * @see org.axdt.as3.model.As3Operation#isNative()
-	 * @see #getAs3Operation()
-	 * @generated
-	 */
-	EAttribute getAs3Operation_Native();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Operation#isOverride <em>Override</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Override</em>'.
-	 * @see org.axdt.as3.model.As3Operation#isOverride()
-	 * @see #getAs3Operation()
-	 * @generated
-	 */
-	EAttribute getAs3Operation_Override();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Operation#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.axdt.as3.model.As3Operation#isFinal()
-	 * @see #getAs3Operation()
-	 * @generated
-	 */
-	EAttribute getAs3Operation_Final();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3Operation#isGetter <em>Getter</em>}'.
@@ -7486,6 +7187,103 @@ public interface As3EPackage extends EPackage {
 	EReference getAs3ConditionalBlock_Body();
 
 	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.As3ReservedAttribute <em>As3 Reserved Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>As3 Reserved Attribute</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute
+	 * @generated
+	 */
+	EClass getAs3ReservedAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#getVisibility()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Visibility();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#isStatic()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Static();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#isOverride <em>Override</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Override</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#isOverride()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Override();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#isDynamic <em>Dynamic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dynamic</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#isDynamic()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Dynamic();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#isFinal <em>Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Final</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#isFinal()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Final();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.as3.model.As3ReservedAttribute#isNative <em>Native</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Native</em>'.
+	 * @see org.axdt.as3.model.As3ReservedAttribute#isNative()
+	 * @see #getAs3ReservedAttribute()
+	 * @generated
+	 */
+	EAttribute getAs3ReservedAttribute_Native();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.As3Attributes <em>As3 Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>As3 Attributes</em>'.
+	 * @see org.axdt.as3.model.As3Attributes
+	 * @generated
+	 */
+	EClass getAs3Attributes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.axdt.as3.model.As3Attributes#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see org.axdt.as3.model.As3Attributes#getAttributes()
+	 * @see #getAs3Attributes()
+	 * @generated
+	 */
+	EReference getAs3Attributes_Attributes();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.Iterable <em>Iterable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7788,36 +7586,20 @@ public interface As3EPackage extends EPackage {
 		EClass AS3_DEFINITION = eINSTANCE.getAs3Definition();
 
 		/**
-		 * The meta object literal for the '<em><b>Metadata</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference AS3_DEFINITION__METADATA = eINSTANCE.getAs3Definition_Metadata();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_DEFINITION__VISIBILITY = eINSTANCE.getAs3Definition_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Visibility</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference AS3_DEFINITION__CUSTOM_VISIBILITY = eINSTANCE.getAs3Definition_CustomVisibility();
-
-		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute AS3_DEFINITION__NAME = eINSTANCE.getAs3Definition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_DEFINITION__ATTRIBUTES = eINSTANCE.getAs3Definition_Attributes();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3MemberImpl <em>As3 Member</em>}' class.
@@ -7828,14 +7610,6 @@ public interface As3EPackage extends EPackage {
 		 * @generated
 		 */
 		EClass AS3_MEMBER = eINSTANCE.getAs3Member();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_MEMBER__STATIC = eINSTANCE.getAs3Member_Static();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.as3.model.As3Executable <em>As3 Executable</em>}' class.
@@ -7930,30 +7704,6 @@ public interface As3EPackage extends EPackage {
 		EClass AS3_FIELD_DEFINITION = eINSTANCE.getAs3FieldDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_FIELD_DEFINITION__VISIBILITY = eINSTANCE.getAs3FieldDefinition_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Visibility</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY = eINSTANCE.getAs3FieldDefinition_CustomVisibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_FIELD_DEFINITION__STATIC = eINSTANCE.getAs3FieldDefinition_Static();
-
-		/**
 		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7970,12 +7720,12 @@ public interface As3EPackage extends EPackage {
 		EReference AS3_FIELD_DEFINITION__BINDINGS = eINSTANCE.getAs3FieldDefinition_Bindings();
 
 		/**
-		 * The meta object literal for the '<em><b>Metadata</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference AS3_FIELD_DEFINITION__METADATA = eINSTANCE.getAs3FieldDefinition_Metadata();
+		EReference AS3_FIELD_DEFINITION__ATTRIBUTES = eINSTANCE.getAs3FieldDefinition_Attributes();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3ProgramImpl <em>As3 Program</em>}' class.
@@ -8138,22 +7888,6 @@ public interface As3EPackage extends EPackage {
 		EClass AS3_CLASS = eINSTANCE.getAs3Class();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_CLASS__DYNAMIC = eINSTANCE.getAs3Class_Dynamic();
-
-		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_CLASS__FINAL = eINSTANCE.getAs3Class_Final();
-
-		/**
 		 * The meta object literal for the '<em><b>Extended Class</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8284,30 +8018,6 @@ public interface As3EPackage extends EPackage {
 		 * @generated
 		 */
 		EReference AS3_OPERATION__BODY = eINSTANCE.getAs3Operation_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Native</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_OPERATION__NATIVE = eINSTANCE.getAs3Operation_Native();
-
-		/**
-		 * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_OPERATION__OVERRIDE = eINSTANCE.getAs3Operation_Override();
-
-		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AS3_OPERATION__FINAL = eINSTANCE.getAs3Operation_Final();
 
 		/**
 		 * The meta object literal for the '<em><b>Getter</b></em>' attribute feature.
@@ -9784,6 +9494,82 @@ public interface As3EPackage extends EPackage {
 		 * @generated
 		 */
 		EReference AS3_CONDITIONAL_BLOCK__BODY = eINSTANCE.getAs3ConditionalBlock_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3ReservedAttributeImpl <em>As3 Reserved Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.impl.As3ReservedAttributeImpl
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3ReservedAttribute()
+		 * @generated
+		 */
+		EClass AS3_RESERVED_ATTRIBUTE = eINSTANCE.getAs3ReservedAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__VISIBILITY = eINSTANCE.getAs3ReservedAttribute_Visibility();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__STATIC = eINSTANCE.getAs3ReservedAttribute_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__OVERRIDE = eINSTANCE.getAs3ReservedAttribute_Override();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__DYNAMIC = eINSTANCE.getAs3ReservedAttribute_Dynamic();
+
+		/**
+		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__FINAL = eINSTANCE.getAs3ReservedAttribute_Final();
+
+		/**
+		 * The meta object literal for the '<em><b>Native</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AS3_RESERVED_ATTRIBUTE__NATIVE = eINSTANCE.getAs3ReservedAttribute_Native();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3AttributesImpl <em>As3 Attributes</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.impl.As3AttributesImpl
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3Attributes()
+		 * @generated
+		 */
+		EClass AS3_ATTRIBUTES = eINSTANCE.getAs3Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_ATTRIBUTES__ATTRIBUTES = eINSTANCE.getAs3Attributes_Attributes();
 
 		/**
 		 * The meta object literal for the '<em>Iterable</em>' data type.

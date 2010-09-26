@@ -18,21 +18,24 @@ Identifier
 	| 'prototype'
 	| 'native'
 	; 
-As3PropertyIdentifierFirst returns As3PropertyIdentifier
-	: reference=[avm::AvmReferable|Identifier]
-	;
 As3PropertyIdentifier
 	: name='*'
 	| reference=[avm::AvmReferable|Identifier]
 	;
 As3SimpleQualifiedIdentifier returns IIdentifier
-	: As3SimpleIdentifier
+	: As3PropertyIdentifier
 	({As3SimpleQualifiedIdentifier.qualifier = current}
 		LT* '::' 
 	LT* ( identifier=As3PropertyIdentifier
 		| '[' LT* expressions=As3ListExpression LT* ']'
 		)
-	)?;
+	)?
+	| {As3SimpleQualifiedIdentifier} 
+		qualifier=ReservedNamespaceName LT* '::' 
+	LT* ( identifier=As3PropertyIdentifier
+		| '[' LT* expressions=As3ListExpression LT* ']'
+		)
+	;
 As3ExpressionQualifiedIdentifier
 	: '(' LT* qualifier=IAssignmentExpression LT* ')' LT* '::'
 	LT*	( identifier=As3PropertyIdentifier
@@ -48,10 +51,6 @@ AttributeQualifiedIdentifier returns As3AttributeQualifiedIdentifier
 	LT* ( identifier=As3NonAttributeQualifiedIdentifier
 		| '[' LT* expressions=As3ListExpression LT* ']'
 		)
-	;
-As3SimpleIdentifier
-	: As3PropertyIdentifier
-	| ReservedNamespaceName
 	;
 IIdentifier
 	: As3NonAttributeQualifiedIdentifier
@@ -111,7 +110,6 @@ ILiteralFieldName
 	: As3StringLiteral
 	| As3NumberLiteral
 	| {As3PropertyIdentifier} name=Identifier
-	| ReservedNamespaceName
 	;
 // 14.7 Array initialiser
 As3ArrayInitializer
@@ -275,7 +273,7 @@ IStatement
 	| As3VariableDefinition
 	;
 As3ConditionalBlock
-	: condition=As3SimpleQualifiedIdentifier body=As3Block;
+	: condition=IIdentifier body=As3Block;
 // 15.1 Empty statement
 // 15.2 Expression statement
 As3ExpressionStatement:
@@ -387,7 +385,22 @@ StandardDirective returns IBlockDirective
 	;
 // 16.1 Attributes
 IAttribute
-	: As3AttributeExpression
+	: As3MetadataTag
+	| As3AttributeExpression
+	| As3ReservedAttribute
+	;
+
+As3ReservedAttribute
+	: visibility=ReservedNamespace
+	| static?="static"
+	| final?="final"
+	| override?="override"
+	| dynamic?="dynamic"
+	| native?="native"
+	;
+As3Attributes:
+	{As3Attributes}
+	(attributes+=IAttribute)*
 	;
 As3MetadataTag:
 	'[' name=Identifier 
@@ -421,11 +434,7 @@ As3Use:
 // 17 Definitions
 // 17.1 Variable definition
 As3FieldDefinition:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	( (static?="static")?
-	& (visibility=ReservedNamespace)?
-	)
+	attributes=As3Attributes
 	('var'|constant?='const') LT*
 	bindings+=As3FieldBinding (LT* ',' LT* bindings+=As3FieldBinding)*
 	VirtualSemi;
@@ -447,13 +456,7 @@ As3Variable:
 	name=Identifier (LT* type=VarType)?;
 // 17.2 Function definition
 As3Operation:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	( (static?="static")?
-	& (final?="final")?
-	& (override?="override")?
-	& (visibility=ReservedNamespace)?
-	)
+	attributes=As3Attributes
 	'function' LT* 
 	(setter?='set'|getter?='get')? name=Identifier LT*
 	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
@@ -461,9 +464,7 @@ As3Operation:
 	LT* body=As3Block;
 // 17.2.2 Function signature
 As3OperationSignature returns As3Operation:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	(visibility=ReservedNamespace)?
+	attributes=As3Attributes
 	'function' LT* 
 	(setter?='set'|getter?='get')? name=Identifier LT*
 	'(' LT* (parameters+=As3Parameter LT* (',' LT* parameters+=As3Parameter LT*)* )?  ')'
@@ -496,12 +497,7 @@ VarTypeAssign  returns avm::AvmTypeReference
 GenericVarTypeAssign: '*=';
 // 17.3 Class definition
 As3Class:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	( (final?="final")?
-	& (dynamic?="dynamic")?
-	& (visibility=ReservedNamespace)?
-	)
+	attributes=As3Attributes
 	'class' LT* name=Identifier 
 	(LT* 'extends' LT* extendedClass=Inheritance)?
 	(LT* 'implements' LT* extendedInterfaces+=Inheritance
@@ -513,9 +509,7 @@ Inheritance returns avm::AvmDeclaredTypeReference
 // 17.3.2 Class name
 // 17.4 Interface definition
 As3Interface:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	(visibility=ReservedNamespace)?
+	attributes=As3Attributes
 	'interface' LT* name=Identifier 
 	(LT* 'extends' LT* extendedInterfaces+=Inheritance 
 		(LT* ',' LT* extendedInterfaces+=Inheritance)*
@@ -529,11 +523,7 @@ As3Package:
 
 // 17.6 Namespace definition
 As3Namespace:
-	(metadata+=As3MetadataTag)*
-	(customVisibility=As3AttributeExpression)?
-	( (static?="static")?
-	& (visibility=ReservedNamespace)?
-	)
+	attributes=As3Attributes
 	'namespace' LT* name=Identifier 
 	(LT* '=' LT* expression=NonAssignmentExpression )? 
 	VirtualSemi;

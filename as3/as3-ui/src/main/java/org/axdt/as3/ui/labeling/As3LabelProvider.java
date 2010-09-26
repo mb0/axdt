@@ -9,7 +9,6 @@ package org.axdt.as3.ui.labeling;
 
 import java.util.List;
 
-import org.axdt.as3.model.As3FieldDefinition;
 import org.axdt.as3.model.As3Import;
 import org.axdt.as3.model.As3ImportList;
 import org.axdt.as3.model.As3PropertyIdentifier;
@@ -140,20 +139,15 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     	return NAMESPACE;
     }
     Object image(AvmField ele) {
-    	AvmVisibility visibility = null;
-    	if (ele.eContainer() instanceof As3FieldDefinition) {
-			As3FieldDefinition def = (As3FieldDefinition) ele.eContainer();
-			visibility = def.getVisibility();
-    	} else {
-    		visibility = ele.getVisibility();
-    	}
+		AvmVisibility visibility = null;
+		visibility = ele.getVisibility();
 		if (AvmVisibility.PUBLIC.equals(visibility))
 			return FIELD_PUBLIC;
 		if (AvmVisibility.PRIVATE.equals(visibility))
 			return FIELD_PRIVATE;
 		if (AvmVisibility.PROTECTED.equals(visibility))
 			return FIELD_PROTECTED;
-   		return FIELD_DEFAULT;
+		return FIELD_DEFAULT;
     }
     Object text(AvmVariable ele) {
     	return ele.getName()

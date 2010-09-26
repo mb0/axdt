@@ -49,16 +49,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="As3Element" abstract="true" eSuperTypes="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="As3Identifiable" abstract="true" eSuperTypes="#//As3Element ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmIdentifiable"/>
   <eClassifiers xsi:type="ecore:EClass" name="As3Definition" abstract="true" eSuperTypes="#//As3Identifiable ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metadata" upperBound="-1"
-        eType="#//As3MetadataTag" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="customVisibility" eType="#//As3AttributeExpression"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" eType="#//As3Attributes"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="As3Member" abstract="true" eSuperTypes="#//As3Definition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmMember #//ITypeDirective">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="As3Member" abstract="true" eSuperTypes="#//As3Definition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmMember #//ITypeDirective"/>
   <eClassifiers xsi:type="ecore:EClass" name="As3Executable" abstract="true" interface="true"
       eSuperTypes="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmExecutable">
     <eOperations name="getDeclarations">
@@ -107,10 +102,6 @@
         eType="#//IDirective" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="As3Class" eSuperTypes="#//As3Type ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmClass">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendedClass" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
         containment="true"/>
   </eClassifiers>
@@ -146,26 +137,19 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="As3FieldDefinition" eSuperTypes="#//ITypeDirective">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//As3FieldBinding" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metadata" upperBound="-1"
-        eType="#//As3MetadataTag" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="customVisibility" eType="#//As3AttributeExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" eType="#//As3Attributes"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="As3Operation" eSuperTypes="#//As3Member #//As3Executable ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmOperation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="override" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="getter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="setter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//As3Block"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="native" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="As3Constructor" eSuperTypes="#//As3Member #//As3Executable ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmConstructor">
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//As3Block"
@@ -448,5 +432,24 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//As3Block"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="As3ReservedAttribute" eSuperTypes="#//IAttribute">
+    <eOperations name="isVisibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="override" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="native" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="As3Attributes">
+    <eOperations name="isDynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getVisibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"/>
+    <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isNative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isOverride" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//IAttribute" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

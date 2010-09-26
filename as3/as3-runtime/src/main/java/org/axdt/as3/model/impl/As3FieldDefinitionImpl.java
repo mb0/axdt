@@ -10,11 +10,9 @@ package org.axdt.as3.model.impl;
 import java.util.Collection;
 
 import org.axdt.as3.As3EPackage;
-import org.axdt.as3.model.As3AttributeExpression;
+import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3FieldBinding;
 import org.axdt.as3.model.As3FieldDefinition;
-import org.axdt.as3.model.As3MetadataTag;
-import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -32,12 +30,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getBindings <em>Bindings</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getMetadata <em>Metadata</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getCustomVisibility <em>Custom Visibility</em>}</li>
+ *   <li>{@link org.axdt.as3.model.impl.As3FieldDefinitionImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,26 +47,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected int flags = 0;
-
-	/**
-	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean STATIC_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int STATIC_EFLAG = 1 << 0;
 
 	/**
 	 * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
@@ -91,7 +66,7 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int CONSTANT_EFLAG = 1 << 1;
+	protected static final int CONSTANT_EFLAG = 1 << 0;
 
 	/**
 	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
@@ -104,44 +79,14 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	protected EList<As3FieldBinding> bindings;
 
 	/**
-	 * The cached value of the '{@link #getMetadata() <em>Metadata</em>}' containment reference list.
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetadata()
+	 * @see #getAttributes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<As3MetadataTag> metadata;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final AvmVisibility VISIBILITY_EDEFAULT = AvmVisibility.PUBLIC;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected AvmVisibility visibility = VISIBILITY_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getCustomVisibility() <em>Custom Visibility</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected As3AttributeExpression customVisibility;
+	protected As3Attributes attributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,91 +105,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_FIELD_DEFINITION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AvmVisibility getVisibility() {
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(AvmVisibility newVisibility) {
-		AvmVisibility oldVisibility = visibility;
-		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__VISIBILITY, oldVisibility, visibility));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public As3AttributeExpression getCustomVisibility() {
-		return customVisibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCustomVisibility(As3AttributeExpression newCustomVisibility, NotificationChain msgs) {
-		As3AttributeExpression oldCustomVisibility = customVisibility;
-		customVisibility = newCustomVisibility;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY, oldCustomVisibility, newCustomVisibility);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomVisibility(As3AttributeExpression newCustomVisibility) {
-		if (newCustomVisibility != customVisibility) {
-			NotificationChain msgs = null;
-			if (customVisibility != null)
-				msgs = ((InternalEObject)customVisibility).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY, null, msgs);
-			if (newCustomVisibility != null)
-				msgs = ((InternalEObject)newCustomVisibility).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY, null, msgs);
-			msgs = basicSetCustomVisibility(newCustomVisibility, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY, newCustomVisibility, newCustomVisibility));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isStatic() {
-		return (flags & STATIC_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatic(boolean newStatic) {
-		boolean oldStatic = (flags & STATIC_EFLAG) != 0;
-		if (newStatic) flags |= STATIC_EFLAG; else flags &= ~STATIC_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__STATIC, oldStatic, newStatic));
 	}
 
 	/**
@@ -285,11 +145,42 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<As3MetadataTag> getMetadata() {
-		if (metadata == null) {
-			metadata = new EObjectContainmentEList<As3MetadataTag>(As3MetadataTag.class, this, As3EPackage.AS3_FIELD_DEFINITION__METADATA);
+	public As3Attributes getAttributes() {
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAttributes(As3Attributes newAttributes, NotificationChain msgs) {
+		As3Attributes oldAttributes = attributes;
+		attributes = newAttributes;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES, oldAttributes, newAttributes);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return metadata;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAttributes(As3Attributes newAttributes) {
+		if (newAttributes != attributes) {
+			NotificationChain msgs = null;
+			if (attributes != null)
+				msgs = ((InternalEObject)attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES, null, msgs);
+			if (newAttributes != null)
+				msgs = ((InternalEObject)newAttributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES, null, msgs);
+			msgs = basicSetAttributes(newAttributes, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES, newAttributes, newAttributes));
 	}
 
 	/**
@@ -302,10 +193,8 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case As3EPackage.AS3_FIELD_DEFINITION__BINDINGS:
 				return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
-			case As3EPackage.AS3_FIELD_DEFINITION__METADATA:
-				return ((InternalEList<?>)getMetadata()).basicRemove(otherEnd, msgs);
-			case As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY:
-				return basicSetCustomVisibility(null, msgs);
+			case As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES:
+				return basicSetAttributes(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -318,18 +207,12 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
-				return isStatic();
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
 				return isConstant();
 			case As3EPackage.AS3_FIELD_DEFINITION__BINDINGS:
 				return getBindings();
-			case As3EPackage.AS3_FIELD_DEFINITION__METADATA:
-				return getMetadata();
-			case As3EPackage.AS3_FIELD_DEFINITION__VISIBILITY:
-				return getVisibility();
-			case As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY:
-				return getCustomVisibility();
+			case As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES:
+				return getAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -343,9 +226,6 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
-				setStatic((Boolean)newValue);
-				return;
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
 				setConstant((Boolean)newValue);
 				return;
@@ -353,15 +233,8 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 				getBindings().clear();
 				getBindings().addAll((Collection<? extends As3FieldBinding>)newValue);
 				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__METADATA:
-				getMetadata().clear();
-				getMetadata().addAll((Collection<? extends As3MetadataTag>)newValue);
-				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__VISIBILITY:
-				setVisibility((AvmVisibility)newValue);
-				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY:
-				setCustomVisibility((As3AttributeExpression)newValue);
+			case As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES:
+				setAttributes((As3Attributes)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -375,23 +248,14 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
-				setStatic(STATIC_EDEFAULT);
-				return;
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
 				setConstant(CONSTANT_EDEFAULT);
 				return;
 			case As3EPackage.AS3_FIELD_DEFINITION__BINDINGS:
 				getBindings().clear();
 				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__METADATA:
-				getMetadata().clear();
-				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__VISIBILITY:
-				setVisibility(VISIBILITY_EDEFAULT);
-				return;
-			case As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY:
-				setCustomVisibility((As3AttributeExpression)null);
+			case As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES:
+				setAttributes((As3Attributes)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -405,18 +269,12 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_FIELD_DEFINITION__STATIC:
-				return ((flags & STATIC_EFLAG) != 0) != STATIC_EDEFAULT;
 			case As3EPackage.AS3_FIELD_DEFINITION__CONSTANT:
 				return ((flags & CONSTANT_EFLAG) != 0) != CONSTANT_EDEFAULT;
 			case As3EPackage.AS3_FIELD_DEFINITION__BINDINGS:
 				return bindings != null && !bindings.isEmpty();
-			case As3EPackage.AS3_FIELD_DEFINITION__METADATA:
-				return metadata != null && !metadata.isEmpty();
-			case As3EPackage.AS3_FIELD_DEFINITION__VISIBILITY:
-				return visibility != VISIBILITY_EDEFAULT;
-			case As3EPackage.AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY:
-				return customVisibility != null;
+			case As3EPackage.AS3_FIELD_DEFINITION__ATTRIBUTES:
+				return attributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -431,12 +289,8 @@ public class As3FieldDefinitionImpl extends MinimalEObjectImpl.Container impleme
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (static: ");
-		result.append((flags & STATIC_EFLAG) != 0);
-		result.append(", constant: ");
+		result.append(" (constant: ");
 		result.append((flags & CONSTANT_EFLAG) != 0);
-		result.append(", visibility: ");
-		result.append(visibility);
 		result.append(')');
 		return result.toString();
 	}

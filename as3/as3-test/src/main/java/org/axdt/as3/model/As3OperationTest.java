@@ -11,6 +11,7 @@ import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
 import org.axdt.avm.model.AvmOperationTest;
+import org.axdt.avm.model.AvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -98,5 +99,9 @@ public class As3OperationTest extends AvmOperationTest {
 
 	public void testGetDirectives() {
 		assertNotNull(getFixture().getDirectives());
+	}
+	
+	public void testGetVisibility() {
+		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
 	}
 } //As3OperationTest

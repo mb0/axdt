@@ -18,6 +18,7 @@ import org.axdt.as3.model.As3ArrayInitializer;
 import org.axdt.as3.model.As3AssignmentExpression;
 import org.axdt.as3.model.As3AttributeExpression;
 import org.axdt.as3.model.As3AttributeQualifiedIdentifier;
+import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3BinaryExpression;
 import org.axdt.as3.model.As3BitwiseExpression;
 import org.axdt.as3.model.As3BitwiseNotExpression;
@@ -95,6 +96,7 @@ import org.axdt.as3.model.As3QueryExpression;
 import org.axdt.as3.model.As3QueryOperator;
 import org.axdt.as3.model.As3RegexLiteral;
 import org.axdt.as3.model.As3RelationalExpression;
+import org.axdt.as3.model.As3ReservedAttribute;
 import org.axdt.as3.model.As3ReturnStatement;
 import org.axdt.as3.model.As3ShiftExpression;
 import org.axdt.as3.model.As3SimpleAttributeExpression;
@@ -1104,6 +1106,20 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass as3ReservedAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass as3AttributesEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType iterableEDataType = null;
 
 	/**
@@ -1418,35 +1434,17 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAs3Definition_Metadata() {
-		return (EReference)as3DefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Definition_Visibility() {
-		return (EAttribute)as3DefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAs3Definition_CustomVisibility() {
-		return (EReference)as3DefinitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAs3Definition_Name() {
-		return (EAttribute)as3DefinitionEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)as3DefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3Definition_Attributes() {
+		return (EReference)as3DefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1456,15 +1454,6 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 */
 	public EClass getAs3Member() {
 		return as3MemberEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Member_Static() {
-		return (EAttribute)as3MemberEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1562,25 +1551,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAs3FieldDefinition_Visibility() {
-		return (EAttribute)as3FieldDefinitionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAs3FieldDefinition_CustomVisibility() {
-		return (EReference)as3FieldDefinitionEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3FieldDefinition_Static() {
+	public EAttribute getAs3FieldDefinition_Constant() {
 		return (EAttribute)as3FieldDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1589,17 +1560,8 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAs3FieldDefinition_Constant() {
-		return (EAttribute)as3FieldDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAs3FieldDefinition_Bindings() {
-		return (EReference)as3FieldDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EReference)as3FieldDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1607,8 +1569,8 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAs3FieldDefinition_Metadata() {
-		return (EReference)as3FieldDefinitionEClass.getEStructuralFeatures().get(3);
+	public EReference getAs3FieldDefinition_Attributes() {
+		return (EReference)as3FieldDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1778,26 +1740,8 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAs3Class_Dynamic() {
-		return (EAttribute)as3ClassEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Class_Final() {
-		return (EAttribute)as3ClassEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAs3Class_ExtendedClass() {
-		return (EReference)as3ClassEClass.getEStructuralFeatures().get(2);
+		return (EReference)as3ClassEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1914,7 +1858,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	public EReference getAs3Operation_ReturnType() {
-		return (EReference)as3OperationEClass.getEStructuralFeatures().get(4);
+		return (EReference)as3OperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1923,34 +1867,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	public EReference getAs3Operation_Body() {
-		return (EReference)as3OperationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Operation_Native() {
-		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Operation_Override() {
-		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAs3Operation_Final() {
-		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(1);
+		return (EReference)as3OperationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1959,7 +1876,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	public EAttribute getAs3Operation_Getter() {
-		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1968,7 +1885,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	public EAttribute getAs3Operation_Setter() {
-		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)as3OperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3425,6 +3342,87 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAs3ReservedAttribute() {
+		return as3ReservedAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Visibility() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Static() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Override() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Dynamic() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Final() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAs3ReservedAttribute_Native() {
+		return (EAttribute)as3ReservedAttributeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAs3Attributes() {
+		return as3AttributesEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3Attributes_Attributes() {
+		return (EReference)as3AttributesEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIterable() {
 		return iterableEDataType;
 	}
@@ -3510,13 +3508,10 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3IdentifiableEClass = createEClass(AS3_IDENTIFIABLE);
 
 		as3DefinitionEClass = createEClass(AS3_DEFINITION);
-		createEReference(as3DefinitionEClass, AS3_DEFINITION__METADATA);
-		createEAttribute(as3DefinitionEClass, AS3_DEFINITION__VISIBILITY);
-		createEReference(as3DefinitionEClass, AS3_DEFINITION__CUSTOM_VISIBILITY);
 		createEAttribute(as3DefinitionEClass, AS3_DEFINITION__NAME);
+		createEReference(as3DefinitionEClass, AS3_DEFINITION__ATTRIBUTES);
 
 		as3MemberEClass = createEClass(AS3_MEMBER);
-		createEAttribute(as3MemberEClass, AS3_MEMBER__STATIC);
 
 		as3ExecutableEClass = createEClass(AS3_EXECUTABLE);
 		createEReference(as3ExecutableEClass, AS3_EXECUTABLE__PARAMETERS);
@@ -3546,8 +3541,6 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		createEReference(as3TypeEClass, AS3_TYPE__DIRECTIVES);
 
 		as3ClassEClass = createEClass(AS3_CLASS);
-		createEAttribute(as3ClassEClass, AS3_CLASS__DYNAMIC);
-		createEAttribute(as3ClassEClass, AS3_CLASS__FINAL);
 		createEReference(as3ClassEClass, AS3_CLASS__EXTENDED_CLASS);
 
 		as3InterfaceEClass = createEClass(AS3_INTERFACE);
@@ -3578,21 +3571,15 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		createEReference(as3FieldBindingEClass, AS3_FIELD_BINDING__EXPRESSION);
 
 		as3FieldDefinitionEClass = createEClass(AS3_FIELD_DEFINITION);
-		createEAttribute(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__STATIC);
 		createEAttribute(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__CONSTANT);
 		createEReference(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__BINDINGS);
-		createEReference(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__METADATA);
-		createEAttribute(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__VISIBILITY);
-		createEReference(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__CUSTOM_VISIBILITY);
+		createEReference(as3FieldDefinitionEClass, AS3_FIELD_DEFINITION__ATTRIBUTES);
 
 		as3OperationEClass = createEClass(AS3_OPERATION);
-		createEAttribute(as3OperationEClass, AS3_OPERATION__OVERRIDE);
-		createEAttribute(as3OperationEClass, AS3_OPERATION__FINAL);
 		createEAttribute(as3OperationEClass, AS3_OPERATION__GETTER);
 		createEAttribute(as3OperationEClass, AS3_OPERATION__SETTER);
 		createEReference(as3OperationEClass, AS3_OPERATION__RETURN_TYPE);
 		createEReference(as3OperationEClass, AS3_OPERATION__BODY);
-		createEAttribute(as3OperationEClass, AS3_OPERATION__NATIVE);
 
 		as3ConstructorEClass = createEClass(AS3_CONSTRUCTOR);
 		createEReference(as3ConstructorEClass, AS3_CONSTRUCTOR__BODY);
@@ -3841,6 +3828,17 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		createEReference(as3ConditionalBlockEClass, AS3_CONDITIONAL_BLOCK__CONDITION);
 		createEReference(as3ConditionalBlockEClass, AS3_CONDITIONAL_BLOCK__BODY);
 
+		as3ReservedAttributeEClass = createEClass(AS3_RESERVED_ATTRIBUTE);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__VISIBILITY);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__STATIC);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__OVERRIDE);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__DYNAMIC);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__FINAL);
+		createEAttribute(as3ReservedAttributeEClass, AS3_RESERVED_ATTRIBUTE__NATIVE);
+
+		as3AttributesEClass = createEClass(AS3_ATTRIBUTES);
+		createEReference(as3AttributesEClass, AS3_ATTRIBUTES__ATTRIBUTES);
+
 		// Create data types
 		iterableEDataType = createEDataType(ITERABLE);
 	}
@@ -4037,6 +4035,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3StringLiteralEClass.getESuperTypes().add(this.getILiteralFieldName());
 		as3RegexLiteralEClass.getESuperTypes().add(this.getILiteral());
 		as3ConditionalBlockEClass.getESuperTypes().add(this.getIStatement());
+		as3ReservedAttributeEClass.getESuperTypes().add(this.getIAttribute());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(iDirectiveEClass, IDirective.class, "IDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4094,13 +4093,10 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		initEClass(as3IdentifiableEClass, As3Identifiable.class, "As3Identifiable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(as3DefinitionEClass, As3Definition.class, "As3Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAs3Definition_Metadata(), this.getAs3MetadataTag(), null, "metadata", null, 0, -1, As3Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAs3Definition_Visibility(), theAvmEPackage.getAvmVisibility(), "visibility", null, 0, 1, As3Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAs3Definition_CustomVisibility(), this.getAs3AttributeExpression(), null, "customVisibility", null, 0, 1, As3Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAs3Definition_Name(), ecorePackage.getEString(), "name", null, 0, 1, As3Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAs3Definition_Attributes(), this.getAs3Attributes(), null, "attributes", null, 0, 1, As3Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3MemberEClass, As3Member.class, "As3Member", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAs3Member_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, As3Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3ExecutableEClass, As3Executable.class, "As3Executable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAs3Executable_Parameters(), this.getAs3Parameter(), null, "parameters", null, 0, -1, As3Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4142,8 +4138,6 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		initEReference(getAs3Type_Directives(), this.getIDirective(), null, "directives", null, 0, -1, As3Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3ClassEClass, As3Class.class, "As3Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAs3Class_Dynamic(), ecorePackage.getEBoolean(), "dynamic", "false", 0, 1, As3Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getAs3Class_Final(), ecorePackage.getEBoolean(), "final", "false", 0, 1, As3Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getAs3Class_ExtendedClass(), theAvmEPackage.getAvmTypeReference(), null, "extendedClass", null, 0, 1, As3Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3InterfaceEClass, As3Interface.class, "As3Interface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4174,21 +4168,15 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		initEReference(getAs3FieldBinding_Expression(), this.getIExpression(), null, "expression", null, 0, 1, As3FieldBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3FieldDefinitionEClass, As3FieldDefinition.class, "As3FieldDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAs3FieldDefinition_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAs3FieldDefinition_Constant(), ecorePackage.getEBoolean(), "constant", null, 0, 1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAs3FieldDefinition_Bindings(), this.getAs3FieldBinding(), null, "bindings", null, 0, -1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAs3FieldDefinition_Metadata(), this.getAs3MetadataTag(), null, "metadata", null, 0, -1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAs3FieldDefinition_Visibility(), theAvmEPackage.getAvmVisibility(), "visibility", null, 0, 1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAs3FieldDefinition_CustomVisibility(), this.getAs3AttributeExpression(), null, "customVisibility", null, 0, 1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAs3FieldDefinition_Attributes(), this.getAs3Attributes(), null, "attributes", null, 0, 1, As3FieldDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3OperationEClass, As3Operation.class, "As3Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAs3Operation_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAs3Operation_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAs3Operation_Getter(), ecorePackage.getEBoolean(), "getter", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAs3Operation_Setter(), ecorePackage.getEBoolean(), "setter", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAs3Operation_ReturnType(), theAvmEPackage.getAvmTypeReference(), null, "returnType", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAs3Operation_Body(), this.getAs3Block(), null, "body", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAs3Operation_Native(), ecorePackage.getEBoolean(), "native", null, 0, 1, As3Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(as3ConstructorEClass, As3Constructor.class, "As3Constructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAs3Constructor_Body(), this.getAs3Block(), null, "body", null, 0, 1, As3Constructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4436,6 +4424,31 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		initEClass(as3ConditionalBlockEClass, As3ConditionalBlock.class, "As3ConditionalBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAs3ConditionalBlock_Condition(), this.getIIdentifier(), null, "condition", null, 0, 1, As3ConditionalBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAs3ConditionalBlock_Body(), this.getAs3Block(), null, "body", null, 0, 1, As3ConditionalBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(as3ReservedAttributeEClass, As3ReservedAttribute.class, "As3ReservedAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAs3ReservedAttribute_Visibility(), theAvmEPackage.getAvmVisibility(), "visibility", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAs3ReservedAttribute_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAs3ReservedAttribute_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAs3ReservedAttribute_Dynamic(), ecorePackage.getEBoolean(), "dynamic", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAs3ReservedAttribute_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAs3ReservedAttribute_Native(), ecorePackage.getEBoolean(), "native", null, 0, 1, As3ReservedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(as3ReservedAttributeEClass, ecorePackage.getEBoolean(), "isVisibility", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(as3AttributesEClass, As3Attributes.class, "As3Attributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAs3Attributes_Attributes(), this.getIAttribute(), null, "attributes", null, 0, -1, As3Attributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isDynamic", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isFinal", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, theAvmEPackage.getAvmVisibility(), "getVisibility", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isStatic", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isNative", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isOverride", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

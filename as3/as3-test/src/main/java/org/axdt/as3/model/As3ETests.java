@@ -89,6 +89,8 @@ public class As3ETests extends TestSuite {
 		suite.addTestSuite(As3NumberLiteralTest.class);
 		suite.addTestSuite(As3StringLiteralTest.class);
 		suite.addTestSuite(As3RegexLiteralTest.class);
+		suite.addTestSuite(As3ReservedAttributeTest.class);
+		suite.addTestSuite(As3AttributesTest.class);
 		return suite;
 	}
 

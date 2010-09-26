@@ -42,13 +42,10 @@ import com.google.common.collect.Lists;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#isOverride <em>Override</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#isGetter <em>Getter</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#isSetter <em>Setter</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#getBody <em>Body</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3OperationImpl#isNative <em>Native</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,46 +61,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	 * @ordered
 	 */
 	protected EList<As3Parameter> parameters;
-
-	/**
-	 * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverride()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean OVERRIDE_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isOverride() <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverride()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int OVERRIDE_EFLAG = 1 << 1;
-
-	/**
-	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FINAL_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int FINAL_EFLAG = 1 << 2;
 
 	/**
 	 * The default value of the '{@link #isGetter() <em>Getter</em>}' attribute.
@@ -123,7 +80,7 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int GETTER_EFLAG = 1 << 3;
+	protected static final int GETTER_EFLAG = 1 << 0;
 
 	/**
 	 * The default value of the '{@link #isSetter() <em>Setter</em>}' attribute.
@@ -143,7 +100,7 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SETTER_EFLAG = 1 << 4;
+	protected static final int SETTER_EFLAG = 1 << 1;
 
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
@@ -164,26 +121,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	 * @ordered
 	 */
 	protected As3Block body;
-
-	/**
-	 * The default value of the '{@link #isNative() <em>Native</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNative()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NATIVE_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isNative() <em>Native</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNative()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int NATIVE_EFLAG = 1 << 5;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,43 +230,9 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isOverride() {
-		return (flags & OVERRIDE_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOverride(boolean newOverride) {
-		boolean oldOverride = (flags & OVERRIDE_EFLAG) != 0;
-		if (newOverride) flags |= OVERRIDE_EFLAG; else flags &= ~OVERRIDE_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_OPERATION__OVERRIDE, oldOverride, newOverride));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public boolean isFinal() {
-		return (flags & FINAL_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFinal(boolean newFinal) {
-		boolean oldFinal = (flags & FINAL_EFLAG) != 0;
-		if (newFinal) flags |= FINAL_EFLAG; else flags &= ~FINAL_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_OPERATION__FINAL, oldFinal, newFinal));
+		return super.isFinal();
 	}
 
 	/**
@@ -377,22 +280,17 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public boolean isNative() {
-		return (flags & NATIVE_EFLAG) != 0;
+		return super.isNative();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setNative(boolean newNative) {
-		boolean oldNative = (flags & NATIVE_EFLAG) != 0;
-		if (newNative) flags |= NATIVE_EFLAG; else flags &= ~NATIVE_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_OPERATION__NATIVE, oldNative, newNative));
+	public boolean isOverride() {
+		return super.isOverride();
 	}
 
 	/**
@@ -458,10 +356,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 		switch (featureID) {
 			case As3EPackage.AS3_OPERATION__PARAMETERS:
 				return getParameters();
-			case As3EPackage.AS3_OPERATION__OVERRIDE:
-				return isOverride();
-			case As3EPackage.AS3_OPERATION__FINAL:
-				return isFinal();
 			case As3EPackage.AS3_OPERATION__GETTER:
 				return isGetter();
 			case As3EPackage.AS3_OPERATION__SETTER:
@@ -470,8 +364,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				return getReturnType();
 			case As3EPackage.AS3_OPERATION__BODY:
 				return getBody();
-			case As3EPackage.AS3_OPERATION__NATIVE:
-				return isNative();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -489,12 +381,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends As3Parameter>)newValue);
 				return;
-			case As3EPackage.AS3_OPERATION__OVERRIDE:
-				setOverride((Boolean)newValue);
-				return;
-			case As3EPackage.AS3_OPERATION__FINAL:
-				setFinal((Boolean)newValue);
-				return;
 			case As3EPackage.AS3_OPERATION__GETTER:
 				setGetter((Boolean)newValue);
 				return;
@@ -506,9 +392,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				return;
 			case As3EPackage.AS3_OPERATION__BODY:
 				setBody((As3Block)newValue);
-				return;
-			case As3EPackage.AS3_OPERATION__NATIVE:
-				setNative((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -525,12 +408,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 			case As3EPackage.AS3_OPERATION__PARAMETERS:
 				getParameters().clear();
 				return;
-			case As3EPackage.AS3_OPERATION__OVERRIDE:
-				setOverride(OVERRIDE_EDEFAULT);
-				return;
-			case As3EPackage.AS3_OPERATION__FINAL:
-				setFinal(FINAL_EDEFAULT);
-				return;
 			case As3EPackage.AS3_OPERATION__GETTER:
 				setGetter(GETTER_EDEFAULT);
 				return;
@@ -542,9 +419,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				return;
 			case As3EPackage.AS3_OPERATION__BODY:
 				setBody((As3Block)null);
-				return;
-			case As3EPackage.AS3_OPERATION__NATIVE:
-				setNative(NATIVE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -560,10 +434,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 		switch (featureID) {
 			case As3EPackage.AS3_OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case As3EPackage.AS3_OPERATION__OVERRIDE:
-				return ((flags & OVERRIDE_EFLAG) != 0) != OVERRIDE_EDEFAULT;
-			case As3EPackage.AS3_OPERATION__FINAL:
-				return ((flags & FINAL_EFLAG) != 0) != FINAL_EDEFAULT;
 			case As3EPackage.AS3_OPERATION__GETTER:
 				return ((flags & GETTER_EFLAG) != 0) != GETTER_EDEFAULT;
 			case As3EPackage.AS3_OPERATION__SETTER:
@@ -572,8 +442,6 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				return returnType != null;
 			case As3EPackage.AS3_OPERATION__BODY:
 				return body != null;
-			case As3EPackage.AS3_OPERATION__NATIVE:
-				return ((flags & NATIVE_EFLAG) != 0) != NATIVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -640,16 +508,10 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (override: ");
-		result.append((flags & OVERRIDE_EFLAG) != 0);
-		result.append(", final: ");
-		result.append((flags & FINAL_EFLAG) != 0);
-		result.append(", getter: ");
+		result.append(" (getter: ");
 		result.append((flags & GETTER_EFLAG) != 0);
 		result.append(", setter: ");
 		result.append((flags & SETTER_EFLAG) != 0);
-		result.append(", native: ");
-		result.append((flags & NATIVE_EFLAG) != 0);
 		result.append(')');
 		return result.toString();
 	}

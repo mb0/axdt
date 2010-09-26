@@ -23,8 +23,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.as3.model.impl.As3ClassImpl#isDynamic <em>Dynamic</em>}</li>
- *   <li>{@link org.axdt.as3.model.impl.As3ClassImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.axdt.as3.model.impl.As3ClassImpl#getExtendedClass <em>Extended Class</em>}</li>
  * </ul>
  * </p>
@@ -32,46 +30,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class As3ClassImpl extends As3TypeImpl implements As3Class {
-	/**
-	 * The default value of the '{@link #isDynamic() <em>Dynamic</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDynamic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean DYNAMIC_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isDynamic() <em>Dynamic</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDynamic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int DYNAMIC_EFLAG = 1 << 0;
-
-	/**
-	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FINAL_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int FINAL_EFLAG = 1 << 1;
-
 	/**
 	 * The cached value of the '{@link #getExtendedClass() <em>Extended Class</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -99,48 +57,6 @@ public class As3ClassImpl extends As3TypeImpl implements As3Class {
 	@Override
 	protected EClass eStaticClass() {
 		return As3EPackage.Literals.AS3_CLASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isDynamic() {
-		return (flags & DYNAMIC_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDynamic(boolean newDynamic) {
-		boolean oldDynamic = (flags & DYNAMIC_EFLAG) != 0;
-		if (newDynamic) flags |= DYNAMIC_EFLAG; else flags &= ~DYNAMIC_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_CLASS__DYNAMIC, oldDynamic, newDynamic));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFinal() {
-		return (flags & FINAL_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFinal(boolean newFinal) {
-		boolean oldFinal = (flags & FINAL_EFLAG) != 0;
-		if (newFinal) flags |= FINAL_EFLAG; else flags &= ~FINAL_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_CLASS__FINAL, oldFinal, newFinal));
 	}
 
 	/**
@@ -208,10 +124,6 @@ public class As3ClassImpl extends As3TypeImpl implements As3Class {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case As3EPackage.AS3_CLASS__DYNAMIC:
-				return isDynamic();
-			case As3EPackage.AS3_CLASS__FINAL:
-				return isFinal();
 			case As3EPackage.AS3_CLASS__EXTENDED_CLASS:
 				return getExtendedClass();
 		}
@@ -226,12 +138,6 @@ public class As3ClassImpl extends As3TypeImpl implements As3Class {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case As3EPackage.AS3_CLASS__DYNAMIC:
-				setDynamic((Boolean)newValue);
-				return;
-			case As3EPackage.AS3_CLASS__FINAL:
-				setFinal((Boolean)newValue);
-				return;
 			case As3EPackage.AS3_CLASS__EXTENDED_CLASS:
 				setExtendedClass((AvmTypeReference)newValue);
 				return;
@@ -247,12 +153,6 @@ public class As3ClassImpl extends As3TypeImpl implements As3Class {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_CLASS__DYNAMIC:
-				setDynamic(DYNAMIC_EDEFAULT);
-				return;
-			case As3EPackage.AS3_CLASS__FINAL:
-				setFinal(FINAL_EDEFAULT);
-				return;
 			case As3EPackage.AS3_CLASS__EXTENDED_CLASS:
 				setExtendedClass((AvmTypeReference)null);
 				return;
@@ -268,32 +168,10 @@ public class As3ClassImpl extends As3TypeImpl implements As3Class {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case As3EPackage.AS3_CLASS__DYNAMIC:
-				return ((flags & DYNAMIC_EFLAG) != 0) != DYNAMIC_EDEFAULT;
-			case As3EPackage.AS3_CLASS__FINAL:
-				return ((flags & FINAL_EFLAG) != 0) != FINAL_EDEFAULT;
 			case As3EPackage.AS3_CLASS__EXTENDED_CLASS:
 				return extendedClass != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (dynamic: ");
-		result.append((flags & DYNAMIC_EFLAG) != 0);
-		result.append(", final: ");
-		result.append((flags & FINAL_EFLAG) != 0);
-		result.append(')');
-		return result.toString();
 	}
 
 	@Override

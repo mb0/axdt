@@ -11,12 +11,14 @@ import java.util.Collection;
 import java.util.List;
 
 import org.axdt.as3.As3EPackage;
+import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3Member;
 import org.axdt.as3.model.As3Type;
 import org.axdt.as3.model.IDirective;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -138,7 +140,8 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	 * <!-- end-user-doc -->
 	 */
 	public boolean isDynamic() {
-		return false;
+		As3Attributes attris = getAttributes();
+		return attris != null ? attris.isFinal() : false;
 	}
 
 	/**
@@ -146,7 +149,8 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	 * <!-- end-user-doc -->
 	 */
 	public boolean isFinal() {
-		return false;
+		As3Attributes attris = getAttributes();
+		return attris != null ? attris.isFinal() : false;
 	}
 
 	/**
@@ -182,6 +186,14 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 		}
 		// TODO: handle inheritance
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmVisibility getVisibility() {
+		return super.getVisibility();
 	}
 
 	/**

@@ -14,6 +14,7 @@ import org.axdt.as3.model.As3ArrayElement;
 import org.axdt.as3.model.As3ArrayInitializer;
 import org.axdt.as3.model.As3AssignmentExpression;
 import org.axdt.as3.model.As3AttributeQualifiedIdentifier;
+import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3BitwiseExpression;
 import org.axdt.as3.model.As3BitwiseNotExpression;
 import org.axdt.as3.model.As3Block;
@@ -75,6 +76,7 @@ import org.axdt.as3.model.As3QueryExpression;
 import org.axdt.as3.model.As3QueryOperator;
 import org.axdt.as3.model.As3RegexLiteral;
 import org.axdt.as3.model.As3RelationalExpression;
+import org.axdt.as3.model.As3ReservedAttribute;
 import org.axdt.as3.model.As3ReturnStatement;
 import org.axdt.as3.model.As3ShiftExpression;
 import org.axdt.as3.model.As3SimpleAttributeExpression;
@@ -945,6 +947,24 @@ public interface As3EFactory extends EFactory {
 	 * @generated
 	 */
 	As3ConditionalBlock createAs3ConditionalBlock();
+
+	/**
+	 * Returns a new object of class '<em>As3 Reserved Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>As3 Reserved Attribute</em>'.
+	 * @generated
+	 */
+	As3ReservedAttribute createAs3ReservedAttribute();
+
+	/**
+	 * Returns a new object of class '<em>As3 Attributes</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>As3 Attributes</em>'.
+	 * @generated
+	 */
+	As3Attributes createAs3Attributes();
 
 	/**
 	 * Returns the package supported by this factory.

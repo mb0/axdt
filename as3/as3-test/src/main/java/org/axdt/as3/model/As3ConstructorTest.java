@@ -11,6 +11,7 @@ import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
 import org.axdt.avm.model.AvmConstructorTest;
+import org.axdt.avm.model.AvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,5 +102,9 @@ public class As3ConstructorTest extends AvmConstructorTest {
 
 	public void testGetDirectives() {
 		assertNotNull(getFixture().getDirectives());
+	}
+	
+	public void testGetVisibility() {
+		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
 	}
 } //As3ConstructorTest

@@ -7,11 +7,20 @@
  ******************************************************************************/
 package org.axdt.as3.model;
 
+import org.axdt.avm.model.AvmVisibility;
+
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>As3 Member</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link org.axdt.avm.model.AvmMember#isStatic() <em>Is Static</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getVisibility() <em>Get Visibility</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public abstract class As3MemberTest extends As3DefinitionTest {
@@ -35,6 +44,26 @@ public abstract class As3MemberTest extends As3DefinitionTest {
 	@Override
 	protected As3Member getFixture() {
 		return (As3Member)fixture;
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmMember#isStatic() <em>Is Static</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmMember#isStatic()
+	 */
+	public void testIsStatic() {
+		assertFalse(getFixture().isStatic());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDeclaredElement#getVisibility() <em>Get Visibility</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDeclaredElement#getVisibility()
+	 */
+	public void testGetVisibility() {
+		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
 	}
 
 } //As3MemberTest

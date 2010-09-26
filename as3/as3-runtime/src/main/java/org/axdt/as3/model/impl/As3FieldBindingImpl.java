@@ -8,6 +8,7 @@
 package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
+import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3FieldBinding;
 import org.axdt.as3.model.As3FieldDefinition;
 import org.axdt.as3.model.IExpression;
@@ -260,5 +261,17 @@ public class As3FieldBindingImpl extends As3MemberImpl implements As3FieldBindin
 		EObject parent = eContainer();
 		return parent instanceof As3FieldDefinition
 			? parent.eContainer() : parent; 
+	}
+	@Override
+	public As3Attributes getAttributes() {
+		if (eContainer instanceof As3FieldDefinition) {
+			As3FieldDefinition fieldDef = (As3FieldDefinition) eContainer;
+			return fieldDef.getAttributes();
+		}
+		return null;
+	}
+	@Override
+	public void setAttributes(As3Attributes newAttributes) {
+		throw new UnsupportedOperationException();
 	}
 } //As3FieldBindingImpl

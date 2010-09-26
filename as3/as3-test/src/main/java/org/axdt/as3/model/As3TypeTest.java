@@ -8,6 +8,7 @@
 package org.axdt.as3.model;
 
 import org.axdt.avm.model.AvmDeclaredTypeTest;
+import org.axdt.avm.model.AvmVisibility;
 
 
 /**
@@ -49,5 +50,10 @@ public abstract class As3TypeTest extends AvmDeclaredTypeTest {
 	@Override
 	protected As3Type getFixture() {
 		return (As3Type)fixture;
+	}
+	
+
+	public void testGetVisibility() {
+		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
 	}
 } //As3TypeTest

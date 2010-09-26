@@ -315,4 +315,11 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parseExpression("/^regex$/gi");
 		assertParseResult(result);
 	}
+	public void testStatements() throws Exception {
+		IParseResult result;
+		result = parse("var i:int\ni++;");
+		assertParseResult(result);
+		result = parse("1++\n2++\n");
+		assertParseResult(result);
+	}
 }

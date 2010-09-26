@@ -14,6 +14,7 @@ import org.axdt.as3.services.As3GrammarAccess;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
@@ -53,25 +54,18 @@ public class As3FormattingStream extends FormattingConfigBasedStream {
 	}
 
 	protected boolean isVSemiPart(EObject ele) {
-		if (ele == null)
-			return false;
-		EObject container = ele.eContainer();
-		return container != null && isVSemiRule(container.eContainer());
+		return ele instanceof RuleCall && isVSemiRule(((RuleCall)ele).getRule());
 	}
 
 	@Override
 	public void writeSemantic(EObject grammarElement, String value)
 			throws IOException {
 		String preserve = null;
-		if (";".equals(value)) {
-			if (isVSemiPart(grammarElement))
-				grammarElement = grammarElement.eContainer().eContainer();
-		} else if (BREAKS.contains(value)) {
+		if (BREAKS.contains(value)) {
 			preserve = value;
 			value = null;
 			if (isVSemiPart(grammarElement)) {
 				value = ";";
-				grammarElement = grammarElement.eContainer().eContainer();
 			}
 		}
 		if (value != null)
@@ -82,8 +76,8 @@ public class As3FormattingStream extends FormattingConfigBasedStream {
 	}
 
 	protected Set<ElementLocator> collectLocators(EObject ele) {
-		boolean addVsemi = isVSemiRule(last);
-		Set<ElementLocator> locators = isVSemiRule(ele) ? Sets
+		boolean addVsemi = isVSemiPart(last);
+		Set<ElementLocator> locators = isVSemiPart(ele) ? Sets
 				.newHashSet(getBeforeVSemiLocator()) : super
 				.collectLocators(ele);
 		if (addVsemi)
