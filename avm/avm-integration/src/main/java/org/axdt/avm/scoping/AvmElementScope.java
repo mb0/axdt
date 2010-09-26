@@ -85,14 +85,14 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		return type;
 	}
 
-	protected void collectAllMembers(AvmClass type, List<AvmMember> list) {
+	protected void collectAllMembers(AvmDeclaredType type, List<AvmMember> list) {
 		list.addAll(type.getMembers());
-		AvmDeclaredType superType = resolveTypeReference(type.getExtendedClass());
-		if (superType instanceof AvmClass)
-			collectAllMembers((AvmClass) superType, list);
-	}
-	protected void collectAllMembers(AvmInterface type, List<AvmMember> list) {
-		list.addAll(type.getMembers());
+		if (type.isClass()) {
+			AvmClass clss = (AvmClass) type;
+			AvmDeclaredType superType = resolveTypeReference(clss.getExtendedClass());
+			if (superType instanceof AvmClass)
+				collectAllMembers((AvmClass) superType, list);
+		}
 		List<AvmTypeReference> interfaces = type.getExtendedInterfaces();
 		for (AvmTypeReference ref:interfaces) {
 			AvmDeclaredType superType = resolveTypeReference(ref);
@@ -102,10 +102,7 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 	}
 	protected Iterable<AvmMember> getAllMembers(AvmDeclaredType type) {
 		List<AvmMember> result = Lists.newArrayList();
-		if (type.isClass())
-			collectAllMembers((AvmClass) type, result);
-		else if (type.isInterface())
-			collectAllMembers((AvmInterface) type, result);
+		collectAllMembers(type, result);
 		return result;
 	}
 	
