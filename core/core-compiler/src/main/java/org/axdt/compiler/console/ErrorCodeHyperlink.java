@@ -24,9 +24,6 @@ public class ErrorCodeHyperlink implements IHyperlink {
 	}
 
 	public void linkEntered() {
-		URL url = getURL();
-		if (url != null)
-			new SwfEditorLauncher().open(url);
 	}
 
 	protected URL getURL() {
@@ -45,5 +42,8 @@ public class ErrorCodeHyperlink implements IHyperlink {
 	}
 
 	public void linkActivated() {
+		URL url = getURL();
+		if (url != null)
+			new SwfEditorLauncher().open(url);
 	}
 }
