@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.axdt.as3.As3EFactory;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3AccessExpression;
+import org.axdt.as3.model.As3CatchClause;
 import org.axdt.as3.model.As3Class;
 import org.axdt.as3.model.As3Executable;
 import org.axdt.as3.model.As3ExpressionList;
@@ -177,6 +178,9 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 		}
 		return null;
 	}
+	IScope scope_AvmReferable(As3CatchClause ctx, EObject initial, EReference ref) {
+		return getCachedScope(ctx, ref, As3CatchScope.class);
+	}
 	IScope scope_AvmReferable(As3PropertyOperator ctx, EObject initial, EReference ref) {
 		if (ctx.getIdentifier() != null
 				&& ctx.eContainingFeature() == As3EPackage.eINSTANCE.getAs3AccessExpression_Operator()) {
@@ -285,5 +289,18 @@ class As3WithScope extends AvmPropertyScope<As3WithStatement> {
 		As3FieldBinding field = As3EFactory.eINSTANCE.createAs3FieldBinding();
 		field.setName(name);
 		return field;
+	}
+}
+
+class As3CatchScope extends AvmElementScope<As3CatchClause> {
+
+	public As3CatchScope(As3CatchClause element, EReference ref,
+			IScopeProvider scopeProvider) {
+		super(element, ref, scopeProvider);
+	}
+
+	@Override
+	protected Iterable<? extends AvmReferable> getCandidates() {
+		return Collections.singleton(element.getError());
 	}
 }
