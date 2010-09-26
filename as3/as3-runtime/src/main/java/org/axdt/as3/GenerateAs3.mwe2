@@ -18,6 +18,7 @@ var uiProject = "../as3-ui"
 var avmProject = "../../avm/avm-runtime"
 var srcGen = "/src/generated/java"
 var src = "/src/main/java"
+var antlrTimeout = "10000"
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "../../.."
@@ -66,6 +67,7 @@ Workflow {
 					memoize = true
 					classSplitting = true
 				}
+				antlrParam = "-Xconversiontimeout" antlrParam = "${antlrTimeout}"
 			}
 			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
@@ -92,6 +94,7 @@ Workflow {
 					memoize = true	
 					classSplitting = true
 				}
+				antlrParam = "-Xconversiontimeout" antlrParam = "${antlrTimeout}"
 			}
 		}
 	}
