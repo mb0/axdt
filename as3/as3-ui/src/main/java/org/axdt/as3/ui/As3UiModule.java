@@ -42,6 +42,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
@@ -54,9 +55,11 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 /**
@@ -149,6 +152,9 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public Class<? extends CrossReferenceTemplateVariableResolver> bindCrossReferenceTemplateVariableResolver() {
 		return As3CrossReferenceTemplateVariableResolver.class;
+	}
+	public Provider<IAllContainersState> provideIAllContainersState() {
+		return Access.getWorkspaceProjectsState();
 	}
 }
 class As3ImageHelper implements IImageHelper {
