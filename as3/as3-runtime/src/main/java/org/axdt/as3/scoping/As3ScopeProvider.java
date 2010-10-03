@@ -128,18 +128,18 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 		return cache.get(getCacheKey(ctx, ref), ctx.eResource(), provider);
 	}
 	<T extends EObject> IScope getCachedScope(final T ctx, final EReference ref, final Class<? extends AvmElementScope<T>> type) {
-		return getCachedScope(ctx, ref, new Provider<IScope>() {
-			@SuppressWarnings("rawtypes")
-			public IScope get() {
+//		return getCachedScope(ctx, ref, new Provider<IScope>() {
+//			public IScope get() {
 				try {
+					@SuppressWarnings("rawtypes")
 					Constructor constructor = type.getConstructors()[0];
 					return (IScope) constructor.newInstance(ctx, ref, As3ScopeProvider.this);
 				} catch (Exception e) {
 					logger.warn("error creating avm element scope", e);
 					return null;
 				}
-			}
-		});
+//			}
+//		});
 	}
 	Object getCacheKey(EObject ctx, EReference ref) {
 		return Tuples.create(As3ScopeProvider.class, ctx, ref);
