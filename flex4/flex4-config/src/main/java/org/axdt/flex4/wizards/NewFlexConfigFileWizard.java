@@ -121,7 +121,11 @@ public class NewFlexConfigFileWizard extends AbstractFileWizard {
 			buf.append("\t\t<").append(name).append(" append=\"true\">\n");
 			for (IPath path: paths) {
 				buf.append("\t\t\t<path-element>");
-				buf.append(path.makeRelativeTo(parent));
+				IPath relativeTo = path.makeRelativeTo(parent);
+				if (relativeTo.segmentCount()==0)
+					buf.append("./");
+				else
+					buf.append(path.makeRelativeTo(parent));
 				buf.append("</path-element>\n");
 			}
 			buf.append("\t\t</").append(name).append(">\n");

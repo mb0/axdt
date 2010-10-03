@@ -108,7 +108,6 @@ public class NewFlexAntFileWizard extends AbstractFileWizard {
 		String srcDir = pref.getStringList(project, ICoreConfig.SOURCE_PATHS)[0];
 		IPreferenceStore store = pref.getProjectStore(project);
 		String outDir = store.getString(ICoreConfig.OUTPUT_PATH);
-		String confDir = store.getString(ICoreConfig.CONFIG_PATH);
 		String targetPath = "path/to/Application.as";
 		String targetName = "Application";
 		if (target != null
@@ -125,8 +124,6 @@ public class NewFlexAntFileWizard extends AbstractFileWizard {
 		buf.append("\t<property name=\"OUT_DIR\" location=\"").append(outDir)
 				.append("\" />\n");
 		buf.append("\t<property name=\"DOC_DIR\" location=\"${OUT_DIR}/asdoc\" />\n");
-		buf.append("\t<property name=\"CONF_DIR\" location=\"").append(confDir)
-				.append("\" />\n\n");
 		buf.append("\t<property name=\"TARGET_NAME\" value=\"")
 				.append(targetName).append("\" />\n");
 		buf.append("\t<property name=\"TARGET_PATH\" location=\"")
@@ -135,7 +132,6 @@ public class NewFlexAntFileWizard extends AbstractFileWizard {
 		buf.append("\t<target name=\"compile\">\n");
 		buf.append("\t\t<mxmlc output=\"${OUT_DIR}/${TARGET_NAME}.swf\" file=\"${TARGET_PATH}\">\n");
 		buf.append("\t\t\t<load-config filename=\"${flex.frameworks}/flex-config.xml\" />\n");
-		buf.append("\t\t\t<load-config filename=\"${CONF_DIR}/${TARGET_NAME}-config.xml\" />\n");
 		buf.append("\t\t</mxmlc>\n");
 		buf.append("\t</target>\n\n");
 		buf.append("\t<target name=\"wrapper\">\n");
@@ -146,7 +142,6 @@ public class NewFlexAntFileWizard extends AbstractFileWizard {
 		buf.append("\t<target name=\"asdoc\" depends=\"clean-asdoc\">\n");
 		buf.append("\t\t<asdoc output=\"${DOC_DIR}\">\n");
 		buf.append("\t\t\t<load-config filename=\"${flex.frameworks}/flex-config.xml\" />\n");
-		buf.append("\t\t\t<load-config filename=\"${CONF_DIR}/${TARGET_NAME}-config.xml\" />\n");
 		buf.append("\t\t\t<doc-sources path-element=\"${SRC_DIR}\"/>\n");
 		buf.append("\t\t</asdoc>\n");
 		buf.append("\t</target>\n\n");
@@ -162,7 +157,6 @@ public class NewFlexAntFileWizard extends AbstractFileWizard {
 		buf.append("\t\t</pathconvert>\n");
 		buf.append("\t\t<compc output=\"${OUT_DIR}/${TARGET_NAME}.swc\" include-classes=\"${classes}\">\n");
 		buf.append("\t\t\t<load-config filename=\"${flex.frameworks}/flex-config.xml\" />\n");
-		buf.append("\t\t\t<load-config filename=\"${CONF_DIR}/${TARGET_NAME}-config.xml\" />\n");
 		buf.append("\t\t</compc>\n");
 		buf.append("\t</target>\n\n");
 		buf.append("\t<target name=\"clean\" depends=\"clean-library,clean-compile,clean-asdoc,clean-wrapper\" />\n\n");
