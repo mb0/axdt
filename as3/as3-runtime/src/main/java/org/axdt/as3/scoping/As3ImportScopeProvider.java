@@ -90,7 +90,7 @@ public class As3ImportScopeProvider extends
 		return result;
 	}
 
-	protected boolean hasImports(EObject context) {
+	public boolean hasImports(EObject context) {
 		// if is local definitions
 		if (context instanceof As3Package) {
 			// check if there are any imports
@@ -184,7 +184,7 @@ public class As3ImportScopeProvider extends
 		};
 	}
 
-	protected Set<As3ImportNormalizer> getImportNormalizer(final EObject context) {
+	public Set<As3ImportNormalizer> getImportNormalizer(final EObject context) {
 		return cache.get(Tuples.pair(context, "imports"), context.eResource(), new Provider<Set<As3ImportNormalizer>>() {
 
 			public Set<As3ImportNormalizer> get() {

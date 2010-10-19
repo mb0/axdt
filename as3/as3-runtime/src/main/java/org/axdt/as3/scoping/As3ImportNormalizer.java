@@ -16,8 +16,8 @@ public class As3ImportNormalizer {
 			if (lastIndex<0)
 				return new As3ImportNormalizer(raw, null);
 		}
-		name = raw.substring(0,lastIndex);
-		qualifier = raw.substring(lastIndex+offset);
+		qualifier = raw.substring(0,lastIndex);
+		name = raw.substring(lastIndex+offset);
 		return new As3ImportNormalizer(name, qualifier);
 	}
 	
@@ -65,6 +65,12 @@ public class As3ImportNormalizer {
 		} else if (!qualifier.equals(other.qualifier))
 			return false;
 		return true;
+	}
+	public boolean match(As3ImportNormalizer other) {
+		if (name == null) {
+			return equalsQualifier(other);
+		}
+		return equals(other);
 	}
 	
 	public String shortToLongName(String shortName) {

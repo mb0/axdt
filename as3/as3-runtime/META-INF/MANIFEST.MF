@@ -25,5 +25,6 @@ Export-Package: org.axdt.as3,
  org.axdt.as3.parseTreeConstruction,
  org.axdt.as3.parser.antlr,
  org.axdt.as3.parser.antlr.internal,
+ org.axdt.as3.scoping,
  org.axdt.as3.services,
  org.axdt.as3.validation

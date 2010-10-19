@@ -7,6 +7,12 @@
  ******************************************************************************/
 package org.axdt.as3.ui.contentassist;
 
+import java.util.Collections;
+import java.util.Set;
+
+import org.axdt.as3.scoping.As3ImportNormalizer;
+import org.axdt.as3.scoping.As3ImportScopeProvider;
+import org.axdt.as3.scoping.As3ScopeProvider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -30,15 +36,48 @@ public class As3ProposalProvider extends AbstractAs3ProposalProvider {
 			int priority, ContentAssistContext context) {
 		int replacementOffset = context.getReplaceRegion().getOffset();
 		int replacementLength = context.getReplaceRegion().getLength();
-		ConfigurableCompletionProposal result;
-		if (proposal.contains("::"))
-			result = doCreateQualifiedProposal(proposal,context.getCurrentModel(), displayString, image, replacementOffset, replacementLength);
-		else
+		ConfigurableCompletionProposal result = null;
+		if (proposal.contains("::")) {
+			As3ImportNormalizer name = As3ImportNormalizer.parse(proposal);
+			for (As3ImportNormalizer norm:getImportNormalizers(context.getCurrentModel())) {
+				if (norm.match(name)) {
+					proposal = name.name;
+					break;
+				}
+			}
+			if (proposal.contains("::")) {
+				result = doCreateQualifiedProposal(proposal,context.getCurrentModel(), displayString, image, replacementOffset, replacementLength);
+				result.setPriority(priority-400);
+			}
+		} 
+		if (result == null){
 			result = doCreateProposal(proposal, displayString, image, replacementOffset, replacementLength);
-		result.setPriority(priority);
+			result.setPriority(priority);
+		}
 		result.setMatcher(context.getMatcher());
 		result.setReplaceContextLength(context.getReplaceContextLength());
 		return result;
+	}
+	private Set<As3ImportNormalizer> getImportNormalizers(EObject context) {
+		As3ImportScopeProvider importScopeProvider = getImportScopeProvider();
+		if (importScopeProvider != null) {
+			EObject current = context;
+			while (current != null) {
+				if (importScopeProvider.hasImports(current)) break;
+				current = current.eContainer();
+			}
+			return importScopeProvider.getImportNormalizer(current);
+		}
+		return Collections.emptySet();
+	}
+	private As3ImportScopeProvider getImportScopeProvider() {
+		if (getCrossReferenceProposalCreator().getScopeProvider() instanceof As3ScopeProvider) {
+			As3ScopeProvider scopeProvider = (As3ScopeProvider) getCrossReferenceProposalCreator().getScopeProvider();
+			if (scopeProvider.getDelegate() instanceof As3ImportScopeProvider) {
+				return (As3ImportScopeProvider) scopeProvider.getDelegate();
+			}
+		}
+		return null;
 	}
 	
 	protected ConfigurableCompletionProposal doCreateQualifiedProposal(String proposal,
