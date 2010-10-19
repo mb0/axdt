@@ -107,7 +107,8 @@ public class As3FoldingRegionProvider extends DefaultFoldingRegionProvider {
 				if (hiddenFeatureID != -1 && grammarFeatureID != -1 &&
 						(Boolean)input.eGet(leafHidden, false)) {
 					EObject rule = (EObject) input.eGet(grammarElement, false);
-					return rules.contains(rule.eGet(ruleName));
+					if (rule != null)
+						return rules.contains(rule.eGet(ruleName));
 				}
 				return false;
 			}

@@ -141,7 +141,7 @@ As3NewExpression
 
 // 14.12 Property accessors
 As3PropertyOperator
-	: '.' LT* identifier=IIdentifier
+	: {As3PropertyOperator} '.' (LT* identifier=IIdentifier)?
 	| '[' LT* expressions=As3ListExpression LT* ']'
 	;
 // 14.13 Query operators

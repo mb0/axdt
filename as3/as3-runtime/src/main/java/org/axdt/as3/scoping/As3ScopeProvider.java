@@ -182,8 +182,7 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 		return getCachedScope(ctx, ref, As3CatchScope.class);
 	}
 	IScope scope_AvmReferable(As3PropertyOperator ctx, EObject initial, EReference ref) {
-		if (ctx.getIdentifier() != null
-				&& ctx.eContainingFeature() == As3EPackage.eINSTANCE.getAs3AccessExpression_Operator()) {
+		if (ctx.getExpressions() == null && ctx.eContainingFeature() == As3EPackage.eINSTANCE.getAs3AccessExpression_Operator()) {
 			As3AccessExpression access = (As3AccessExpression) ctx.eContainer();
 			return getCachedScope(access, ref, As3PropertyScope.class);
 		}
