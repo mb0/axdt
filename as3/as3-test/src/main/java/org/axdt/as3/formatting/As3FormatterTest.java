@@ -78,9 +78,6 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("a();\nb();", "a();\nb();");
 		assertFormatDefault("a();\nb();", "a();\n\n\nb();");
 	}
-	public void testLiterals() throws Exception {
-		assertFormatDefault("{a:'b', 'b':5, c:d};", "{a:'b','b':5,c:d} ; ");
-	}
 	public void testExpressions() throws Exception {
 		assertFormatDefault("1 + 1;", " 1+ 1 ; ");
 		assertFormatPreserve(" 1+ 1 ;", " 1+ 1 ; ");
@@ -98,6 +95,23 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormatDefault("{\n\t1++;\n\t2++;\n}", "{1++;\n2++;}");
 		assertFormatDefault("{\n\t1++;\n\t2++;\n}", "{1++;2++;}");
 	}
+	public void testIfElse() throws Exception {
+		assertFormatDefault("if (true) {\n} else {\n}", "if(true){}else{}");
+	}
+	public void testShortIfElse() throws Exception {
+		assertFormatDefault("if (true) 1++;\nelse 2++;", "if(true)1++;else 2++;");
+		assertFormatDefault("if (true) 1++;\nelse 2++;", "if(true)\n\t1++;else\n\t2++;");
+		// there is no easy way to add indentation so better use a block
+		assertFormat("if (true) 1++;\nelse 2++;", "if(true)\n\t1++;else\n\t2++;");
+	}
+	public void testInitializers() throws Exception {
+		// initializers can have breaks
+		assertFormat("[\n\t1,\n\t2,\n\t3\n];", "[\n1,\n2,\n3\n];");
+		assertFormat("{\n\t'a':1,\n\t'b':2,\n\t'c':3\n};", "{\n'a':1,\n'b':2,\n'c':3\n};");
+		// the trade off are bounding spaces
+		assertFormat("[ 1, 2, 3 ];", "[1,2,3];");
+		assertFormat("{ 'a':1, 'b':2, 'c':3 };", "{'a':1,'b':2,'c':3};");
+	}
 	public void testStatements() throws Exception {
 		assertFormatDefault("if (true) {\n}", "if(true){}");
 		assertFormatDefault("if (true) {\n\t1 + 1;\n}", "if(true){1+1;}");
@@ -112,12 +126,23 @@ public class As3FormatterTest extends AbstractXtextTests {
 	}
 	public void testEndComment() throws Exception {
 		assertFormat("1++;\n//comment", "1++;//comment");
-		assertFormatPreserve("1++;\n//comment", "1++;//comment");
-		// TODO eof comment not working
-		assertFormatDefault("1++; //comment", "1++;//comment");
+		assertFormat("1++;\n//comment", "1++;\n//comment");
+		assertFormatPreserve("1++;//comment", "1++;//comment");
+		assertFormatPreserve("1++;  //comment", "1++;  //comment");
+		assertFormatDefault("1++;\n//comment", "1++;\n\n//comment");
+		assertFormatDefault("1++;\n//comment", "1++;//comment");
+		assertFormatDefault("1++;\n//comment\n2++;", "1++;//comment\n2++;");
+	}
+	public void testCommentInBlock() throws Exception {
+		// this seems a bit strange because of the comment indention fix
+		assertFormat("class A {\n\t1++;\n\t//comment\n}","class A{1++;//comment\n}");
+		assertFormat("class A {\n\t//comment\n\t1++;\n}","class A{\n//comment\n1++;}");
+		assertFormat("class A {\t//comment\n\t1++;\n}","class A{//comment\n1++;}");
+		assertFormatDefault("class A {\n\t1++;\n\t//comment\n}","class A{1++;//comment\n}");
+		assertFormat("class A {//comment\n}","class A{//comment\n}");
 	}
 	public void testComments() throws Exception {
-		assertFormat("a++;\n/* ml comment */ a++;", "a++;/* ml comment */a++;");
+		assertFormat("a++;\n/* ml comment */\na++;", "a++;/* ml comment */a++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n/* ml comment */\na++;");
 		assertFormatDefault("a++;\n/* ml comment */\na++;", "a++;\n\n\n/* ml comment */\n\n\na++;");
 		assertFormat("a++;\n\n/* ml comment */\n\na++;", "a++;\n\n\n/* ml comment */\n\n\na++;");

@@ -27,6 +27,6 @@ public class As3HiddenTokenHelper extends DefaultHiddenTokenHelper {
 	}
 
 	public boolean isComment(AbstractRule rule) {
-		return rule != null && COMMENT_RULES.contains(rule);
+		return rule != null && COMMENT_RULES.contains(rule.getName());
 	}
 }

@@ -42,9 +42,4 @@ public class As3AutoEditStrategy extends DefaultAutoEditStrategy {
 		converter.setLineTracker(new DefaultLineTracker());
 		acceptor.accept(converter);
 	}
-
-	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(newMultiLineTerminals("/**", " * ", " */"));
-		acceptor.accept(newMultiLineTerminals("/*", " * ", " */"));	
-	}
 }
