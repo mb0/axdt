@@ -45,17 +45,18 @@ public class AxdtImageHelper implements BundleListener, AxdtImages {
 		if (descriptor == null) {
 			descriptor = ImageDescriptor.getMissingImageDescriptor();
 		}
-		synchronized (registry) {
-			Image result = registry.get(descriptor);
-			if (result != null) {
-				return result;
-			}
-			result = descriptor.createImage();
-			if (result != null) {
-				registry.put(descriptor, result);
-			}
+		Image result = registry.get(descriptor);
+		if (result != null) {
 			return result;
 		}
+		result = descriptor.createImage();
+		if (result != null) {
+			Image existing = registry.put(descriptor, result);
+			if (existing != null) {
+				existing.dispose();
+			}
+		}
+		return result;
 	}
 
 	public void dispose() {
