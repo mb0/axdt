@@ -166,17 +166,16 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 		while (current != null) {
 			if (ctx.equals(current.eContainer())) {
 				if (current.eContainingFeature() == As3EPackage.eINSTANCE
-						.getAs3WithStatement_Statement())
-					return getCachedScope(ctx, ref, new Provider<IScope>() {
-						public IScope get() {
-							return new As3WithScope(ctx, initial, ref, As3ScopeProvider.this);
-						}
-					});
-				break;
+						.getAs3WithStatement_Target())
+				return null;
 			}
 			current = current.eContainer();
 		}
-		return null;
+//		return getCachedScope(ctx, ref, new Provider<IScope>() {
+//			public IScope get() {
+				return new As3WithScope(ctx, initial, ref, As3ScopeProvider.this);
+//			}
+//		});
 	}
 	IScope scope_AvmReferable(As3CatchClause ctx, EObject initial, EReference ref) {
 		return getCachedScope(ctx, ref, As3CatchScope.class);
