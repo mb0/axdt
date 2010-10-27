@@ -19,7 +19,7 @@ You can find a copy of the license text in any Axdt feature.
    </license>
 
    <url>
-      <update label="Axdt Updates" url="http://update.axdt.org/"/>
+      <update label="Axdt Updates" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/"/>
    </url>
 
    <requires>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="Axdt update-site" url="http://update.axdt.org/">
+   <description name="Axdt update-site" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/">
       Axdt enables you to write ActionScript3 code in an integrated environment.
    </description>
    <feature url="features/org.axdt.as3.feature_0.0.8.qualifier.jar" id="org.axdt.as3.feature" version="0.0.8.qualifier"/>

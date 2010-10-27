@@ -18,7 +18,7 @@
    </license>
 
    <url>
-      <update label="%updateName" url="http://update.axdt.org/"/>
+      <update label="%updateName" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/"/>
    </url>
 
    <requires>
