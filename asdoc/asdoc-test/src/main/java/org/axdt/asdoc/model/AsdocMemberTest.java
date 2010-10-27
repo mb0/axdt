@@ -41,6 +41,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 
 	public void testGetFullUri_Root() {
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
+		root.setParseType(ParseType.HTML);
 		root.setBaseUri("file://tmp/test/");
 		root.getMembers().add(getFixture());
 		assertNull(getFixture().getFullUri());
@@ -55,6 +56,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 	public void testGetFullUri_Package() {
 		getFixture().setName("naMe");
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
+		root.setParseType(ParseType.HTML);
 		root.setBaseUri("file://tmp/test/");
 		AsdocPackage pack = root.createPackage("foo.bar");
 		pack.getMembers().add(getFixture());
@@ -64,6 +66,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		getFixture().setName("naMe");
 		assertNull(getFixture().getFullUri());
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
+		root.setParseType(ParseType.HTML);
 		root.setBaseUri("file://tmp/test/");
 		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
 		type.setName("Test");
@@ -76,6 +79,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		getFixture().setName("naMe");
 		assertNull(getFixture().getFullUri());
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
+		root.setParseType(ParseType.HTML);
 		root.setBaseUri("file://tmp/test/");
 		AsdocPackage pack = root.createPackage("org.nicegui");
 		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();

@@ -121,8 +121,9 @@ public class AsdocRootTest extends AsdocPackageTest {
 	@Override
 	public void testGetFullUri() {
 		assertNull(getFixture().getFullUri());
-		assertEquals(getFixture().getBaseUri(), getFixture().getFullUri());
 		getFixture().setBaseUri("file:///tmp/test/");
+		assertNull(getFixture().getFullUri());
+		getFixture().setParseType(ParseType.HTML);
 		assertEquals(getFixture().getBaseUri(), getFixture().getFullUri());
 	}
 	@Override

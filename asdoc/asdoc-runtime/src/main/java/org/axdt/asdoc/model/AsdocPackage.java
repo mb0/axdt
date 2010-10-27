@@ -321,12 +321,4 @@ public interface AsdocPackage extends AsdocElement, AvmPackage {
 	 */
 	AsdocPackage createChildPackage(String name);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	AsdocRoot getRoot();
-
 } // AsdocPackage

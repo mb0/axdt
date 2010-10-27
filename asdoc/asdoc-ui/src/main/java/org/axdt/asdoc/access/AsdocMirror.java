@@ -10,8 +10,9 @@ package org.axdt.asdoc.access;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.AsdocType;
-import org.axdt.asdoc.parser.CollectTypeInfo;
+import org.axdt.asdoc.parser.AsdocParser;
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.access.AbstractMirror;
 import org.axdt.avm.access.AvmResource;
@@ -61,8 +62,10 @@ public class AsdocMirror extends AbstractMirror {
 		} else if (mirroredDefinition instanceof AsdocType) {
 			AsdocType asdocType = (AsdocType) mirroredDefinition;
 			if (!asdocType.isMemberContentParsed()) {
+				AsdocRoot root = asdocType.getRoot();
 				try {
-					new CollectTypeInfo().collectType(asdocType);
+					AsdocParser parser = root.getParseType().getParser();
+					parser.parseMemberLevel(asdocType);
 				} catch (Exception e) {
 					logger.error(e);
 				}

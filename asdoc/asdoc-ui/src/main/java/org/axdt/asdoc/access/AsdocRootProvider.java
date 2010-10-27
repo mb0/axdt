@@ -49,8 +49,6 @@ public class AsdocRootProvider extends AbstractAsdocRootProvider {
 
 	protected IAxdtProjectProvider projectProvider;
 
-	private AsdocParser docParser = new AsdocParser();
-	
 	private AsdocRootProvider() {
 		super();
 	}
@@ -87,6 +85,10 @@ public class AsdocRootProvider extends AbstractAsdocRootProvider {
 					try {
 						AsdocRoot root = addRoot(item.name, item.url);
 						initialize(root, ParseLevel.GLOBAL);
+						if (item.asdocUrl != null) {
+							// XXX ugly hack should use a property or map
+							root.setAsdoc(item.asdocUrl);
+						}
 						initialized.add(root);
 					} catch (Exception e) {
 						item.status = new Status(IStatus.ERROR, "org.axdt.asdoc.ui", e.getClass().getSimpleName() +" "+ e.getMessage(), e);
@@ -112,11 +114,12 @@ public class AsdocRootProvider extends AbstractAsdocRootProvider {
 	}
 	public void initialize(AsdocRoot root, ParseLevel level) throws Exception {
 		try {
-			docParser.parseDoc(root, level);
+			AsdocParser parser = root.getParseType().getParser();
+			parser.parseDoc(root, level);
 			if (root.eResource().isModified())
 				saveRoot(root);
 		} catch (Exception e) {
-			logger.error("error parsing asdoc at "+root.getFullUri(), e);
+			logger.error("error parsing asdoc at "+root.getBaseUri(), e);
 			throw e;
 		}
 	}

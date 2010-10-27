@@ -9,12 +9,10 @@ package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocMember;
-import org.axdt.asdoc.model.AsdocPackage;
-import org.axdt.asdoc.model.AsdocType;
+import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -221,19 +219,14 @@ public abstract class AsdocMemberImpl extends AsdocDefinitionImpl implements Asd
 
 	@Override
 	public String getFullUri() {
-		// member can be contained in a package or type
-		EObject container = eContainer();
-		if (getName() == null || container == null)
-			return null;
-		String result = null;
-		if (container instanceof AsdocType) {
-			result = ((AsdocType) container).getFullUri();
-		} else if (container instanceof AsdocPackage) {
-			result = ((AsdocPackage) container).getFullUri();
-			if (result != null)	result += "package.html";
+		AsdocRoot root = getRoot();
+		if (root != null) {
+			String base = root.getBaseUri();
+			String uri = root.getParseType().getUrlHelper()
+				.memberUrl(this);
+			if (base != null && uri != null)
+				return base + uri; 
 		}
-		if (result != null)
-			result += "#"+ getName();
-		return result;
+		return null;
 	}
 } //AsdocMemberImpl

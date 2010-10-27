@@ -11,12 +11,12 @@ import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocConstructor;
+import org.axdt.asdoc.model.AsdocDefinition;
 import org.axdt.asdoc.model.AsdocElement;
 import org.axdt.asdoc.model.AsdocExecutable;
 import org.axdt.asdoc.model.AsdocField;
 import org.axdt.asdoc.model.AsdocInterface;
 import org.axdt.asdoc.model.AsdocMember;
-import org.axdt.asdoc.model.AsdocDefinition;
 import org.axdt.asdoc.model.AsdocNamespace;
 import org.axdt.asdoc.model.AsdocOperation;
 import org.axdt.asdoc.model.AsdocPackage;
@@ -25,6 +25,7 @@ import org.axdt.asdoc.model.AsdocProperty;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.AsdocType;
 import org.axdt.asdoc.model.ParseLevel;
+import org.axdt.asdoc.model.ParseType;
 import org.axdt.avm.AvmEPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -152,6 +153,13 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * @generated
 	 */
 	private EEnum parseLevelEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum parseTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -429,6 +437,15 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAsdocRoot_ParseType() {
+		return (EAttribute)asdocRootEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAsdocType() {
 		return asdocTypeEClass;
 	}
@@ -672,6 +689,15 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getParseType() {
+		return parseTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AsdocEFactory getAsdocEFactory() {
 		return (AsdocEFactory)getEFactoryInstance();
 	}
@@ -723,6 +749,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		asdocRootEClass = createEClass(ASDOC_ROOT);
 		createEAttribute(asdocRootEClass, ASDOC_ROOT__BASE_URI);
 		createEAttribute(asdocRootEClass, ASDOC_ROOT__VERSION);
+		createEAttribute(asdocRootEClass, ASDOC_ROOT__PARSE_TYPE);
 
 		asdocTypeEClass = createEClass(ASDOC_TYPE);
 		createEAttribute(asdocTypeEClass, ASDOC_TYPE__VISIBILITY);
@@ -761,6 +788,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 
 		// Create enums
 		parseLevelEEnum = createEEnum(PARSE_LEVEL);
+		parseTypeEEnum = createEEnum(PARSE_TYPE);
 	}
 
 	/**
@@ -829,6 +857,8 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 
 		addEOperation(asdocElementEClass, ecorePackage.getEString(), "getFullUri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(asdocElementEClass, this.getAsdocRoot(), "getRoot", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(asdocDefinitionEClass, AsdocDefinition.class, "AsdocDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsdocDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, AsdocDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -858,11 +888,10 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		op = addEOperation(asdocPackageEClass, this.getAsdocPackage(), "createChildPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(asdocPackageEClass, this.getAsdocRoot(), "getRoot", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(asdocRootEClass, AsdocRoot.class, "AsdocRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsdocRoot_BaseUri(), ecorePackage.getEString(), "baseUri", null, 0, 1, AsdocRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsdocRoot_Version(), ecorePackage.getEInt(), "version", "1", 0, 1, AsdocRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsdocRoot_ParseType(), this.getParseType(), "parseType", "", 0, 1, AsdocRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(asdocRootEClass, this.getAsdocPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "fqn", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -912,6 +941,11 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		addEEnumLiteral(parseLevelEEnum, ParseLevel.TYPE);
 		addEEnumLiteral(parseLevelEEnum, ParseLevel.GLOBAL);
 		addEEnumLiteral(parseLevelEEnum, ParseLevel.MEMBER);
+
+		initEEnum(parseTypeEEnum, ParseType.class, "ParseType");
+		addEEnumLiteral(parseTypeEEnum, ParseType.NONE);
+		addEEnumLiteral(parseTypeEEnum, ParseType.HTML);
+		addEEnumLiteral(parseTypeEEnum, ParseType.DITA);
 
 		// Create resource
 		createResource(eNS_URI);

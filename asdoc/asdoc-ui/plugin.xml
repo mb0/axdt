@@ -36,4 +36,13 @@
 			name="%asdocPref">
 		</page>
    </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.axdt.asdoc.ui.preferences"
+			class="org.axdt.asdoc.ui.preferences.AsdocBuiltInPreferencePage"
+			id="org.axdt.asdoc.ui.builtinPreferences"
+			name="%asdocBuiltInPref">
+		</page>
+   </extension>
 </plugin>

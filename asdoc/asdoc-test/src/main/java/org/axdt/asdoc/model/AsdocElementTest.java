@@ -17,6 +17,7 @@ import junit.framework.TestCase;
  * The following operations are tested:
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.AsdocElement#getFullUri() <em>Get Full Uri</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.AsdocElement#getRoot() <em>Get Root</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmIdentifiable#getName() <em>Get Name</em>}</li>
  * </ul>
  * </p>
@@ -71,6 +72,15 @@ public abstract class AsdocElementTest extends TestCase {
 	 */
 	public void testGetFullUri() {
 		assertEquals(null, getFixture().getFullUri());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.asdoc.model.AsdocElement#getRoot() <em>Get Root</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.asdoc.model.AsdocElement#getRoot()
+	 */
+	public void testGetRoot() {
 	}
 
 	/**

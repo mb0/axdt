@@ -8,13 +8,12 @@
 package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEPackage;
-import org.axdt.asdoc.model.AsdocElement;
 import org.axdt.asdoc.model.AsdocParameter;
+import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.avm.model.AvmTypeReference;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -244,13 +243,14 @@ public class AsdocParameterImpl extends AsdocDefinitionImpl implements AsdocPara
 		return result.toString();
 	}
 
-	@Override
 	public String getFullUri() {
-		// parameter has no own documentation 
-		// so return the containers uri if available
-		EObject container = eContainer();
-		if (container instanceof AsdocElement)
-			return ((AsdocElement) container).getFullUri();
+		AsdocRoot root = getRoot();
+		if (root != null) {
+			String base = root.getBaseUri();
+			String url = root.getParseType().getUrlHelper().paramUrl(this);
+			if (base != null && url != null)
+				return base + url; 
+		}
 		return null;
 	}
 

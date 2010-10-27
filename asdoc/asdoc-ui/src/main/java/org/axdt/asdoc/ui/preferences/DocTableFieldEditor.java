@@ -48,6 +48,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
+import com.google.inject.internal.Lists;
+
 public class DocTableFieldEditor extends FieldEditor {
 
 	private Composite baseComp;
@@ -226,10 +228,14 @@ public class DocTableFieldEditor extends FieldEditor {
 	}
 
 	protected static Object[] deserializeValue(String value) {
-		if (value == null) return new Object[0];
-		List<Object> list = new ArrayList<Object>();
+		List<DocItem> list = deserializeList(value);
+		return list.toArray();
+	}
+	protected static List<DocItem> deserializeList(String value) {
+		List<DocItem> list = Lists.newArrayList();
+		if (value == null) return list;
 		value = value.trim();
-		if (value.length() == 0) return new Object[0];
+		if (value.length() == 0) return list;
 		if (Pattern.matches("('[^']*')([,;]('[^']*'))*", value)) {
 			// rows
 			for (String part:value.split(";")) {
@@ -250,7 +256,7 @@ public class DocTableFieldEditor extends FieldEditor {
 				list.add(new DocItem("New",part));
 			}
 		}
-		return list.toArray();
+		return list;
 	}
 	
 	protected static String serializeValue(Object[] items) {
@@ -277,6 +283,7 @@ public class DocTableFieldEditor extends FieldEditor {
 		public String url;
 		public String name;
 		public IStatus status = null;
+		public String asdocUrl = null;
 
 		public DocItem(String name, String url) {
 			this.name = name;

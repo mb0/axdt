@@ -10,8 +10,14 @@
     <eLiterals name="GLOBAL" value="64" literal="GLOBAL"/>
     <eLiterals name="MEMBER" value="128"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParseType">
+    <eLiterals name="NONE"/>
+    <eLiterals name="HTML" value="1"/>
+    <eLiterals name="DITA" value="2"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AsdocElement" abstract="true" eSuperTypes="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmElement ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmIdentifiable">
     <eOperations name="getFullUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getRoot" eType="#//AsdocRoot"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AsdocDefinition" abstract="true" eSuperTypes="#//AsdocElement ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -32,7 +38,6 @@
     <eOperations name="createChildPackage" eType="#//AsdocPackage">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getRoot" eType="#//AsdocRoot"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="canonicalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//AsdocPackage" containment="true" eOpposite="#//AsdocPackage/parent"/>
@@ -65,6 +70,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parseType" eType="#//ParseType"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AsdocType" abstract="true" eSuperTypes="#//AsdocDefinition ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmDeclaredType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmVisibility"

@@ -15,15 +15,15 @@ import org.axdt.asdoc.ui.preferences.DocTableFieldEditor.DocItem;
 import org.axdt.common.preferences.AbstractPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-public class AsdocPreferencePage extends AbstractPreferencePage {
+public class AsdocBuiltInPreferencePage extends AbstractPreferencePage {
 
 	protected final AsdocPreferences asdocPreferences;
 	
-	public AsdocPreferencePage() {
+	public AsdocBuiltInPreferencePage() {
 		this(AsdocPreferences.getInstance());
 	}
-	protected AsdocPreferencePage(AsdocPreferences asdocPreferences) {
-		super(asdocPreferences);
+	protected AsdocBuiltInPreferencePage(AsdocPreferences asdocPreferences) {
+		super(asdocPreferences, AsdocPreferences.PAGE_BUILT_INS);
 		this.asdocPreferences = asdocPreferences;
 	}
 
@@ -32,7 +32,7 @@ public class AsdocPreferencePage extends AbstractPreferencePage {
 		super.performApply();
 		// if reinitialize with configuration from the workspace scope 
 		IPreferenceStore store = asdocPreferences.getStore();
-		List<DocItem> docItems = asdocPreferences.getPrefDocItems(store);
+		List<DocItem> docItems = asdocPreferences.getBuiltinDocItems(store);
 		AsdocRootProvider instance = AsdocRootProvider.getInstance();
 		if (instance != null)
 			instance.initializeAsdocs(docItems.toArray());

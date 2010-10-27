@@ -20,7 +20,6 @@ import org.axdt.asdoc.AsdocEFactory;
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getChildPackage(java.lang.String) <em>Get Child Package</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.AsdocPackage#createChildPackage(java.lang.String) <em>Create Child Package</em>}</li>
- *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getRoot() <em>Get Root</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifier() <em>Get Qualifier</em>}</li>
  * </ul>
  * </p>
@@ -94,11 +93,15 @@ public class AsdocPackageTest extends AsdocElementTest {
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
 		root.setBaseUri("file://tmp/test/");
 		getFixture().setParent(root);
-		assertEquals("file://tmp/test/foo/", getFixture().getFullUri());
 		AsdocPackage child = AsdocEFactory.eINSTANCE.createAsdocPackage();
 		child.setCanonicalName("foo.bar");
 		child.setParent(getFixture());
+		root.setParseType(ParseType.HTML);
+		assertEquals("file://tmp/test/foo/", getFixture().getFullUri());
 		assertEquals("file://tmp/test/foo/bar/", child.getFullUri());
+		root.setParseType(ParseType.DITA);
+		assertEquals("file://tmp/test/foo.xml", getFixture().getFullUri());
+		assertEquals("file://tmp/test/foo.bar.xml", child.getFullUri());
 	}
 
 	/**

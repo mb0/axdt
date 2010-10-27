@@ -61,6 +61,7 @@ public class AsdocRootItemProvider
 
 			addBaseUriPropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
+			addParseTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -105,6 +106,28 @@ public class AsdocRootItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parse Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParseTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AsdocRoot_parseType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AsdocRoot_parseType_feature", "_UI_AsdocRoot_type"),
+				 AsdocEPackage.Literals.ASDOC_ROOT__PARSE_TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -157,6 +180,7 @@ public class AsdocRootItemProvider
 		switch (notification.getFeatureID(AsdocRoot.class)) {
 			case AsdocEPackage.ASDOC_ROOT__BASE_URI:
 			case AsdocEPackage.ASDOC_ROOT__VERSION:
+			case AsdocEPackage.ASDOC_ROOT__PARSE_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

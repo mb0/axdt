@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  ******************************************************************************/
-package org.axdt.asdoc.parser;
+package org.axdt.asdoc.parser.html;
 
 import java.util.Iterator;
 import java.util.List;

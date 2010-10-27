@@ -463,17 +463,20 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getFullUri() {
 		AsdocRoot root = getRoot();
-		if (root == null) return null;
-		return root.getBaseUri() + getCanonicalName().replace(".", "/") + "/";
+		if (root != null) {
+			String base = root.getBaseUri();
+			String url = root.getParseType().getUrlHelper().packageUrl(this);
+			if (base != null && url != null)
+				return base + url; 
+		}
+		return null;
 	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public AsdocPackage getChildPackage(String fqn) {
 		if (fqn == null) return null;
@@ -498,16 +501,6 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 			getPackages().add(child);
 		}
 		return child;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public AsdocRoot getRoot() {
-		AsdocPackage parent = getParent();
-		return parent == null ? null : parent.getRoot();
 	}
 
 	/**

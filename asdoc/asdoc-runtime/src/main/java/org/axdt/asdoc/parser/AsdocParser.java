@@ -9,48 +9,35 @@ package org.axdt.asdoc.parser;
 
 import org.apache.log4j.Logger;
 import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.asdoc.model.AsdocType;
 import org.axdt.asdoc.model.ParseLevel;
 import org.eclipse.emf.ecore.resource.Resource;
 
-public class AsdocParser {
+public abstract class AsdocParser {
+	protected Logger logger = Logger.getLogger(getClass());
 	
-	private static Logger logger = Logger.getLogger(CollectPackageList.class);
-	
-	public static interface Flags {
-		int PACKAGE_GLOBALS = 16;
-		int PACKAGE_TYPES = 32;
-	}
-
 	public AsdocRoot parseDoc(AsdocRoot root, ParseLevel level) throws Exception {
 		boolean modified = false;
 		if (ParseLevel.PACKAGE_VALUE <= level.getValue()
 				&& !root.isPackageContentParsed()) {
 			logger.info("Parsing package list");
-			parsePackageLevel(root);
-			modified = true;
-			root.setPackageContentParsed(true);
+			modified = parsePackageLevel(root) || modified;
 		}
 		if (ParseLevel.TYPE_VALUE <= level.getValue()
 				&& !root.isTypeContentParsed()) {
 			logger.info("Parsing type list");
-			parseTypeLevel(root);
-			modified = true;
-			root.setTypeContentParsed(true);
+			modified = parseTypeLevel(root) || modified;
 		}
 		if (ParseLevel.GLOBAL_VALUE <= level.getValue()
 				&& root.isGlobalContentAvailable()
 				&& !root.isGlobalContentParsed()) {
 			logger.info("Parsing type list");
-			parseGlobalLevel(root);
-			modified = true;
-			root.setGlobalContentParsed(true);
+			modified = parseGlobalLevel(root) || modified;
 		}
 		if (ParseLevel.MEMBER_VALUE <= level.getValue() 
 				&& !root.isMemberContentParsed()) {
 			logger.info("Parsing type members");
-			parseMemberLevel(root);
-			modified = true;
-			root.setMemberContentParsed(true);
+			modified = parseMemberLevel(root) || modified;
 		}
 		if (modified) {
 			Resource eResource = root.eResource();
@@ -58,20 +45,14 @@ public class AsdocParser {
 		}
 		return root;
 	}
-	protected void parsePackageLevel(AsdocRoot root) throws Exception {
-		CollectPackageList collectPackageList = new CollectPackageList();
-		collectPackageList.collectPackages(root, false);
-	}
-	protected void parseTypeLevel(AsdocRoot root) throws Exception {
-		CollectTypeList collectTypeList = new CollectTypeList();
-		collectTypeList.collectAllTypes(root, false);
-	}
-	protected void parseGlobalLevel(AsdocRoot root) throws Exception {
-		CollectGlobalInfo collectGlobalInfo = new CollectGlobalInfo();
-		collectGlobalInfo.collectAllGlobalInfo(root);
-	}
-	protected void parseMemberLevel(AsdocRoot root) throws Exception {
-		CollectTypeInfo collectTypeInfo = new CollectTypeInfo();
-		collectTypeInfo.collectAllTypeInfo(root);
-	}
+
+	public abstract boolean parsePackageLevel(AsdocRoot root) throws Exception;
+
+	public abstract boolean parseTypeLevel(AsdocRoot root) throws Exception;
+
+	public abstract boolean parseGlobalLevel(AsdocRoot root) throws Exception;
+
+	public abstract boolean parseMemberLevel(AsdocRoot root) throws Exception;
+
+	public abstract boolean parseMemberLevel(AsdocType asdocType) throws Exception;
 }

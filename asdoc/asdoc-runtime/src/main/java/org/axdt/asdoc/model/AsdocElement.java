@@ -29,4 +29,12 @@ public interface AsdocElement extends AvmElement, AvmIdentifiable {
 	 * @generated
 	 */
 	String getFullUri();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	AsdocRoot getRoot();
 } // AsdocElement

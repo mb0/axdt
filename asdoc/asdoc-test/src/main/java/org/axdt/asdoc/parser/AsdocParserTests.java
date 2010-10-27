@@ -10,17 +10,18 @@ package org.axdt.asdoc.parser;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.axdt.asdoc.parser.dita.AsdocDitaParserTest;
+import org.axdt.asdoc.parser.html.AsdocHtmlParserTest;
+
 public class AsdocParserTests extends TestSuite {
 	public AsdocParserTests(String name) {
 		super(name);
 	}
 	public static Test suite() {
 		TestSuite suite = new AsdocParserTests("parser Tests");
-		suite.addTestSuite(CollectPackageListTest.class);
-		suite.addTestSuite(CollectTypeListTest.class);
-		suite.addTestSuite(CollectGlobalInfoTest.class);
-		suite.addTestSuite(CollectTypeInfoTest.class);
-		suite.addTestSuite(AsdocParserTest.class);
+		suite.addTestSuite(ParserLevelTest.class);
+		suite.addTestSuite(AsdocHtmlParserTest.class);
+		suite.addTestSuite(AsdocDitaParserTest.class);
 		return suite;
 	}
 }

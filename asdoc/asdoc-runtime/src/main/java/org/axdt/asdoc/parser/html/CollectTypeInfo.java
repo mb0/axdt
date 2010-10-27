@@ -5,23 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  ******************************************************************************/
-package org.axdt.asdoc.parser;
+package org.axdt.asdoc.parser.html;
 
+import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPathExpression;
 
-import org.apache.log4j.Logger;
+import org.axdt.asdoc.model.AsdocClass;
 import org.axdt.asdoc.model.AsdocConstructor;
 import org.axdt.asdoc.model.AsdocExecutable;
 import org.axdt.asdoc.model.AsdocField;
 import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocOperation;
+import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocProperty;
+import org.axdt.asdoc.model.AsdocType;
+import org.axdt.asdoc.util.HtmlUrlHelper;
 import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.access.IDefinitionProvider;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmDeclaredTypeReference;
 import org.axdt.avm.model.AvmDefinition;
@@ -38,8 +42,8 @@ import org.w3c.dom.NodeList;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-public abstract class AbstractMemberCollector<T extends AvmDefinition> extends AbstractCollector {
-
+public class CollectTypeInfo extends AbstractHtmlCollector {
+	
 	protected static final List<String> expectedMemberHeaderClasses = Lists.newArrayList(
 		"detailHeaderName","detailHeaderType");
 	// for some reason some docs use upper first, so ignore case
@@ -53,13 +57,190 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 	protected XPathExpression findDetailType;
 	protected XPathExpression findDetailSpan;
 	protected List<String> noneVisibilityMods = Lists.newArrayList("AS3", "static", "override", "final");
-	
-	public AbstractMemberCollector() {
+
+	protected XPathExpression findTypeHeader;
+
+	public CollectTypeInfo() {
 		super();
-		findDetailBody = compileXPath("./html:div[@class='detailBody']");
-		findDetailType = compileXPath(".//html:td");
-		findDetailSpan = compileXPath(".//html:span[0][@class='label']");
+		findDetailBody = xml.xexpr("./html:div[@class='detailBody']");
+		findDetailType = xml.xexpr(".//html:td");
+		findDetailSpan = xml.xexpr(".//html:span[0][@class='label']");
+		findTypeHeader = xml.xexpr(".//html:table[@class='classHeaderTable']//html:tr");
 	}
+	public void collectAllTypeInfo(AsdocPackage pack) throws Exception {
+		collectTypeInfo(pack);
+		for (AsdocPackage child:pack.getPackages())
+			collectAllTypeInfo(child);
+	}
+	public void collectTypeInfo(AsdocPackage pack) throws Exception {
+		for (AvmDeclaredType child:pack.getTypes()) {
+			if (child instanceof AsdocType)
+				collectType(pack, (AsdocType)child);
+			else
+				logger.error("expected AsdocType but is "+ child.getClass().getName());
+		}
+	}
+	public AsdocType collectType(AsdocType type) throws Exception {
+		if (type.eContainer() instanceof AsdocPackage)
+			return collectType((AsdocPackage) type.eContainer(),type);
+		throw new Exception(type.getCanonicalName() +"has no package info");
+	}
+	public AsdocType collectType(AsdocPackage pack, AsdocType type) throws Exception {
+		String uri = pack.getFullUri()+type.getName()+".html";
+		logger.info("loading member:"+uri);
+		Node node = xml.load(uri);
+		List<Node> contents = xml.eIter(findMain,node);
+		if (contents.size()<2) {
+			throw new Exception(type.getCanonicalName() +"has no content divs");
+		}
+		parseTypeHeader(type, contents.get(0));
+		parseTypeMembers(type, contents.get(1));
+		type.setMemberContentParsed(true);
+		if (pack.eResource() != null)
+			pack.eResource().setModified(true);
+		return type;
+	}
+	
+	public void collectAllGlobalInfo(AsdocPackage pack) throws Exception {
+		if (pack.isGlobalContentAvailable())
+			collectGlobalInfo(pack);
+		for (AsdocPackage child:pack.getPackages())
+			collectAllGlobalInfo(child);
+	}
+	public void collectGlobalInfo(final AsdocPackage pack) throws Exception {
+		String uri = pack.getFullUri()+HtmlUrlHelper.PACKAGE;
+		logger.info("loading: "+ uri);
+		try {
+			Node node = xml.load(uri);
+			Node found = xml.eval(findMain, node);
+			if (found == null)
+				found = xml.eval(findFlex4Main, node);
+			List<AsdocMember> members = xml.eIter(findDetailBody, found, new Function<Node, AsdocMember>() {
+				public AsdocMember apply(Node from) {
+					if (!from.hasChildNodes()) return null;
+					try {
+						return parseMember(pack,from);
+					} catch (Exception e) {
+						logger.error("error parsing type", e);
+						return null;
+					}
+				}
+			});
+			Collections.sort(members, this);
+			pack.getMembers().addAll(members);
+		} catch (FileNotFoundException e) {
+			logger.info("file not found '"+uri.toString()+"'.");
+		}
+	}
+
+	protected void parseTypeHeader(AsdocType type, Node node) throws Exception {
+		for (Node header:xml.eIter(findTypeHeader,node)) {
+			NodeList parts = header.getChildNodes();
+			String detail = parts.item(0).getTextContent().trim();
+			Node valueNode = parts.item(1);
+			if ("Package".equals(detail)) {
+				String packageFqn = valueNode.getTextContent().trim();
+				if (type.getQualifier() != null && !packageFqn.equals(type.getQualifier()))
+					logger.warn("package does not match types package "+packageFqn);
+			} else if ("Class".equals(detail)) {
+				String classDetail = valueNode.getTextContent().trim();
+				for (String word:classDetail.split("\\W+")) {
+					// all documented types are expected to be public
+					if ("public".equals(word)) continue;
+					if ("class".equals(word)) continue;
+					if ("dynamic".equals(word))
+						((AsdocClass)type).setDynamic(true);
+					if (!classDetail.endsWith(word)){
+						logger.info("found unknown class word: '"+word+"'");
+					}else if (!word.equals(type.getName())) {
+						logger.warn("found class name does not match: '"+word+"'");
+					}
+				}
+				logger.info("found class: '"+classDetail+"'");
+			} else if ("Inheritance".equals(detail)) {
+				if (!(type instanceof AsdocClass))
+					logger.warn("found inheritance but got no class");
+				else parseInheritance((AsdocClass) type, valueNode);
+			} else if ("Implements".equals(detail)) {
+				parseImplements(type, valueNode);
+			} else if ("Subclasses".equals(detail)) {
+				// ignore
+			} else if ("Implementors".equals(detail)) {
+				// ignore
+			} else if ("Interface".equals(detail)) {
+				// XXX investigate meaning of this 
+			} else {
+				logger.warn("found unknown header: (" + detail +") "+valueNode.getTextContent());
+			}
+		}
+	}
+	protected void parseImplements(AsdocType type, Node valueNode) {
+		String implementsDetail = valueNode.getTextContent().trim();
+		logger.info("found implements: '"+implementsDetail+"'");
+		NodeList nodes = valueNode.getChildNodes();
+		String qualifier = type.getQualifier();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if (isText(node)) {
+				String text = getText(node);
+				if (",".equals(text)) continue;
+				String[] split = text.split("\\W*,\\W*");
+				for (String qname:split) {
+					qname = parseTypeName(qname, qualifier);
+					if (qname == null) continue;
+					logger.info("found text inheritance: '"+qname+"'");
+					type.getExtendedInterfaces().add(getTypeRef(qname));
+				}
+			} else 
+			if ("a".equals(node.getNodeName())) {
+				String qname = parseTypeName(xml.attr(node, "href"), qualifier);
+				if (qname == null) continue;
+				logger.info("found link inheritance: '"+qname+"'");
+				type.getExtendedInterfaces().add(getTypeRef(qname));
+			}
+		}
+	}
+	protected void parseInheritance(AsdocClass type, Node valueNode) {
+		NodeList nodes = valueNode.getChildNodes();
+		String qualifier = type.getQualifier();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			// safely skip declared type 
+			if (i == 0) continue;
+			Node node = nodes.item(i);
+			// ignore the arrow images
+			String qname = null;
+			String nodeName = node.getLocalName();
+			if ("a".equals(nodeName)) {
+				qname = parseTypeName(xml.attr(node, "href"), qualifier);
+			} else if (isText(node)) {
+				qname = parseTypeName(node.getTextContent(), qualifier);
+			}
+			if (qname != null) {
+				logger.info("found inheritance: '"+qname+"'");
+				type.setExtendedClass(getTypeRef(qname));
+				// only add first supertype of the inheritance chain
+				break;
+			}
+		}
+	}
+
+	protected List<AsdocMember> parseTypeMembers(final AsdocType result, Node node) throws Exception {
+		List<AsdocMember> members = xml.eIter(findDetailBody,node, new Function<Node, AsdocMember>() {
+			public AsdocMember apply(Node from) {
+				if (!from.hasChildNodes()) return null;
+				try {
+					return parseMember(result,from);
+				} catch (Exception e) {
+					logger.error("error parsing type", e);
+				}
+				return null;
+			}
+		});
+		Collections.sort(members, this);
+		result.getMembers().addAll(members);
+		return members;
+	}
+	
 	protected boolean isDiv(Node node) {
 		return "div".equals(node.getNodeName());
 	}
@@ -98,10 +279,10 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			node = node.getNextSibling();
 		return node;
 	}
-	protected AsdocMember parseMember(T result, Node detail) throws Exception {
+	protected AsdocMember parseMember(AvmDefinition result, Node detail) throws Exception {
 		List<String> memberHeader = parseMemberType(detail);
 		if (memberHeader.size()<2) {
-			getLogger().debug("member '"+result.getCanonicalName()+"' has unexpected header. probably example");
+			logger.debug("member '"+result.getCanonicalName()+"' has unexpected header. probably example");
 			return null;
 		}
 		String memberType = memberHeader.get(1);
@@ -109,7 +290,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			if ("event".equals(memberType.toLowerCase())) {
 				// TODO add events to meta model
 			} else {
-				getLogger().error("member '"+result.getCanonicalName()+"' has unexpected type '"+memberType+"'");
+				logger.error("member '"+result.getCanonicalName()+"' has unexpected type '"+memberType+"'");
 			}
 			return null;
 		}
@@ -118,10 +299,10 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		String childCode = getText(child);
 		AsdocMember member = createMember(result,memberHeader,childCode, child);
 		if (member == null) {
-			getLogger().info("member '"+result.getCanonicalName()+"' could not be created");
+			logger.info("member '"+result.getCanonicalName()+"' could not be created");
 			return null;
 		}
-		getLogger().info("found member "+ childCode);
+		logger.info("found member "+ childCode);
 		child = nextReal(child);
 		if (child == null) return member;
 		boolean isAccessor = isText(child);
@@ -145,17 +326,19 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 				child = getReal(child.getNextSibling());
 			} while (child != null && child.getNodeType() == Node.TEXT_NODE);
 			member.setAsdoc(asdoc.toString().trim());
-			getLogger().info("found asdoc: "+ member.getAsdoc());
+			logger.info("found asdoc: "+ member.getAsdoc());
+			break;
 		}
 		// we might be at the end
 		if (child == null) return member;
+		// TODO parse parameter info
 		// or some info spans follow
 		if (member instanceof AsdocProperty) {
 			AsdocProperty prop = (AsdocProperty) member;
 			// we are looking for an implementation span
 			List<String> codes = Lists.newArrayList();
 			while (child != null) {
-				if (isSpan(child) && "label".equals(attribute(child, "class"))
+				if (isSpan(child) && "label".equals(xml.attr(child, "class"))
 					&& "Implementation".equals(getText(child))) {
 					child = nextReal(child);
 					while (child != null) {
@@ -198,8 +381,8 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 	protected boolean isDocNode(Node node) throws Exception {
 		return acceptedDocNodes.contains(node.getNodeName())
 			&& !(isSpan(node) && node.hasAttributes())
-			&& !(isP(node) && node.hasChildNodes() && eval(findDetailSpan, node) != null)
-			&& !(isTable(node) || acceptedDocTableClasses.contains(attribute(node, "class")));
+			&& !(isP(node) && node.hasChildNodes() && xml.is(findDetailSpan, node))
+			&& !(isTable(node) || acceptedDocTableClasses.contains(xml.attr(node, "class")));
 	}
 	protected void checkMemberMods(AsdocMember result, String mods) {
 		AvmVisibility visibility = AvmVisibility.INTERNAL;
@@ -230,7 +413,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			} else if (noneVisibilityMods.contains(mod)) {
 				// ignore or handled outside 
 			} else {
-				getLogger().error("member '"+target.getCanonicalName()+"' has unknown mod: "+ mod);
+				logger.error("member '"+target.getCanonicalName()+"' has unknown mod: "+ mod);
 			}
 		}
 		return result;
@@ -240,21 +423,21 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		while (isText(header) || isBr(header)) 
 			header = header.getPreviousSibling();
 		if (isDiv(header)) {
-			getLogger().info("found example "+ header.getTextContent());
+			logger.info("found example "+ header.getTextContent());
 			return Lists.newArrayList("Example");
 		}
-		List<String> result = eIter(findDetailType, header, new Function<Node, String>() {
+		List<String> result = xml.eIter(findDetailType, header, new Function<Node, String>() {
 			public String apply(Node from) {
 				if (from == null || from.getTextContent() == null) return null;
-				String attr = attribute(from, "class");
+				String attr = xml.attr(from, "class");
 				return expectedMemberHeaderClasses.contains(attr) ? from.getTextContent().trim() : null;
 			}
 		});
 		if (result == null || result.size() < 2  || result.size() > 3)
-			getLogger().error("type member header is expected to have 2 or 3 elements");
+			logger.error("type member header is expected to have 2 or 3 elements");
 		return result;
 	}
-	protected AsdocMember createMember(T parent, List<String> memberHeader, String code, Node child) {
+	protected AsdocMember createMember(AvmDefinition parent, List<String> memberHeader, String code, Node child) {
 		String type = memberHeader.get(1);
 		if ("constant".equals(type.toLowerCase()))
 			return createField(parent, memberHeader, code, child, true);
@@ -262,7 +445,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			return createField(parent, memberHeader, code, child, false);
 		return createFunction(parent, memberHeader, code, child);
 	}
-	protected AsdocExecutable createFunction(T parent, List<String> memberHeader,
+	protected AsdocExecutable createFunction(AvmDefinition parent, List<String> memberHeader,
 			String code, Node child) {
 		String name = memberHeader.get(0);
 		name = name.replaceAll("\\W+", "");
@@ -278,7 +461,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		String nameFound = null;
 		String[] split = code.split("function",2);
 		if (split == null || split.length < 2) {
-			getLogger().error("operation '"+name+"' in '"+parent.getCanonicalName()+"' has unexpected function code '"+code+"'");
+			logger.error("operation '"+name+"' in '"+parent.getCanonicalName()+"' has unexpected function code '"+code+"'");
 			return null;
 		}
 		checkMemberMods(result, split[0].trim());
@@ -294,7 +477,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 				opr.setReturnType(getTypeRef(resultName));
 				nameFound = decl.substring(0,last).trim();
 			} else {
-				getLogger().error("operation '"+name+"' in '"+parent.getCanonicalName()+"' shoud have a return type");
+				logger.error("operation '"+name+"' in '"+parent.getCanonicalName()+"' shoud have a return type");
 				nameFound = decl;
 			}
 		}
@@ -303,17 +486,17 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 			nameFound = nameFound.substring(0,nameFound.indexOf("("));
 		}
 		if (!name.equals(nameFound))
-			getLogger().error("operation name '"+name+"' in '"+parent.getCanonicalName()+"' does not match '"+nameFound+"'");
+			logger.error("operation name '"+name+"' in '"+parent.getCanonicalName()+"' does not match '"+nameFound+"'");
 		return result;
 	}
-	protected String findLink(T parent, String simpleName, Node child) {
+	protected String findLink(EObject parent, String simpleName, Node child) {
 		NodeList list = child.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++) {
 			Node node = list.item(i);
 			if (!"a".equals(node.getLocalName())) continue;
 			String nodeText = node.getTextContent();
 			if (simpleName.equals(nodeText))
-				return parseTypeName(attribute(node, "href"), getPackageName(parent));
+				return parseTypeName(xml.attr(node, "href"), getPackageName(parent));
 			else
 				nodeText.toString();
 		}
@@ -325,7 +508,7 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 				return ((AvmPackage) parent).getCanonicalName();
 		return null;
 	}
-	protected AsdocField createField(T parent, List<String> memberHeader,
+	protected AsdocField createField(AvmDefinition parent, List<String> memberHeader,
 			String code, Node child, boolean constant) {
 		String keyword = constant ? "const" : "var";
 		String name = memberHeader.get(0);
@@ -365,23 +548,8 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		if (foundName.charAt(0)=='-')
 			return null;
 		if (!name.equals(foundName))
-			getLogger().error("member name does not match '"+name+"' '"+foundName+"'");
+			logger.error("member name does not match '"+name+"' '"+foundName+"'");
 		return result;
-	}
-	public URI getProxyURI(String name) {
-		if (name == null || "*".equals(name) || "void".equals(name))
-			return null;
-		name = name.trim();
-		if (name.length()==0) return null;
-		if (name.lastIndexOf(']')!=0)
-			name = name.replaceFirst("\\.<[^>]*>", "");
-		// check if we already got a qualified name
-		if (name.contains(":") && !name.contains("::"))
-			name = name.replaceFirst(":", "::");
-		boolean isQualified = name.contains("::");
-		String partition = ":"+ (isQualified ? "/types/" : "/lookup/");
-		String uri = IDefinitionProvider.PROTOCOL + partition + name;
-		return URI.createURI(uri);
 	}
 	public AvmTypeReference getTypeRef(String name) {
 		if ("*".equals(name))
@@ -398,8 +566,6 @@ public abstract class AbstractMemberCollector<T extends AvmDefinition> extends A
 		((InternalEObject) proxy).eSetProxyURI(uri);
 		return proxy;
 	}
-	protected abstract Logger getLogger();
-	
 
 	public String parseTypeName(String rawLinkOrName, String qualifier) {
 		if (rawLinkOrName == null) return null;

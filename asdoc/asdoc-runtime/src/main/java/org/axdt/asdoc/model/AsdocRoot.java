@@ -9,6 +9,7 @@ package org.axdt.asdoc.model;
 
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Doc Root</b></em>'.
@@ -19,6 +20,7 @@ package org.axdt.asdoc.model;
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.AsdocRoot#getBaseUri <em>Base Uri</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.AsdocRoot#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.AsdocRoot#getParseType <em>Parse Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +77,36 @@ public interface AsdocRoot extends AsdocPackage {
 	 * @generated
 	 */
 	void setVersion(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Parse Type</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * The literals are from the enumeration {@link org.axdt.asdoc.model.ParseType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parse Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parse Type</em>' attribute.
+	 * @see org.axdt.asdoc.model.ParseType
+	 * @see #setParseType(ParseType)
+	 * @see org.axdt.asdoc.AsdocEPackage#getAsdocRoot_ParseType()
+	 * @model default=""
+	 * @generated
+	 */
+	ParseType getParseType();
+
+	/**
+	 * Sets the value of the '{@link org.axdt.asdoc.model.AsdocRoot#getParseType <em>Parse Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parse Type</em>' attribute.
+	 * @see org.axdt.asdoc.model.ParseType
+	 * @see #getParseType()
+	 * @generated
+	 */
+	void setParseType(ParseType value);
 
 	/**
 	 * <!-- begin-user-doc -->

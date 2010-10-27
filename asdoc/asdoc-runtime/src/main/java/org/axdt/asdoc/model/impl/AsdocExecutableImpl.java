@@ -159,10 +159,4 @@ public abstract class AsdocExecutableImpl extends AsdocMemberImpl implements Asd
 		}
 		return super.eIsSet(featureID);
 	}
-	
-	@Override
-	public String getFullUri() {
-		String result = super.getFullUri();
-		return result == null ? null : result+"()";
-	}
 } //AsdocExecutableImpl

@@ -91,7 +91,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)

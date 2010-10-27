@@ -10,6 +10,7 @@ package org.axdt.asdoc.model.impl;
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.asdoc.model.ParseType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocRootImpl#getBaseUri <em>Base Uri</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocRootImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.impl.AsdocRootImpl#getParseType <em>Parse Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +70,25 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 	protected int version = VERSION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getParseType() <em>Parse Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParseType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ParseType PARSE_TYPE_EDEFAULT = ParseType.NONE;
+	/**
+	 * The cached value of the '{@link #getParseType() <em>Parse Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParseType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ParseType parseType = PARSE_TYPE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -97,7 +118,11 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 
 	@Override
 	public String getFullUri() {
-		return baseUri;
+		String base = getBaseUri();
+		String uri = getParseType().getUrlHelper().rootUrl(this);
+		if (base != null && uri != null)
+			return base + uri;
+		return null;  
 	}
 	@Override
 	public AsdocRoot getRoot() {
@@ -138,6 +163,27 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 		version = newVersion;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_ROOT__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParseType getParseType() {
+		return parseType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParseType(ParseType newParseType) {
+		ParseType oldParseType = parseType;
+		parseType = newParseType == null ? PARSE_TYPE_EDEFAULT : newParseType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_ROOT__PARSE_TYPE, oldParseType, parseType));
 	}
 
 	/**
@@ -192,6 +238,8 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 				return getBaseUri();
 			case AsdocEPackage.ASDOC_ROOT__VERSION:
 				return getVersion();
+			case AsdocEPackage.ASDOC_ROOT__PARSE_TYPE:
+				return getParseType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -209,6 +257,9 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 				return;
 			case AsdocEPackage.ASDOC_ROOT__VERSION:
 				setVersion((Integer)newValue);
+				return;
+			case AsdocEPackage.ASDOC_ROOT__PARSE_TYPE:
+				setParseType((ParseType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,6 +279,9 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 			case AsdocEPackage.ASDOC_ROOT__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
+			case AsdocEPackage.ASDOC_ROOT__PARSE_TYPE:
+				setParseType(PARSE_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -244,6 +298,8 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 				return BASE_URI_EDEFAULT == null ? baseUri != null : !BASE_URI_EDEFAULT.equals(baseUri);
 			case AsdocEPackage.ASDOC_ROOT__VERSION:
 				return version != VERSION_EDEFAULT;
+			case AsdocEPackage.ASDOC_ROOT__PARSE_TYPE:
+				return parseType != PARSE_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -262,6 +318,8 @@ public class AsdocRootImpl extends AsdocPackageImpl implements AsdocRoot {
 		result.append(baseUri);
 		result.append(", version: ");
 		result.append(version);
+		result.append(", parseType: ");
+		result.append(parseType);
 		result.append(')');
 		return result.toString();
 	}

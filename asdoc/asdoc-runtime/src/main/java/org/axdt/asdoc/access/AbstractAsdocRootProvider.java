@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.axdt.asdoc.AsdocEFactory;
+import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.asdoc.model.ParseType;
 import org.axdt.asdoc.util.AsdocEXMLProcessor;
+import org.axdt.asdoc.util.DitaUrlHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -57,6 +60,9 @@ public abstract class AbstractAsdocRootProvider implements IDocRootProvider {
 		}
 		return resource;
 	}
+	protected ParseType getParseType(String url) {
+		return url.endsWith(DitaUrlHelper.PACKAGE_LIST) ? ParseType.DITA : ParseType.HTML;
+	}
 	protected AsdocRoot createRoot(String name, String url) {
 		AsdocRoot root = null;
 		URI docRootUri = createDocRootUri(url);
@@ -65,10 +71,20 @@ public abstract class AbstractAsdocRootProvider implements IDocRootProvider {
 			EObject eobject = resource.getContents().get(0);
 			if (eobject instanceof AsdocRoot) {
 				root = (AsdocRoot) eobject;
+				if (root.getVersion() < AsdocEPackage.CURRENT_VERSION)
+					root = null;
 			}
-		} else {
+		} 
+		if (root == null) {
+			ParseType parseType = getParseType(url);
+			if (parseType.equals(ParseType.DITA))
+				url = url.substring(0, url.length() - DitaUrlHelper.PACKAGE_LIST.length());
 			root = AsdocEFactory.eINSTANCE.createAsdocRoot(url);
+			root.setParseType(parseType);
+			root.setVersion(AsdocEPackage.CURRENT_VERSION);
+			resource.getContents().clear();
 			resource.getContents().add(root);
+			resource.setModified(true);
 		}
 		return root;
 	}

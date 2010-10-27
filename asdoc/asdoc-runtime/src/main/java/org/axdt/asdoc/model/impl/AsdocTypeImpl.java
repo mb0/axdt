@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocMember;
-import org.axdt.asdoc.model.AsdocPackage;
+import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.AsdocType;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmType;
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -380,12 +379,13 @@ public abstract class AsdocTypeImpl extends AsdocDefinitionImpl implements Asdoc
 
 	@Override
 	public String getFullUri() {
-		EObject container = eContainer();
-		if (container instanceof AsdocPackage) {
-			AsdocPackage pack = (AsdocPackage) container;
-			String fullUri = pack.getFullUri();
-			if (fullUri != null)
-				return fullUri + getName() +".html";
+
+		AsdocRoot root = getRoot();
+		if (root != null) {
+			String base = root.getBaseUri();
+			String url = root.getParseType().getUrlHelper().typeUrl(this);
+			if (base != null && url != null)
+				return base + url; 
 		}
 		return null;
 	}

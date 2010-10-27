@@ -9,7 +9,18 @@ package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.AsdocEPackage;
-import org.axdt.asdoc.model.*;
+import org.axdt.asdoc.model.AsdocClass;
+import org.axdt.asdoc.model.AsdocConstructor;
+import org.axdt.asdoc.model.AsdocField;
+import org.axdt.asdoc.model.AsdocInterface;
+import org.axdt.asdoc.model.AsdocNamespace;
+import org.axdt.asdoc.model.AsdocOperation;
+import org.axdt.asdoc.model.AsdocPackage;
+import org.axdt.asdoc.model.AsdocParameter;
+import org.axdt.asdoc.model.AsdocProperty;
+import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.asdoc.model.ParseLevel;
+import org.axdt.asdoc.model.ParseType;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -86,6 +97,8 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 		switch (eDataType.getClassifierID()) {
 			case AsdocEPackage.PARSE_LEVEL:
 				return createParseLevelFromString(eDataType, initialValue);
+			case AsdocEPackage.PARSE_TYPE:
+				return createParseTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -101,6 +114,8 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 		switch (eDataType.getClassifierID()) {
 			case AsdocEPackage.PARSE_LEVEL:
 				return convertParseLevelToString(eDataType, instanceValue);
+			case AsdocEPackage.PARSE_TYPE:
+				return convertParseTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -230,6 +245,26 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 	 * @generated
 	 */
 	public String convertParseLevelToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParseType createParseTypeFromString(EDataType eDataType, String initialValue) {
+		ParseType result = ParseType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertParseTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -30,6 +30,12 @@ import org.eclipse.emf.ecore.EReference;
  * @generated
  */
 public interface AsdocEPackage extends EPackage {
+	
+	/**
+	 * Asdoc Model version.
+	 */
+	int CURRENT_VERSION = 2;
+	
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -457,13 +463,21 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int ASDOC_ROOT__VERSION = ASDOC_PACKAGE_FEATURE_COUNT + 1;
 	/**
+	 * The feature id for the '<em><b>Parse Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASDOC_ROOT__PARSE_TYPE = ASDOC_PACKAGE_FEATURE_COUNT + 2;
+	/**
 	 * The number of structural features of the '<em>Asdoc Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_ROOT_FEATURE_COUNT = ASDOC_PACKAGE_FEATURE_COUNT + 2;
+	int ASDOC_ROOT_FEATURE_COUNT = ASDOC_PACKAGE_FEATURE_COUNT + 3;
 	/**
 	 * The meta object id for the '{@link org.axdt.asdoc.model.impl.AsdocTypeImpl <em>Asdoc Type</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -1083,6 +1097,15 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int PARSE_LEVEL = 15;
 	/**
+	 * The meta object id for the '{@link org.axdt.asdoc.model.ParseType <em>Parse Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.asdoc.model.ParseType
+	 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getParseType()
+	 * @generated
+	 */
+	int PARSE_TYPE = 16;
+	/**
 	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocElement <em>Asdoc Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1328,6 +1351,17 @@ public interface AsdocEPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAsdocRoot_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocRoot#getParseType <em>Parse Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Parse Type</em>'.
+	 * @see org.axdt.asdoc.model.AsdocRoot#getParseType()
+	 * @see #getAsdocRoot()
+	 * @generated
+	 */
+	EAttribute getAsdocRoot_ParseType();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.asdoc.model.AsdocType <em>Asdoc Type</em>}'.
@@ -1617,6 +1651,16 @@ public interface AsdocEPackage extends EPackage {
 	EEnum getParseLevel();
 
 	/**
+	 * Returns the meta object for enum '{@link org.axdt.asdoc.model.ParseType <em>Parse Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Parse Type</em>'.
+	 * @see org.axdt.asdoc.model.ParseType
+	 * @generated
+	 */
+	EEnum getParseType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1833,6 +1877,14 @@ public interface AsdocEPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ASDOC_ROOT__VERSION = eINSTANCE.getAsdocRoot_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Parse Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASDOC_ROOT__PARSE_TYPE = eINSTANCE.getAsdocRoot_ParseType();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.asdoc.model.impl.AsdocTypeImpl <em>Asdoc Type</em>}' class.
@@ -2069,6 +2121,16 @@ public interface AsdocEPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PARSE_LEVEL = eINSTANCE.getParseLevel();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.asdoc.model.ParseType <em>Parse Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.asdoc.model.ParseType
+		 * @see org.axdt.asdoc.model.impl.AsdocEPackageImpl#getParseType()
+		 * @generated
+		 */
+		EEnum PARSE_TYPE = eINSTANCE.getParseType();
 
 	}
 

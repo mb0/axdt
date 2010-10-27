@@ -1,7 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Martin Schnabel <mb0@mb0.org>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ ******************************************************************************/
 package org.axdt.avm.scoping;
 
 import java.util.List;
 
+import org.axdt.avm.access.DefinitionNotFoundException;
 import org.axdt.avm.model.AvmClass;
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmInterface;
@@ -13,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -61,21 +70,34 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 
 	protected abstract Iterable<? extends AvmReferable> getCandidates();
 	
-	protected AvmType resolveType(AvmType type) {
+	protected AvmType resolveType(AvmType type, AvmTypeReference ref) {
 		if (type.eIsProxy()) {
 			InternalEObject internal = (InternalEObject) type;
 			String urlString = internal.eProxyURI().toString();
 			if (urlString.startsWith("avm:/lookup/")) {
 				String lookupName = urlString.replaceFirst("avm:/lookup/", "");
 				// lets lookup the type name in the parent scope
-				IEObjectDescription description = getParentScope().getContentByName(lookupName);
-				if (description != null) {
-					EObject descEObj = description.getEObjectOrProxy();
-					// if resolution was successful
-					if (descEObj != null && !descEObj.eIsProxy() && descEObj instanceof AvmDeclaredType) {
+				IScope current = getParentScope();
+				AvmDefinitionScope defScope = null;
+				while (current != null) {
+					if (current instanceof AvmDefinitionScope) {
+						defScope = (AvmDefinitionScope) current;
+						break;
+					}
+					current = current.getOuterScope();
+				}
+				if (defScope != null) {
+					try {
+						type = defScope.definitionProvider.findTypeByName(lookupName);
 						// set the canonical type name so we can skip the scope lookup next time
-						type = (AvmType) descEObj;
-						internal.eSetProxyURI(URI.createURI("avm:/types/"+type.getCanonicalName()));
+						internal.eSetProxyURI(URI.createURI("avm:/types/"+ type.getCanonicalName()));
+						if (ref != null) {
+							Resource resource = ref.eResource();
+							if (resource != null) {
+								resource.setModified(true);
+							}
+						}
+					} catch (DefinitionNotFoundException e) {
 					}
 				}
 			} else {
@@ -108,9 +130,10 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 	
 	protected AvmDeclaredType resolveTypeReference(AvmTypeReference ref) {
 		if (ref != null) {
-			AvmType parent = resolveType(ref.getType());
-			if (parent instanceof AvmDeclaredType)
+			AvmType parent = resolveType(ref.getType(), ref);
+			if (parent instanceof AvmDeclaredType) {
 				return (AvmDeclaredType) parent;
+			}
 		}
 		return null;
 	}

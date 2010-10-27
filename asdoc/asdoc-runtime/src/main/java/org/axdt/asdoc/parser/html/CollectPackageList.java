@@ -5,51 +5,66 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  ******************************************************************************/
-package org.axdt.asdoc.parser;
+package org.axdt.asdoc.parser.html;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.asdoc.util.HtmlUrlHelper;
 import org.w3c.dom.Node;
 
 import com.google.common.base.Function;
 
-public class CollectPackageList extends AbstractCollector {
+public class CollectPackageList extends AbstractHtmlCollector {
 
-	private static Logger logger = Logger.getLogger(CollectPackageList.class);
-
+	private Pattern pattern;
+	
 	public CollectPackageList() {
 		super();
+		pattern = Pattern.compile("^.*'(.*/" + HtmlUrlHelper.PACKAGE_DETAIL
+				+ ")'.*$");
 	}
 
 	public List<AsdocPackage> collectPackages(AsdocRoot root, boolean summary)
 			throws Exception {
-		String uri = AsdocUris.packages(root, summary);
+		String uri = new HtmlUrlHelper().packages(root, summary);
 		logger.info("loading: " + uri);
-		Node node = load(uri);
+		Node node = xml.load(uri);
 		if (summary)
-			node = eval(findMain, node);
-		return eIter(findLinks, node, new TransformLink2Package(root));
+			node = xml.eval(findMain, node);
+		return xml.eIter(findLinks, node, new TransformLink2Package(root));
 	}
 
-	public static class TransformLink2Package implements
+	public String getFQN(String href) {
+		if (href == null)
+			return null;
+		if (!href.endsWith(HtmlUrlHelper.PACKAGE_DETAIL)) {
+			Matcher matcher = pattern.matcher(href);
+			if (!matcher.matches()) {
+				logger.debug("ignored link: " + href);
+				return null;
+			}
+			href = matcher.group(1);
+		}
+		int lastSlash = href.lastIndexOf('/');
+		return lastSlash < 0 ? ""
+				: href.substring(0, lastSlash).replace('/', '.');
+	}
+
+	protected class TransformLink2Package implements
 			Function<Node, AsdocPackage> {
 
 		private final AsdocRoot root;
-		private Pattern pattern;
 
 		public TransformLink2Package(AsdocRoot root) {
 			this.root = root;
-			pattern = Pattern.compile("^.*'(.*/" + AsdocUris.PACKAGE_DETAIL
-					+ ")'.*$");
 		}
 
 		public AsdocPackage apply(Node link) {
-			String href = attribute(link, "href");
+			String href = xml.attr(link, "href");
 			String fqn = getFQN(href);
 			if (fqn != null) {
 				AsdocPackage pack = root.createPackage(fqn);
@@ -57,22 +72,6 @@ public class CollectPackageList extends AbstractCollector {
 				return pack;
 			}
 			return null;
-		}
-
-		public String getFQN(String href) {
-			if (href == null)
-				return null;
-			if (!href.endsWith(AsdocUris.PACKAGE_DETAIL)) {
-				Matcher matcher = pattern.matcher(href);
-				if (!matcher.matches()) {
-					logger.debug("ignored link: " + href);
-					return null;
-				}
-				href = matcher.group(1);
-			}
-			int lastSlash = href.lastIndexOf('/');
-			return lastSlash < 0 ? ""
-					: href.substring(0, lastSlash).replace('/', '.');
 		}
 	}
 }

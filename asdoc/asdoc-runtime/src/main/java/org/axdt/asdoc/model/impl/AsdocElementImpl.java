@@ -9,6 +9,7 @@ package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocElement;
+import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.avm.model.impl.AvmElementImpl;
 import org.eclipse.emf.ecore.EClass;
 
@@ -59,12 +60,17 @@ public abstract class AsdocElementImpl extends AvmElementImpl implements AsdocEl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public String getName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public AsdocRoot getRoot() {
+		if (eContainer instanceof AsdocElement)
+			return ((AsdocElement) eContainer).getRoot(); 
+		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public abstract String getName();
 
 } //AsdocElementImpl

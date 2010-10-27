@@ -5,28 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  ******************************************************************************/
-package org.axdt.asdoc.parser;
+package org.axdt.asdoc.parser.html;
 
 import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.axdt.asdoc.AsdocEFactory;
-import org.axdt.asdoc.model.AsdocField;
-import org.axdt.asdoc.model.AsdocOperation;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocType;
-import org.axdt.avm.model.AvmDeclaredElement;
+import org.axdt.asdoc.util.HtmlUrlHelper;
 import org.w3c.dom.Node;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-public class CollectTypeList extends AbstractCollector {
+public class CollectTypeList extends AbstractHtmlCollector {
 	
-	private static Logger logger = Logger.getLogger(CollectTypeList.class);
-	
+	private static final List<String> ignored = Lists.newArrayList("", "appendixes", "conventions",
+			"index", "package");
 	public CollectTypeList() {
 		super();
 	}
@@ -38,78 +34,57 @@ public class CollectTypeList extends AbstractCollector {
 			collectAllTypes(child, detail);
 	}
 	
-	public List<AvmDeclaredElement> collectTypes(AsdocPackage pack, boolean detail) throws Exception {
-		String uri = AsdocUris.types(pack, detail);
+	public List<AsdocType> collectTypes(AsdocPackage pack, boolean detail) throws Exception {
+		String uri = new HtmlUrlHelper().types(pack, detail);
 		logger.info("loading : " + uri);
 		try {
-			Node node = load(uri);
+			Node node = xml.load(uri);
 			if (detail) {
-				Node found = eval(findMain, node);
+				Node found = xml.eval(findMain, node);
 				if (found == null)
-					found = eval(findFlex4Main, node);
+					found = xml.eval(findFlex4Main, node);
 				node = found;
 			}
-			return eIter(findLinks, node, new TransformLink2Element(pack));
+			List<AsdocType> result = xml.eIter(findLinks, node, new TransformLink2Element(pack));
+			Collections.sort(result, this);
+			pack.getTypes().addAll(result);
+			return result;
 		} catch (FileNotFoundException e) {
 			return Collections.emptyList();
 		}
 	}
 
-	protected static class TransformLink2Element implements
-			Function<Node, AvmDeclaredElement> {
+	protected class TransformLink2Element implements
+			Function<Node, AsdocType> {
 
-		private final static List<String> ignored = Lists.newArrayList("", "appendixes", "conventions",
-				"index", "package");
 		private final AsdocPackage pack;
-		protected AsdocEFactory asFactory = AsdocEFactory.eINSTANCE;
 
 		public TransformLink2Element(AsdocPackage pack) {
 			this.pack = pack;
 		}
 
-		public AvmDeclaredElement apply(Node link) {
-			String href = attribute(link, "href");
+		public AsdocType apply(Node link) {
+			String href = xml.attr(link, "href");
 			if (isMember(href)) {
 				pack.setGlobalContentAvailable(true);
 				return null;
 			} else if (isType(href)) {
-				AsdocType type = createType(link, href);
-				pack.getTypes().add(type);
-				return type;
+				return createType(link, href);
 			}
 			logger.debug("ignored link: " + href);
 			return null;
 		}
 
 		boolean isMember(String href) {
-			return href.startsWith(AsdocUris.PACKAGE + "#")
+			return href.startsWith(HtmlUrlHelper.PACKAGE + "#")
 					&& !(href.endsWith("#methodSummary") || href
 							.endsWith("#constantSummary"));
-		}
-
-		boolean isMethod(String href) {
-			return href.endsWith("()");
 		}
 
 		boolean isType(String href) {
 			String typeName = href.split("\\.")[0].trim();
 			return !(typeName == null || ignored.contains(typeName) || typeName
 					.startsWith("javascript:") || typeName.contains("-"));
-		}
-
-		AsdocField createField(Node link, String href) {
-			String name = href.split("#")[1];
-			AsdocField field = asFactory.createAsdocField();
-			field.setName(name);
-			return field;
-		}
-
-		AsdocOperation createMethod(Node link, String href) {
-			String name = href.split("#")[1];
-			name = name.substring(0, name.length() - 2);
-			AsdocOperation method = asFactory.createAsdocOperation();
-			method.setName(name);
-			return method;
 		}
 
 		AsdocType createType(Node link, String href) {

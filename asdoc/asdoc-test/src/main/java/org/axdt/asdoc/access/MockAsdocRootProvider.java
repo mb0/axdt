@@ -10,8 +10,9 @@ package org.axdt.asdoc.access;
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.ParseLevel;
-import org.axdt.asdoc.parser.AbstractCollectorTest;
-import org.axdt.asdoc.parser.AsdocParser;
+import org.axdt.asdoc.model.ParseType;
+import org.axdt.asdoc.parser.AsdocTestHelper;
+import org.axdt.asdoc.parser.dita.AsdocDitaParser;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.google.common.collect.Lists;
@@ -29,9 +30,10 @@ public class MockAsdocRootProvider implements IDocRootProvider {
 	private AsdocRoot asdocRoot;
 
 	public MockAsdocRootProvider() throws Exception {
-		String dataFolder = AbstractCollectorTest.getTestDocUri()+"simple";
-		AsdocParser asdocParser = new AsdocParser();
+		String dataFolder = AsdocTestHelper.getTestDocUri("testdocs.zip!/dita/");
+		AsdocDitaParser asdocParser = new AsdocDitaParser();
 		asdocRoot = AsdocEFactory.eINSTANCE.createAsdocRoot(dataFolder);
+		asdocRoot.setParseType(ParseType.DITA);
 		asdocRoot = asdocParser.parseDoc(asdocRoot, ParseLevel.MEMBER);
 	}
 	

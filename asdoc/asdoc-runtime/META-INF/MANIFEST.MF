@@ -28,6 +28,8 @@ Export-Package: org.axdt.asdoc;uses:="org.eclipse.emf.ecore,org.axdt.asdoc.model
    javax.xml.xpath,
    org.axdt.asdoc,
    org.axdt.asdoc.model",
+ org.axdt.asdoc.parser.dita,
+ org.axdt.asdoc.parser.html,
  org.axdt.asdoc.util;
   uses:="org.eclipse.emf.ecore.xmi.impl,
    org.eclipse.emf.ecore.resource,
