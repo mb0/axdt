@@ -7,7 +7,6 @@
  ******************************************************************************/
 package org.axdt.as3.scoping;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Collections;
 
@@ -42,14 +41,12 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -70,13 +67,6 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 	@Named(AbstractDeclarativeScopeProvider.NAMED_ERROR_HANDLER)
 	private PolymorphicDispatcher.ErrorHandler<IScope> errorHandler = new PolymorphicDispatcher.NullErrorHandler<IScope>();
 
-	@Inject
-	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
-	
-	public void setCache(IResourceScopeCache cache) {
-		this.cache = cache;
-	}
-	
 	protected IScope delegateGetScope(EObject context, EReference reference) {
 		return getDelegate().getScope(context, reference);
 	}
@@ -124,23 +114,6 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 		return scope;
 	}
 
-	IScope getCachedScope(EObject ctx, EReference ref, Provider<IScope> provider) {
-		return cache.get(getCacheKey(ctx, ref), ctx.eResource(), provider);
-	}
-	<T extends EObject> IScope getCachedScope(final T ctx, final EReference ref, final Class<? extends AvmElementScope<T>> type) {
-//		return getCachedScope(ctx, ref, new Provider<IScope>() {
-//			public IScope get() {
-				try {
-					@SuppressWarnings("rawtypes")
-					Constructor constructor = type.getConstructors()[0];
-					return (IScope) constructor.newInstance(ctx, ref, As3ScopeProvider.this);
-				} catch (Exception e) {
-					logger.warn("error creating avm element scope", e);
-					return null;
-				}
-//			}
-//		});
-	}
 	Object getCacheKey(EObject ctx, EReference ref) {
 		return Tuples.create(As3ScopeProvider.class, ctx, ref);
 	}
@@ -150,15 +123,15 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 	}
 
 	IScope scope_AvmReferable(As3Program ctx, EObject initial, EReference ref) {
-		return getCachedScope(ctx, ref, As3ProgramScope.class);
+		return new As3ProgramScope(ctx, ref, this);
 	}
 
 	IScope scope_AvmReferable(As3Class ctx, EObject initial, EReference ref) {
-		return getCachedScope(ctx, ref, AvmTypeScope.class);
+		return new AvmTypeScope(ctx, ref, this);
 	}
 
 	IScope scope_AvmReferable(As3Executable ctx, EObject initial, EReference ref) {
-		return getCachedScope(ctx, ref, As3ExecutableScope.class);
+		return new As3ExecutableScope(ctx, ref, this);
 	}
 	
 	IScope scope_AvmReferable(final As3WithStatement ctx, final EObject initial, final EReference ref) {
@@ -171,19 +144,15 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 			}
 			current = current.eContainer();
 		}
-//		return getCachedScope(ctx, ref, new Provider<IScope>() {
-//			public IScope get() {
-				return new As3WithScope(ctx, initial, ref, As3ScopeProvider.this);
-//			}
-//		});
+		return new As3WithScope(ctx, initial, ref, As3ScopeProvider.this);
 	}
 	IScope scope_AvmReferable(As3CatchClause ctx, EObject initial, EReference ref) {
-		return getCachedScope(ctx, ref, As3CatchScope.class);
+		return new As3CatchScope(ctx, ref, this);
 	}
 	IScope scope_AvmReferable(As3PropertyOperator ctx, EObject initial, EReference ref) {
 		if (ctx.getExpressions() == null && ctx.eContainingFeature() == As3EPackage.eINSTANCE.getAs3AccessExpression_Operator()) {
 			As3AccessExpression access = (As3AccessExpression) ctx.eContainer();
-			return getCachedScope(access, ref, As3PropertyScope.class);
+			return new As3PropertyScope(access, ref, this);
 		}
 		return null;
 	}
