@@ -10,8 +10,9 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3FunctionExpression;
 import org.axdt.as3.model.As3ThisExpression;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.as3.util.As3TypeAccessUtil;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -45,16 +46,16 @@ public class As3ThisExpressionImpl extends IExpressionImpl implements As3ThisExp
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		EObject current = eContainer();
 		while (current != null) {
 			if (current instanceof As3FunctionExpression)
-				return AvmEFactory.eINSTANCE.createAvmGeneric();
+				return AvmTypeAccess.GENERIC;
 			if (current instanceof AvmType)
-				return (AvmType) current; 
+				return As3TypeAccessUtil.thisAccess((AvmType) current); 
 			current = current.eContainer();
 		}
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 
 } //As3ThisExpressionImpl

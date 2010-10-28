@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class As3AccessExpressionTest extends As3PostfixExpressionTest {
 
 	@Override
 	public void testResolveType() {
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 		As3PropertyOperator operator = As3EFactory.eINSTANCE.createAs3PropertyOperator();
 		operator.setIdentifier(createTypedIdent("Foo"));
 		getFixture().setOperator(operator);
@@ -82,7 +82,7 @@ public class As3AccessExpressionTest extends As3PostfixExpressionTest {
 		operator.setIdentifier(null);
 		As3ListExpression expressions = As3EFactory.eINSTANCE.createAs3ListExpression();
 		operator.setExpressions(expressions);
-		assertEquals(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.GENERIC, getFixture().resolveType());
 	}
 
 } //As3AccessExpressionTest

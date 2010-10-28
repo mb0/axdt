@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,12 +74,12 @@ public class As3PropertyIdentifierTest extends As3SimpleIdentifierTest {
 
 	@Override
 	public void testResolveType() {
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 		getFixture().setReference(createTypeProxy("Foo"));
 		assertProxyType("avm:/types/Foo", getFixture().resolveType());
 		getFixture().setReference(null);
 		getFixture().setName("*");
-		assertEquals(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.GENERIC, getFixture().resolveType());
 		// test resolve identifier with property names
 	}
 

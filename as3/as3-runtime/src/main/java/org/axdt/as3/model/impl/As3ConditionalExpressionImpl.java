@@ -11,8 +11,7 @@ import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ConditionalExpression;
 import org.axdt.as3.model.IExpression;
 import org.axdt.as3.model.ILogicalExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -310,16 +309,16 @@ public class As3ConditionalExpressionImpl extends IExpressionImpl implements As3
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		if (statement != null && elseStatement != null) {
-			AvmType ifType = statement.resolveType();
-			AvmType elseType = elseStatement.resolveType();
-			if (ifType != null && ifType.equals(elseType))
-				return elseType;
+//			AvmTypeAccess ifType = statement.resolveType();
+//			AvmTypeAccess elseType = elseStatement.resolveType();
+//			if (ifType != null && ifType.equals(elseType))
+//				return elseType;
 			// TODO find common super type and generalize
-			return AvmEFactory.eINSTANCE.createAvmGeneric();
+			return AvmTypeAccess.GENERIC;
 		}
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 
 } //As3ConditionalExpressionImpl

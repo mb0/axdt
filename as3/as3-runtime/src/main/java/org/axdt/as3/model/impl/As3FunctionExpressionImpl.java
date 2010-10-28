@@ -17,11 +17,12 @@ import org.axdt.as3.model.As3FunctionExpression;
 import org.axdt.as3.model.As3Parameter;
 import org.axdt.as3.model.IDirective;
 import org.axdt.as3.model.IForInInit;
+import org.axdt.as3.util.As3TypeAccessUtil;
 import org.axdt.avm.model.AvmExecutable;
 import org.axdt.avm.model.AvmIdentifiable;
 import org.axdt.avm.model.AvmReferable;
-import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -452,7 +453,7 @@ public class As3FunctionExpressionImpl extends IExpressionImpl implements As3Fun
 
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("Function");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("Function");
 	}
 } //As3FunctionExpressionImpl

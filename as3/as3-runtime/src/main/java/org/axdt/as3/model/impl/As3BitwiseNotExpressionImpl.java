@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3BitwiseNotExpression;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -42,7 +43,7 @@ public class As3BitwiseNotExpressionImpl extends As3UnaryExpressionImpl implemen
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("int");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("int");
 	}
 } //As3BitwiseNotExpressionImpl

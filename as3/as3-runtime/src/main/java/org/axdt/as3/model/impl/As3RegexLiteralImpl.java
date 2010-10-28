@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3RegexLiteral;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -163,7 +164,7 @@ public class As3RegexLiteralImpl extends IExpressionImpl implements As3RegexLite
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("Regex");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("Regex");
 	}
 } //As3RegexLiteralImpl

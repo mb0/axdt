@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,7 +77,7 @@ public class As3AssignmentExpressionTest extends As3BinaryExpressionTest {
 	@Override
 	public void testResolveType() {
 		// null by default
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 		// if assignee is set resolve to its type
 		// let validation check for incompatible types
 		getFixture().setLeft(createTypedIdent("Foo"));

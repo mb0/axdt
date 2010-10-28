@@ -11,8 +11,8 @@ import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3QueryExpression;
 import org.axdt.as3.model.As3QueryOperator;
 import org.axdt.as3.model.IPostfixExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -178,14 +178,14 @@ public class As3QueryExpressionImpl extends As3PostfixExpressionImpl implements 
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		IPostfixExpression expression = getExpression();
 		if (expression == null)
-			return AvmEFactory.eINSTANCE.createAvmNull();
-		AvmType type = expression.resolveType();
-		if (checkTypeName(type,"XML","XMLList"))
-			return getClassProxy("XMLList");
+			return AvmTypeAccess.NULL;
+		AvmTypeAccess type = expression.resolveType();
+		if (checkTypeName(type.getType(),"XML","XMLList"))
+			return As3TypeAccessUtil.global("XMLList");
 		// can overridden by flash.utils.Proxy
-		return AvmEFactory.eINSTANCE.createAvmGeneric();
+		return AvmTypeAccess.GENERIC;
 	}
 } //As3QueryExpressionImpl

@@ -10,8 +10,7 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3SimpleQualifiedIdentifier;
 import org.axdt.as3.model.IExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -177,9 +176,9 @@ public class As3SimpleQualifiedIdentifierImpl extends As3NonAttributeQualifiedId
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		// TODO resolve simple qualified identifier
-		return AvmEFactory.eINSTANCE.createAvmGeneric();
+		return AvmTypeAccess.GENERIC;
 	}
 
 } //As3SimpleQualifiedIdentifierImpl

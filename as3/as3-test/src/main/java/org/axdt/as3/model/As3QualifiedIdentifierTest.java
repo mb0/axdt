@@ -7,7 +7,7 @@
  ******************************************************************************/
 package org.axdt.as3.model;
 
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public abstract class As3QualifiedIdentifierTest extends IExpressionTest {
 	 */
 	public void testResolveType() {
 		// TODO: implement namespaces
-		assertEquals(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.GENERIC, getFixture().resolveType());
 	}
 
 } //As3QualifiedIdentifierTest

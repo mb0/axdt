@@ -15,12 +15,14 @@ import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3ReservedAttribute;
 import org.axdt.as3.model.IAttribute;
 
+import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -127,6 +129,16 @@ public class As3AttributesImpl extends MinimalEObjectImpl.Container implements A
 			for (As3ReservedAttribute element:getReservedAttributes())
 				if (element.isVisibility())
 					return element.getVisibility();
+		AvmDeclaredType enclosingType = null;
+		for (EObject current = eContainer(); current != null; current = current.eContainer()) {
+			if (current instanceof AvmDeclaredType) {
+				enclosingType = (AvmDeclaredType) current;
+				break;
+			}
+		}
+		if (enclosingType != null && enclosingType.isInterface()) {
+			return AvmVisibility.PUBLIC;
+		}
 		return AvmVisibility.INTERNAL;
 	}
 

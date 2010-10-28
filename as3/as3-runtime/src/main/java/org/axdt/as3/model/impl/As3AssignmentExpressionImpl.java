@@ -9,8 +9,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3AssignmentExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -43,9 +42,9 @@ public class As3AssignmentExpressionImpl extends As3BinaryExpressionImpl impleme
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		// always resolves to assignee's type
 		if (left != null) return getLeft().resolveType();
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 } //As3AssignmentExpressionImpl

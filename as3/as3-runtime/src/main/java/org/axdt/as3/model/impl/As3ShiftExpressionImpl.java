@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ShiftExpression;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -42,9 +43,9 @@ public class As3ShiftExpressionImpl extends As3BinaryExpressionImpl implements A
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		if (">>>".equals(getOperation()))
-			return getClassProxy("uint");
-		return getClassProxy("int");
+			return As3TypeAccessUtil.global("uint");
+		return As3TypeAccessUtil.global("int");
 	}
 } //As3ShiftExpressionImpl

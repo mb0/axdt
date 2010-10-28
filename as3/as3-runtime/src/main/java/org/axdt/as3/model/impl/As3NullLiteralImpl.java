@@ -9,8 +9,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3NullLiteral;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -43,7 +42,7 @@ public class As3NullLiteralImpl extends IExpressionImpl implements As3NullLitera
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return AvmEFactory.eINSTANCE.createAvmVoid();
+	public AvmTypeAccess resolveType() {
+		return AvmTypeAccess.VOID;
 	}
 } //As3NullLiteralImpl

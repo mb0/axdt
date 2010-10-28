@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,7 +84,7 @@ public class As3NewExpressionTest extends IExpressionTest {
 	 * @see org.axdt.as3.model.IExpression#resolveType()
 	 */
 	public void testResolveType() {
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 		getFixture().setTarget(createTypedIdent("String"));
 		assertProxyType("avm:/types/String", getFixture().resolveType());
 	}

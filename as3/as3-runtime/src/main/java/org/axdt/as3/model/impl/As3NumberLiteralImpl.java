@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3NumberLiteral;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -163,16 +164,16 @@ public class As3NumberLiteralImpl extends IExpressionImpl implements As3NumberLi
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		double intValue = Math.floor(value);
 		if (value*-1+intValue!=0) // we have a fraction
-			return getClassProxy("Number");
+			return As3TypeAccessUtil.global("Number");
 		if (value > Integer.MAX_VALUE)
 			return value < 2d*Integer.MAX_VALUE+2 
-				? getClassProxy("uint")
-				: getClassProxy("Number");
+				? As3TypeAccessUtil.global("uint")
+				: As3TypeAccessUtil.global("Number");
 		if (value >= Integer.MIN_VALUE)
-			return getClassProxy("int");
-		return getClassProxy("Number");
+			return As3TypeAccessUtil.global("int");
+		return As3TypeAccessUtil.global("Number");
 	}
 } //As3NumberLiteralImpl

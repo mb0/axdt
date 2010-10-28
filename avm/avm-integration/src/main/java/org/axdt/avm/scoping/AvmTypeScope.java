@@ -7,19 +7,44 @@
  ******************************************************************************/
 package org.axdt.avm.scoping;
 
+import java.util.List;
+
 import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmMember;
 import org.axdt.avm.model.AvmReferable;
+import org.axdt.avm.util.AvmTypeAccess;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.scoping.IScopeProvider;
+import com.google.inject.internal.Lists;
 
 public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 
-	public AvmTypeScope(AvmDeclaredType element, EReference ref, IScopeProvider scopeProvider) {
+	protected final EObject ctx;
+
+	public AvmTypeScope(AvmDeclaredType element, EObject initial, EReference ref, AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
+		this.ctx = initial;
 	}
 
 	@Override
 	protected Iterable<? extends AvmReferable> getCandidates() {
-		return getAllMembers(element);
+		AvmTypeAccess access = new AvmTypeAccess.Extended(element, true, true, true, true);
+		if (ctx != null && ctx != element) {
+			for (EObject current = ctx;current != null;) {
+				EObject next = current.eContainer();
+				if (next == element) {
+					if (current instanceof AvmMember) {
+						AvmMember member = (AvmMember) current;
+						if (member.isStatic())
+							access.setInstance(false);
+					}
+					break;
+				}
+				current = next;
+			}
+		}
+		List<AvmMember> result = Lists.newArrayList();
+		collectAllMembers(access, result, true, true);
+		return result;
 	}
 }

@@ -12,7 +12,8 @@ import java.util.Collection;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ArrayElement;
 import org.axdt.as3.model.As3ArrayInitializer;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -150,7 +151,7 @@ public class As3ArrayInitializerImpl extends IExpressionImpl implements As3Array
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("Array");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("Array");
 	}
 } //As3ArrayInitializerImpl

@@ -12,7 +12,8 @@ import java.util.Collection;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3LiteralField;
 import org.axdt.as3.model.As3ObjectInitializer;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -150,7 +151,7 @@ public class As3ObjectInitializerImpl extends IExpressionImpl implements As3Obje
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("Object");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("Object");
 	}
 } //As3ObjectInitializerImpl

@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class As3VoidExpressionTest extends As3UnaryExpressionTest {
 
 	@Override
 	public void testResolveType() {
-		assertSame(AvmEFactory.eINSTANCE.createAvmVoid(), getFixture().resolveType());
+		assertSame(AvmTypeAccess.VOID, getFixture().resolveType());
 	}
 
 } //As3VoidExpressionTest

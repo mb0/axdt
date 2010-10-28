@@ -9,10 +9,10 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3SuperExpression;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.as3.util.As3TypeAccessUtil;
 import org.axdt.avm.model.AvmDeclaredType;
-import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -46,17 +46,17 @@ public class As3SuperExpressionImpl extends IExpressionImpl implements As3SuperE
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		EObject current = eContainer();
 		while (current != null) {
 			if (current instanceof AvmDeclaredType) {
 				AvmTypeReference extended = ((AvmDeclaredType) current).getExtendedClass();
 				if (extended == null)
 					break;
-				return extended.getType(); 
+				return As3TypeAccessUtil.superAccess(extended.getType()); 
 			}
 			current = current.eContainer();
 		}
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 } //As3SuperExpressionImpl

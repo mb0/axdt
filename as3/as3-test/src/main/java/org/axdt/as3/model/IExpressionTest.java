@@ -13,6 +13,7 @@ import org.axdt.as3.As3EFactory;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmDeclaredTypeReference;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -76,6 +77,9 @@ public abstract class IExpressionTest extends TestCase {
 	 */
 	public abstract void testResolveType();
 
+	public void assertProxyType(String expectedUri, AvmTypeAccess type) {
+		assertProxyType(expectedUri, type.getType());
+	}
 	public void assertProxyType(String expectedUri, AvmType type) {
 		assertNotNull(type);
 		assertTrue(type.eIsProxy());

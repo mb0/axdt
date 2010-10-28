@@ -9,8 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3RelationalExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -43,10 +43,10 @@ public class As3RelationalExpressionImpl extends As3BinaryExpressionImpl impleme
 	}
 	
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		// TODO resolve type from right class ref
 		if ("as".equals(getOperation()))
-			return AvmEFactory.eINSTANCE.createAvmGeneric();
-		return getClassProxy("Boolean");
+			return AvmTypeAccess.GENERIC;
+		return As3TypeAccessUtil.global("Boolean");
 	}
 } //As3RelationalExpressionImpl

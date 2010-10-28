@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3XmlInitializer;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -163,8 +164,8 @@ public class As3XmlInitializerImpl extends IExpressionImpl implements As3XmlInit
 	}
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("XML");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("XML");
 	}
 
 } //As3XmlInitializerImpl

@@ -17,12 +17,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.scoping.IScopeProvider;
 
 public abstract class AvmGenericScope<T extends EObject> extends AvmElementScope<T> {
 	private static Resource tempResource = null;
 
-	public AvmGenericScope(T element, EReference ref, IScopeProvider scopeProvider) {
+	public AvmGenericScope(T element, EReference ref, AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 	}
 	public String getReferenceText(EObject reference) {

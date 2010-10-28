@@ -11,6 +11,7 @@ import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
 import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +83,7 @@ public class As3InvocationExpressionTest extends As3PostfixExpressionTest {
 		identifier.setReference(function);
 		getFixture().setExpression(identifier);
 		
-		assertSame(AvmEFactory.eINSTANCE.createAvmGeneric(), getFixture().resolveType());
+		assertSame(AvmTypeAccess.GENERIC, getFixture().resolveType());
 	}
 
 } //As3InvocationExpressionTest

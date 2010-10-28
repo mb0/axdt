@@ -28,11 +28,12 @@ import org.axdt.as3.model.IIdentifier;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmField;
 import org.axdt.avm.model.AvmReferable;
-import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.scoping.AvmElementScope;
 import org.axdt.avm.scoping.AvmPropertyScope;
+import org.axdt.avm.scoping.AvmScopeProvider;
 import org.axdt.avm.scoping.AvmTypeScope;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -55,7 +56,7 @@ import com.google.inject.name.Named;
  * @author mb0
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
  */
-public class As3ScopeProvider extends AbstractScopeProvider {
+public class As3ScopeProvider extends AbstractScopeProvider implements AvmScopeProvider {
 
 	public final Logger logger = Logger.getLogger(getClass());
 
@@ -94,19 +95,21 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		IScope scope = polymorphicFindScopeForClassName(context, reference);
+		return getScope(context, context, reference);
+	}
+	public IScope getScope(EObject context, EObject current, EReference reference) {
+		IScope scope = polymorphicFindScopeForClassName(context, current, reference);
 		if (scope == null)
-			scope = delegateGetScope(context, reference);
+			scope = delegateGetScope(current, reference);
 		return scope;
 	}
 
-	private IScope polymorphicFindScopeForClassName(EObject context,
+	private IScope polymorphicFindScopeForClassName(EObject context, EObject current,
 			EReference reference) {
 		IScope scope = null;
 		PolymorphicDispatcher<IScope> dispatcher = new PolymorphicDispatcher<IScope>(
 				Collections.singletonList(this), getPredicate(context,
 						reference.getEReferenceType()), errorHandler);
-		EObject current = context;
 		while (scope == null && current != null) {
 			scope = dispatcher.invoke(current, context, reference);
 			current = current.eContainer();
@@ -127,7 +130,7 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 	}
 
 	IScope scope_AvmReferable(As3Class ctx, EObject initial, EReference ref) {
-		return new AvmTypeScope(ctx, ref, this);
+		return new AvmTypeScope(ctx, initial, ref, this);
 	}
 
 	IScope scope_AvmReferable(As3Executable ctx, EObject initial, EReference ref) {
@@ -161,7 +164,7 @@ public class As3ScopeProvider extends AbstractScopeProvider {
 class As3ProgramScope extends AvmElementScope<As3Program> {
 
 	public As3ProgramScope(As3Program element, EReference ref,
-			IScopeProvider scopeProvider) {
+			AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 	}
 
@@ -183,7 +186,7 @@ class As3ProgramScope extends AvmElementScope<As3Program> {
 class As3ExecutableScope extends AvmElementScope<As3Executable> {
 
 	public As3ExecutableScope(As3Executable element, EReference ref,
-			IScopeProvider scopeProvider) {
+			AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 	}
 
@@ -197,12 +200,12 @@ class As3ExecutableScope extends AvmElementScope<As3Executable> {
 class As3PropertyScope extends AvmPropertyScope<As3AccessExpression> {
 
 	public As3PropertyScope(As3AccessExpression element, EReference ref,
-			IScopeProvider scopeProvider) {
+			AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 	}
 
 	@Override
-	protected AvmType getQualifierType() {
+	protected AvmTypeAccess getQualifierType() {
 		return element.getExpression().resolveType();
 	}
 
@@ -216,6 +219,7 @@ class As3PropertyScope extends AvmPropertyScope<As3AccessExpression> {
 	protected AvmField createDynamicField(String name) {
 		As3FieldBinding field = As3EFactory.eINSTANCE.createAs3FieldBinding();
 		field.setName(name);
+		field.setType(AvmEFactory.eINSTANCE.createAvmGenericReference());
 		return field;
 	}
 
@@ -230,20 +234,20 @@ class As3WithScope extends AvmPropertyScope<As3WithStatement> {
 	protected final EObject ctx;
 
 	public As3WithScope(As3WithStatement element, EObject initial,
-			EReference ref, IScopeProvider scopeProvider) {
+			EReference ref, AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 		this.ctx = initial;
 	}
 
 	@Override
-	protected AvmType getQualifierType() {
+	protected AvmTypeAccess getQualifierType() {
 		As3ExpressionList target = element.getTarget();
 		EList<IExpression> list = target.getExpressions();
 		if (!list.isEmpty()) {
 			IExpression expression = list.get(list.size() - 1);
 			return expression.resolveType();
 		}
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 
 	@Override
@@ -255,6 +259,7 @@ class As3WithScope extends AvmPropertyScope<As3WithStatement> {
 	protected AvmField createDynamicField(String name) {
 		As3FieldBinding field = As3EFactory.eINSTANCE.createAs3FieldBinding();
 		field.setName(name);
+		field.setType(AvmEFactory.eINSTANCE.createAvmGenericReference());
 		return field;
 	}
 }
@@ -262,7 +267,7 @@ class As3WithScope extends AvmPropertyScope<As3WithStatement> {
 class As3CatchScope extends AvmElementScope<As3CatchClause> {
 
 	public As3CatchScope(As3CatchClause element, EReference ref,
-			IScopeProvider scopeProvider) {
+			AvmScopeProvider scopeProvider) {
 		super(element, ref, scopeProvider);
 	}
 

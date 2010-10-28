@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3BooleanLiteral;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -164,7 +165,7 @@ public class As3BooleanLiteralImpl extends IExpressionImpl implements As3Boolean
 
 
 	@Override
-	public AvmType resolveType() {
-		return getClassProxy("Boolean");
+	public AvmTypeAccess resolveType() {
+		return As3TypeAccessUtil.global("Boolean");
 	}
 } //As3BooleanLiteralImpl

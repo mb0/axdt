@@ -10,8 +10,7 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3ParenListExpression;
 import org.axdt.as3.model.IExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -47,9 +46,9 @@ public class As3ParenListExpressionImpl extends As3ExpressionListImpl implements
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		if (getExpressions().isEmpty())
-			return AvmEFactory.eINSTANCE.createAvmNull();
+			return AvmTypeAccess.NULL;
 		IExpression last = getExpressions().get(getExpressions().size() - 1);
 		return last.resolveType();
 	}

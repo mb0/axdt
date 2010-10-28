@@ -147,6 +147,7 @@ import org.axdt.as3.model.IStatement;
 import org.axdt.as3.model.ITypeDirective;
 import org.axdt.as3.model.IUnaryExpression;
 import org.axdt.avm.AvmEPackage;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -1121,6 +1122,13 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	private EDataType iterableEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType avmTypeAccessEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -3432,6 +3440,15 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getAvmTypeAccess() {
+		return avmTypeAccessEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public As3EFactory getAs3EFactory() {
 		return (As3EFactory)getEFactoryInstance();
 	}
@@ -3841,6 +3858,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		// Create data types
 		iterableEDataType = createEDataType(ITERABLE);
+		avmTypeAccessEDataType = createEDataType(AVM_TYPE_ACCESS);
 	}
 
 	/**
@@ -4050,7 +4068,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		initEClass(iExpressionEClass, IExpression.class, "IExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(iExpressionEClass, theAvmEPackage.getAvmType(), "resolveType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(iExpressionEClass, this.getAvmTypeAccess(), "resolveType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iAssignmentExpressionEClass, IAssignmentExpression.class, "IAssignmentExpression", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4452,6 +4470,7 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 
 		// Initialize data types
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(avmTypeAccessEDataType, AvmTypeAccess.class, "AvmTypeAccess", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

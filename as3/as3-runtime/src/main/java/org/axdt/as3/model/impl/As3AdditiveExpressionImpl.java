@@ -9,7 +9,8 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3AdditiveExpression;
-import org.axdt.avm.model.AvmType;
+import org.axdt.as3.util.As3TypeAccessUtil;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -42,19 +43,19 @@ public class As3AdditiveExpressionImpl extends As3BinaryExpressionImpl implement
 	}
 	
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		if ("+".equals(operation)) {
 			if (left != null) {
-				AvmType operandType = left.resolveType();
-				if (checkTypeName(operandType, "String", "XML","XMLList"))
+				AvmTypeAccess operandType = left.resolveType();
+				if (checkTypeName(operandType.getType(), "String", "XML","XMLList"))
 					return operandType;
 			}
 			if (right != null) {
-				AvmType operandType = right.resolveType();
-				if (checkTypeName(operandType, "String", "XML","XMLList"))
+				AvmTypeAccess operandType = right.resolveType();
+				if (checkTypeName(operandType.getType(), "String", "XML","XMLList"))
 					return operandType;
 			}
 		}
-		return getClassProxy("Number");
+		return As3TypeAccessUtil.global("Number");
 	}
 } //As3AdditiveExpressionImpl

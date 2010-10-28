@@ -10,8 +10,7 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3NewExpression;
 import org.axdt.as3.model.IPostfixExpression;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -177,10 +176,10 @@ public class As3NewExpressionImpl extends IExpressionImpl implements As3NewExpre
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		IPostfixExpression expression = getTarget();
 		if (expression == null)
-			return AvmEFactory.eINSTANCE.createAvmNull();
+			return AvmTypeAccess.NULL;
 		return expression.resolveType();
 	}
 

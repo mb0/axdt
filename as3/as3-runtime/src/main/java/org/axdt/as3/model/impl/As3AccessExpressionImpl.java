@@ -10,8 +10,7 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3AccessExpression;
 import org.axdt.as3.model.As3PropertyOperator;
-import org.axdt.avm.AvmEFactory;
-import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -177,14 +176,14 @@ public class As3AccessExpressionImpl extends As3PostfixExpressionImpl implements
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		if (operator != null) {
 			if (operator.getIdentifier() != null)
 				return operator.getIdentifier().resolveType();
 			// bracket access resolves to generic
 			if (operator.getExpressions() != null)
-				return AvmEFactory.eINSTANCE.createAvmGeneric();
+				return AvmTypeAccess.GENERIC;
 		}
-		return AvmEFactory.eINSTANCE.createAvmNull();
+		return AvmTypeAccess.NULL;
 	}
 } //As3AccessExpressionImpl

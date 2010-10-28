@@ -10,8 +10,8 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.util.AvmTypeAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,7 +80,7 @@ public class As3SuperExpressionTest extends IExpressionTest {
 	 * @see org.axdt.as3.model.IExpression#resolveType()
 	 */
 	public void testResolveType() {
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 	}
 	public void testResolveType_Unbound() {
 		As3EFactory as3Fac = As3EFactory.eINSTANCE;
@@ -90,7 +90,7 @@ public class As3SuperExpressionTest extends IExpressionTest {
 		statement.getExpressions().add(getFixture());
 		block.getDirectives().add(statement);
 		func.setBody(block);
-		assertEquals(AvmEFactory.eINSTANCE.createAvmNull(), getFixture().resolveType());
+		assertEquals(AvmTypeAccess.NULL, getFixture().resolveType());
 	}
 	public void testResolveType_Operation() {
 		As3EFactory as3Fac = As3EFactory.eINSTANCE;
@@ -104,7 +104,7 @@ public class As3SuperExpressionTest extends IExpressionTest {
 		type.getDirectives().add(func);
 		AvmTypeReference extended = createTypeReference("Foo");
 		type.setExtendedClass(extended);
-		assertSame(extended.getType(), getFixture().resolveType());
+		assertSame(extended.getType(), getFixture().resolveType().getType());
 	}
 
 } //As3SuperExpressionTest

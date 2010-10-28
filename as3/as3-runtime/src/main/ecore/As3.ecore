@@ -13,7 +13,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IStatement" abstract="true" interface="true"
       eSuperTypes="#//IBlockDirective"/>
   <eClassifiers xsi:type="ecore:EClass" name="IExpression" abstract="true">
-    <eOperations name="resolveType" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmType"/>
+    <eOperations name="resolveType" eType="#//AvmTypeAccess"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IAssignmentExpression" abstract="true"
       interface="true" eSuperTypes="#//IExpression"/>
@@ -452,4 +452,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//IAttribute" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="AvmTypeAccess" instanceClassName="org.axdt.as3.util.AvmTypeAccess"/>
 </ecore:EPackage>

@@ -10,12 +10,13 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3PropertyIdentifier;
-import org.axdt.avm.AvmEFactory;
+import org.axdt.as3.util.As3TypeAccessUtil;
 import org.axdt.avm.model.AvmExecutable;
 import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVariable;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -48,25 +49,25 @@ public class As3PropertyIdentifierImpl extends As3SimpleIdentifierImpl implement
 	}
 
 	@Override
-	public AvmType resolveType() {
+	public AvmTypeAccess resolveType() {
 		AvmReferable ref = getReference();
 		if (ref == null && name == null)
-			return AvmEFactory.eINSTANCE.createAvmNull();
+			return AvmTypeAccess.NULL;
 		// TODO when should a avm type resolve to Class ?
 		if (ref instanceof AvmType) {
-			return (AvmType) ref;
+			return As3TypeAccessUtil.staticAccess((AvmType) ref);
 		} else if (ref instanceof AvmVariable) {
 			AvmTypeReference typeRef = ((AvmVariable) ref).getType();
 			if (typeRef != null)
-			return typeRef.getType();
+			return As3TypeAccessUtil.normalAccess(typeRef.getType());
 		} else if (ref instanceof AvmExecutable) {
 			if (ref instanceof As3Operation) {
 				As3Operation operation = (As3Operation) ref;
 				if (operation.isGetter())
-					return operation.getReturnType().getType();
+					return As3TypeAccessUtil.normalAccess(operation.getReturnType().getType());
 			}
-			return getClassProxy("Function");
+			return As3TypeAccessUtil.global("Function");
 		}
-		return AvmEFactory.eINSTANCE.createAvmGeneric();
+		return AvmTypeAccess.GENERIC;
 	}
 } //As3PropertyIdentifierImpl

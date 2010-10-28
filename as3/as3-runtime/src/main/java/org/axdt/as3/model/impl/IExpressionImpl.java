@@ -14,6 +14,7 @@ import org.axdt.as3.model.As3Class;
 import org.axdt.as3.model.IExpression;
 
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.util.AvmTypeAccess;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -64,7 +65,7 @@ public abstract class IExpressionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public abstract AvmType resolveType();
+	public abstract AvmTypeAccess resolveType();
 
 	protected As3Class getClassProxy(String typeName) {
 		As3Class proxy = As3EFactory.eINSTANCE.createAs3Class();

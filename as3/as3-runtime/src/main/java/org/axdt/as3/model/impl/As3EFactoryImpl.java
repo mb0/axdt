@@ -11,6 +11,7 @@ import java.lang.Iterable;
 import org.axdt.as3.As3EFactory;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.*;
+import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -171,6 +172,8 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 		switch (eDataType.getClassifierID()) {
 			case As3EPackage.ITERABLE:
 				return createIterableFromString(eDataType, initialValue);
+			case As3EPackage.AVM_TYPE_ACCESS:
+				return createAvmTypeAccessFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -186,6 +189,8 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 		switch (eDataType.getClassifierID()) {
 			case As3EPackage.ITERABLE:
 				return convertIterableToString(eDataType, instanceValue);
+			case As3EPackage.AVM_TYPE_ACCESS:
+				return convertAvmTypeAccessToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1147,6 +1152,24 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 	 */
 	public String convertIterableToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AvmTypeAccess createAvmTypeAccessFromString(EDataType eDataType, String initialValue) {
+		return (AvmTypeAccess)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAvmTypeAccessToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

@@ -4692,6 +4692,17 @@ public interface As3EPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Avm Type Access</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.util.AvmTypeAccess
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAvmTypeAccess()
+	 * @generated
+	 */
+	int AVM_TYPE_ACCESS = 137;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.axdt.as3.model.IDirective <em>IDirective</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7294,6 +7305,16 @@ public interface As3EPackage extends EPackage {
 	EDataType getIterable();
 
 	/**
+	 * Returns the meta object for data type '{@link org.axdt.avm.util.AvmTypeAccess <em>Avm Type Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Avm Type Access</em>'.
+	 * @see org.axdt.avm.util.AvmTypeAccess
+	 * @generated
+	 */
+	EDataType getAvmTypeAccess();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9580,6 +9601,16 @@ public interface As3EPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType ITERABLE = eINSTANCE.getIterable();
+
+		/**
+		 * The meta object literal for the '<em>Avm Type Access</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.avm.util.AvmTypeAccess
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAvmTypeAccess()
+		 * @generated
+		 */
+		EDataType AVM_TYPE_ACCESS = eINSTANCE.getAvmTypeAccess();
 
 	}
 
