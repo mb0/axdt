@@ -7,15 +7,30 @@
  ******************************************************************************/
 package org.axdt.as3.ui.preferences;
 
+import org.axdt.as3.formatting.ConfigurableDeclarativeFormatter;
 import org.axdt.common.preferences.AbstractPreferencePage;
+import org.eclipse.xtext.formatting.IFormatter;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 public class As3FormattingPreferencePage extends AbstractPreferencePage {
+	
+	@Inject
+	protected Injector injector;
 
 	@Inject
 	public As3FormattingPreferencePage(As3FormattingPreferences prefs) {
 		super(prefs);
 	}
+	
 
+	@Override
+	protected void performApply() {
+		IFormatter formatter = injector.getInstance(IFormatter.class);
+		if (formatter instanceof ConfigurableDeclarativeFormatter) {
+			ConfigurableDeclarativeFormatter configFormatter = (ConfigurableDeclarativeFormatter) formatter;
+			configFormatter.clearConfig();
+		}
+	}
 }

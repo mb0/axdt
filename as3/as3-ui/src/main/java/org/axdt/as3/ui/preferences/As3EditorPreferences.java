@@ -28,7 +28,7 @@ public class As3EditorPreferences extends AbstractPreferences {
 	public static As3EditorPreferences getInstance() {
 		if (instance == null)
 			new As3EditorPreferences();
-		return (As3EditorPreferences) instance;
+		return instance;
 	}
 
 	public As3EditorPreferences() {

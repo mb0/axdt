@@ -77,6 +77,13 @@
             name="%as3PrefEditor">
             <keywordReference id="org.axdt.as3.ui.keyword"/>
         </page>
+        <page
+            category="org.axdt.as3.preferences"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.preferences.As3FormattingPreferencePage"
+            id="org.axdt.as3.preferences.formatting"
+            name="%as3PrefFormatting">
+            <keywordReference id="org.axdt.as3.ui.keyword"/>
+        </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">

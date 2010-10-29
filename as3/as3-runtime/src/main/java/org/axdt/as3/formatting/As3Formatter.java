@@ -7,6 +7,8 @@
  ******************************************************************************/
 package org.axdt.as3.formatting;
 
+import org.axdt.as3.config.IFormattingConfig;
+import org.axdt.as3.config.IFormattingConfig.IndentStyle;
 import org.axdt.as3.services.As3GrammarAccess;
 import org.axdt.as3.services.As3GrammarAccess.As3ArrayInitializerElements;
 import org.axdt.as3.services.As3GrammarAccess.As3MetadataTagElements;
@@ -14,45 +16,20 @@ import org.axdt.as3.services.As3GrammarAccess.ObjectInitialiserElements;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.inject.Inject;
+
 /**
  * @author mb0
  */
-public class As3Formatter extends AbstractDeclarativeFormatter {
+public class As3Formatter extends ConfigurableDeclarativeFormatter {
 
-	public static enum BlockStyle {
-		ALLMAN("allman", 0, 0, 1), BSD("bsd", 0, 1, 1), STRICT_ALLMAN(
-				"strictAllman", 0, 0, 0), STRICT_BSD("strictBsd", 1, 1, 1);
-
-		public final String name;
-		public final int bcMin;
-		public final int bcMax;
-		public final int bcDefault;
-
-		private BlockStyle(String name, int bcMin, int bcDefault, int bcMax) {
-			this.name = name;
-			this.bcMin = bcMin;
-			this.bcDefault = bcDefault;
-			this.bcMax = bcMax;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		public void breakBefore(FormattingConfig c, Keyword leftCurly) {
-			if (bcMax == 0)
-				c.setNoLinewrap().before(leftCurly);
-			else
-				c.setLinewrap(bcMin, bcDefault, bcMax).before(leftCurly);
-		}
-	}
-
+	@Inject
+	protected IFormattingConfig formattingConfig; 
+	
 	@Override
 	protected As3GrammarAccess getGrammarAccess() {
 		return (As3GrammarAccess) super.getGrammarAccess();
@@ -60,11 +37,13 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-		// TODO make allman or bsd style configurable
-		BlockStyle blockStyle = BlockStyle.ALLMAN;
+		IndentStyle indentStyle = formattingConfig.getIndentStyle(null);
+		int autoLineWrap = formattingConfig.getInt(null, IFormattingConfig.MAX_LINE_WIDTH);
+
 		int minMemberWrap = 1;
+		
 		As3GrammarAccess f = getGrammarAccess();
-		c.setAutoLinewrap(100);
+		c.setAutoLinewrap(autoLineWrap);
 		c.setLinewrap(1, 1, 2).after(f.getVirtualSemiRule());
 		c.setNoSpace().before(f.getVirtualSemiRule());
 
@@ -138,13 +117,13 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 				f.getAs3BlockAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap(1, 1, 2).after(
 				f.getAs3BlockAccess().getRightCurlyBracketKeyword_4());
-		blockStyle.breakBefore(c, f.getAs3BlockAccess()
+		indentStyle.breakBefore(c, f.getAs3BlockAccess()
 				.getLeftCurlyBracketKeyword_1());
 		c.setIndentation(f.getAs3ClassAccess().getLeftCurlyBracketKeyword_7(),
 				f.getAs3ClassAccess().getRightCurlyBracketKeyword_10());
 		c.setLinewrap(minMemberWrap, 2, 2).after(
 				f.getAs3ClassAccess().getLeftCurlyBracketKeyword_7());
-		blockStyle.breakBefore(c, f.getAs3ClassAccess()
+		indentStyle.breakBefore(c, f.getAs3ClassAccess()
 				.getLeftCurlyBracketKeyword_7());
 		c.setLinewrap().after(
 				f.getAs3ClassAccess().getRightCurlyBracketKeyword_10());
@@ -153,7 +132,7 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 				.getRightCurlyBracketKeyword_9());
 		c.setLinewrap(minMemberWrap, 2, 2).after(
 				f.getAs3InterfaceAccess().getLeftCurlyBracketKeyword_6());
-		blockStyle.breakBefore(c, f.getAs3InterfaceAccess()
+		indentStyle.breakBefore(c, f.getAs3InterfaceAccess()
 				.getLeftCurlyBracketKeyword_6());
 		c.setLinewrap().after(
 				f.getAs3InterfaceAccess().getRightCurlyBracketKeyword_9());
@@ -162,7 +141,7 @@ public class As3Formatter extends AbstractDeclarativeFormatter {
 						.getAs3PackageAccess().getRightCurlyBracketKeyword_7());
 		c.setLinewrap(minMemberWrap, 2, 2).after(
 				f.getAs3PackageAccess().getLeftCurlyBracketKeyword_4());
-		blockStyle.breakBefore(c, f.getAs3PackageAccess()
+		indentStyle.breakBefore(c, f.getAs3PackageAccess()
 				.getLeftCurlyBracketKeyword_4());
 		c.setLinewrap().after(
 				f.getAs3PackageAccess().getRightCurlyBracketKeyword_7());

@@ -7,6 +7,7 @@
  ******************************************************************************/
 package org.axdt.as3.ui;
 
+import org.axdt.as3.config.IFormattingConfig;
 import org.axdt.as3.resource.As3LocationInFileProvider;
 import org.axdt.as3.resource.As3ProjectsStateHelper;
 import org.axdt.as3.resource.AvmResourceSetProvider;
@@ -17,6 +18,7 @@ import org.axdt.as3.ui.folding.As3FoldingRegionProvider;
 import org.axdt.as3.ui.folding.As3FoldingStructureProvider;
 import org.axdt.as3.ui.matching.As3BracketMatcher;
 import org.axdt.as3.ui.preferences.As3EditorPreferences;
+import org.axdt.as3.ui.preferences.As3FormattingPreferences;
 import org.axdt.as3.ui.templates.As3CrossReferenceTemplateVariableResolver;
 import org.axdt.as3.ui.templates.As3TemplateProposalProvider;
 import org.axdt.as3.ui.wizards.As3ProjectCreator;
@@ -77,6 +79,9 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public As3EditorPreferences bindAs3EditorPreferencesToInstance() {
 		return As3EditorPreferences.getInstance();
+	}
+	public IFormattingConfig bindIFormattingConfigToInstance() {
+		return As3FormattingPreferences.getInstance();
 	}
 	public IDocRootProvider bindDocRootProviderToInstance() {
 		return AsdocRootProvider.getInstance();
