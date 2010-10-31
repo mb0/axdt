@@ -276,7 +276,7 @@ public class AxdtModelImpl extends AxdtElementImpl implements AxdtModel {
 	public boolean hasAxdtNature(IProject project) {
 		if (project == null) return false;
 		try {
-			return project.hasNature(AxdtCore.NATURE_ÌD);
+			return project.hasNature(AxdtCore.NATURE_ID);
 		} catch (CoreException e) {
 			logger.info("exception when checking for axdt nature",e);
 		}

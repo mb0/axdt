@@ -16,7 +16,7 @@ import org.osgi.framework.BundleContext;
 public class AxdtCore extends Plugin {
 	public static final String PLUGIN_ÌD = "org.axdt.core";
 	// TODO compatibility with flexmojos
-	public static final String NATURE_ÌD = "org.axdt.as3.imp.nature";
+	public static final String NATURE_ID = "org.axdt.as3.imp.nature";
 	// TODO compatibility with flexmojos
 	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder";
 

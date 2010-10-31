@@ -52,7 +52,7 @@ public class AxdtElementAdapterFactory implements IAdapterFactory {
 			if (resource != null) {
 				IProject project = resource.getProject();
 				if (project != null)
-					return (AxdtProject) project.getNature(AxdtCore.NATURE_ÌD);
+					return (AxdtProject) project.getNature(AxdtCore.NATURE_ID);
 			}
 		} catch (CoreException e) {
 		}

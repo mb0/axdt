@@ -16,7 +16,7 @@ public class As3ProjectsStateHelper extends WorkspaceProjectsStateHelper {
 	@Override
 	protected boolean isAccessibleXtextProject(IProject p) {
 		try {
-			return p != null && p.getNature(AxdtCore.NATURE_ÌD) != null;
+			return p != null && p.getNature(AxdtCore.NATURE_ID) != null;
 		} catch (CoreException e) {
 			return false;
 		}

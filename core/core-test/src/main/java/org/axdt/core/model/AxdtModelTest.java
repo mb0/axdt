@@ -166,7 +166,7 @@ public class AxdtModelTest extends AxdtElementTest {
 		createIProject(iProject);
 		assertTrue(getFixture().getProjects().isEmpty());
 		IProjectDescription description = iProject.getDescription();
-		description.setNatureIds(new String[] {AxdtCore.NATURE_ÌD});
+		description.setNatureIds(new String[] {AxdtCore.NATURE_ID});
 		iProject.setDescription(description, null);
 		AxdtProject project = getFixture().getProject(iProject);
 		projects = getFixture().getProjects();
@@ -186,7 +186,7 @@ public class AxdtModelTest extends AxdtElementTest {
 		IProject project = getIProject("other");
 		createIProject(project);
 		IProjectDescription description = project.getDescription();
-		description.setNatureIds(new String [] {AxdtCore.NATURE_ÌD});
+		description.setNatureIds(new String [] {AxdtCore.NATURE_ID});
 		project.setDescription(description, null);
 		assertTrue(getFixture().hasAxdtNature(project));
 	}

@@ -72,7 +72,7 @@ public class As3ProjectCreator extends AbstractProjectCreator {
 
 	@Override
 	protected String[] getProjectNatures() {
-		return new String[] { AxdtCore.NATURE_ÌD, XtextProjectHelper.NATURE_ID };
+		return new String[] { AxdtCore.NATURE_ID, XtextProjectHelper.NATURE_ID };
 	}
 
 	@Override

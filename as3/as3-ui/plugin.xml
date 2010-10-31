@@ -250,4 +250,45 @@
 			</enablement>
 		</commonWizard>
 	</extension>
+	<extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.axdt.as3.ui.addNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.axdt.as3.ui.util.ToggleAxdtNatureAction"
+               id="org.axdt.as3.ui.addNatureAction"
+               label="%addNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+         	<not>
+	            <objectState
+    	              name="nature"
+        	          value="org.axdt.as3.imp.nature">
+            	</objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.axdt.as3.ui.removeNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.axdt.as3.ui.util.ToggleAxdtNatureAction"
+               id="org.axdt.as3.ui.removeNatureAction"
+               label="%removeNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+               <objectState
+    	              name="nature"
+        	          value="org.axdt.as3.imp.nature">
+            	</objectState>
+         </visibility>
+      </objectContribution>
+   </extension>
 </plugin>
