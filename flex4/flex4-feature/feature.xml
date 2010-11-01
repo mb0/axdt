@@ -2,7 +2,7 @@
 <feature
       id="org.axdt.flex4.feature"
       label="%featureName"
-      version="0.0.8.qualifier"
+      version="0.0.81.qualifier"
       provider-name="%providerName">
 
    <description url="%descriptionUrl">

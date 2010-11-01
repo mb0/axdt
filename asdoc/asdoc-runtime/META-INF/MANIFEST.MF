@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.asdoc.runtime;singleton:=true
-Bundle-Version: 0.0.8.qualifier
+Bundle-Version: 0.0.81.qualifier
 Require-Bundle: org.axdt.avm.runtime;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
  com.google.collect,

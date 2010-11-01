@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.core.runtime;singleton:=true
-Bundle-Version: 0.0.8.qualifier
+Bundle-Version: 0.0.81.qualifier
 Bundle-Activator: org.axdt.core.AxdtCore
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime,

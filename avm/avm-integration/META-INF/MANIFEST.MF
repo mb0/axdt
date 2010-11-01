@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.axdt.avm.integration;singleton:=true
-Bundle-Version: 0.0.8.qualifier
+Bundle-Version: 0.0.81.qualifier
 Bundle-Vendor: %providerName
 Require-Bundle: org.axdt.core.runtime,
  org.axdt.avm.runtime;visibility:=reexport,

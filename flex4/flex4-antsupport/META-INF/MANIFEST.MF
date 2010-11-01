@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.flex4.antsupport;singleton:=true
-Bundle-Version: 0.0.8.qualifier
+Bundle-Version: 0.0.81.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  lib/flexTasks.jar

@@ -3,11 +3,11 @@
    <description name="Axdt update-site" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/">
       Axdt enables you to write ActionScript3 code in an integrated environment.
    </description>
-   <feature url="features/org.axdt.as3.feature_0.0.8.qualifier.jar" id="org.axdt.as3.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.asdoc.feature_0.0.8.qualifier.jar" id="org.axdt.asdoc.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.avm.feature_0.0.8.qualifier.jar" id="org.axdt.avm.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.core.feature_0.0.8.qualifier.jar" id="org.axdt.core.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.flex4.feature_0.0.8.qualifier.jar" id="org.axdt.flex4.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.mxml.feature_0.0.8.qualifier.jar" id="org.axdt.mxml.feature" version="0.0.8.qualifier"/>
-   <feature url="features/org.axdt.swc.feature_0.0.8.qualifier.jar" id="org.axdt.swc.feature" version="0.0.8.qualifier"/>
+   <feature url="features/org.axdt.as3.feature_0.0.81.qualifier.jar" id="org.axdt.as3.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.asdoc.feature_0.0.81.qualifier.jar" id="org.axdt.asdoc.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.avm.feature_0.0.81.qualifier.jar" id="org.axdt.avm.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.core.feature_0.0.81.qualifier.jar" id="org.axdt.core.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.flex4.feature_0.0.81.qualifier.jar" id="org.axdt.flex4.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.mxml.feature_0.0.81.qualifier.jar" id="org.axdt.mxml.feature" version="0.0.81.qualifier"/>
+   <feature url="features/org.axdt.swc.feature_0.0.81.qualifier.jar" id="org.axdt.swc.feature" version="0.0.81.qualifier"/>
 </site>
