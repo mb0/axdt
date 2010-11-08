@@ -24,6 +24,10 @@
 >function ${name}(${}):${void:CrossReference(avm.AvmDeclaredTypeReference.type)} {
 	${cursor}
 }</template>
+<template name="getter" autoinsert="false" context="org.axdt.as3.As3.As3Operation" deleted="false" description="Property getter" enabled="true" id="org.axdt.as3.templates.getter"
+>public function get ${name}():${Object:CrossReference(avm.AvmDeclaredTypeReference.type)} {
+	return ${prop};
+}</template>
 <template name="interface" autoinsert="false" context="org.axdt.as3.As3.As3Interface" deleted="false" description="Interface definition" enabled="true" id="org.axdt.as3.templates.interface"
 >interface ${typeName} {
 	${cursor}
@@ -45,6 +49,10 @@ ${cursor}</template>
 <template name="package" autoinsert="false" context="org.axdt.as3.As3.As3Program" deleted="false" description="Package directive" enabled="true" id="org.axdt.as3.templates.package"
 >package ${packageName} {
 	${cursor}
+}</template>
+<template name="setter" autoinsert="false" context="org.axdt.as3.As3.As3Operation" deleted="false" description="Property setter" enabled="true" id="org.axdt.as3.templates.setter"
+>public function set ${name}(${val}:${Object:CrossReference(avm.AvmDeclaredTypeReference.type)}):void{
+	${prop} = ${val};
 }</template>
 <template name="switch" autoinsert="false" context="org.axdt.as3.As3.As3ExpressionStatement" deleted="false" description="Switch statement" enabled="true" id="org.axdt.as3.templates.switch"
 >switch (${key}) {
