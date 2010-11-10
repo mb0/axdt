@@ -47,6 +47,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
+import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
@@ -160,6 +161,9 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public Provider<IAllContainersState> provideIAllContainersState() {
 		return Access.getWorkspaceProjectsState();
+	}
+	public Class<? extends XtextSourceViewerConfiguration> bindXtextSourceViewerConfiguration() {
+		return As3SourceViewerConfiguration.class;
 	}
 }
 class As3ImageHelper implements IImageHelper {
