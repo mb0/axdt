@@ -18,9 +18,12 @@ import org.eclipse.jface.text.templates.TemplateBuffer;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.jface.text.templates.TemplateTranslator;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
+
+import com.google.inject.Inject;
 
 /**
  * This template context fixes the indentation of inserted templates and
@@ -30,6 +33,13 @@ import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
  */
 public class As3TemplateContext extends XtextTemplateContext {
 
+	@Inject(optional = true)
+	private IIndentationInformation indentInfo = new IIndentationInformation() {
+		public String getIndentString() {
+			return "\t";
+		}
+	};
+	
 	public As3TemplateContext(TemplateContextType type, IDocument document,
 			Position position, ContentAssistContext contentAssistContext,
 			IScopeProvider scopeProvider) {
@@ -70,11 +80,9 @@ public class As3TemplateContext extends XtextTemplateContext {
 			String indentation = line.substring(0, index);
 			pattern = pattern.replace("\n", "\n" + indentation);
 		}
-		if (store.getBoolean(As3EditorPreferences.TAB_TO_SPACE)) {
-			int numSpaces = store.getInt(As3EditorPreferences.TAB_WIDTH);
-			String spaces = "            ".substring(0, numSpaces);
-			pattern = pattern.replace("\t", spaces);
-		}
+		String indentString = indentInfo.getIndentString();
+		if (!"\t".equals(indentString))
+			pattern = pattern.replace("\t", indentString);
 		return pattern;
 	}
 }

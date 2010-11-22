@@ -41,9 +41,6 @@ public class As3EditorPreferences extends AbstractPreferences {
 	}
 
 	public void initializeFieldSpecs() {
-		addGroup("Tabs", false);
-		add(TAB_WIDTH, "&Tab width", 4);
-		add(TAB_TO_SPACE, "Con&vert tabs to spaces", false);
 		addGroup("Folding", true);
 		add(USE_FOLDING, "Enable &folding", true);
 		addHelp("Initially fold:");
