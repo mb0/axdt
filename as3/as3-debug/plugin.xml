@@ -7,7 +7,25 @@
             delegate="org.axdt.as3.debug.launch.As3LaunchDelegate"
             name="%launcherName"
             modes="run,debug" public="true"
-            id="org.axdt.as3.debug.launch.type"/>
+            id="org.axdt.as3.debug.launch.type"
+            sourceLocatorId="org.axdt.as3.debug.launch.srcLocator"
+            sourcePathComputerId="org.axdt.as3.debug.launch.srcComputer"
+            />
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourceLocators">
+      <sourceLocator
+            class="org.axdt.as3.debug.launch.As3SourceLookupDirector"
+            id="org.axdt.as3.debug.launch.srcLocator"
+            name="As3 Source Locator">
+      </sourceLocator>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourcePathComputers">
+      <sourcePathComputer
+            class="org.axdt.as3.debug.launch.As3SourcePathComputer"
+            id="org.axdt.as3.debug.launch.srcComputer">
+      </sourcePathComputer>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">

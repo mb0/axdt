@@ -32,4 +32,75 @@
       <initializer
             class="org.axdt.flex4.preferences.Flex4Preferences"/>
    </extension>
+   <extension
+         point="org.eclipse.debug.ui.debugModelPresentations">
+      <debugModelPresentation
+            class="org.axdt.flex4.debugger.FlexDebugPresentation"
+            id="org.axdt.flex4.debugger.model">
+      </debugModelPresentation>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.axdt.core.ui.IAxdtEditor"
+            class="org.axdt.flex4.debugger.FlexLineBreakpointAdapterFactory">
+         <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="org.axdt.flex4.debugger.rulerActions"
+            targetID="org.axdt.as3.As3">
+            <action
+                  class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+                  id="org.axdt.flex4.debugger.rulerActions.toggle"
+                  label=""
+                  icon=""
+                  actionID="RulerDoubleClick"
+                  style="push">
+            </action>
+      </editorContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+         targetID="org.axdt.as3.As3#TextRulerContext"
+         id="org.axdt.flex4.debugger.rulerPopupActions">
+           <action
+                 label="Toggle Breakpoint"
+                 class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+                 menubarPath="debug"
+                 id="org.axdt.flex4.debugger.rulerPopupActions.toggle">
+           </action>
+      </viewerContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+ 	  <viewerContribution
+            targetID="org.eclipse.debug.ui.VariableView"
+            id="org.eclipse.debug.ui.variablesView.popupMenu">
+            <action
+                  class="org.axdt.flex4.debugger.InvokeVariableGetter"
+                  enablesFor="+"
+                  menubarPath="variableGroup"
+                  id="org.axdt.flex4.debugger.invokeGetter"
+                  label="Invoke Getter">
+                <selection
+                      class="org.axdt.flex4.debugger.model.FlexVariable">
+                </selection>
+            </action>
+      </viewerContribution>
+   </extension>
+   <extension point="org.eclipse.debug.core.breakpoints">
+      <breakpoint 
+            markerType="org.axdt.flex4.debugger.lineBreakpointMarker"
+            class="org.axdt.flex4.debugger.model.FlexLineBreakpoint"
+            id="org.axdt.flex4.debugger.lineBreakpoint"/>
+   </extension>
+   <extension 
+         point="org.eclipse.core.resources.markers"
+         id="org.axdt.flex4.debugger.lineBreakpointMarker">
+      <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
+      <persistent value="true"/>
+   </extension>
 </fragment>

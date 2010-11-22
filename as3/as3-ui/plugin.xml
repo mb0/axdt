@@ -5,7 +5,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.axdt.as3.ui.As3Editor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="as"

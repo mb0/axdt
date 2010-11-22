@@ -13,16 +13,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IStreamsProxy;
 
 /**
  * @author mb0
  * @author nkuebler
  */
-public abstract class AbstractLaunchJob extends Job implements IProcess {
+public abstract class AbstractLaunchJob extends Job {
 
 	protected boolean terminated = false;
 	protected final AxdtLaunchContext context;
@@ -38,7 +34,7 @@ public abstract class AbstractLaunchJob extends Job implements IProcess {
 		try {
 			IStatus status = doRun(monitor);
 			if (status == null) {
-				if (monitor.isCanceled() || this.isTerminated())
+				if (isCanceled(monitor))
 					status = Status.CANCEL_STATUS;
 				else
 					status = Status.OK_STATUS;
@@ -56,39 +52,7 @@ public abstract class AbstractLaunchJob extends Job implements IProcess {
 
 	protected abstract IStatus doRun(IProgressMonitor monitor) throws Exception;
 
-	public boolean canTerminate() {
-		return true;
-	}
-
-	public boolean isTerminated() {
-		return terminated;
-	}
-
-	public void terminate() throws DebugException {
-		cancel();
-		terminated = true;
-	}
-
-	public String getLabel() {
-		return getName();
-	}
-
-	public ILaunch getLaunch() {
-		return context.getLaunch();
-	}
-
-	public IStreamsProxy getStreamsProxy() {
-		return null;
-	}
-
-	public void setAttribute(String key, String value) {
-	}
-
-	public String getAttribute(String key) {
-		return null;
-	}
-
-	public int getExitValue() throws DebugException {
-		return 0;
+	protected boolean isCanceled(IProgressMonitor monitor) {
+		return monitor.isCanceled();
 	}
 }

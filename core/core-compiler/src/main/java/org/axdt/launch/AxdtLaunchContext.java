@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -25,7 +26,7 @@ import com.google.common.collect.Lists;
  */
 public class AxdtLaunchContext {
 
-	protected final List<AbstractLaunchJob> jobQueue;
+	protected final List<Job> jobQueue;
 	protected final ILaunch launch;
 	protected final ILaunchConfiguration config;
 	protected final String launchMode;
@@ -40,7 +41,7 @@ public class AxdtLaunchContext {
 	public AxdtLaunchContext(ILaunch launch, ILaunchConfiguration config,
 			String launchMode) {
 		this.jobQueue = Collections.synchronizedList(
-				Lists.<AbstractLaunchJob>newLinkedList());
+				Lists.<Job>newLinkedList());
 		this.launch = launch;
 		this.config = config;
 		this.launchMode = launchMode;
@@ -58,13 +59,13 @@ public class AxdtLaunchContext {
 		return launchMode;
 	}
 
-	public AbstractLaunchJob getNextJob() {
+	public Job getNextJob() {
 		synchronized (jobQueue) {
 			return jobQueue.isEmpty() ? null : jobQueue.remove(0);
 		}
 	}
 
-	public void enqueueJob(AbstractLaunchJob job) {
+	public void enqueueJob(Job job) {
 		jobQueue.add(job);
 	}
 
@@ -114,9 +115,9 @@ public class AxdtLaunchContext {
 
 	public void workJobs(IProgressMonitor monitor) {
 		try {
-			AbstractLaunchJob job = getNextJob();
+			Job job = getNextJob();
 			while (job != null) {
-				launch.addProcess(job);
+				monitor.subTask(job.getName());
 				job.schedule();
 				job.join();
 				IStatus result = job.getResult();

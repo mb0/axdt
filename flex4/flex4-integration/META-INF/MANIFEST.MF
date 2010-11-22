@@ -13,6 +13,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.axdt.core.compiler,
  org.eclipse.wst.xml.core;bundle-version="1.0.0",
  org.axdt.as3.debug,
- org.axdt.core.ui
+ org.axdt.core.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.jface.text
 Export-Package: org.axdt.flex4.compiler
 Import-Package: org.apache.log4j
