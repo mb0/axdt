@@ -12,14 +12,17 @@ import org.axdt.avm.model.AvmElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.hover.ProblemHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Inject;
 import com.ibm.icu.util.StringTokenizer;
 
 public class As3SourceViewerConfiguration extends XtextSourceViewerConfiguration {
@@ -27,6 +30,30 @@ public class As3SourceViewerConfiguration extends XtextSourceViewerConfiguration
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
 		return new ProblemAndDocHover(sourceViewer);
+	}
+	@Inject
+	private IPreferenceStoreAccess storeAccess;
+	
+	public boolean isSpacesForTab() {
+		return storeAccess.getPreferenceStore().getBoolean(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_SPACES_FOR_TABS);
+	}
+	
+	public String[] getIndentPrefixes(ISourceViewer sourceViewer,
+			String contentType) {
+		String[] indentPrefixes= getIndentPrefixesForTab(getTabWidth(sourceViewer));
+		if (indentPrefixes == null)
+			return null;
+
+		int length= indentPrefixes.length;
+		
+		if (length > 2 && isSpacesForTab())  {
+			// Swap first with second last
+			String first= indentPrefixes[0];
+			indentPrefixes[0]= indentPrefixes[length - 2];
+			indentPrefixes[length - 2]= first;
+		}
+
+		return indentPrefixes;
 	}
 }
 

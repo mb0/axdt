@@ -7,8 +7,6 @@
  ******************************************************************************/
 package org.axdt.as3.ui.templates;
 
-import org.axdt.as3.ui.preferences.As3EditorPreferences;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -67,7 +65,6 @@ public class As3TemplateContext extends XtextTemplateContext {
 
 	protected String translateIndentation(String pattern)
 			throws BadLocationException {
-		IPreferenceStore store = As3EditorPreferences.getInstance().getStore();
 		if (pattern.indexOf('\n') != -1) {
 			IRegion lineInfo = getDocument().getLineInformationOfOffset(
 					getCompletionOffset());
