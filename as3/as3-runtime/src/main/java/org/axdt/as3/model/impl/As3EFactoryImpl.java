@@ -157,6 +157,8 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 			case As3EPackage.AS3_CONDITIONAL_BLOCK: return createAs3ConditionalBlock();
 			case As3EPackage.AS3_RESERVED_ATTRIBUTE: return createAs3ReservedAttribute();
 			case As3EPackage.AS3_ATTRIBUTES: return createAs3Attributes();
+			case As3EPackage.AS3_NEW_VECTOR_EXPRESSION: return createAs3NewVectorExpression();
+			case As3EPackage.AS3_TYPE_PARAMETER: return createAs3TypeParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -1134,6 +1136,26 @@ public class As3EFactoryImpl extends EFactoryImpl implements As3EFactory {
 	public As3Attributes createAs3Attributes() {
 		As3AttributesImpl as3Attributes = new As3AttributesImpl();
 		return as3Attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public As3NewVectorExpression createAs3NewVectorExpression() {
+		As3NewVectorExpressionImpl as3NewVectorExpression = new As3NewVectorExpressionImpl();
+		return as3NewVectorExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public As3TypeParameter createAs3TypeParameter() {
+		As3TypeParameterImpl as3TypeParameter = new As3TypeParameterImpl();
+		return as3TypeParameter;
 	}
 
 	/**

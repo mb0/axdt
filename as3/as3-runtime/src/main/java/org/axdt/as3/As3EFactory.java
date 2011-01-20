@@ -56,6 +56,7 @@ import org.axdt.as3.model.As3MetadataTag;
 import org.axdt.as3.model.As3MultiplicativeExpression;
 import org.axdt.as3.model.As3Namespace;
 import org.axdt.as3.model.As3NewExpression;
+import org.axdt.as3.model.As3NewVectorExpression;
 import org.axdt.as3.model.As3NullLiteral;
 import org.axdt.as3.model.As3NumberLiteral;
 import org.axdt.as3.model.As3ObjectInitializer;
@@ -89,6 +90,7 @@ import org.axdt.as3.model.As3ThisExpression;
 import org.axdt.as3.model.As3ThrowStatement;
 import org.axdt.as3.model.As3TryStatement;
 import org.axdt.as3.model.As3TypeOfExpression;
+import org.axdt.as3.model.As3TypeParameter;
 import org.axdt.as3.model.As3UnaryMinusExpression;
 import org.axdt.as3.model.As3UnaryPlusExpression;
 import org.axdt.as3.model.As3Use;
@@ -965,6 +967,24 @@ public interface As3EFactory extends EFactory {
 	 * @generated
 	 */
 	As3Attributes createAs3Attributes();
+
+	/**
+	 * Returns a new object of class '<em>As3 New Vector Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>As3 New Vector Expression</em>'.
+	 * @generated
+	 */
+	As3NewVectorExpression createAs3NewVectorExpression();
+
+	/**
+	 * Returns a new object of class '<em>As3 Type Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>As3 Type Parameter</em>'.
+	 * @generated
+	 */
+	As3TypeParameter createAs3TypeParameter();
 
 	/**
 	 * Returns the package supported by this factory.

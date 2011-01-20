@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.axdt.avm.model.impl.AvmDeclaredTypeReferenceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.axdt.avm.model.impl.AvmDeclaredTypeReferenceImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,6 +39,16 @@ public class AvmDeclaredTypeReferenceImpl extends AvmTypeReferenceImpl implement
 	 * @ordered
 	 */
 	protected AvmType type;
+
+	/**
+	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected AvmType parameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,12 +112,53 @@ public class AvmDeclaredTypeReferenceImpl extends AvmTypeReferenceImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AvmType getParameter() {
+		if (parameter != null && parameter.eIsProxy()) {
+			InternalEObject oldParameter = (InternalEObject)parameter;
+			parameter = (AvmType)eResolveProxy(oldParameter);
+			if (parameter != oldParameter) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER, oldParameter, parameter));
+			}
+		}
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AvmType basicGetParameter() {
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParameter(AvmType newParameter) {
+		AvmType oldParameter = parameter;
+		parameter = newParameter;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER, oldParameter, parameter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER:
+				if (resolve) return getParameter();
+				return basicGetParameter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -121,6 +173,9 @@ public class AvmDeclaredTypeReferenceImpl extends AvmTypeReferenceImpl implement
 		switch (featureID) {
 			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__TYPE:
 				setType((AvmType)newValue);
+				return;
+			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER:
+				setParameter((AvmType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,6 +192,9 @@ public class AvmDeclaredTypeReferenceImpl extends AvmTypeReferenceImpl implement
 			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__TYPE:
 				setType((AvmType)null);
 				return;
+			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER:
+				setParameter((AvmType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -151,6 +209,8 @@ public class AvmDeclaredTypeReferenceImpl extends AvmTypeReferenceImpl implement
 		switch (featureID) {
 			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__TYPE:
 				return type != null;
+			case AvmEPackage.AVM_DECLARED_TYPE_REFERENCE__PARAMETER:
+				return parameter != null;
 		}
 		return super.eIsSet(featureID);
 	}

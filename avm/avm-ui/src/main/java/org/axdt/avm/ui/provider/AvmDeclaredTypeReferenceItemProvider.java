@@ -62,6 +62,7 @@ public class AvmDeclaredTypeReferenceItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
+			addParameterPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,6 +81,28 @@ public class AvmDeclaredTypeReferenceItemProvider
 				 getString("_UI_AvmDeclaredTypeReference_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AvmDeclaredTypeReference_type_feature", "_UI_AvmDeclaredTypeReference_type"),
 				 AvmEPackage.Literals.AVM_DECLARED_TYPE_REFERENCE__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parameter feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParameterPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AvmDeclaredTypeReference_parameter_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AvmDeclaredTypeReference_parameter_feature", "_UI_AvmDeclaredTypeReference_type"),
+				 AvmEPackage.Literals.AVM_DECLARED_TYPE_REFERENCE__PARAMETER,
 				 true,
 				 false,
 				 true,

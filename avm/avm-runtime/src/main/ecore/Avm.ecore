@@ -142,6 +142,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AvmGenericReference" eSuperTypes="#//AvmTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmDeclaredTypeReference" eSuperTypes="#//AvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AvmType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//AvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List">
     <eTypeParameters name="E"/>

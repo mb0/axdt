@@ -73,10 +73,10 @@ public class As3Formatter extends ConfigurableDeclarativeFormatter {
 		// arithmetic
 		c.setNoSpace().before(
 				f.getIPostfixExpressionAccess()
-						.getPlusSignPlusSignKeyword_1_3_1());
+						.getPlusSignPlusSignKeyword_1_4_1());
 		c.setNoSpace().before(
 				f.getIPostfixExpressionAccess()
-						.getHyphenMinusHyphenMinusKeyword_1_4_1());
+						.getHyphenMinusHyphenMinusKeyword_1_5_1());
 
 		// pairs
 		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("(", ")")) {

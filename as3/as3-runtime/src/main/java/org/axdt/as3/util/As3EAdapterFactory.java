@@ -634,6 +634,14 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 				return createAs3AttributesAdapter();
 			}
 			@Override
+			public Adapter caseAs3NewVectorExpression(As3NewVectorExpression object) {
+				return createAs3NewVectorExpressionAdapter();
+			}
+			@Override
+			public Adapter caseAs3TypeParameter(As3TypeParameter object) {
+				return createAs3TypeParameterAdapter();
+			}
+			@Override
 			public Adapter caseAvmElement(AvmElement object) {
 				return createAvmElementAdapter();
 			}
@@ -2630,6 +2638,34 @@ public class As3EAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAs3AttributesAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.As3NewVectorExpression <em>As3 New Vector Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.As3NewVectorExpression
+	 * @generated
+	 */
+	public Adapter createAs3NewVectorExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.axdt.as3.model.As3TypeParameter <em>As3 Type Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.axdt.as3.model.As3TypeParameter
+	 * @generated
+	 */
+	public Adapter createAs3TypeParameterAdapter() {
 		return null;
 	}
 

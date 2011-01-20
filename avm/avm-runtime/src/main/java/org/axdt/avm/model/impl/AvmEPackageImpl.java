@@ -433,6 +433,15 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAvmDeclaredTypeReference_Parameter() {
+		return (EReference)avmDeclaredTypeReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAvmReferable() {
 		return avmReferableEClass;
 	}
@@ -700,6 +709,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		avmDeclaredTypeReferenceEClass = createEClass(AVM_DECLARED_TYPE_REFERENCE);
 		createEReference(avmDeclaredTypeReferenceEClass, AVM_DECLARED_TYPE_REFERENCE__TYPE);
+		createEReference(avmDeclaredTypeReferenceEClass, AVM_DECLARED_TYPE_REFERENCE__PARAMETER);
 
 		avmReferableEClass = createEClass(AVM_REFERABLE);
 
@@ -931,6 +941,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		initEClass(avmDeclaredTypeReferenceEClass, AvmDeclaredTypeReference.class, "AvmDeclaredTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAvmDeclaredTypeReference_Type(), this.getAvmType(), null, "type", null, 0, 1, AvmDeclaredTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAvmDeclaredTypeReference_Parameter(), this.getAvmType(), null, "parameter", null, 0, 1, AvmDeclaredTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(avmReferableEClass, AvmReferable.class, "AvmReferable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

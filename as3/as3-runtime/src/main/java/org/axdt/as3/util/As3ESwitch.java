@@ -1893,6 +1893,42 @@ public class As3ESwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case As3EPackage.AS3_NEW_VECTOR_EXPRESSION: {
+				As3NewVectorExpression as3NewVectorExpression = (As3NewVectorExpression)theEObject;
+				T result = caseAs3NewVectorExpression(as3NewVectorExpression);
+				if (result == null) result = caseIPrimaryExpression(as3NewVectorExpression);
+				if (result == null) result = caseIPostfixExpression(as3NewVectorExpression);
+				if (result == null) result = caseIUnaryExpression(as3NewVectorExpression);
+				if (result == null) result = caseIForInInit(as3NewVectorExpression);
+				if (result == null) result = caseIArithmeticExpression(as3NewVectorExpression);
+				if (result == null) result = caseIRelationalExpression(as3NewVectorExpression);
+				if (result == null) result = caseIEqualityExpression(as3NewVectorExpression);
+				if (result == null) result = caseIBitwiseExpression(as3NewVectorExpression);
+				if (result == null) result = caseILogicalExpression(as3NewVectorExpression);
+				if (result == null) result = caseIConditionalExpression(as3NewVectorExpression);
+				if (result == null) result = caseIAssignmentExpression(as3NewVectorExpression);
+				if (result == null) result = caseIExpression(as3NewVectorExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case As3EPackage.AS3_TYPE_PARAMETER: {
+				As3TypeParameter as3TypeParameter = (As3TypeParameter)theEObject;
+				T result = caseAs3TypeParameter(as3TypeParameter);
+				if (result == null) result = caseAs3PostfixExpression(as3TypeParameter);
+				if (result == null) result = caseIPostfixExpression(as3TypeParameter);
+				if (result == null) result = caseIUnaryExpression(as3TypeParameter);
+				if (result == null) result = caseIForInInit(as3TypeParameter);
+				if (result == null) result = caseIArithmeticExpression(as3TypeParameter);
+				if (result == null) result = caseIRelationalExpression(as3TypeParameter);
+				if (result == null) result = caseIEqualityExpression(as3TypeParameter);
+				if (result == null) result = caseIBitwiseExpression(as3TypeParameter);
+				if (result == null) result = caseILogicalExpression(as3TypeParameter);
+				if (result == null) result = caseIConditionalExpression(as3TypeParameter);
+				if (result == null) result = caseIAssignmentExpression(as3TypeParameter);
+				if (result == null) result = caseIExpression(as3TypeParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -3934,6 +3970,36 @@ public class As3ESwitch<T> {
 	 * @generated
 	 */
 	public T caseAs3Attributes(As3Attributes object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>As3 New Vector Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>As3 New Vector Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAs3NewVectorExpression(As3NewVectorExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>As3 Type Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>As3 Type Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAs3TypeParameter(As3TypeParameter object) {
 		return null;
 	}
 

@@ -103,6 +103,10 @@ public class As3ParserTest extends AbstractXtextTests {
 		IParseResult result;
 		result = parse("interface A {}");
 		assertParseResult(result);
+		result = parse("interface A { function b():void; function c():void; }");
+		assertParseResult(result);
+		result = parse("interface A { function get b():int; function get c():int; }");
+		assertParseResult(result);
 	}
 	public void testVariable() throws Exception {
 		IParseResult result;
@@ -320,6 +324,17 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parse("var i:int\ni++;");
 		assertParseResult(result);
 		result = parse("1++\n2++\n");
+		assertParseResult(result);
+	}
+	public void testVector() throws Exception {
+		IParseResult result;
+		result = parse("var v:Vector.<String>;");
+		assertParseResult(result);
+		result = parse("var v:Vector.<int> = new Vector.<int>();");
+		assertParseResult(result);
+		result = parse("var friends:Vector.<String> = Vector.<String>([\"Bob\", \"Larry\", \"Sarah\"]);");
+		assertParseResult(result);
+		result = parse("var friends:Vector.<String> = new <String>[\"Bob\", \"Larry\", \"Sarah\"];");
 		assertParseResult(result);
 	}
 }

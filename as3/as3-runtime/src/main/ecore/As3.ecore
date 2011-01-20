@@ -453,4 +453,12 @@
         eType="#//IAttribute" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="AvmTypeAccess" instanceClassName="org.axdt.as3.util.AvmTypeAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="As3NewVectorExpression" eSuperTypes="#//IPrimaryExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//As3ArrayInitializer"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="As3TypeParameter" eSuperTypes="#//As3PostfixExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="ecore:EClass ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmType"/>
+  </eClassifiers>
 </ecore:EPackage>

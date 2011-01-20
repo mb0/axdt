@@ -604,13 +604,22 @@ public interface AvmEPackage extends EPackage {
 	int AVM_DECLARED_TYPE_REFERENCE__TYPE = AVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AVM_DECLARED_TYPE_REFERENCE__PARAMETER = AVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Avm Declared Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AVM_DECLARED_TYPE_REFERENCE_FEATURE_COUNT = AVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int AVM_DECLARED_TYPE_REFERENCE_FEATURE_COUNT = AVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.axdt.avm.model.AvmVisibility <em>Avm Visibility</em>}' enum.
@@ -742,6 +751,17 @@ public interface AvmEPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAvmDeclaredTypeReference_Type();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.axdt.avm.model.AvmDeclaredTypeReference#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see org.axdt.avm.model.AvmDeclaredTypeReference#getParameter()
+	 * @see #getAvmDeclaredTypeReference()
+	 * @generated
+	 */
+	EReference getAvmDeclaredTypeReference_Parameter();
 
 	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}'.
@@ -1084,6 +1104,14 @@ public interface AvmEPackage extends EPackage {
 		 * @generated
 		 */
 		EReference AVM_DECLARED_TYPE_REFERENCE__TYPE = eINSTANCE.getAvmDeclaredTypeReference_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AVM_DECLARED_TYPE_REFERENCE__PARAMETER = eINSTANCE.getAvmDeclaredTypeReference_Parameter();
 
 		/**
 		 * The meta object literal for the '{@link org.axdt.avm.model.AvmReferable <em>Avm Referable</em>}' class.

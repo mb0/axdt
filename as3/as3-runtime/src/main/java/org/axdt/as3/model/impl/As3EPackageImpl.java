@@ -71,6 +71,7 @@ import org.axdt.as3.model.As3MetadataTag;
 import org.axdt.as3.model.As3MultiplicativeExpression;
 import org.axdt.as3.model.As3Namespace;
 import org.axdt.as3.model.As3NewExpression;
+import org.axdt.as3.model.As3NewVectorExpression;
 import org.axdt.as3.model.As3NonAttributeQualifiedIdentifier;
 import org.axdt.as3.model.As3NullLiteral;
 import org.axdt.as3.model.As3NumberLiteral;
@@ -111,6 +112,7 @@ import org.axdt.as3.model.As3ThrowStatement;
 import org.axdt.as3.model.As3TryStatement;
 import org.axdt.as3.model.As3Type;
 import org.axdt.as3.model.As3TypeOfExpression;
+import org.axdt.as3.model.As3TypeParameter;
 import org.axdt.as3.model.As3UnaryExpression;
 import org.axdt.as3.model.As3UnaryMinusExpression;
 import org.axdt.as3.model.As3UnaryPlusExpression;
@@ -1115,6 +1117,20 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * @generated
 	 */
 	private EClass as3AttributesEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass as3NewVectorExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass as3TypeParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3431,6 +3447,51 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAs3NewVectorExpression() {
+		return as3NewVectorExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3NewVectorExpression_Parameter() {
+		return (EReference)as3NewVectorExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3NewVectorExpression_Data() {
+		return (EReference)as3NewVectorExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAs3TypeParameter() {
+		return as3TypeParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAs3TypeParameter_Parameter() {
+		return (EReference)as3TypeParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIterable() {
 		return iterableEDataType;
 	}
@@ -3856,6 +3917,13 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3AttributesEClass = createEClass(AS3_ATTRIBUTES);
 		createEReference(as3AttributesEClass, AS3_ATTRIBUTES__ATTRIBUTES);
 
+		as3NewVectorExpressionEClass = createEClass(AS3_NEW_VECTOR_EXPRESSION);
+		createEReference(as3NewVectorExpressionEClass, AS3_NEW_VECTOR_EXPRESSION__PARAMETER);
+		createEReference(as3NewVectorExpressionEClass, AS3_NEW_VECTOR_EXPRESSION__DATA);
+
+		as3TypeParameterEClass = createEClass(AS3_TYPE_PARAMETER);
+		createEReference(as3TypeParameterEClass, AS3_TYPE_PARAMETER__PARAMETER);
+
 		// Create data types
 		iterableEDataType = createEDataType(ITERABLE);
 		avmTypeAccessEDataType = createEDataType(AVM_TYPE_ACCESS);
@@ -4054,6 +4122,8 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		as3RegexLiteralEClass.getESuperTypes().add(this.getILiteral());
 		as3ConditionalBlockEClass.getESuperTypes().add(this.getIStatement());
 		as3ReservedAttributeEClass.getESuperTypes().add(this.getIAttribute());
+		as3NewVectorExpressionEClass.getESuperTypes().add(this.getIPrimaryExpression());
+		as3TypeParameterEClass.getESuperTypes().add(this.getAs3PostfixExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(iDirectiveEClass, IDirective.class, "IDirective", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4467,6 +4537,13 @@ public class As3EPackageImpl extends EPackageImpl implements As3EPackage {
 		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isNative", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(as3AttributesEClass, ecorePackage.getEBoolean(), "isOverride", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(as3NewVectorExpressionEClass, As3NewVectorExpression.class, "As3NewVectorExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAs3NewVectorExpression_Parameter(), theAvmEPackage.getAvmType(), null, "parameter", null, 0, 1, As3NewVectorExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAs3NewVectorExpression_Data(), this.getAs3ArrayInitializer(), null, "data", null, 0, 1, As3NewVectorExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(as3TypeParameterEClass, As3TypeParameter.class, "As3TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAs3TypeParameter_Parameter(), theAvmEPackage.getAvmType(), null, "parameter", null, 0, 1, As3TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

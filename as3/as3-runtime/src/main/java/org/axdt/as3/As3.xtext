@@ -126,8 +126,10 @@ As3ArrayElement
 IPostfixExpression
 	: 	( IPrimaryExpression
 		| As3NewExpression
+		| As3NewVectorExpression
 		)
 		( {As3AccessExpression.expression = current} LT* operator=As3PropertyOperator
+		| {As3TypeParameter.expression = current} LT* '.<' parameter=[avm::AvmType|FQN] '>'
 		| {As3InvocationExpression.expression = current} LT* arguments=As3Arguments
 		| {As3QueryExpression.expression = current} LT* operator=As3QueryOperator
 		| {As3PostIncrementExpression.expression = current} '++'
@@ -138,6 +140,9 @@ IPostfixExpression
 // 14.11 New expressions
 As3NewExpression 
 	: 'new' LT* target=IPostfixExpression;
+// Vector literal syntax constructor
+As3NewVectorExpression
+	: 'new' LT* '<' parameter=[avm::AvmType|FQN] '>' LT* data=As3ArrayInitializer;
 
 // 14.12 Property accessors
 As3PropertyOperator
@@ -489,7 +494,8 @@ ResultType returns avm::AvmTypeReference
 	;
 VarType returns avm::AvmTypeReference
 	: ':' LT* 
-	({avm::AvmDeclaredTypeReference} type=[avm::AvmType|FQN] 
+	({avm::AvmDeclaredTypeReference} type=[avm::AvmType|FQN]
+		('.<' parameter=[avm::AvmType|FQN] '>')?
 	|{avm::AvmGenericReference} '*');
 VarTypeAssign  returns avm::AvmTypeReference
 	: {avm::AvmDeclaredTypeReference} ':' LT* GenericVarTypeAssign

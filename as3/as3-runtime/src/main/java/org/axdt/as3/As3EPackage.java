@@ -4681,6 +4681,80 @@ public interface As3EPackage extends EPackage {
 	int AS3_ATTRIBUTES_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3NewVectorExpressionImpl <em>As3 New Vector Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.impl.As3NewVectorExpressionImpl
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NewVectorExpression()
+	 * @generated
+	 */
+	int AS3_NEW_VECTOR_EXPRESSION = 136;
+
+	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_NEW_VECTOR_EXPRESSION__PARAMETER = IPRIMARY_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Data</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_NEW_VECTOR_EXPRESSION__DATA = IPRIMARY_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>As3 New Vector Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_NEW_VECTOR_EXPRESSION_FEATURE_COUNT = IPRIMARY_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.axdt.as3.model.impl.As3TypeParameterImpl <em>As3 Type Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.as3.model.impl.As3TypeParameterImpl
+	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3TypeParameter()
+	 * @generated
+	 */
+	int AS3_TYPE_PARAMETER = 137;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_TYPE_PARAMETER__EXPRESSION = AS3_POSTFIX_EXPRESSION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_TYPE_PARAMETER__PARAMETER = AS3_POSTFIX_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>As3 Type Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AS3_TYPE_PARAMETER_FEATURE_COUNT = AS3_POSTFIX_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4688,18 +4762,18 @@ public interface As3EPackage extends EPackage {
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 136;
+	int ITERABLE = 138;
 
 
 	/**
 	 * The meta object id for the '<em>Avm Type Access</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.axdt.avm.util.AvmTypeAccess
+	 * @see org.axdt.as3.util.AvmTypeAccess
 	 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAvmTypeAccess()
 	 * @generated
 	 */
-	int AVM_TYPE_ACCESS = 137;
+	int AVM_TYPE_ACCESS = 139;
 
 
 	/**
@@ -7295,6 +7369,59 @@ public interface As3EPackage extends EPackage {
 	EReference getAs3Attributes_Attributes();
 
 	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.As3NewVectorExpression <em>As3 New Vector Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>As3 New Vector Expression</em>'.
+	 * @see org.axdt.as3.model.As3NewVectorExpression
+	 * @generated
+	 */
+	EClass getAs3NewVectorExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.axdt.as3.model.As3NewVectorExpression#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see org.axdt.as3.model.As3NewVectorExpression#getParameter()
+	 * @see #getAs3NewVectorExpression()
+	 * @generated
+	 */
+	EReference getAs3NewVectorExpression_Parameter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.axdt.as3.model.As3NewVectorExpression#getData <em>Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Data</em>'.
+	 * @see org.axdt.as3.model.As3NewVectorExpression#getData()
+	 * @see #getAs3NewVectorExpression()
+	 * @generated
+	 */
+	EReference getAs3NewVectorExpression_Data();
+
+	/**
+	 * Returns the meta object for class '{@link org.axdt.as3.model.As3TypeParameter <em>As3 Type Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>As3 Type Parameter</em>'.
+	 * @see org.axdt.as3.model.As3TypeParameter
+	 * @generated
+	 */
+	EClass getAs3TypeParameter();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.axdt.as3.model.As3TypeParameter#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see org.axdt.as3.model.As3TypeParameter#getParameter()
+	 * @see #getAs3TypeParameter()
+	 * @generated
+	 */
+	EReference getAs3TypeParameter_Parameter();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.Iterable <em>Iterable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7305,11 +7432,11 @@ public interface As3EPackage extends EPackage {
 	EDataType getIterable();
 
 	/**
-	 * Returns the meta object for data type '{@link org.axdt.avm.util.AvmTypeAccess <em>Avm Type Access</em>}'.
+	 * Returns the meta object for data type '{@link org.axdt.as3.util.AvmTypeAccess <em>Avm Type Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Avm Type Access</em>'.
-	 * @see org.axdt.avm.util.AvmTypeAccess
+	 * @see org.axdt.as3.util.AvmTypeAccess
 	 * @generated
 	 */
 	EDataType getAvmTypeAccess();
@@ -9593,6 +9720,50 @@ public interface As3EPackage extends EPackage {
 		EReference AS3_ATTRIBUTES__ATTRIBUTES = eINSTANCE.getAs3Attributes_Attributes();
 
 		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3NewVectorExpressionImpl <em>As3 New Vector Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.impl.As3NewVectorExpressionImpl
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3NewVectorExpression()
+		 * @generated
+		 */
+		EClass AS3_NEW_VECTOR_EXPRESSION = eINSTANCE.getAs3NewVectorExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_NEW_VECTOR_EXPRESSION__PARAMETER = eINSTANCE.getAs3NewVectorExpression_Parameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Data</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_NEW_VECTOR_EXPRESSION__DATA = eINSTANCE.getAs3NewVectorExpression_Data();
+
+		/**
+		 * The meta object literal for the '{@link org.axdt.as3.model.impl.As3TypeParameterImpl <em>As3 Type Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.as3.model.impl.As3TypeParameterImpl
+		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAs3TypeParameter()
+		 * @generated
+		 */
+		EClass AS3_TYPE_PARAMETER = eINSTANCE.getAs3TypeParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AS3_TYPE_PARAMETER__PARAMETER = eINSTANCE.getAs3TypeParameter_Parameter();
+
+		/**
 		 * The meta object literal for the '<em>Iterable</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9606,7 +9777,7 @@ public interface As3EPackage extends EPackage {
 		 * The meta object literal for the '<em>Avm Type Access</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.axdt.avm.util.AvmTypeAccess
+		 * @see org.axdt.as3.util.AvmTypeAccess
 		 * @see org.axdt.as3.model.impl.As3EPackageImpl#getAvmTypeAccess()
 		 * @generated
 		 */
