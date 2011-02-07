@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.core.compiler;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.82.qualifier
 Require-Bundle: org.eclipse.ui.console,
  org.eclipse.text,
  org.axdt.core.ui

@@ -2,7 +2,7 @@
 <feature
       id="org.axdt.as3.feature"
       label="%featureName"
-      version="0.0.81.qualifier"
+      version="0.0.82.qualifier"
       provider-name="%providerName">
 
    <description url="%descriptionUrl">
@@ -50,21 +50,21 @@
          id="org.axdt.as3.debug"
          download-size="0"
          install-size="0"
-         version="0.0.81.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.axdt.as3.runtime"
          download-size="0"
          install-size="0"
-         version="0.0.81.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.axdt.as3.ui"
          download-size="0"
          install-size="0"
-         version="0.0.81.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

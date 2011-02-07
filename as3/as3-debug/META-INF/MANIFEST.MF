@@ -4,7 +4,7 @@ Bundle-Name: %providerName
 Bundle-Vendor: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.as3.debug;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.82.qualifier
 Bundle-Activator: org.axdt.as3.debug.As3DebugPlugin
 Require-Bundle: org.eclipse.core.variables,
  org.axdt.core.compiler,
