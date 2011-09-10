@@ -16,6 +16,5 @@
 		<module>flex4-config</module>
 		<module>flex4-antsupport</module>
 		<module>flex4-integration</module>
-		<module>flex4-sdk</module>
 	</modules>
 </project>
