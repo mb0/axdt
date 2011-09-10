@@ -14,6 +14,9 @@
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IProjectDescription" instanceClassName="org.eclipse.core.resources.IProjectDescription"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Set" instanceClassName="java.util.Set">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List">
     <eTypeParameters name="T"/>
   </eClassifiers>
@@ -120,6 +123,17 @@
       eSuperTypes="#//AxdtElement">
     <eOperations name="isExternal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isArchive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getPackages">
+      <eGenericType eClassifier="#//Set">
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getPackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addPackage">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AxdtPackageRootSource" eSuperTypes="#//AxdtPackageRoot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" eType="#//IResource"/>

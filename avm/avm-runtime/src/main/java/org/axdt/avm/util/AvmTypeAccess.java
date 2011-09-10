@@ -8,7 +8,11 @@
 package org.axdt.avm.util;
 
 import org.axdt.avm.AvmEFactory;
+import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmGeneric;
+import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.model.AvmVoid;
 
 public interface AvmTypeAccess {
 
@@ -16,15 +20,54 @@ public interface AvmTypeAccess {
 	AvmTypeAccess GENERIC = new Simple(AvmEFactory.eINSTANCE.createAvmGeneric());
 	AvmTypeAccess NULL = new Simple(AvmEFactory.eINSTANCE.createAvmNull());
 	
+	public static class Factory {
+		public static AvmTypeAccess access(AvmType t) {
+			if (t instanceof AvmDeclaredType) return new Extended(t, false, false, true, false);
+			if (t instanceof AvmGeneric) return GENERIC;
+			if (t instanceof AvmVoid) return VOID;
+			return NULL; 
+		}
+		public static AvmTypeAccess staticAccess(AvmType t) {
+			return access(t).setInstance(false).setStatic(true);
+		}
+		public static AvmTypeAccess superAccess(AvmType t) {
+			return access(t).setProtected(true);
+		}
+		public static AvmTypeAccess thisAccess(AvmType t) {
+			return superAccess(t).setPrivate(true);
+		}
+		public static AvmTypeAccess packageAccess(AvmPackage ref) {
+			return new Builder(ref);
+		}
+	}
+	
 	AvmType getType();
 	boolean isPrivate();
 	boolean isProtected();
 	boolean isStatic();
 	boolean isInstance();
-	void setPrivate(boolean priv);
-	void setProtected(boolean prot);
-	void setStatic(boolean stat);
-	void setInstance(boolean inst);
+	AvmTypeAccess setPrivate(boolean priv);
+	AvmTypeAccess setProtected(boolean prot);
+	AvmTypeAccess setStatic(boolean stat);
+	AvmTypeAccess setInstance(boolean inst);
+	AvmTypeAccess computeCommonSuperType(AvmTypeAccess resolveType);
+	
+
+	
+	public static class Builder extends Simple {
+
+		private final AvmPackage _package;
+
+		public Builder(AvmPackage ref) {
+			super(AvmEFactory.eINSTANCE.createAvmNull());
+			this._package = ref;
+		}
+
+		public AvmPackage getPackage() {
+			return _package;
+		}
+	}
+	
 	
 	public static class Simple implements AvmTypeAccess {
 		
@@ -55,16 +98,28 @@ public interface AvmTypeAccess {
 			return true;
 		}
 
-		public void setPrivate(boolean priv) {
+		public Simple setPrivate(boolean priv) {
+			return this;
 		}
 
-		public void setProtected(boolean prot) {
+		public Simple setProtected(boolean prot) {
+			return this;
 		}
 
-		public void setStatic(boolean stat) {
+		public Simple setStatic(boolean stat) {
+			return this;
 		}
 
-		public void setInstance(boolean inst) {
+		public Simple setInstance(boolean inst) {
+			return this;
+		}
+
+		public AvmTypeAccess computeCommonSuperType(AvmTypeAccess resolveType) {
+			if (type != null && resolveType != null) {
+				AvmType t = type.calculateCommonType(resolveType.getType());
+				return Factory.access(t);
+			}
+			return NULL;
 		}
 	}
 	
@@ -75,9 +130,6 @@ public interface AvmTypeAccess {
 		private boolean _static;
 		private boolean _instance;
 		
-		public Extended(AvmType type) {
-			this(type, false, false, true, false);
-		}
 		public Extended(AvmType type, boolean prot, boolean priv, boolean inst, boolean stat) {
 			super(type);
 			_protected = prot;
@@ -89,26 +141,30 @@ public interface AvmTypeAccess {
 		public boolean isPrivate() {
 			return _private;
 		}
-		public void setPrivate(boolean priv) {
+		public Extended setPrivate(boolean priv) {
 			_private = priv;
+			return this;
 		}
 		public boolean isProtected() {
 			return _protected;
 		}
-		public void setProtected(boolean prot) {
+		public Extended setProtected(boolean prot) {
 			_protected = prot;
+			return this;
 		}
 		public boolean isStatic() {
 			return _static;
 		}
-		public void setStatic(boolean stat) {
+		public Extended setStatic(boolean stat) {
 			_static = stat;
+			return this;
 		}
 		public boolean isInstance() {
 			return _instance;
 		}
-		public void setInstance(boolean inst) {
+		public Extended setInstance(boolean inst) {
 			_instance = inst;
+			return this;
 		}
 	}
 }

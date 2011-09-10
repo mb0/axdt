@@ -15,6 +15,7 @@ import org.axdt.asdoc.model.AsdocMember;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.AsdocType;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -33,7 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.axdt.asdoc.model.impl.AsdocPackageImpl#getCanonicalName <em>Canonical Name</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.impl.AsdocPackageImpl#getQualifiedName <em>Qualified Name</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocPackageImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocPackageImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.impl.AsdocPackageImpl#getTypes <em>Types</em>}</li>
@@ -51,23 +52,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	/**
-	 * The default value of the '{@link #getCanonicalName() <em>Canonical Name</em>}' attribute.
+	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCanonicalName()
-	 * @generated
+	 * @see #getQualifiedName()
 	 * @ordered
 	 */
-	protected static final String CANONICAL_NAME_EDEFAULT = null;
+	protected static final AvmQualifiedName QUALIFIED_NAME_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getCanonicalName() <em>Canonical Name</em>}' attribute.
+	 * The cached value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCanonicalName()
+	 * @see #getQualifiedName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String canonicalName = CANONICAL_NAME_EDEFAULT;
+	protected AvmQualifiedName qualifiedName = QUALIFIED_NAME_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -227,22 +227,22 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public String getCanonicalName() {
-		return canonicalName;
+		if (qualifiedName == null) return null;
+		return qualifiedName.toString();
 	}
 
 	public String getName() {
-		if (canonicalName == null) return null;
-		int lastDot = canonicalName.lastIndexOf('.');
-		return lastDot >= 0 ? canonicalName.substring(lastDot+1) : canonicalName;
+		if (qualifiedName == null) return null;
+		return qualifiedName.getLastSegment();
 	}
 	
 	public String getQualifier() {
-		if (canonicalName == null) return null;
-		int lastDot = canonicalName.lastIndexOf('.');
-		return lastDot >= 0 ? canonicalName.substring(0,lastDot) : null;
+		if (qualifiedName == null) return null;
+		AvmQualifiedName qname = qualifiedName.skipLast(1);
+		String quali = qname.toString();
+		return quali.length() > 0 ? quali : null;
 	}
 
 	/**
@@ -250,11 +250,20 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCanonicalName(String newCanonicalName) {
-		String oldCanonicalName = canonicalName;
-		canonicalName = newCanonicalName;
+	public AvmQualifiedName getQualifiedName() {
+		return qualifiedName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQualifiedName(AvmQualifiedName newQualifiedName) {
+		AvmQualifiedName oldQualifiedName = qualifiedName;
+		qualifiedName = newQualifiedName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME, oldCanonicalName, canonicalName));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME, oldQualifiedName, qualifiedName));
 	}
 
 	/**
@@ -493,11 +502,12 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	 * @generated NOT
 	 */
 	public AsdocPackage createChildPackage(String fqn) {
-		if (fqn == null) return null;
+		if (fqn == null || fqn.length() < 1)
+			return null;
 		AsdocPackage child = getChildPackage(fqn);
 		if (child == null) {
 			child = AsdocEFactory.eINSTANCE.createAsdocPackage();
-			child.setCanonicalName(fqn);
+			child.setQualifiedName(AvmQualifiedName.create(fqn.split("\\.")));
 			getPackages().add(child);
 		}
 		return child;
@@ -564,8 +574,8 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME:
-				return getCanonicalName();
+			case AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME:
+				return getQualifiedName();
 			case AsdocEPackage.ASDOC_PACKAGE__PACKAGES:
 				return getPackages();
 			case AsdocEPackage.ASDOC_PACKAGE__PARENT:
@@ -599,8 +609,8 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME:
-				setCanonicalName((String)newValue);
+			case AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME:
+				setQualifiedName((AvmQualifiedName)newValue);
 				return;
 			case AsdocEPackage.ASDOC_PACKAGE__PACKAGES:
 				getPackages().clear();
@@ -647,8 +657,8 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME:
-				setCanonicalName(CANONICAL_NAME_EDEFAULT);
+			case AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME:
+				setQualifiedName(QUALIFIED_NAME_EDEFAULT);
 				return;
 			case AsdocEPackage.ASDOC_PACKAGE__PACKAGES:
 				getPackages().clear();
@@ -692,8 +702,8 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME:
-				return CANONICAL_NAME_EDEFAULT == null ? canonicalName != null : !CANONICAL_NAME_EDEFAULT.equals(canonicalName);
+			case AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME:
+				return QUALIFIED_NAME_EDEFAULT == null ? qualifiedName != null : !QUALIFIED_NAME_EDEFAULT.equals(qualifiedName);
 			case AsdocEPackage.ASDOC_PACKAGE__PACKAGES:
 				return packages != null && !packages.isEmpty();
 			case AsdocEPackage.ASDOC_PACKAGE__PARENT:
@@ -728,8 +738,8 @@ public class AsdocPackageImpl extends AsdocElementImpl implements AsdocPackage {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (canonicalName: ");
-		result.append(canonicalName);
+		result.append(" (qualifiedName: ");
+		result.append(qualifiedName);
 		result.append(", packageContentParsed: ");
 		result.append((flags & PACKAGE_CONTENT_PARSED_EFLAG) != 0);
 		result.append(", typeContentParsed: ");

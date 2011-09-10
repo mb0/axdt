@@ -8,6 +8,7 @@
 package org.axdt.asdoc.model;
 
 import org.axdt.avm.model.AvmPackage;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -18,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getCanonicalName <em>Canonical Name</em>}</li>
+ *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getQualifiedName <em>Qualified Name</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getPackages <em>Packages</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getParent <em>Parent</em>}</li>
  *   <li>{@link org.axdt.asdoc.model.AsdocPackage#getTypes <em>Types</em>}</li>
@@ -38,30 +39,31 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface AsdocPackage extends AsdocElement, AvmPackage {
 	/**
-	 * Returns the value of the '<em><b>Canonical Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Qualified Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Canonical Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Qualified Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Canonical Name</em>' attribute.
-	 * @see #setCanonicalName(String)
-	 * @see org.axdt.asdoc.AsdocEPackage#getAsdocPackage_CanonicalName()
-	 * @model
+	 * @return the value of the '<em>Qualified Name</em>' attribute.
+	 * @see #setQualifiedName(AvmQualifiedName)
+	 * @see org.axdt.asdoc.AsdocEPackage#getAsdocPackage_QualifiedName()
+	 * @model default="" dataType="org.axdt.avm.model.AvmQualifiedName"
 	 * @generated
 	 */
-	String getCanonicalName();
+	AvmQualifiedName getQualifiedName();
 
 	/**
-	 * Sets the value of the '{@link org.axdt.asdoc.model.AsdocPackage#getCanonicalName <em>Canonical Name</em>}' attribute.
+	 * Sets the value of the '{@link org.axdt.asdoc.model.AsdocPackage#getQualifiedName <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Canonical Name</em>' attribute.
-	 * @see #getCanonicalName()
+	 * @param value the new value of the '<em>Qualified Name</em>' attribute.
+	 * @see #getQualifiedName()
 	 * @generated
 	 */
-	void setCanonicalName(String value);
+	void setQualifiedName(AvmQualifiedName value);
 
 	/**
 	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.

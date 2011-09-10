@@ -44,7 +44,8 @@ public class AxdtCore extends Plugin {
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		try {
-			// XXX cleanup ?!
+			AXDT_CORE_PLUGIN = null;
+			model = null;
 		} finally {
 			super.stop(context);
 		}
@@ -57,7 +58,7 @@ public class AxdtCore extends Plugin {
 	}
 	
 	public IAxdtConfig getAxdtConfig(String configId) {
-		return configProvider.getAxdtConfig(configId);
+		return configProvider != null ? configProvider.getAxdtConfig(configId) : null;
 	}
 	
 	public <T extends IAxdtConfig> T getAxdtConfig(String key, Class<T> type) {

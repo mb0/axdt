@@ -5262,7 +5262,7 @@ public interface As3EPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
-	 * @see org.axdt.as3.model.As3Import#getQualifiedName()
+	 * @see org.axdt.as3.model.As3Import#getCanonicalName()
 	 * @see #getAs3Import()
 	 * @generated
 	 */

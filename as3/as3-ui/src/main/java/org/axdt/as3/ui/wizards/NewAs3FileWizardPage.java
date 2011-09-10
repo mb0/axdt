@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 
 public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 
@@ -118,7 +118,7 @@ public class NewAs3FileWizardPage extends AbstractFileWizardPage {
 			result = result.removeLastSegments(0);
 		int matchingSegments = result.matchingFirstSegments(cont.getFullPath());
 		result = result.removeFirstSegments(matchingSegments);
-		return Join.join(".", result.segments());
+		return Joiner.on('.').join(result.segments());
 	}
 
 	@Override

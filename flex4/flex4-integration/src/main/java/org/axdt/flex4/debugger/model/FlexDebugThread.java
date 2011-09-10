@@ -24,7 +24,6 @@ import flash.tools.debugger.Frame;
 import flash.tools.debugger.InProgressException;
 import flash.tools.debugger.NoResponseException;
 import flash.tools.debugger.NotConnectedException;
-import flash.tools.debugger.PlayerDebugException;
 import flash.tools.debugger.Session;
 import flash.tools.debugger.SourceFile;
 import flash.tools.debugger.SuspendReason;
@@ -95,8 +94,8 @@ public class FlexDebugThread extends FlexDebugElement implements IThread {
 	public void stepping(int kind) {
 		synchronized (lock) {
 			state = STATE_STEPPING;
-			getDebugTarget().fireResumeEvent(kind);
 		}
+		getDebugTarget().fireResumeEvent(kind);
 	}
 
 	public void terminate() throws DebugException {
@@ -121,8 +120,8 @@ public class FlexDebugThread extends FlexDebugElement implements IThread {
 		synchronized (lock) {
 			state = STATE_SUSPENDED;
 			updateCachedFrames();
-			fireSuspendEvent(kind);
 		}
+		fireSuspendEvent(kind);
 	}
 
 	public void resume() throws DebugException {
@@ -246,15 +245,14 @@ public class FlexDebugThread extends FlexDebugElement implements IThread {
 			if (event instanceof BreakEvent) {
 				try {
 					if (session.suspendReason() == SuspendReason.ScriptLoaded) {
+						customMessage(DETAIL_INFO, "script loaded ");
 						if (!isStarting())
 							installBreakpoints();
 						resume();
 					} else {
 						suspended(DebugEvent.BREAKPOINT);
 					}
-				} catch (PlayerDebugException e) {
-					e.printStackTrace();
-				} catch (DebugException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} else if (event instanceof TraceEvent) {

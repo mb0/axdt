@@ -9,8 +9,8 @@ package org.axdt.avm.model.impl;
 
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.model.AvmGeneric;
-import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.axdt.avm.model.AvmVoid;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -33,14 +33,16 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	 * @ordered
 	 */
 	protected int flags = 0;
-
+	
+	protected final AvmQualifiedName qname;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected AvmGenericImpl() {
 		super();
+		qname = AvmQualifiedName.create("*");
 	}
 
 	/**
@@ -56,7 +58,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isDynamic() {
 		return true;
@@ -65,7 +66,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isFinal() {
 		return true;
@@ -74,7 +74,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isInterface() {
 		return false;
@@ -83,7 +82,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isClass() {
 		return false;
@@ -96,8 +94,7 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)
 			return null;
-		if (other instanceof AvmNull
-				|| other instanceof AvmVoid)
+		if (other instanceof AvmVoid)
 			return other;
 		return this;
 	}
@@ -105,7 +102,6 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getQualifier() {
 		return null;
@@ -114,19 +110,25 @@ public class AvmGenericImpl extends MinimalEObjectImpl.Container implements AvmG
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getName() {
-		return "*";
+		return qname.getFirstSegment();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getCanonicalName() {
-		return "*";
+		return qname.getFirstSegment();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmQualifiedName getQualifiedName() {
+		return qname;
 	}
 
 } //AvmGenericImpl

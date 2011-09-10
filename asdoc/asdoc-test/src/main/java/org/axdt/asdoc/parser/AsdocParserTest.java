@@ -72,8 +72,8 @@ public abstract class AsdocParserTest extends TestCase {
 		assertNull(collectTypes.getProxyURI("void"));
 		assertEquals("avm:/lookup/Foo", collectTypes.getProxyURI("Foo")
 				.toString());
-		assertEquals("avm:/types/spam.egg::Foo",
-				collectTypes.getProxyURI("spam.egg::Foo").toString());
+		assertEquals("avm:/types/spam.egg.Foo",
+				collectTypes.getProxyURI("spam.egg.Foo").toString());
 		// TODO introduce parameterized type references
 		assertEquals("avm:/lookup/Vector",
 				collectTypes.getProxyURI("Vector.<String>").toString());
@@ -81,7 +81,7 @@ public abstract class AsdocParserTest extends TestCase {
 
 	protected void assertPackageLevelResult(Iterable<AsdocPackage> packs) {
 		assertEqualsQNames(
-				Lists.newArrayList("", "foo.bar", "foo.globals", "foo.members"),
+				Lists.newArrayList(null, "foo.bar", "foo.globals", "foo.members"),
 				packs);
 	}
 
@@ -119,7 +119,7 @@ public abstract class AsdocParserTest extends TestCase {
 		assertPublic(operation, "global method", false);
 		assertFalse(operation.isFinal() || operation.isNative()
 				|| operation.isOverride());
-		assertEquals("foo.globals::globalMethod", operation.getCanonicalName());
+		assertEquals("foo.globals.globalMethod", operation.getCanonicalName());
 		assertEquals(0, operation.getParameters().size());
 		assertTrue(operation.getReturnType().getType() instanceof AvmVoid);
 		assertFalse(operation.getReturnType().eIsProxy());
@@ -132,11 +132,11 @@ public abstract class AsdocParserTest extends TestCase {
 	protected void assertTypeLevelInheritance_Bar(AsdocType type)
 			throws Exception {
 		Iterator<AvmTypeReference> superTypes = type.getSuperTypes().iterator();
-		assertTypeProxy(superTypes.next().getType(), "foo.bar::SuperBar");
-		assertTypeProxy(superTypes.next().getType(), "foo.bar::IBar");
-		assertTypeProxy(superTypes.next().getType(), "foo.bar::IBar2");
+		assertTypeProxy(superTypes.next().getType(), "foo.bar.SuperBar");
+		assertTypeProxy(superTypes.next().getType(), "foo.bar.IBar");
+		assertTypeProxy(superTypes.next().getType(), "foo.bar.IBar2");
 		assertTypeProxy(superTypes.next().getType(),
-				"flash.display::IBitmapDrawable");
+				"flash.display.IBitmapDrawable");
 		assertFalse(superTypes.hasNext());
 	}
 

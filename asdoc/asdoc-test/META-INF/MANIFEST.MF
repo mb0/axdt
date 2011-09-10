@@ -7,8 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.axdt.asdoc,
- org.axdt.asdoc.access,
+Export-Package: org.axdt.asdoc.access,
  org.axdt.asdoc.model,
  org.axdt.asdoc.parser
 Require-Bundle: org.axdt.avm.test,

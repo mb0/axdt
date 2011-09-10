@@ -28,12 +28,12 @@
         <handler
             class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.axdt.as3.validate">
-			<activeWhen>
-	            <reference
-	            	definitionId="org.axdt.as3.editor.opened">
-	            </reference>
-         	</activeWhen>
-    	</handler>
+         <activeWhen>
+            <reference
+                    definitionId="org.axdt.as3.editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.axdt.as3.editor.opened">
@@ -188,6 +188,13 @@
 			</command>
 		</menuContribution>
 	</extension>
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.axdt.as3.ui.As3ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+      </markerResolutionGenerator>
+   </extension>
 
    <extension
          point="org.eclipse.ui.newWizards">

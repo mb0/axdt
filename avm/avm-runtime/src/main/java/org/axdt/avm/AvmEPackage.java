@@ -642,6 +642,16 @@ public interface AvmEPackage extends EPackage {
 	int LIST = 29;
 
 	/**
+	 * The meta object id for the '<em>Avm Qualified Name</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.naming.AvmQualifiedName
+	 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmQualifiedName()
+	 * @generated
+	 */
+	int AVM_QUALIFIED_NAME = 30;
+
+	/**
 	 * Returns the meta object for class '{@link org.axdt.avm.model.AvmIdentifiable <em>Avm Identifiable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -974,6 +984,17 @@ public interface AvmEPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getList();
+
+	/**
+	 * Returns the meta object for data type '{@link org.axdt.avm.naming.AvmQualifiedName <em>Avm Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Avm Qualified Name</em>'.
+	 * @see org.axdt.avm.naming.AvmQualifiedName
+	 * @model instanceClass="org.axdt.avm.naming.AvmQualifiedName"
+	 * @generated
+	 */
+	EDataType getAvmQualifiedName();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1320,6 +1341,16 @@ public interface AvmEPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LIST = eINSTANCE.getList();
+
+		/**
+		 * The meta object literal for the '<em>Avm Qualified Name</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.axdt.avm.naming.AvmQualifiedName
+		 * @see org.axdt.avm.model.impl.AvmEPackageImpl#getAvmQualifiedName()
+		 * @generated
+		 */
+		EDataType AVM_QUALIFIED_NAME = eINSTANCE.getAvmQualifiedName();
 
 	}
 

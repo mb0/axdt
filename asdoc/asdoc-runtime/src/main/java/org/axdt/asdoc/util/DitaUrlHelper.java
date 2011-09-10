@@ -31,7 +31,7 @@ public class DitaUrlHelper extends AsdocUrlHelper {
 	}
 
 	public String packageUrl(AsdocPackage pack) {
-		if (pack.getCanonicalName().length() == 0)
+		if (pack.getCanonicalName() == null)
 			return GLOBAL + EXT;
 		return pack.getCanonicalName() + EXT;
 	}

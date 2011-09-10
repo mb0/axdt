@@ -14,19 +14,24 @@ import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3VariableDefinition;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  
 
 public class As3JavaValidator extends AbstractAs3JavaValidator {
 	@Check
 	public void checkInterface(As3Interface def) {
 		if (!Character.isUpperCase(def.getName().charAt(0))) {
-			warning("Name should start with a capital", As3EPackage.AS3_INTERFACE__NAME);
+			warning("Name should start with a capital",
+					def.eClass().getEStructuralFeature(As3EPackage.AS3_INTERFACE__NAME)
+			);
 		}
 	}
 	@Check
 	public void checkClass(As3Class def) {
 		if (!Character.isUpperCase(def.getName().charAt(0))) {
-			warning("Name should start with a capital", As3EPackage.AS3_CLASS__NAME);
+			warning("Name should start with a capital", 
+					def.eClass().getEStructuralFeature(As3EPackage.AS3_CLASS__NAME)
+			);
 		}
 	}
 	@Check
@@ -42,17 +47,27 @@ public class As3JavaValidator extends AbstractAs3JavaValidator {
 		}
 		if (isConstructor) { 
 			if (def.getReturnType() != null) {
-				error("Constructor cannot have result type", As3EPackage.AS3_OPERATION__RETURN_TYPE);
+				error("Constructor cannot have result type",
+						def.eClass().getEStructuralFeature(As3EPackage.AS3_OPERATION__RETURN_TYPE)
+				);
 			}
 		} else if (def.getReturnType() == null) {
-			warning("Methods need a result type", def, As3EPackage.AS3_OPERATION__RETURN_TYPE);
+			warning("Methods need a result type", def,
+					def.eClass().getEStructuralFeature(As3EPackage.AS3_OPERATION__RETURN_TYPE),
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX
+			);
 		}
 		if (isInterface) {
 			if (def.getBody() != null) {
-				error("Method signatures cannot have a body", As3EPackage.AS3_OPERATION__BODY);
+				error("Method signatures cannot have a body",
+						def.eClass().getEStructuralFeature(As3EPackage.AS3_OPERATION__BODY)
+				);
 			}
 		} else if (def.getBody() == null) {
-			warning("Methods need a method body", def, As3EPackage.AS3_OPERATION__BODY);
+			warning("Methods need a method body", def,
+					def.eClass().getEStructuralFeature(As3EPackage.AS3_OPERATION__BODY),
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX
+			);
 		}
 	}
 	@Check

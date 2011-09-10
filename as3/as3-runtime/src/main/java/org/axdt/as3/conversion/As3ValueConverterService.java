@@ -11,8 +11,8 @@ import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author mb0
@@ -22,7 +22,7 @@ public class As3ValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "NUMBER")
 	public IValueConverter<Double> NUMBER() {
 		return new IValueConverter<Double>() {
-			public Double toValue(String string, AbstractNode node) {
+			public Double toValue(String string, INode node) {
 				if (Strings.isEmpty(string))
 					throw new ValueConverterException("Couldn't convert "
 							+ "empty string to number", node, null);
@@ -47,7 +47,7 @@ public class As3ValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "FQN")
 	public IValueConverter<String> FQN() {
 		return new IValueConverter<String>() {
-			public String toValue(String string, AbstractNode node) {
+			public String toValue(String string, INode node) {
 				if (string == null)
 					return null;
 				return string.replaceAll("\\s+", "");
@@ -62,7 +62,7 @@ public class As3ValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "ImportFQN")
 	public IValueConverter<String> ImportFQN() {
 		return new IValueConverter<String>() {
-			public String toValue(String string, AbstractNode node) {
+			public String toValue(String string, INode node) {
 				if (string == null)
 					return null;
 				return string.replaceAll("\\s+", "");
@@ -77,7 +77,7 @@ public class As3ValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "LT")
 	public IValueConverter<String> LT() {
 		return new IValueConverter<String>() {
-			public String toValue(String string, AbstractNode node) {
+			public String toValue(String string, INode node) {
 				return "\n";
 			}
 

@@ -45,7 +45,7 @@ public class Flex4Debugger implements IAxdtDebugger {
 			monitor.setTaskName("Listening for connections");
 			sessionManager = ThreadSafeBootstrap.sessionManager();
 			sessionManager.setPreference(SessionManager.PREF_INVOKE_GETTERS, 0);
-			sessionManager.setPreference(SessionManager.PREF_GETVAR_RESPONSE_TIMEOUT, 5000);
+			sessionManager.setPreference(SessionManager.PREF_GETVAR_RESPONSE_TIMEOUT, 500000);
 
 			sessionManager.startListening();
 			monitor.setTaskName("Launching player");

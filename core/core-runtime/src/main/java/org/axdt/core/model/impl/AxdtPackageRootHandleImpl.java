@@ -7,6 +7,9 @@
  ******************************************************************************/
 package org.axdt.core.model.impl;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.axdt.core.AxdtEPackage;
 import org.axdt.core.model.AxdtPackageRootHandle;
 import org.axdt.core.model.AxdtPackageRootSource;
@@ -58,6 +61,34 @@ public class AxdtPackageRootHandleImpl extends AxdtHandleImpl<AxdtPackageRootSou
 		AxdtPackageRootSource source = checkDelegate();
 		return source == null ? false : source.isArchive();
 	}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Set<String> getPackages() {
+		AxdtPackageRootSource source = checkDelegate();
+		if (source != null) source.getPackages();
+		return Collections.emptySet();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addPackage(String name) {
+		AxdtPackageRootSource source = checkDelegate();
+		if (source != null) source.addPackage(name);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String getPackage(String name) {
+		AxdtPackageRootSource source = checkDelegate();
+		return source == null ? null : source.getPackage(name);
+	}
+
 	public AxdtPackageRootHandle getHandle() {
 		return this;
 	}

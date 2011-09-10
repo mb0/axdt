@@ -106,15 +106,15 @@ public class As3ImportTest extends TestCase {
 	 */
 	public void testGetQualifier() {
 		assertNull(getFixture().getQualifier());
-		getFixture().setQualifiedName("foo");
+		getFixture().setCanonicalName("foo");
 		assertNull(getFixture().getQualifier());
-		getFixture().setQualifiedName("spam.bar.foo");
+		getFixture().setCanonicalName("spam.bar.foo");
 		assertEquals("spam.bar",getFixture().getQualifier());
-		getFixture().setQualifiedName("spam.bar.*");
+		getFixture().setCanonicalName("spam.bar.*");
 		assertEquals("spam.bar",getFixture().getQualifier());
-		getFixture().setQualifiedName("spam.bar.");
+		getFixture().setCanonicalName("spam.bar.");
 		assertEquals("spam.bar",getFixture().getQualifier());
-		getFixture().setQualifiedName("");
+		getFixture().setCanonicalName("");
 		assertNull(getFixture().getQualifier());
 	}
 
@@ -126,15 +126,15 @@ public class As3ImportTest extends TestCase {
 	 */
 	public void testGetName() {
 		assertNull(getFixture().getName());
-		getFixture().setQualifiedName("foo");
+		getFixture().setCanonicalName("foo");
 		assertEquals("foo",getFixture().getName());
-		getFixture().setQualifiedName("spam.bar.foo");
+		getFixture().setCanonicalName("spam.bar.foo");
 		assertEquals("foo",getFixture().getName());
-		getFixture().setQualifiedName("spam.bar.*");
+		getFixture().setCanonicalName("spam.bar.*");
 		assertEquals("*",getFixture().getName());
-		getFixture().setQualifiedName("spam.bar.");
+		getFixture().setCanonicalName("spam.bar.");
 		assertEquals("*",getFixture().getName());
-		getFixture().setQualifiedName("");
+		getFixture().setCanonicalName("");
 		assertEquals("*",getFixture().getName());
 	}
 
@@ -146,14 +146,14 @@ public class As3ImportTest extends TestCase {
 	 */
 	public void testGetCanonicalName() {
 		assertNull(getFixture().getCanonicalName());
-		getFixture().setQualifiedName("spam");
+		getFixture().setCanonicalName("spam");
 		assertEquals("spam", getFixture().getCanonicalName());
-		getFixture().setQualifiedName("foo.bar.spam");
-		assertEquals("foo.bar::spam", getFixture().getCanonicalName());
-		getFixture().setQualifiedName("foo.bar.*");
-		assertEquals("foo.bar::*", getFixture().getCanonicalName());
-		getFixture().setQualifiedName("foo.bar.");
-		assertEquals("foo.bar::*", getFixture().getCanonicalName());
+		getFixture().setCanonicalName("foo.bar.spam");
+		assertEquals("foo.bar.spam", getFixture().getCanonicalName());
+		getFixture().setCanonicalName("foo.bar.*");
+		assertEquals("foo.bar.*", getFixture().getCanonicalName());
+		getFixture().setCanonicalName("foo.bar.");
+		assertEquals("foo.bar.*", getFixture().getCanonicalName());
 	}
 
 } //As3ImportTest

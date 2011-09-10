@@ -7,6 +7,8 @@
  ******************************************************************************/
 package org.axdt.core.model;
 
+import java.util.Set;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -31,5 +33,26 @@ public interface AxdtPackageRoot extends AxdtElement {
 	 * @generated
 	 */
 	boolean isArchive();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	Set<String> getPackages();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String getPackage(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	void addPackage(String name);
+
 	AxdtPackageRootHandle getHandle();
 } // AxdtPackageRoot

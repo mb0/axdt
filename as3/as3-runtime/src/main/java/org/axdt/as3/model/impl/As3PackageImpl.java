@@ -15,6 +15,7 @@ import org.axdt.as3.model.As3Member;
 import org.axdt.as3.model.As3Package;
 import org.axdt.as3.model.As3Type;
 import org.axdt.as3.model.IDirective;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -69,6 +70,8 @@ public class As3PackageImpl extends As3IdentifiableImpl implements As3Package {
 	 */
 	protected String canonicalName = CANONICAL_NAME_EDEFAULT;
 
+	transient protected AvmQualifiedName qName;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,13 +115,20 @@ public class As3PackageImpl extends As3IdentifiableImpl implements As3Package {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public void setCanonicalName(String newCanonicalName) {
+		qName = null;
 		String oldCanonicalName = canonicalName;
 		canonicalName = newCanonicalName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_PACKAGE__CANONICAL_NAME, oldCanonicalName, canonicalName));
+	}
+	
+	public AvmQualifiedName getQualifiedName() {
+		if (canonicalName == null) return null;
+		if (qName == null)
+			qName = AvmQualifiedName.create(canonicalName.split("\\.")); 
+		return qName;
 	}
 
 	public String getQualifier() {

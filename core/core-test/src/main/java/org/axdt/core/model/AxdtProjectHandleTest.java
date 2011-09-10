@@ -137,7 +137,8 @@ public class AxdtProjectHandleTest extends AxdtHandleTest {
 		setDefaultResource();
 		List<IPath> list = getFixture().getConfiguredSourcePaths();
 		assertNotNull(list);
-		assertTrue(list.isEmpty());
+		assertEquals(1, list.size());
+		assertEquals("/foo/src", list.get(0).toString());
 	}
 
 	/**

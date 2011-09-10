@@ -95,11 +95,11 @@ public class As3ClassTest extends As3TypeTest {
 		assertEquals("spam",getFixture().getCanonicalName());
 		As3Program program = As3EFactory.eINSTANCE.createAs3Program();
 		program.getDirectives().add(getFixture());
-		assertEquals("::spam",getFixture().getCanonicalName());
+		assertEquals(".spam",getFixture().getCanonicalName());
 		As3Package pack = As3EFactory.eINSTANCE.createAs3Package();
 		pack.getDirectives().add(getFixture());
 		assertEquals("spam",getFixture().getCanonicalName());
 		pack.setCanonicalName("foo.bar");
-		assertEquals("foo.bar::spam", getFixture().getCanonicalName());
+		assertEquals("foo.bar.spam", getFixture().getCanonicalName());
 	}
 } //As3ClassTest

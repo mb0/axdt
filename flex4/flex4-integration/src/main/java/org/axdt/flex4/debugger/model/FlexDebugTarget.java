@@ -210,8 +210,10 @@ public class FlexDebugTarget extends FlexDebugElement implements IDebugTarget {
 			try {
 				do {
 					Thread.sleep(1000);
+					if (thread.isDisconnected())
+						break;
 					thread.processEvents();
-				} while (!monitor.isCanceled() && !thread.isDisconnected());
+				} while (!monitor.isCanceled());
 				return thread.isTerminated() ? Status.OK_STATUS
 						: Status.CANCEL_STATUS;
 			} catch (Exception e) {

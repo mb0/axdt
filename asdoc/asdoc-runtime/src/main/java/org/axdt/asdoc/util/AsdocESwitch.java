@@ -164,6 +164,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmElement(asdocPackage);
 				if (result == null) result = caseAvmDefinitionContainer(asdocPackage);
 				if (result == null) result = caseAvmDefinition(asdocPackage);
+				if (result == null) result = caseAvmReferable(asdocPackage);
 				if (result == null) result = caseAvmIdentifiable(asdocPackage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -177,6 +178,7 @@ public class AsdocESwitch<T> {
 				if (result == null) result = caseAvmElement(asdocRoot);
 				if (result == null) result = caseAvmDefinitionContainer(asdocRoot);
 				if (result == null) result = caseAvmDefinition(asdocRoot);
+				if (result == null) result = caseAvmReferable(asdocRoot);
 				if (result == null) result = caseAvmIdentifiable(asdocRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

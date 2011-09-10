@@ -7,9 +7,12 @@
  ******************************************************************************/
 package org.axdt.as3.resource;
 
+import java.util.Collection;
+
 import org.axdt.core.AxdtCore;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 
 public class As3ProjectsStateHelper extends WorkspaceProjectsStateHelper {
@@ -20,5 +23,10 @@ public class As3ProjectsStateHelper extends WorkspaceProjectsStateHelper {
 		} catch (CoreException e) {
 			return false;
 		}
+	}
+	@Override
+	public Collection<URI> initContainedURIs(String containerHandle) {
+		Collection<URI> result = super.initContainedURIs(containerHandle);
+		return result;
 	}
 }

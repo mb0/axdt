@@ -7,17 +7,16 @@
  ******************************************************************************/
 package org.axdt.avm.scoping;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
+import org.axdt.avm.access.AvmContainer;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
-import com.google.common.collect.Lists;
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -26,23 +25,27 @@ import com.google.inject.Inject;
 public class AvmAwareGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	
 	@Inject
-	private AbstractDefinitionScopeProvider definitionScopeProvider;
+	private AvmLibraryScopeProvider libraryScopeProvider;
 	
 	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		IScope result;
-		try {
-			result = definitionScopeProvider.getScope(context, reference);
-		} catch (Exception e) {
-			result = IScope.NULLSCOPE;
-		}
-		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
-		Collections.reverse(containers);
-		Iterator<IContainer> iter = containers.iterator();
-		while (iter.hasNext()) {
-			IContainer container = iter.next();
-			result = createContainerScope(result, container, reference);
-		}
-		return result;
+	protected IScope getScope(final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
+		IScope result = libraryScopeProvider.getScope(context, type, filter, ignoreCase);
+		return getScope(result, context, ignoreCase, type, filter);
+	}
+	public IScope getScope(Resource resource, final EReference reference) {
+		return getScope(resource, reference, null);
+	}
+	public IScope getScope(Resource resource, final EReference reference, Predicate<IEObjectDescription> filter) {
+		return getScope(resource, isIgnoreCase(reference), reference.getEReferenceType(), filter);
+	}
+	protected IScope createContainerScopeWithContext(Resource eResource, IScope parent, IContainer container,
+			Predicate<IEObjectDescription> filter, EClass type, boolean ignoreCase) {
+		if (eResource != null && container instanceof AvmContainer)
+			((AvmContainer) container).init(eResource.getResourceSet());
+		return super.createContainerScopeWithContext(eResource, parent, container, filter, type, ignoreCase);
+	}
+	@Override
+	protected IScope createContainerScope(IScope parent, IContainer container, Predicate<IEObjectDescription> filter, EClass type, boolean ignoreCase) {
+		return new AvmShadyScope(parent, container, filter, type, ignoreCase);
 	}
 }

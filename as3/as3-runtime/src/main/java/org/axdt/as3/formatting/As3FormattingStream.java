@@ -27,8 +27,8 @@ import org.eclipse.xtext.formatting.impl.FormattingConfigBasedStream;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Lists;
 
 /**
  * Customized FormattingConfigBasedStream that filters out un-hidden line terminators 

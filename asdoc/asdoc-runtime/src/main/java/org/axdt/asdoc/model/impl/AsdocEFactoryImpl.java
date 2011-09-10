@@ -9,18 +9,7 @@ package org.axdt.asdoc.model.impl;
 
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.AsdocEPackage;
-import org.axdt.asdoc.model.AsdocClass;
-import org.axdt.asdoc.model.AsdocConstructor;
-import org.axdt.asdoc.model.AsdocField;
-import org.axdt.asdoc.model.AsdocInterface;
-import org.axdt.asdoc.model.AsdocNamespace;
-import org.axdt.asdoc.model.AsdocOperation;
-import org.axdt.asdoc.model.AsdocPackage;
-import org.axdt.asdoc.model.AsdocParameter;
-import org.axdt.asdoc.model.AsdocProperty;
-import org.axdt.asdoc.model.AsdocRoot;
-import org.axdt.asdoc.model.ParseLevel;
-import org.axdt.asdoc.model.ParseType;
+import org.axdt.asdoc.model.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -219,7 +208,6 @@ public class AsdocEFactoryImpl extends EFactoryImpl implements AsdocEFactory {
 		AsdocRootImpl docRoot = new AsdocRootImpl();
 		docRoot.setTypeContentAvailable(true);
 		docRoot.setGlobalContentAvailable(true);
-		docRoot.setCanonicalName("");
 		return docRoot;
 	}
 	public AsdocRoot createAsdocRoot(String uri) {

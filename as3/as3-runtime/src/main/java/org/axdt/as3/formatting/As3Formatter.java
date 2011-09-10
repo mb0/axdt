@@ -10,6 +10,8 @@ package org.axdt.as3.formatting;
 import org.axdt.as3.config.IFormattingConfig;
 import org.axdt.as3.config.IFormattingConfig.IndentStyle;
 import org.axdt.as3.services.As3GrammarAccess;
+import org.axdt.as3.services.As3GrammarAccess.As3ArrayElementHeadElements;
+import org.axdt.as3.services.As3GrammarAccess.As3ArrayElementTailElements;
 import org.axdt.as3.services.As3GrammarAccess.As3ArrayInitializerElements;
 import org.axdt.as3.services.As3GrammarAccess.As3MetadataTagElements;
 import org.axdt.as3.services.As3GrammarAccess.ObjectInitialiserElements;
@@ -47,11 +49,6 @@ public class As3Formatter extends ConfigurableDeclarativeFormatter {
 		c.setLinewrap(1, 1, 2).after(f.getVirtualSemiRule());
 		c.setNoSpace().before(f.getVirtualSemiRule());
 
-		c.setLinewrap(1, 1, 2).after(
-				f.getAs3OperationSignatureAccess().getSemicolonKeyword_12());
-		c.setNoSpace().before(
-				f.getAs3OperationSignatureAccess().getSemicolonKeyword_12());
-
 		// colon
 		c.setNoSpace().around(f.getResultTypeAccess().getColonKeyword_0_1());
 		c.setNoSpace().around(f.getVarTypeAssignAccess().getColonKeyword_1());
@@ -73,10 +70,10 @@ public class As3Formatter extends ConfigurableDeclarativeFormatter {
 		// arithmetic
 		c.setNoSpace().before(
 				f.getIPostfixExpressionAccess()
-						.getPlusSignPlusSignKeyword_1_4_1());
+						.getPlusSignPlusSignKeyword_1_0_0_1());
 		c.setNoSpace().before(
 				f.getIPostfixExpressionAccess()
-						.getHyphenMinusHyphenMinusKeyword_1_5_1());
+						.getHyphenMinusHyphenMinusKeyword_1_1_0_1());
 
 		// pairs
 		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("(", ")")) {
@@ -92,16 +89,19 @@ public class As3Formatter extends ConfigurableDeclarativeFormatter {
 		// initializers
 		As3ArrayInitializerElements arrayInitializer = f
 				.getAs3ArrayInitializerAccess();
+		As3ArrayElementHeadElements arrayHead = f.getAs3ArrayElementHeadAccess();
+		As3ArrayElementTailElements arrayTail = f.getAs3ArrayElementTailAccess();
 		configureInitializers(c,
-				arrayInitializer.getLeftSquareBracketKeyword_1(),
-				arrayInitializer.getRightSquareBracketKeyword_5(),
-				arrayInitializer.getCommaKeyword_3_1());
+				arrayHead.getLeftSquareBracketKeyword_1(),
+				arrayInitializer.getRightSquareBracketKeyword_3(),
+				arrayTail.getCommaKeyword_1());
 		ObjectInitialiserElements objectInitialiser = f
 				.getObjectInitialiserAccess();
 		configureInitializers(c,
 				objectInitialiser.getLeftCurlyBracketKeyword_1(),
 				objectInitialiser.getRightCurlyBracketKeyword_4(),
-				objectInitialiser.getCommaKeyword_3_1_1());
+				objectInitialiser.getCommaKeyword_3_2_0());
+		c.setLinewrap(0, 0, 1).after(objectInitialiser.getCommaKeyword_3_3_0());
 		// metadata
 		As3MetadataTagElements metadataTag = f.getAs3MetadataTagAccess();
 		c.setNoSpace().bounds(metadataTag.getLeftSquareBracketKeyword_0(),
@@ -185,7 +185,7 @@ public class As3Formatter extends ConfigurableDeclarativeFormatter {
 				f.getAs3ImportListRule());
 		c.setNoLinewrap().between(
 				f.getAs3BlockAccess().getRightCurlyBracketKeyword_4(),
-				f.getAs3IfStatementAccess().getElseKeyword_5_1());
+				f.getAs3IfStatementAccess().getElseKeyword_5_0_0_1());
 	}
 
 	protected void configureInitializers(FormattingConfig c,

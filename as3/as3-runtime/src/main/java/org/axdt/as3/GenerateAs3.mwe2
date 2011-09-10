@@ -15,22 +15,14 @@ var grammarURI = "classpath:/org/axdt/as3/As3.xtext"
 var file.extensions = "as"
 var runtimeProject = "../as3-runtime"
 var uiProject = "../as3-ui"
-var avmProject = "../../avm/avm-runtime"
+var testProject = "../as3-test"
 var srcGen = "/src/generated/java"
 var src = "/src/main/java"
 var antlrTimeout = "10000"
 Workflow {
 	bean = StandaloneSetup {
+	    //scanClassPath = true
 		platformUri = "../../.."
-		registerGeneratedEPackage = "org.axdt.as3.As3EPackage"
-		uriMap = Mapping {
-			from = "platform:/resource/org.axdt.as3.runtime/src/main/ecore/As3.ecore"
-			to = "${runtimeProject}/src/main/ecore/As3.ecore"
-		}
-		uriMap = Mapping {
-			from = "platform:/resource/org.axdt.avm.runtime/src/main/ecore/Avm.ecore"
-			to = "${avmProject}/src/main/ecore/Avm.ecore"
-		}
 	}
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}${srcGen}"
@@ -39,12 +31,13 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${uiProject}${srcGen}"
 	}
-	
+
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = uiProject
+		pathTestProject = testProject
 		projectNameRt = "org.axdt.as3.runtime"
-		projectNameUi = "org.axdt.as3.ui"	
+		projectNameUi = "org.axdt.as3.ui"
 		srcPath = src
 		srcGenPath = srcGen
 		language = {
@@ -82,19 +75,51 @@ Workflow {
 			// labeling API 
 			fragment = labeling.LabelProviderFragment {}
 			// outline API
-			fragment = outline.TransformerFragment {}
+			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = outline.QuickOutlineFragment {}
 
-			// java-based API for content assistance 
+			// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment {}
+
+			// content assist API  
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment { 
 				options = {
 					backtrack = true
-					memoize = true	
+					memoize = true
 					classSplitting = true
 				}
 				antlrParam = "-Xconversiontimeout" antlrParam = "${antlrTimeout}"
 			}
+			
+			// generates junit test support classes into Generator#pathTestProject
+			fragment = junit.Junit4Fragment {}
+
+			// project wizard (optional) 
+			// fragment = projectWizard.SimpleProjectWizardFragment {
+			// 		generatorProjectName = "${projectName}.generator" 
+			//		modelFileExtension = file.extensions
+			// }
+
+			// provides the necessary bindings for java types integration
+			//fragment = types.TypesGeneratorFragment {}
+
+			// generates the required bindings only if the grammar inherits from Xbase
+			//fragment = xbase.XbaseGeneratorFragment {}
+			
+			// provides a preference page for template proposals 
+			//fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
+
+			// rename refactoring
+            // fragment = refactoring.RefactorElementNameFragment {}
+
+            // provides a compare view
+            // fragment = compare.CompareFragment {
+            //    fileExtensions = file.extensions
+            // }
+
+            // Serializer 2.0
+            // serializer.SerializerFragment {}
 		}
 	}
 }

@@ -31,6 +31,7 @@ import junit.framework.TestCase;
  *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getName() <em>Get Name</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDeclaredElement#getVisibility() <em>Get Visibility</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getCanonicalName() <em>Get Canonical Name</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -167,7 +168,7 @@ public abstract class AvmDeclaredTypeTest extends TestCase {
 	public void testCalculateCommonType__AvmType() {
 		assertNull(getFixture().calculateCommonType(null));
 		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
-		assertEquals(nul, getFixture().calculateCommonType(nul));
+		assertEquals(getFixture(), getFixture().calculateCommonType(nul));
 		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
 		assertEquals(voi, getFixture().calculateCommonType(voi));
 		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
@@ -213,6 +214,16 @@ public abstract class AvmDeclaredTypeTest extends TestCase {
 	 */
 	public void testGetCanonicalName() {
 		assertNull(getFixture().getCanonicalName());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDefinition#getQualifiedName()
+	 */
+	public void testGetQualifiedName() {
+		assertNull(getFixture().getQualifiedName());
 	}
 
 } //AvmDeclaredTypeTest

@@ -55,7 +55,7 @@
             <action
                   class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
                   id="org.axdt.flex4.debugger.rulerActions.toggle"
-                  label=""
+                  label="Add breakpoint"
                   icon=""
                   actionID="RulerDoubleClick"
                   style="push">

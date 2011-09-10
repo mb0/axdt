@@ -7,155 +7,134 @@
  ******************************************************************************/
 package org.axdt.as3.ui.folding;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.axdt.as3.model.As3Class;
 import org.axdt.as3.model.As3ImportList;
-import org.axdt.as3.model.As3Interface;
 import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Package;
 import org.axdt.as3.model.As3Program;
+import org.axdt.as3.model.As3Type;
+import org.axdt.as3.ui.folding.As3FoldedPosition.Acceptor;
 import org.axdt.as3.ui.preferences.As3EditorPreferences;
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Position;
-import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
+import org.eclipse.jface.text.BadPartitioningException;
+import org.eclipse.jface.text.IDocumentExtension3;
+import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
-import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
+import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
-public class As3FoldingRegionProvider extends DefaultFoldingRegionProvider {
+public class As3FoldingRegionProvider implements IFoldingRegionProvider {
 
+	private static final Logger log = Logger.getLogger(DefaultFoldingRegionProvider.class);
+	protected static final Pattern TEXT_PATTERN_IN_COMMENT = Pattern.compile("\\w");
+	
 	@Inject
 	protected As3EditorPreferences preferences;
+	@Inject
+	private ILocationInFileProvider locationInFileProvider;
 	
-	@Override
-	protected List<IFoldingRegion> doGetFoldingRegions(
-			IXtextDocument xtextDocument, XtextResource xtextResource) {
-		List<IFoldingRegion> foldingRegions = Lists.newArrayList();
-		if (preferences.getStore().getBoolean(As3EditorPreferences.USE_FOLDING)) {
-			EObject root = xtextResource.getContents().get(0);
-			Iterable<AbstractNode> comments = collectComments(root);
-			List<EObject> contents = Lists.newArrayList();
-			int headerEnd = collectContents(root, contents, 0);
-			for (AbstractNode node:comments) {
-				Position pos = getPosition(xtextDocument, node);
-				if (pos == null) continue;
-				String type = pos.offset < headerEnd
-						? As3EditorPreferences.FOLD_HEADERS
-						: As3EditorPreferences.FOLD_COMMENTS;
-				foldingRegions.add(newFoldingRegion(node, type, pos));
-			}
-			for (EObject eObject:contents) {
-				addFoldingRegions(xtextDocument, eObject, foldingRegions);
-			}
-		}
-		return foldingRegions;
-	}
-	
-	private final Set<String> rules = ImmutableSet.of("DOC_COMMENT", "ML_COMMENT");
-	
-	@Override
-	protected void addFoldingRegions(IXtextDocument xtextDocument,
-			EObject eObject, List<IFoldingRegion> foldingRegions) {
-		if (eObject.eContainer() != null) // except Programm
-			super.addFoldingRegions(xtextDocument, eObject, foldingRegions);
-	}
-	
-	protected Position getPosition(IXtextDocument xtextDocument, AbstractNode node) {
-		Assert.isNotNull(node, "parameter 'node' must not be null");
-		try {
-			int startLine = xtextDocument.getLineOfOffset(node.getOffset());
-			int endLine = xtextDocument.getLineOfOffset(node.getOffset() + node.getLength());
-			if (startLine < endLine) {
-				int start = xtextDocument.getLineOffset(startLine);
-				int end = xtextDocument.getLineOffset(endLine) + xtextDocument.getLineLength(endLine);
-				return new Position(start, end - start);
-			}
-		} catch (BadLocationException e) {
-		}
-		return null;
-	}
-	
-	protected Iterable<AbstractNode> collectComments(EObject eObject) {
-		NodeAdapter adapter = NodeUtil.getNodeAdapter(eObject);
-		CompositeNode parserNode = adapter.getParserNode();
-		return Iterables.filter(NodeUtil.getAllContents(parserNode), new Predicate<AbstractNode>() {
-			EAttribute leafHidden = ParsetreePackage.eINSTANCE.getLeafNode_Hidden();
-			EReference grammarElement = ParsetreePackage.eINSTANCE.getAbstractNode_GrammarElement();
-			EAttribute ruleName = XtextPackage.eINSTANCE.getAbstractRule_Name();
-			public boolean apply(AbstractNode input) {
-				int hiddenFeatureID = input.eClass().getFeatureID(leafHidden);
-				int grammarFeatureID = input.eClass().getFeatureID(grammarElement);
-				if (hiddenFeatureID != -1 && grammarFeatureID != -1 &&
-						(Boolean)input.eGet(leafHidden, false)) {
-					EObject rule = (EObject) input.eGet(grammarElement, false);
-					if (rule != null)
-						return rules.contains(rule.eGet(ruleName));
-				}
-				return false;
+	public Collection<FoldedPosition> getFoldingRegions(final IXtextDocument xtextDocument) {
+		return xtextDocument.readOnly(new IUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
+			public Collection<FoldedPosition> exec(XtextResource xtextResource) throws Exception {
+				if (xtextResource == null)
+					return Collections.emptyList();
+				return doGetFoldingRegions(xtextDocument, xtextResource);
 			}
 		});
 	}
-
-	protected int collectContents(EObject obj, List<EObject> result, int headerEnd) {
-		boolean isProg = obj instanceof As3Program;
-		boolean isPack = !isProg && obj instanceof As3Package;
-		boolean isClass = !isProg && !isPack && obj instanceof As3Class;
-		if (isClass || !(isProg || isPack)
-			&&(obj instanceof As3Operation
-			|| obj instanceof As3Interface
-			|| obj instanceof As3ImportList))
-			result.add(obj);
-		if (isPack) {
-			NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
-			headerEnd = adapter.getParserNode().getOffset();
+	
+	protected Collection<FoldedPosition> doGetFoldingRegions(
+			IXtextDocument xtextDocument, XtextResource xtextResource) {
+		Collection<FoldedPosition> result = Sets.newLinkedHashSet();
+		if (preferences.getStore().getBoolean(As3EditorPreferences.USE_FOLDING)) {
+			Acceptor acceptor = new Acceptor(xtextDocument, result);
+			computeObjectFolding(xtextResource, acceptor);
+			computeCommentFolding(xtextDocument, acceptor);
 		}
-		if (isPack || isClass || isProg)
-			for (EObject child : obj.eContents())
-				headerEnd = collectContents(child, result, headerEnd);
-		return headerEnd;
+		return result;
 	}
-
-	@Override
-	protected boolean isHandled(EObject eObject) {
-		return eObject instanceof As3Operation
-			|| eObject instanceof As3Class
-			|| eObject instanceof As3Interface
-			|| eObject instanceof As3ImportList;
+	
+	protected void doHandle(EObject eObject, Acceptor acceptor) {
+		String type = null;
+		if (eObject instanceof As3Operation)
+			type = As3EditorPreferences.FOLD_MEMBERS;
+		else if (eObject instanceof As3ImportList)
+			type = As3EditorPreferences.FOLD_IMPORTS;
+		else if (!(eObject instanceof As3Type)) return;
+		computeObjectFolding(eObject, acceptor, type);
 	}
-	protected IFoldingRegion newFoldingRegion(EObject obj, String type, Position position) {
-		return new As3FoldingRegion(position, type, null);
+	
+	protected boolean shouldProcessContent(EObject eObject, Acceptor acceptor) {
+		if (eObject instanceof As3Package) {
+			ICompositeNode node = NodeModelUtils.getNode(eObject);
+			acceptor.setHeader(node.getOffset());
+			return true;
+		}
+		return eObject instanceof As3Class
+			|| eObject instanceof As3Program;
 	}
-	protected IFoldingRegion newFoldingRegion(EObject obj, Position position) {
-		return new As3FoldingRegion(position, getFoldType(obj), null);
+	
+	protected void computeCommentFolding(IXtextDocument xtextDocument, Acceptor acceptor) {
+		try {
+			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
+					IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);
+			for (ITypedRegion typedRegion : typedRegions) {
+				if (TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION.equals(typedRegion.getType())) {
+					int offset = typedRegion.getOffset();
+					int length = typedRegion.getLength();
+					Matcher matcher = TEXT_PATTERN_IN_COMMENT.matcher(xtextDocument.get(offset, length));
+					TextRegion significant = matcher.find() ? new TextRegion(offset + matcher.start(), 0) : null;
+					String type = offset < acceptor.getHeader()
+						? As3EditorPreferences.FOLD_HEADERS
+						: As3EditorPreferences.FOLD_COMMENTS;
+					acceptor.accept(offset, length, significant, type);
+				}
+			}
+		} catch (BadLocationException e) {
+			log.error(e, e);
+		} catch (BadPartitioningException e) {
+			log.error(e, e);
+		}
 	}
-
-	protected IFoldingRegion newFoldingRegion(EObject obj, Position position, StyledString styledString) {
-		return new As3FoldingRegion(position, getFoldType(obj), styledString);
+	
+	protected void computeObjectFolding(XtextResource xtextResource, Acceptor acceptor) {
+		TreeIterator<EObject> allContents = xtextResource.getAllContents();
+		while (allContents.hasNext()) {
+			EObject eObject = allContents.next();
+			doHandle(eObject, acceptor);
+			if (!shouldProcessContent(eObject, acceptor))
+				allContents.prune();
+		}
 	}
-	protected String getFoldType(EObject obj) {
-		if (obj instanceof As3Operation)
-			return As3EditorPreferences.FOLD_MEMBERS;
-		if (obj instanceof As3ImportList)
-			return As3EditorPreferences.FOLD_IMPORTS;
-		return null;
+	
+	protected void computeObjectFolding(EObject eObject, Acceptor acceptor, String type) {
+		ITextRegion region = locationInFileProvider.getFullTextRegion(eObject);
+		if (region != null) {
+			ITextRegion significant = null;
+			if (!(eObject instanceof As3ImportList))
+				significant = locationInFileProvider.getSignificantTextRegion(eObject);
+			int offset = region.getOffset();
+			acceptor.accept(offset, region.getLength(), significant, type);
+		}
 	}
 }

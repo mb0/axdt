@@ -32,8 +32,8 @@ public class As3CrossReferenceTemplateVariableResolver extends
 					private int index;
 
 					public String apply(String from) {
-						return (index = from.indexOf("::")) > 0 ? from
-								.substring(index + 2) : from;
+						return (index = from.lastIndexOf(".")) > 0 ? from
+								.substring(index + 1) : from;
 					}
 				});
 	}

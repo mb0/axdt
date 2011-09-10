@@ -10,6 +10,7 @@
       eSuperTypes="#//AvmIdentifiable">
     <eOperations name="getQualifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getCanonicalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getQualifiedName" eType="#//AvmQualifiedName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AvmDefinitionContainer" abstract="true"
       interface="true">
@@ -31,7 +32,7 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AvmPackage" abstract="true" interface="true"
-      eSuperTypes="#//AvmDefinitionContainer #//AvmDefinition"/>
+      eSuperTypes="#//AvmDefinitionContainer #//AvmDefinition #//AvmReferable"/>
   <eClassifiers xsi:type="ecore:EClass" name="AvmType" abstract="true" interface="true"
       eSuperTypes="#//AvmDefinition #//AvmReferable">
     <eOperations name="isDynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -149,4 +150,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AvmReferable" abstract="true" interface="true"
       eSuperTypes="#//AvmIdentifiable"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="AvmQualifiedName" instanceClassName="org.axdt.avm.naming.AvmQualifiedName"/>
 </ecore:EPackage>

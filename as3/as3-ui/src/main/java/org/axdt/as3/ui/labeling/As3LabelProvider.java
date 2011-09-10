@@ -52,7 +52,7 @@ public class As3LabelProvider extends DeclarativeLabelProvider implements AxdtIm
     	return IMPORT;
     }
     Object text(As3Import ele) {
-    	return ele.getQualifiedName();
+    	return ele.getCanonicalName();
     }
     Object image(AvmType ele) {
     	if (ele.isClass()) return CLASS;

@@ -13,7 +13,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.axdt.asdoc.AsdocEFactory;
 import org.axdt.asdoc.model.AsdocElement;
-import org.axdt.avm.access.IDefinitionProvider;
+import org.axdt.avm.access.AvmAccess;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Lists;
@@ -40,12 +40,12 @@ public abstract class AbstractCollector implements Comparator<AsdocElement> {
 			return null;
 		if (name.lastIndexOf(']') != 0)
 			name = name.replaceFirst("\\.<[^>]*>", "");
+		if (name.contains(":"))
+			name = name.replaceFirst(":", ".");
 		// check if we already got a qualified name
-		if (name.contains(":") && !name.contains("::"))
-			name = name.replaceFirst(":", "::");
-		boolean isQualified = name.contains("::") || globalTypes.contains(name);
+		boolean isQualified = name.contains(".") || globalTypes.contains(name);
 		String partition = ":" + (isQualified ? "/types/" : "/lookup/");
-		String uri = IDefinitionProvider.PROTOCOL + partition + name;
+		String uri = AvmAccess.PROTOCOL + partition + name;
 		return URI.createURI(uri);
 	}
 }

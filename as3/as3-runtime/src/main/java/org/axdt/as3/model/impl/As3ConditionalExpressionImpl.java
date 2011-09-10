@@ -311,12 +311,9 @@ public class As3ConditionalExpressionImpl extends IExpressionImpl implements As3
 	@Override
 	public AvmTypeAccess resolveType() {
 		if (statement != null && elseStatement != null) {
-//			AvmTypeAccess ifType = statement.resolveType();
-//			AvmTypeAccess elseType = elseStatement.resolveType();
-//			if (ifType != null && ifType.equals(elseType))
-//				return elseType;
-			// TODO find common super type and generalize
-			return AvmTypeAccess.GENERIC;
+			AvmTypeAccess leftType = statement.resolveType();
+			if (leftType != null)
+				return leftType.computeCommonSuperType(elseStatement.resolveType());
 		}
 		return AvmTypeAccess.NULL;
 	}

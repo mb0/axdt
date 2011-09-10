@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IFragmentProvider;
 
-public abstract class AbstractMirror implements IMirror {
+public abstract class AbstractMirror implements AvmMirror {
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof AvmTypeReference)
 			return fallback.getFragment(obj);

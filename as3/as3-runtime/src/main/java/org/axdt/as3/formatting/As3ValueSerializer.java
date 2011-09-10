@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
 
@@ -26,7 +26,7 @@ public class As3ValueSerializer extends ValueSerializer {
 	private IValueConverterService converter;
 	
 	@Override
-	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (node != null) {
 			String ruleName = ruleCall.getRule().getName();
 			Object converted = converter.toValue(serialize(node), ruleName, node);
@@ -37,7 +37,7 @@ public class As3ValueSerializer extends ValueSerializer {
 	}
 	@Override
 	protected String serializeUnassignedValueByRule(AbstractRule rule, EObject current,
-			AbstractNode node) {
+			INode node) {
 		String ruleName = rule.getName();
 		if ("LT".equals(ruleName))
 			return "\n";

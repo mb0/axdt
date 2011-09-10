@@ -349,5 +349,4 @@ public class AsdocOperationImpl extends AsdocExecutableImpl implements AsdocOper
 		result.append(')');
 		return result.toString();
 	}
-
 } //AsdocOperationImpl

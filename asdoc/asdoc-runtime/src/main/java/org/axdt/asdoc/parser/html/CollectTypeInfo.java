@@ -574,7 +574,7 @@ public class CollectTypeInfo extends AbstractHtmlCollector {
 		if (rawLinkOrName.endsWith(".html")) {
 			// if simple the target is in the same package
 			if (!rawLinkOrName.contains("/"))
-				return (qualifier == null || qualifier.length() < 1 ? "" :qualifier+"::")
+				return (qualifier == null || qualifier.length() < 1 ? "" :qualifier+".")
 						+ rawLinkOrName.replace(".html", "");
 			// if relative calculate with current package
 			if (qualifier != null && rawLinkOrName.contains("..")) {
@@ -591,7 +591,7 @@ public class CollectTypeInfo extends AbstractHtmlCollector {
 							result += i == 0 ? split[i] : "." + split[i];
 						if (subQuali != null)
 							result += (result.length() > 0 ? "." : "") + subQuali.replace('/', '.');
-						return result+"::"+matcher.group(3);
+						return result+"."+matcher.group(3);
 					}
 				}
 				// else fall back to unqualified name
@@ -601,6 +601,6 @@ public class CollectTypeInfo extends AbstractHtmlCollector {
 		}
 		int lastDot = rawLinkOrName.lastIndexOf('.');
 		return lastDot < 0 ? rawLinkOrName
-				: rawLinkOrName.replaceFirst("^(?:([^.]+(?:[.][^.]+)*)[.])?([^.]+)$", "$1::$2");
+				: rawLinkOrName.replaceFirst("^(?:([^.]+(?:[.][^.]+)*)[.])?([^.]+)$", "$1.$2");
 	}
 }

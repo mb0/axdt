@@ -12,6 +12,7 @@ import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3PropertyIdentifier;
 import org.axdt.as3.util.As3TypeAccessUtil;
 import org.axdt.avm.model.AvmExecutable;
+import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
@@ -55,18 +56,20 @@ public class As3PropertyIdentifierImpl extends As3SimpleIdentifierImpl implement
 			return AvmTypeAccess.NULL;
 		// TODO when should a avm type resolve to Class ?
 		if (ref instanceof AvmType) {
-			return As3TypeAccessUtil.staticAccess((AvmType) ref);
+			return AvmTypeAccess.Factory.staticAccess((AvmType) ref);
 		} else if (ref instanceof AvmVariable) {
 			AvmTypeReference typeRef = ((AvmVariable) ref).getType();
 			if (typeRef != null)
-			return As3TypeAccessUtil.normalAccess(typeRef.getType());
+			return AvmTypeAccess.Factory.access(typeRef.getType());
 		} else if (ref instanceof AvmExecutable) {
 			if (ref instanceof As3Operation) {
 				As3Operation operation = (As3Operation) ref;
 				if (operation.isGetter())
-					return As3TypeAccessUtil.normalAccess(operation.getReturnType().getType());
+					return AvmTypeAccess.Factory.access(operation.getReturnType().getType());
 			}
 			return As3TypeAccessUtil.global("Function");
+		} else if (ref instanceof AvmPackage) {
+			return AvmTypeAccess.Factory.packageAccess((AvmPackage) ref);
 		}
 		return AvmTypeAccess.GENERIC;
 	}

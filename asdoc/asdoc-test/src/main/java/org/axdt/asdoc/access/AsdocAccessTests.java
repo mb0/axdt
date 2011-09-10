@@ -16,7 +16,7 @@ public class AsdocAccessTests extends TestSuite {
 	}
 	public static Test suite() {
 		TestSuite suite = new AsdocAccessTests("access Tests");
-		suite.addTestSuite(AsdocDefinitionProviderTest.class);
+		suite.addTestSuite(AsdocResourceFactoryTest.class);
 		return suite;
 	}
 }

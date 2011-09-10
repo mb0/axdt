@@ -77,21 +77,10 @@ public class AsdocMirror extends AbstractMirror {
 			IFragmentProvider.Fallback fallback) {
 		// the fragment is just the resource sub selector. it might be null.
 		// the path already qualifies the mirrored definition.
-		if (fragment == null)
+		if (fragment == null || fragment.length() == 0)
 			return mirroredDefinition;
 		// TODO: investigate which fragments we expect
 		throw new IllegalArgumentException("fragment access is not yet implemented");
-//		int index = fragment.lastIndexOf("::");
-//		String name;
-//		if (index > 0) name = fragment.substring(index+2);
-//		else {
-//			index = fragment.lastIndexOf('.');
-//			if (index > 0) name = fragment.substring(index+1);
-//			else name = fragment;
-//		}
-//		if (name.equals(getTypeName()))
-//			return mirroredDefinition;
-//		return fallback.getEObject(fragment);
 	}
 
 	public TreeIterator<EObject> getAllContents(AvmResource.Fallback fallback) {

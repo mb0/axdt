@@ -7,6 +7,8 @@
  ******************************************************************************/
 package org.axdt.avm.model;
 
+import org.axdt.avm.naming.AvmQualifiedName;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -35,4 +37,12 @@ public interface AvmDefinition extends AvmIdentifiable {
 	 * @generated
 	 */
 	String getCanonicalName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="org.axdt.avm.model.AvmQualifiedName"
+	 * @generated
+	 */
+	AvmQualifiedName getQualifiedName();
 } // AvmDefinition

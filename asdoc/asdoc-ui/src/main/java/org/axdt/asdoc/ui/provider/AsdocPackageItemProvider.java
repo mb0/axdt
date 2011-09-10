@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocPackage;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.axdt.core.ui.img.AxdtImageHelper;
 import org.axdt.core.ui.img.AxdtImages;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -66,7 +67,7 @@ public class AsdocPackageItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addCanonicalNamePropertyDescriptor(object);
+			addQualifiedNamePropertyDescriptor(object);
 			addPackageContentParsedPropertyDescriptor(object);
 			addTypeContentParsedPropertyDescriptor(object);
 			addGlobalContentParsedPropertyDescriptor(object);
@@ -78,19 +79,19 @@ public class AsdocPackageItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Canonical Name feature.
+	 * This adds a property descriptor for the Qualified Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addCanonicalNamePropertyDescriptor(Object object) {
+	protected void addQualifiedNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AsdocPackage_canonicalName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AsdocPackage_canonicalName_feature", "_UI_AsdocPackage_type"),
-				 AsdocEPackage.Literals.ASDOC_PACKAGE__CANONICAL_NAME,
+				 getString("_UI_AsdocPackage_qualifiedName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AsdocPackage_qualifiedName_feature", "_UI_AsdocPackage_type"),
+				 AsdocEPackage.Literals.ASDOC_PACKAGE__QUALIFIED_NAME,
 				 true,
 				 false,
 				 false,
@@ -294,7 +295,8 @@ public class AsdocPackageItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AsdocPackage)object).getCanonicalName();
+		AvmQualifiedName labelValue = ((AsdocPackage)object).getQualifiedName();
+		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_AsdocPackage_type") :
 			getString("_UI_AsdocPackage_type") + " " + label;
@@ -312,7 +314,7 @@ public class AsdocPackageItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AsdocPackage.class)) {
-			case AsdocEPackage.ASDOC_PACKAGE__CANONICAL_NAME:
+			case AsdocEPackage.ASDOC_PACKAGE__QUALIFIED_NAME:
 			case AsdocEPackage.ASDOC_PACKAGE__PACKAGE_CONTENT_PARSED:
 			case AsdocEPackage.ASDOC_PACKAGE__TYPE_CONTENT_PARSED:
 			case AsdocEPackage.ASDOC_PACKAGE__GLOBAL_CONTENT_PARSED:

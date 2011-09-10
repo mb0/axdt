@@ -16,7 +16,7 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.resource.SaveOptions;
@@ -43,8 +43,8 @@ public class As3FormatterTest extends AbstractXtextTests {
 	}
 
 	public String formatNodeModel(String input, boolean preserve) throws Exception {
-		IAntlrParser parser = getAntlrParser();
-		IParseResult parseResult = parser.parse(null, new StringReader(input));
+		IParser parser = getParser();
+		IParseResult parseResult = parser.parse(new StringReader(input));
 		IFormatter formatter = getInjector().getInstance(IFormatter.class);
 		TokenStringBuffer buf = new TokenStringBuffer();
 		ITokenStream fmt = formatter.createFormatterStream("", buf, preserve);
@@ -59,7 +59,8 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertEquals(expected, formatNodeModel(toformat, true));
 	}
 	public void assertFormatDefault(String expected, String toformat) throws Exception {
-		assertEquals(expected, formatEObject(toformat));
+		String formatEObject = formatEObject(toformat);
+		assertEquals(expected, formatEObject);
 	}
 	public void testIgnoreLineBreaksProblem() throws Exception {
 		assertFormat("1++;\n\n2++;", "\n\n1++\n\n2++\n\n");
@@ -150,7 +151,7 @@ public class As3FormatterTest extends AbstractXtextTests {
 		assertFormat("a++;\n\n/** doc comment */\na++;", "a++;\n\n\n/** doc comment */\n\n\na++;");
 	}
 	public void testImportDirective() throws Exception {
-		assertFormatDefault("import a.b.c;\nimport c.b.a;","import a . b . c ; import c . b . a ; ");
+		assertFormatDefault("import a.b.c;\nimport c.b.a;","import a.b.c;\nimport c.b.a;");
 	}
 	public void testClassDirective() throws Exception {
 		assertFormat("public class a {\n}", "public class a{}");

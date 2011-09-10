@@ -9,6 +9,7 @@ package org.axdt.as3.model.impl;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Import;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -38,24 +39,26 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	protected int flags = 0;
 
 	/**
-	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
+	 * The default value of the '{@link #getCanonicalName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQualifiedName()
+	 * @see #getCanonicalName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String QUALIFIED_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
+	 * The cached value of the '{@link #getCanonicalName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQualifiedName()
+	 * @see #getCanonicalName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String qualifiedName = QUALIFIED_NAME_EDEFAULT;
+	protected String canonicalName = QUALIFIED_NAME_EDEFAULT;
+	
+	transient protected AvmQualifiedName qName = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,20 +84,29 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getQualifiedName() {
-		return qualifiedName;
+	public String getCanonicalName() {
+		return canonicalName;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setQualifiedName(String newQualifiedName) {
-		String oldQualifiedName = qualifiedName;
-		qualifiedName = newQualifiedName;
+	public void setCanonicalName(String newCanonicalName) {
+		qName = null;
+		String oldCanonicalName = canonicalName;
+		if (newCanonicalName != null && (newCanonicalName.length() == 0 || newCanonicalName.endsWith(".")))
+			newCanonicalName += "*";
+		canonicalName = newCanonicalName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_IMPORT__QUALIFIED_NAME, oldQualifiedName, qualifiedName));
+			eNotify(new ENotificationImpl(this, Notification.SET, As3EPackage.AS3_IMPORT__QUALIFIED_NAME, oldCanonicalName, canonicalName));
+	}
+	
+	public AvmQualifiedName getQualifiedName() {
+		if (canonicalName == null) return null;
+		if (qName == null)
+			qName = AvmQualifiedName.create(canonicalName.split("\\."));
+		return qName;
 	}
 
 	/**
@@ -102,9 +114,9 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	 * <!-- end-user-doc -->
 	 */
 	public String getQualifier() {
-		if (qualifiedName == null) return null;
-		int lastDot = qualifiedName.lastIndexOf('.');
-		return lastDot < 0 ? null : qualifiedName.substring(0,lastDot);
+		if (canonicalName == null) return null;
+		int lastDot = canonicalName.lastIndexOf('.');
+		return lastDot < 0 ? null : canonicalName.substring(0,lastDot);
 	}
 
 	/**
@@ -112,20 +124,10 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	 * <!-- end-user-doc -->
 	 */
 	public String getName() {
-		if (qualifiedName == null) return null;
-		int lastDot = qualifiedName.lastIndexOf('.');
-		String name = lastDot < 0 ? qualifiedName : qualifiedName.substring(lastDot+1);
-		return name == null || name.length() == 0 ? "*" : name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public String getCanonicalName() {
-		String qualifier = getQualifier();
-		return qualifier == null ? getName()
-			: qualifier +"::"+ getName();
+		if (canonicalName == null) return null;
+		int lastDot = canonicalName.lastIndexOf('.');
+		String name = lastDot < 0 ? canonicalName : canonicalName.substring(lastDot+1);
+		return name == null ? null : name;
 	}
 
 	/**
@@ -137,7 +139,7 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case As3EPackage.AS3_IMPORT__QUALIFIED_NAME:
-				return getQualifiedName();
+				return getCanonicalName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,7 +153,7 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case As3EPackage.AS3_IMPORT__QUALIFIED_NAME:
-				setQualifiedName((String)newValue);
+				setCanonicalName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,7 +168,7 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case As3EPackage.AS3_IMPORT__QUALIFIED_NAME:
-				setQualifiedName(QUALIFIED_NAME_EDEFAULT);
+				setCanonicalName(QUALIFIED_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -181,7 +183,7 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case As3EPackage.AS3_IMPORT__QUALIFIED_NAME:
-				return QUALIFIED_NAME_EDEFAULT == null ? qualifiedName != null : !QUALIFIED_NAME_EDEFAULT.equals(qualifiedName);
+				return QUALIFIED_NAME_EDEFAULT == null ? canonicalName != null : !QUALIFIED_NAME_EDEFAULT.equals(canonicalName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -197,7 +199,7 @@ public class As3ImportImpl extends MinimalEObjectImpl.Container implements As3Im
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (qualifiedName: ");
-		result.append(qualifiedName);
+		result.append(canonicalName);
 		result.append(')');
 		return result.toString();
 	}

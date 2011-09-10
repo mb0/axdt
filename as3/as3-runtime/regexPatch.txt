@@ -1,0 +1,18 @@
+    	  	// XXX: axdt regex patch
+            int lookBack = -2;
+            int prev = input.LA(lookBack);
+            while (prev == ' ')	prev = input.LA(--lookBack);
+            if (prev != CharStream.EOF && //(,=:[!&|?{};
+            	prev != '(' && prev != ',' && prev != '=' && prev != ':' && prev != '[' && prev != '!' &&
+            	prev != '&' && prev != '|' && prev != '?' && prev != '{' && prev != '}' && prev != ';') {
+            	// not actually a regex token
+            	state.type = RULE_DIV_ASSIGN;
+            	// but div assign match assign
+            	if (input.LA(1) == '=') matchAny();
+            	// normal div already matched
+            	else state.type = RULE_DIV;
+                state.channel = _channel;
+                return;
+            }
+            // XXX: end axdt regex patch
+            mRULE_REGEXHEAD(); 

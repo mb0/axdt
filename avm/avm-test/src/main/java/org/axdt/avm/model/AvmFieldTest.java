@@ -134,4 +134,17 @@ public abstract class AvmFieldTest extends AvmMemberTest {
 		super.testGetCanonicalName();
 	}
 
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDefinition#getQualifiedName()
+	 * @generated
+	 */
+	public void testGetQualifiedName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
 } //AvmFieldTest

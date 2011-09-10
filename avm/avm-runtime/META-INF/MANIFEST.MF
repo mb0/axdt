@@ -11,6 +11,9 @@ Export-Package: org.axdt.avm,
  org.axdt.avm.access,
  org.axdt.avm.model,
  org.axdt.avm.model.impl,
+ org.axdt.avm.naming,
  org.axdt.avm.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Import-Package: com.google.common.base;version="1.0.0",
+ org.eclipse.xtext.naming

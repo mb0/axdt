@@ -6,7 +6,7 @@ Bundle-SymbolicName: org.axdt.core.runtime;singleton:=true
 Bundle-Version: 0.0.81.qualifier
 Bundle-Activator: org.axdt.core.AxdtCore
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.resources;visibility:=reexport,
  com.google.collect;visibility:=reexport,

@@ -15,26 +15,30 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.scoping.IScope;
 
 public abstract class AvmGenericScope<T extends EObject> extends AvmElementScope<T> {
 	private static Resource tempResource = null;
 
-	public AvmGenericScope(T element, EReference ref, AvmScopeProvider scopeProvider) {
-		super(element, ref, scopeProvider);
+	public AvmGenericScope(IScope parent, T element, EReference ref, IScope lookup) {
+		super(parent, element, ref, lookup);
 	}
 	public String getReferenceText(EObject reference) {
-		CompositeNode node = NodeUtil.getNodeAdapter(reference).getParserNode();
+		ICompositeNode node = NodeModelUtils.getNode(reference);
 		return new LinkingHelper().getCrossRefNodeAsString(node, false);
 	}
 
-	public AvmReferable getDynamicIdentifiable(final String value) {
+	public AvmReferable getDynamicIdentifiable(final EObject reference) {
+		if (reference == null) return null;
+		final String text = getReferenceText(reference);
 		Resource resource = getTempResource();
+		if (text == null || resource == null) return null;
 		EObject find = null;
 		for (EObject obj: resource.getContents()) {
 			if (obj instanceof AvmField) {
-				if (value.equals(((AvmField) obj).getName()))
+				if (text.equals(((AvmField) obj).getName()))
 					find = obj;
 			}
 		}
@@ -42,7 +46,7 @@ public abstract class AvmGenericScope<T extends EObject> extends AvmElementScope
 		if (find != null) {
 			field = (AvmField) find;
 		} else {
-			field = createDynamicField(value);
+			field = createDynamicField(text);
 			getTempResource().getContents().add(field);
 		}
 		return field;

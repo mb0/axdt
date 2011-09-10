@@ -7,6 +7,7 @@
  ******************************************************************************/
 package org.axdt.avm.scoping;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.axdt.avm.access.DefinitionNotFoundException;
@@ -18,6 +19,7 @@ import org.axdt.avm.model.AvmMember;
 import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.naming.AvmQualifiedNameConverter;
 import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -25,52 +27,49 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 	
 	public final static Function<AvmReferable, IEObjectDescription> GetDesciption = new Function<AvmReferable, IEObjectDescription>() {
 		public IEObjectDescription apply(AvmReferable from) {
-			return EObjectDescription.create(from.getName(), from);
+			String name = from.getName();
+			return name != null ?  EObjectDescription.create(name, from) : null;
 		}
 	};
 	
 	protected final T element;
-	protected final AvmScopeProvider scopeProvider;
 	protected final EReference ref;
-	protected IScope parentScope;
 	protected AvmDeclaredType typeEnclosingElement;
 
-	public AvmElementScope(T element, EReference ref, AvmScopeProvider scopeProvider) {
+	protected final IScope lookup;
+
+	public AvmElementScope(IScope scope, T element,  EReference ref, IScope lookup) {
+		super(scope, false);
 		this.element = element;
 		this.ref = ref;
-		this.scopeProvider = scopeProvider;
+		this.lookup = lookup;
 	}
-	protected IScope getParentScope() {
-		if (parentScope == null)
-			parentScope = createParentScope();
-		return parentScope;
+	public IScope getLookupScope() {
+		return lookup;
 	}
-	protected IScope createParentScope() {
-		return scopeProvider.getScope(element, element.eContainer(), ref);
-	}
-	public IScope getOuterScope() {
-		return getParentScope();
-	}
-
 	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		return Iterables.transform(getCandidates(), GetDesciption);
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		return Iterables.filter(
+				getCandidates(), 
+				Predicates.notNull());
 	}
 
-	protected abstract Iterable<? extends AvmReferable> getCandidates();
+	protected abstract Iterable<IEObjectDescription> getCandidates();
 	
 	protected AvmType resolveType(AvmType type, AvmTypeReference ref) {
 		if (type.eIsProxy()) {
@@ -79,24 +78,36 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 			if (urlString.startsWith("avm:/lookup/")) {
 				String lookupName = urlString.replaceFirst("avm:/lookup/", "");
 				// lets lookup the type name in the parent scope
-				IScope current = getParentScope();
-				AvmDefinitionScope defScope = null;
+				IScope current = getLookupScope();
+				AvmLibraryScope avmScope = null;
 				while (current != null) {
-					if (current instanceof AvmDefinitionScope) {
-						defScope = (AvmDefinitionScope) current;
+					if (current instanceof AvmLibraryScope) {
+						avmScope = (AvmLibraryScope) current;
 						break;
 					}
-					current = current.getOuterScope();
+					if (current instanceof AbstractScope)
+						current = ((AbstractScope)current).getParent();
+					else break;
 				}
-				if (defScope != null) {
+				if (avmScope != null) {
 					try {
-						type = defScope.definitionProvider.findTypeByName(lookupName);
-						// set the canonical type name so we can skip the scope lookup next time
-						internal.eSetProxyURI(URI.createURI("avm:/types/"+ type.getCanonicalName()));
-						if (ref != null) {
-							Resource resource = ref.eResource();
-							if (resource != null) {
-								resource.setModified(true);
+						QualifiedName qname = new AvmQualifiedNameConverter().toQualifiedName(lookupName);
+						Iterable<IEObjectDescription> desciptions = avmScope.getTypedElementsByName(qname, type.eClass());
+						Iterator<IEObjectDescription> iterator = desciptions.iterator();
+						if (iterator.hasNext()) {
+							IEObjectDescription next = iterator.next();
+							EObject object = next.getEObjectOrProxy();
+							// resolve if proxy
+							if (object.eIsProxy())
+								object = EcoreUtil2.resolve(object, element);
+							type = (AvmType) object;
+							// set the canonical type name so we can skip the scope lookup next time
+							internal.eSetProxyURI(URI.createURI("avm:/types/"+ type.getCanonicalName()));
+							if (ref != null) {
+								Resource resource = ref.eResource();
+								if (resource != null) {
+									resource.setModified(true);
+								}
 							}
 						}
 					} catch (DefinitionNotFoundException e) {
@@ -113,7 +124,7 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 			boolean intMod, boolean first) {
 		AvmDeclaredType type = (AvmDeclaredType) access.getType();
 		for (AvmMember member : type.getMembers()) {
-			if (member instanceof AvmExecutable && type.getName().equals(member.getName())) {
+			if (member instanceof AvmExecutable && type.getName() != null && type.getName().equals(member.getName())) {
 				// skip constructor for now
 				// we can work with type references in new expressions
 				// and we usually want to access the type instead of the constructor
@@ -144,9 +155,15 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		}
 		if (type.isClass()) {
 			AvmClass clss = (AvmClass) type;
-			AvmDeclaredType superType = resolveTypeReference(clss.getExtendedClass());
+			AvmTypeReference extendedClass = clss.getExtendedClass();
+			if (extendedClass == null && !type.getCanonicalName().equals("Object"))
+				extendedClass = getObjectReference(); 
+			AvmDeclaredType superType = resolveTypeReference(extendedClass);
 			if (superType instanceof AvmClass) {
-				AvmTypeAccess newaccess = new AvmTypeAccess.Extended(superType, access.isProtected(), false, access.isInstance(), access.isStatic());
+				AvmTypeAccess newaccess = AvmTypeAccess.Factory.access(superType)
+						.setProtected(access.isProtected())
+						.setInstance(access.isInstance())
+						.setStatic(access.isStatic());
 				boolean newIntMod = sameQualifier(superType, getTypeEnclosingElement());
 				collectAllMembers(newaccess, list, newIntMod, false);
 			}
@@ -155,11 +172,12 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		for (AvmTypeReference ref:interfaces) {
 			AvmDeclaredType superType = resolveTypeReference(ref);
 			if (superType instanceof AvmInterface) {
-				AvmTypeAccess newaccess = new AvmTypeAccess.Extended(superType, false, false, true, false);
+				AvmTypeAccess newaccess = AvmTypeAccess.Factory.access(superType);
 				collectAllMembers(newaccess, list, false, false);
 			}
 		}
 	}
+	protected abstract AvmTypeReference getObjectReference();
 	protected boolean sameQualifier(AvmDeclaredType t1, AvmDeclaredType t2) {
 		if (t2 == null) return false;
 		String qualifier = t1.getQualifier();
@@ -172,7 +190,7 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 		return false;
 	}
 	protected Iterable<AvmMember> getAllMembers(AvmDeclaredType type, AvmTypeAccess access) {
-		AvmTypeAccess newAccess = new AvmTypeAccess.Extended(type);
+		AvmTypeAccess newAccess = AvmTypeAccess.Factory.access(type);
 		boolean intMod = false;
 		AvmDeclaredType refType = getTypeEnclosingElement();
 		intMod = sameQualifier(type, refType);
@@ -209,5 +227,12 @@ public abstract class AvmElementScope<T extends EObject> extends AbstractScope {
 			}
 		}
 		return null;
+	}
+	protected boolean isShadowed(IEObjectDescription input) {
+		QualifiedName name = input.getName();
+		int count = name.getSegmentCount();
+		if (count < 1 || count > 1)
+			return false;
+		return getLocalElementsByName(name).iterator().hasNext();
 	}
 }

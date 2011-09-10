@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.axdt.asdoc.AsdocEPackage;
 import org.axdt.asdoc.model.AsdocRoot;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -160,7 +161,8 @@ public class AsdocRootItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AsdocRoot)object).getCanonicalName();
+		AvmQualifiedName labelValue = ((AsdocRoot)object).getQualifiedName();
+		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_AsdocRoot_type") :
 			getString("_UI_AsdocRoot_type") + " " + label;

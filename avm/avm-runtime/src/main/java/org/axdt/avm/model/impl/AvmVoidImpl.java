@@ -8,9 +8,9 @@
 package org.axdt.avm.model.impl;
 
 import org.axdt.avm.AvmEPackage;
-import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVoid;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -33,13 +33,15 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	 */
 	protected int flags = 0;
 
+	protected final AvmQualifiedName qname;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected AvmVoidImpl() {
 		super();
+		qname = AvmQualifiedName.create("void");
 	}
 
 	/**
@@ -64,7 +66,6 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isFinal() {
 		return true;
@@ -73,7 +74,6 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isInterface() {
 		return false;
@@ -82,7 +82,6 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public boolean isClass() {
 		return false;
@@ -95,15 +94,12 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)
 			return null;
-		if (other instanceof AvmNull)
-			return other;
 		return this;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getQualifier() {
 		return null;
@@ -112,18 +108,24 @@ public class AvmVoidImpl extends MinimalEObjectImpl.Container implements AvmVoid
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getName() {
-		return "void";
+		return qname.getFirstSegment();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public String getCanonicalName() {
-		return "void";
+		return qname.getFirstSegment();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmQualifiedName getQualifiedName() {
+		return qname;
 	}
 } //AvmVoidImpl

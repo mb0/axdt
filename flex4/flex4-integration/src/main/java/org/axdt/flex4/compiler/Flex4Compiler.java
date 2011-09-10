@@ -87,7 +87,7 @@ public class Flex4Compiler implements IAxdtCompiler {
 		String cacheFileName = Integer.toHexString(iPath.hashCode()) + "_"
 				+ mode + iPath.removeFileExtension().lastSegment() + ".cache";
 		URI resolvedUri = CommonPlugin.resolve(URI
-				.createURI("platform:/meta/org.axdt.flex4.sdk"));
+				.createURI("platform:/meta/org.axdt.sdk.flex4"));
 		URI uri = resolvedUri.appendSegment(cacheFileName);
 		return new File(uri.toFileString());
 	}

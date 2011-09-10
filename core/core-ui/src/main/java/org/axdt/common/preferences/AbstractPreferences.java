@@ -58,7 +58,7 @@ public abstract class AbstractPreferences extends AbstractPreferenceInitializer 
 
 	@Override
 	public void initializeDefaultPreferences() {
-		IEclipsePreferences def = new DefaultScope().getNode(getQualifier());
+		IEclipsePreferences def = DefaultScope.INSTANCE.getNode(getQualifier());
 		for (FieldSpec<?> spec : getAllFieldSpecs())
 			spec.setDefault(def);
 	}
@@ -150,8 +150,8 @@ public abstract class AbstractPreferences extends AbstractPreferenceInitializer 
 	public IPreferenceStore getStore() {
 		// cache and return the instance scope store
 		if (store == null) {
-			IScopeContext[] search = new IScopeContext[] { new InstanceScope(),
-					new ConfigurationScope() };
+			IScopeContext[] search = new IScopeContext[] { InstanceScope.INSTANCE,
+					ConfigurationScope.INSTANCE };
 			store = new ScopedPreferenceStore(search[0], search, getQualifier());
 		}
 		return store;
@@ -160,7 +160,7 @@ public abstract class AbstractPreferences extends AbstractPreferenceInitializer 
 	public IPreferenceStore getConfigStore() {
 		// cache and return a configuration scope store
 		if (configStore == null)
-			configStore = new ScopedPreferenceStore(new ConfigurationScope(), getQualifier());
+			configStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, getQualifier());
 		return configStore;
 	}
 
@@ -173,7 +173,7 @@ public abstract class AbstractPreferences extends AbstractPreferenceInitializer 
 		}
 		// return a fresh project scope store
 		IScopeContext[] search = new IScopeContext[] { new ProjectScope(res.getProject()),
-				new InstanceScope(), new ConfigurationScope() };
+				InstanceScope.INSTANCE, ConfigurationScope.INSTANCE };
 		ScopedPreferenceStore store = new ScopedPreferenceStore(search[0], search, getQualifier());
 		return store;
 	}

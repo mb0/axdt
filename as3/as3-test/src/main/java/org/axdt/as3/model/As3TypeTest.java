@@ -51,7 +51,6 @@ public abstract class As3TypeTest extends AvmDeclaredTypeTest {
 	protected As3Type getFixture() {
 		return (As3Type)fixture;
 	}
-	
 
 	public void testGetVisibility() {
 		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());

@@ -102,14 +102,14 @@ public class As3FieldBindingTest extends As3MemberTest {
 		pack.getDirectives().add(def);
 		assertEquals("spam",getFixture().getCanonicalName());
 		pack.setCanonicalName("foo.bar");
-		assertEquals("foo.bar::spam",getFixture().getCanonicalName());
+		assertEquals("foo.bar.spam",getFixture().getCanonicalName());
 		As3Program prog = As3EFactory.eINSTANCE.createAs3Program();
 		prog.getDirectives().add(def);
-		assertEquals("::spam",getFixture().getCanonicalName());
+		assertEquals(".spam",getFixture().getCanonicalName());
 		prog.getDirectives().add(getFixture());
-		assertEquals("::spam",getFixture().getCanonicalName());
+		assertEquals(".spam",getFixture().getCanonicalName());
 		pack.getDirectives().add(getFixture());
-		assertEquals("foo.bar::spam",getFixture().getCanonicalName());
+		assertEquals("foo.bar.spam",getFixture().getCanonicalName());
 	}
 	
 	@Override
@@ -123,9 +123,9 @@ public class As3FieldBindingTest extends As3MemberTest {
 		pack.getDirectives().add(def);
 		assertEquals("spam",getFixture().getCanonicalName());
 		pack.setCanonicalName("foo.bar");
-		assertEquals("foo.bar::spam",getFixture().getCanonicalName());
+		assertEquals("foo.bar.spam",getFixture().getCanonicalName());
 		As3Program prog = As3EFactory.eINSTANCE.createAs3Program();
 		prog.getDirectives().add(def);
-		assertEquals("::spam",getFixture().getCanonicalName());
+		assertEquals(".spam",getFixture().getCanonicalName());
 	}
 } //As3FieldBindingTest

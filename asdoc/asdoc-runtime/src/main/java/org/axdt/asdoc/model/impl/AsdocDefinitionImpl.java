@@ -12,6 +12,7 @@ import org.axdt.asdoc.model.AsdocDefinition;
 import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.avm.model.AvmDefinition;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -81,10 +82,24 @@ public abstract class AsdocDefinitionImpl extends AsdocElementImpl implements As
 	
 	public String getQualifier() {
 		if (eContainer() instanceof AvmDefinition) {
-			String name = ((AvmDefinition)eContainer()).getCanonicalName();
-			return name != null && name.length() > 0 ? name : null;
+			AvmQualifiedName name = ((AvmDefinition)eContainer()).getQualifiedName();
+			if (name != null) {
+				String n = name.toString();
+				if (n.length() > 0)
+					return n;
+			}
 		}
 		return null;
+	}
+	
+	public AvmQualifiedName getQualifiedName() {
+		if (name == null) return null;
+		if (eContainer() instanceof AvmDefinition) {
+			AvmQualifiedName qname = ((AvmDefinition)eContainer()).getQualifiedName();
+			if (qname != null)
+				return qname.append(name);
+		}
+		return AvmQualifiedName.create(name);
 	}
 
 	public String getCanonicalName() {
@@ -92,16 +107,15 @@ public abstract class AsdocDefinitionImpl extends AsdocElementImpl implements As
 		EObject container = eContainer();
 		String qualifier = getQualifier();
 		if (qualifier != null) {
-			if (container instanceof AsdocPackage)
-				qualifier += "::";
-			else if (container instanceof AvmType)
-				qualifier += "#";
+			if (container instanceof AvmType)
+				qualifier += '#';
 			else qualifier += '.';
 			return qualifier + getName(); 
 		}
 		return container == null || container instanceof AsdocPackage
-				? getName() : "::"+getName();
+				? getName() : "."+getName();
 	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

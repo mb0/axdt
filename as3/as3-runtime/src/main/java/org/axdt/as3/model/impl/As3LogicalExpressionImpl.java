@@ -45,11 +45,8 @@ public class As3LogicalExpressionImpl extends As3BinaryExpressionImpl implements
 	public AvmTypeAccess resolveType() {
 		if (left != null && right != null) {
 			AvmTypeAccess leftType = left.resolveType();
-			AvmTypeAccess rightType = right.resolveType();
-			if (leftType != null && leftType.equals(rightType))
-				return rightType;
-			// TODO find common super type and generalize
-			return AvmTypeAccess.GENERIC;
+			if (leftType != null)
+				return leftType.computeCommonSuperType(right.resolveType());
 		}
 		return AvmTypeAccess.NULL;
 	}

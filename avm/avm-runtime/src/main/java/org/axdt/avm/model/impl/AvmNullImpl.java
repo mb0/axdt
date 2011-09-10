@@ -10,6 +10,7 @@ package org.axdt.avm.model.impl;
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.model.AvmType;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -31,14 +32,15 @@ public class AvmNullImpl extends MinimalEObjectImpl.Container implements AvmNull
 	 * @ordered
 	 */
 	protected int flags = 0;
-
+	
+	protected final AvmQualifiedName qname;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected AvmNullImpl() {
 		super();
+		qname = AvmQualifiedName.create("Null");
 	}
 
 	/**
@@ -74,7 +76,7 @@ public class AvmNullImpl extends MinimalEObjectImpl.Container implements AvmNull
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)
 			return null;
-		return this;
+		return other;
 	}
 
 	public String getQualifier() {
@@ -82,11 +84,19 @@ public class AvmNullImpl extends MinimalEObjectImpl.Container implements AvmNull
 	}
 
 	public String getName() {
-		return "Null";
+		return qname.getFirstSegment();
 	}
 
 	public String getCanonicalName() {
-		return "Null";
+		return qname.getFirstSegment();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmQualifiedName getQualifiedName() {
+		return qname;
 	}
 
 	@Override

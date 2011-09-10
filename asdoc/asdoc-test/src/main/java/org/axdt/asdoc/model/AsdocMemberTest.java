@@ -98,7 +98,7 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		AsdocRoot root = AsdocEFactory.eINSTANCE.createAsdocRoot();
 		AsdocPackage pack = root.createPackage("foo.bar");
 		pack.getMembers().add(getFixture());
-		assertEquals("foo.bar::test", getFixture().getCanonicalName());
+		assertEquals("foo.bar.test", getFixture().getCanonicalName());
 		pack.getMembers().remove(getFixture());
 		assertEquals("test", getFixture().getCanonicalName());
 		AsdocType type = AsdocEFactory.eINSTANCE.createAsdocClass();
@@ -106,6 +106,6 @@ public abstract class AsdocMemberTest extends AsdocDefinitionTest {
 		type.getMembers().add(getFixture());
 		assertEquals("Test#test", getFixture().getCanonicalName());
 		pack.getTypes().add(type);
-		assertEquals("foo.bar::Test#test", getFixture().getCanonicalName());
+		assertEquals("foo.bar.Test#test", getFixture().getCanonicalName());
 	}
 } //AsdocMemberTest

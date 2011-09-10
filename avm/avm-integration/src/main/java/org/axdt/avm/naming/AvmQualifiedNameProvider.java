@@ -8,9 +8,9 @@
 package org.axdt.avm.naming;
 
 import org.axdt.avm.model.AvmDefinition;
-import org.axdt.avm.model.AvmDefinitionContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author mb0
@@ -18,10 +18,10 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 public class AvmQualifiedNameProvider extends
 		IQualifiedNameProvider.AbstractImpl {
 
-	public String getQualifiedName(EObject obj) {
-		return obj instanceof AvmDefinition
-				&& obj.eContainer() instanceof AvmDefinitionContainer 
-				? ((AvmDefinition) obj).getCanonicalName() 
-				: null;
+	public QualifiedName getFullyQualifiedName(EObject obj) {
+		if (obj instanceof AvmDefinition) {
+			return ((AvmDefinition) obj).getQualifiedName();
+		}
+		return null;
 	}
 }

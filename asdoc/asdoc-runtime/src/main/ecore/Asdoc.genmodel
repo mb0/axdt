@@ -7,7 +7,7 @@
     modelPluginID="org.axdt.asdoc.runtime" modelName="Asdoc" editPluginClass="org.axdt.asdoc.ui.AsdocUiActivator"
     editorPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     featureMapWrapperClass="" testsDirectory="/org.axdt.asdoc.test/src/main/java"
-    testSuiteClass="org.axdt.asdoc.AsdocAllTests" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
+    testSuiteClass="" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.axdt.asdoc.ui"
     editorPluginID="org.axdt.asdoc.runtime.editor" testsPluginID="org.axdt.asdoc.test"
     usedGenPackages="../../../../org.axdt.avm.runtime/src/main/ecore/Avm.genmodel#//avm"
@@ -25,8 +25,14 @@
       <genEnumLiterals ecoreEnumLiteral="Asdoc.ecore#//ParseLevel/GLOBAL"/>
       <genEnumLiterals ecoreEnumLiteral="Asdoc.ecore#//ParseLevel/MEMBER"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Asdoc.ecore#//ParseType">
+      <genEnumLiterals ecoreEnumLiteral="Asdoc.ecore#//ParseType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="Asdoc.ecore#//ParseType/HTML"/>
+      <genEnumLiterals ecoreEnumLiteral="Asdoc.ecore#//ParseType/DITA"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocElement">
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocElement/getFullUri"/>
+      <genOperations ecoreOperation="Asdoc.ecore#//AsdocElement/getRoot"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocDefinition/name"/>
@@ -56,11 +62,11 @@
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocPackage/createChildPackage">
         <genParameters ecoreParameter="Asdoc.ecore#//AsdocPackage/createChildPackage/name"/>
       </genOperations>
-      <genOperations ecoreOperation="Asdoc.ecore#//AsdocPackage/getRoot"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Asdoc.ecore#//AsdocRoot">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocRoot/baseUri"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocRoot/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Asdoc.ecore#//AsdocRoot/parseType"/>
       <genOperations ecoreOperation="Asdoc.ecore#//AsdocRoot/getPackage">
         <genParameters ecoreParameter="Asdoc.ecore#//AsdocRoot/getPackage/fqn"/>
       </genOperations>

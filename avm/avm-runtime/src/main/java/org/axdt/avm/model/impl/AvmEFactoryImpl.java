@@ -12,6 +12,7 @@ import java.util.List;
 import org.axdt.avm.AvmEFactory;
 import org.axdt.avm.AvmEPackage;
 import org.axdt.avm.model.*;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -91,6 +92,8 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 				return createAvmVisibilityFromString(eDataType, initialValue);
 			case AvmEPackage.LIST:
 				return createListFromString(eDataType, initialValue);
+			case AvmEPackage.AVM_QUALIFIED_NAME:
+				return createAvmQualifiedNameFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -108,6 +111,8 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 				return convertAvmVisibilityToString(eDataType, instanceValue);
 			case AvmEPackage.LIST:
 				return convertListToString(eDataType, instanceValue);
+			case AvmEPackage.AVM_QUALIFIED_NAME:
+				return convertAvmQualifiedNameToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -219,6 +224,22 @@ public class AvmEFactoryImpl extends EFactoryImpl implements AvmEFactory {
 	 */
 	public String convertListToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public AvmQualifiedName createAvmQualifiedNameFromString(EDataType eDataType, String initialValue) {
+		return new AvmQualifiedName(initialValue.split("\\."));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String convertAvmQualifiedNameToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue.toString();
 	}
 
 	/**

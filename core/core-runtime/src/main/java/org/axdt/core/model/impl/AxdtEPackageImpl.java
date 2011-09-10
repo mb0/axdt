@@ -9,6 +9,7 @@ package org.axdt.core.model.impl;
 
 import java.util.List;
 
+import java.util.Set;
 import org.axdt.avm.AvmEPackage;
 import org.axdt.core.AxdtEFactory;
 import org.axdt.core.AxdtEPackage;
@@ -179,6 +180,13 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 	 * @generated
 	 */
 	private EDataType listEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType setEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -519,6 +527,15 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getSet() {
+		return setEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AxdtEFactory getAxdtEFactory() {
 		return (AxdtEFactory)getEFactoryInstance();
 	}
@@ -581,6 +598,7 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 		iProjectEDataType = createEDataType(IPROJECT);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		iProjectDescriptionEDataType = createEDataType(IPROJECT_DESCRIPTION);
+		setEDataType = createEDataType(SET);
 		listEDataType = createEDataType(LIST);
 	}
 
@@ -609,6 +627,7 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 
 		// Create type parameters
 		ETypeParameter axdtHandleEClass_T = addETypeParameter(axdtHandleEClass, "T");
+		addETypeParameter(setEDataType, "T");
 		addETypeParameter(listEDataType, "T");
 
 		// Set bounds for type parameters
@@ -748,6 +767,18 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 
 		addEOperation(axdtPackageRootEClass, ecorePackage.getEBoolean(), "isArchive", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(axdtPackageRootEClass, null, "getPackages", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getSet());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(axdtPackageRootEClass, ecorePackage.getEString(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(axdtPackageRootEClass, null, "addPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(axdtPackageRootSourceEClass, AxdtPackageRootSource.class, "AxdtPackageRootSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAxdtPackageRootSource_Resource(), this.getIResource(), "resource", null, 0, 1, AxdtPackageRootSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAxdtPackageRootSource_Parent(), this.getAxdtProjectSource(), this.getAxdtProjectSource_ConnectedPackageRoots(), "parent", null, 0, 1, AxdtPackageRootSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -764,6 +795,7 @@ public class AxdtEPackageImpl extends EPackageImpl implements AxdtEPackage {
 		initEDataType(iProjectEDataType, IProject.class, "IProject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProjectDescriptionEDataType, IProjectDescription.class, "IProjectDescription", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(setEDataType, Set.class, "Set", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listEDataType, List.class, "List", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource

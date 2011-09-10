@@ -22,6 +22,9 @@ import org.eclipse.core.resources.IResource;
  * <ul>
  *   <li>{@link org.axdt.core.model.AxdtPackageRoot#isExternal() <em>Is External</em>}</li>
  *   <li>{@link org.axdt.core.model.AxdtPackageRoot#isArchive() <em>Is Archive</em>}</li>
+ *   <li>{@link org.axdt.core.model.AxdtPackageRoot#getPackages() <em>Get Packages</em>}</li>
+ *   <li>{@link org.axdt.core.model.AxdtPackageRoot#getPackage(java.lang.String) <em>Get Package</em>}</li>
+ *   <li>{@link org.axdt.core.model.AxdtPackageRoot#addPackage(java.lang.String) <em>Add Package</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -104,6 +107,36 @@ public class AxdtPackageRootHandleTest extends AxdtHandleTest {
 	public void testIsArchive() {
 		// TODO: add support for archived files
 		assertFalse(getFixture().isExternal());
+	}
+	/**
+	 * Tests the '{@link org.axdt.core.model.AxdtPackageRoot#getPackages() <em>Get Packages</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.core.model.AxdtPackageRoot#getPackages()
+	 * @generated
+	 */
+	public void testGetPackages() {
+		// TODO: implement this operation test method
+	}
+	/**
+	 * Tests the '{@link org.axdt.core.model.AxdtPackageRoot#getPackage(java.lang.String) <em>Get Package</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.core.model.AxdtPackageRoot#getPackage(java.lang.String)
+	 * @generated
+	 */
+	public void testGetPackage() {
+		// TODO: implement this operation test method
+	}
+	/**
+	 * Tests the '{@link org.axdt.core.model.AxdtPackageRoot#addPackage(java.lang.String) <em>Add Package</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.core.model.AxdtPackageRoot#addPackage(java.lang.String)
+	 * @generated
+	 */
+	public void testAddPackage__String() {
+		// TODO: implement this operation test method
 	}
 	@Override
 	public void testConnect() {

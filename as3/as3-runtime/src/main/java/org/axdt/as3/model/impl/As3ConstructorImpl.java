@@ -9,6 +9,7 @@ package org.axdt.as3.model.impl;
 
 import java.lang.Iterable;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Block;
@@ -33,7 +34,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
@@ -155,7 +155,7 @@ public class As3ConstructorImpl extends As3MemberImpl implements As3Constructor 
 				EcoreUtil.getAllProperContents(body, false),
 				AvmReferable.class
 			));
-		return Iterables.emptyIterable();
+		return Collections.emptySet();
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class As3ConstructorImpl extends As3MemberImpl implements As3Constructor 
 	public Iterable<IDirective> getDirectives() {
 		if (body != null)
 			return body.getDirectives();
-		return Iterables.emptyIterable();
+		return Collections.emptySet();
 	}
 
 	/**

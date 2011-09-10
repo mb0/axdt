@@ -7,8 +7,7 @@
  ******************************************************************************/
 package org.axdt.as3.ui.coloring;
 
-import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.DefaultAntlrTokenToAttributeIdMapper;
-
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 
 public class As3TokenToAttributeIdMapper extends
 		DefaultAntlrTokenToAttributeIdMapper {

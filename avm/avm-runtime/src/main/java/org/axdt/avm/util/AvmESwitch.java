@@ -112,6 +112,7 @@ public class AvmESwitch<T> {
 				T result = caseAvmPackage(avmPackage);
 				if (result == null) result = caseAvmDefinitionContainer(avmPackage);
 				if (result == null) result = caseAvmDefinition(avmPackage);
+				if (result == null) result = caseAvmReferable(avmPackage);
 				if (result == null) result = caseAvmIdentifiable(avmPackage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

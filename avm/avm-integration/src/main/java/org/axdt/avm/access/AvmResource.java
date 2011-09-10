@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 
 public class AvmResource extends ResourceImpl {
 
-	private IMirror mirror;
+	private AvmMirror mirror;
 	
 	public static interface Fallback extends IFragmentProvider.Fallback {
 		String getFragment(EObject obj);
@@ -74,11 +74,11 @@ public class AvmResource extends ResourceImpl {
 		return super.getURIFragment(eObject);
 	}
 
-	public void setMirror(IMirror mirror) {
+	public void setMirror(AvmMirror mirror) {
 		this.mirror = mirror;
 	}
 
-	public IMirror getMirror() {
+	public AvmMirror getMirror() {
 		return mirror;
 	}
 	

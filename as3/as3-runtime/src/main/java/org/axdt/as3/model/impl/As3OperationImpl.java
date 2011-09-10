@@ -9,6 +9,7 @@ package org.axdt.as3.model.impl;
 
 import java.lang.Iterable;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Block;
@@ -17,9 +18,11 @@ import org.axdt.as3.model.As3Operation;
 import org.axdt.as3.model.As3Parameter;
 import org.axdt.as3.model.IDirective;
 import org.axdt.avm.model.AvmExecutable;
+import org.axdt.avm.model.AvmInterface;
 import org.axdt.avm.model.AvmOperation;
 import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmTypeReference;
+import org.axdt.avm.model.AvmVisibility;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -30,7 +33,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
@@ -303,7 +305,7 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 				EcoreUtil.getAllProperContents(body, false),
 				AvmReferable.class
 			));
-		return Iterables.emptyIterable();
+		return Collections.emptySet();
 	}
 
 	/**
@@ -313,7 +315,7 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 	public Iterable<IDirective> getDirectives() {
 		if (body != null)
 			return body.getDirectives();
-		return Iterables.emptyIterable();
+		return Collections.emptySet();
 	}
 
 	/**
@@ -516,4 +518,10 @@ public class As3OperationImpl extends As3MemberImpl implements As3Operation {
 		return result.toString();
 	}
 
+	@Override
+	protected AvmVisibility getDefaultVisibility() {
+		return eContainer() instanceof AvmInterface
+			? AvmVisibility.PUBLIC
+			: AvmVisibility.INTERNAL;
+	}
 } //As3OperationImpl

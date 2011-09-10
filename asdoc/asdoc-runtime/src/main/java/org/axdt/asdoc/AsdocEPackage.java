@@ -246,13 +246,14 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int ASDOC_PACKAGE__ASDOC = ASDOC_ELEMENT__ASDOC;
 	/**
-	 * The feature id for the '<em><b>Canonical Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_PACKAGE__CANONICAL_NAME = ASDOC_ELEMENT_FEATURE_COUNT + 0;
+	int ASDOC_PACKAGE__QUALIFIED_NAME = ASDOC_ELEMENT_FEATURE_COUNT + 0;
+
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -359,13 +360,14 @@ public interface AsdocEPackage extends EPackage {
 	 */
 	int ASDOC_ROOT__ASDOC = ASDOC_PACKAGE__ASDOC;
 	/**
-	 * The feature id for the '<em><b>Canonical Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASDOC_ROOT__CANONICAL_NAME = ASDOC_PACKAGE__CANONICAL_NAME;
+	int ASDOC_ROOT__QUALIFIED_NAME = ASDOC_PACKAGE__QUALIFIED_NAME;
+
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -1200,15 +1202,15 @@ public interface AsdocEPackage extends EPackage {
 	EClass getAsdocPackage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocPackage#getCanonicalName <em>Canonical Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.axdt.asdoc.model.AsdocPackage#getQualifiedName <em>Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Canonical Name</em>'.
-	 * @see org.axdt.asdoc.model.AsdocPackage#getCanonicalName()
+	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
+	 * @see org.axdt.asdoc.model.AsdocPackage#getQualifiedName()
 	 * @see #getAsdocPackage()
 	 * @generated
 	 */
-	EAttribute getAsdocPackage_CanonicalName();
+	EAttribute getAsdocPackage_QualifiedName();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.axdt.asdoc.model.AsdocPackage#getPackages <em>Packages</em>}'.
@@ -1765,12 +1767,12 @@ public interface AsdocEPackage extends EPackage {
 		EClass ASDOC_PACKAGE = eINSTANCE.getAsdocPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Canonical Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ASDOC_PACKAGE__CANONICAL_NAME = eINSTANCE.getAsdocPackage_CanonicalName();
+		EAttribute ASDOC_PACKAGE__QUALIFIED_NAME = eINSTANCE.getAsdocPackage_QualifiedName();
 
 		/**
 		 * The meta object literal for the '<em><b>Packages</b></em>' containment reference list feature.

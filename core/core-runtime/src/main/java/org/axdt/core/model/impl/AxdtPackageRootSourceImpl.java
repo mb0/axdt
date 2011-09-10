@@ -7,6 +7,9 @@
  ******************************************************************************/
 package org.axdt.core.model.impl;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.axdt.core.AxdtEPackage;
 import org.axdt.core.model.AxdtPackageRootHandle;
 import org.axdt.core.model.AxdtPackageRootSource;
@@ -18,6 +21,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import com.google.common.collect.Sets;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +39,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class AxdtPackageRootSourceImpl extends AxdtElementImpl implements AxdtPackageRootSource {
+	
+	protected Set<String> packages = Sets.newHashSet();
+	
 	/**
 	 * The default value of the '{@link #getResource() <em>Resource</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -130,6 +138,33 @@ public class AxdtPackageRootSourceImpl extends AxdtElementImpl implements AxdtPa
 	public boolean isArchive() {
 		// TODO support archives sources in the model
 		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Set<String> getPackages() {
+		return Collections.unmodifiableSet(packages);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String getPackage(String name) {
+		for (String pack:packages)
+			if (pack.equals(name))
+				return pack;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addPackage(String name) {
+		packages.add(name);
 	}
 
 	/**

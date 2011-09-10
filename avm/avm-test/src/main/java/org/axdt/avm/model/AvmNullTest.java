@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.axdt.avm.AvmEFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ import org.axdt.avm.AvmEFactory;
  *   <li>{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifier() <em>Get Qualifier</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getCanonicalName() <em>Get Canonical Name</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmIdentifiable#getName() <em>Get Name</em>}</li>
  * </ul>
  * </p>
@@ -151,11 +153,11 @@ public class AvmNullTest extends TestCase {
 	public void testCalculateCommonType__AvmType() {
 		assertNull(getFixture().calculateCommonType(null));
 		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
-		assertEquals(nul, getFixture().calculateCommonType(nul));
+		assertEquals(getFixture(), getFixture().calculateCommonType(nul));
 		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
-		assertEquals(nul, getFixture().calculateCommonType(voi));
+		assertEquals(voi, getFixture().calculateCommonType(voi));
 		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
-		assertEquals(nul, getFixture().calculateCommonType(generic));
+		assertEquals(generic, getFixture().calculateCommonType(generic));
 	}
 
 	/**
@@ -186,6 +188,16 @@ public class AvmNullTest extends TestCase {
 	 */
 	public void testGetCanonicalName() {
 		assertEquals("Null", getFixture().getName());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDefinition#getQualifiedName()
+	 */
+	public void testGetQualifiedName() {
+		assertEquals(QualifiedName.create("Null"), getFixture().getQualifiedName());
 	}
 
 } //AvmNullTest

@@ -11,24 +11,28 @@ import java.util.List;
 
 import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmMember;
-import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import com.google.inject.internal.Lists;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 
-public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+public abstract class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 
 	protected final EObject ctx;
 
-	public AvmTypeScope(AvmDeclaredType element, EObject initial, EReference ref, AvmScopeProvider scopeProvider) {
-		super(element, ref, scopeProvider);
+	public AvmTypeScope(IScope parent, AvmDeclaredType element, EObject initial, EReference ref) {
+		super(parent, element, ref, parent);
 		this.ctx = initial;
 	}
 
 	@Override
-	protected Iterable<? extends AvmReferable> getCandidates() {
-		AvmTypeAccess access = new AvmTypeAccess.Extended(element, true, true, true, true);
+	protected Iterable<IEObjectDescription> getCandidates() {
+		AvmTypeAccess access = AvmTypeAccess.Factory.thisAccess(element)
+								.setStatic(true);
 		if (ctx != null && ctx != element) {
 			for (EObject current = ctx;current != null;) {
 				EObject next = current.eContainer();
@@ -45,6 +49,6 @@ public class AvmTypeScope extends AvmElementScope<AvmDeclaredType> {
 		}
 		List<AvmMember> result = Lists.newArrayList();
 		collectAllMembers(access, result, true, true);
-		return result;
+		return Iterables.transform(result, GetDesciption);
 	}
 }

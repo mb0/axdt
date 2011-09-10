@@ -35,11 +35,11 @@ public interface As3Import extends IDirective, AvmDefinition {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Qualified Name</em>' attribute.
-	 * @see #setQualifiedName(String)
+	 * @see #setCanonicalName(String)
 	 * @see org.axdt.as3.As3EPackage#getAs3Import_QualifiedName()
 	 * @generated
 	 */
-	String getQualifiedName();
+	String getCanonicalName();
 
 	/**
 	 * Sets the value of the '{@link org.axdt.as3.model.As3Import#getQualifiedName <em>Qualified Name</em>}' attribute.
@@ -49,6 +49,6 @@ public interface As3Import extends IDirective, AvmDefinition {
 	 * @see #getQualifiedName()
 	 * @generated
 	 */
-	void setQualifiedName(String value);
+	void setCanonicalName(String value);
 
 } // As3Import

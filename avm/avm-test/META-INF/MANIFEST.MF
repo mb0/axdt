@@ -11,3 +11,4 @@ Export-Package: org.axdt.avm.model
 Require-Bundle: org.junit;visibility:=reexport,
  org.axdt.avm.integration
 Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.xtext.naming

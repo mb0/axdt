@@ -8,13 +8,20 @@
 package org.axdt.as3.parser.antlr;
 
 import java.io.StringReader;
-import java.util.List;
+import java.util.Iterator;
 
 import org.axdt.as3.As3StandaloneSetup;
+import org.axdt.as3.model.As3ImportList;
+import org.axdt.as3.model.As3Namespace;
+import org.axdt.as3.model.As3Package;
+import org.axdt.as3.model.As3Program;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
-import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.parser.IParser;
 
 public class As3ParserTest extends AbstractXtextTests {
 	
@@ -27,68 +34,67 @@ public class As3ParserTest extends AbstractXtextTests {
 	public As3ParserTest() {
 	}
 	protected IParseResult parse(String text) {
-		IAntlrParser parser = getAntlrParser();
-		return parser.parse(null, new StringReader(text));
-	}
-	protected IParseResult parseExpression(String text) {
-		IAntlrParser parser = getAntlrParser();
-		return parser.parse(null, new StringReader("i = "+text+";"));
-	}
-	protected IParseResult parseExpression(String text,String vars) {
-		IAntlrParser parser = getAntlrParser();
-		return parser.parse(null, new StringReader(vars+"i = "+text+";"));
+		IParser parser = getParser();
+		return parser.parse(new StringReader(text));
 	}
 	protected void assertParseResult(IParseResult result) {
 		assertNotNull(result);
-		List<SyntaxError> errors = result.getParseErrors();
-		if (errors.size() > 0) {
-			assertEquals(errors.get(0).getMessage() + " "+ errors.get(0).getIssueCode() , false, true);
+		Iterator<INode> iter = result.getSyntaxErrors().iterator();
+		if (iter.hasNext()) {
+			SyntaxErrorMessage first = iter.next().getSyntaxErrorMessage();
+			fail(first.getMessage() + " "+ first.getIssueCode());
 		}
+	}
+	private void assertResultType(String input, Class<?> class1) {
+		IParseResult result = parse(input);
+		assertParseResult(result);
+		assertType(class1, result.getRootASTElement());
+	}
+	private void assertType(Class<?> class1, EObject root) {
+		assertTrue("expected instance of "+ class1.getSimpleName() +" but was "+ root.getClass().getSimpleName(), class1.isInstance(root));
+	}
+
+	private void assertResultTypes(String input, Class<?>... classes) {
+		IParseResult result = parse(input);
+		assertParseResult(result);
+		assertType(As3Program.class, result.getRootASTElement());
+		EList<EObject> root = result.getRootASTElement().eContents();
+		for (int i = 0; i < root.size(); i++) {
+			if (i >= classes.length) fail("too many elements. next unexpected :"+ root.get(i));
+			assertTrue("expected "+ classes[i].getSimpleName() +" but was "+ root.get(i).getClass().getSimpleName(), classes[i].isInstance(root.get(i)));
+		}
+		if (root.size() < classes.length) fail("too few elements. next expected: "+ classes[root.size()]);
 	}
 	protected void assertParseError(IParseResult result) {
 		assertNotNull(result);
-		List<SyntaxError> errors = result.getParseErrors();
-		assertEquals("expected errors but has none", true, errors.size()>0);
+		Iterable<INode> errors = result.getSyntaxErrors();
+		assertEquals("expected errors but has none", true, errors.iterator().hasNext());
 	}
 	public void testProgram() throws Exception {
-		IParseResult result;
-		result = parse("");
-		assertParseResult(result);
+		assertResultType("", As3Program.class);
 	}
 	public void testPackage() throws Exception {
-		IParseResult result;
-		result = parse("package {}");
-		assertParseResult(result);
-		result = parse("package a {}");
-		assertParseResult(result);
-		result = parse("package a.b.c {}");
-		assertParseResult(result);
-		result = parse("package a.b.c { import a.b.B; class C{}}");
-		assertParseResult(result);
+		Class<?> t = As3Package.class;
+		assertResultTypes("package {}", t);
+		assertResultTypes("package a {}", t);
+		assertResultTypes("package a.b.c {}", t);
+		assertResultTypes("package a.b.c { import a.b.B; class C{}}", t);
 	}
 	public void testNamespace() throws Exception {
-		IParseResult result;
-		result = parse("namespace n;");
-		assertParseResult(result);
-		result = parse("namespace n \n ");
-		assertParseResult(result);
-		result = parse("namespace n = \"http://an.url/path\";");
-		assertParseResult(result);
-		result = parse("namespace n \n = \n m \n ");
-		assertParseResult(result);
-		result = parse("namespace \n n");
-		assertParseError(result);
+		Class<?> t = As3Namespace.class;
+		assertResultTypes("namespace n;", t);
+		assertResultTypes("namespace n \n ", t);
+		assertResultTypes("namespace n = \"http://an.url/path\";", t);
+		assertResultTypes("namespace n \n = \n m \n ", t);
+		assertResultTypes("namespace \n n \n", t);
 	}
 	public void testImport() throws Exception {
-		IParseResult result;
-		result = parse("import a.b.B;");
-		assertParseResult(result);
-		result = parse("import \n a \n . \n b \n . \n B;");
-		assertParseResult(result);
-		result = parse("import a.b.B;\nimport a.b.c.*;");
-		assertParseResult(result);
-		result = parse("import a.b.B \n\n import a.b.c.*;");
-		assertParseResult(result);
+		Class<?> t = As3ImportList.class;
+		assertResultTypes("import a.b.B;", t);
+		assertResultTypes("import \n a \n . \n b \n . \n B;", t);
+		assertResultTypes("import a.b.B;\nimport a.b.c.*;", t);
+		assertResultTypes("import a.b.B \n\n import a.b.c.*;", t);
+		assertResultTypes("import a.b.B\nimport a.b.c.*\nimport a.b.C\nimport a.B\n", t);
 	}
 	public void testInclude() throws Exception {
 		IParseResult result;
@@ -113,8 +119,6 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parse("var a:A;");
 		assertParseResult(result);
 		result = parse("public static var a:A;");
-		assertParseResult(result);
-		result = parse("var a:int = 5;");
 		assertParseResult(result);
 		result = parse("var get:int = 5;");
 		assertParseResult(result);
@@ -145,8 +149,6 @@ public class As3ParserTest extends AbstractXtextTests {
 		assertParseResult(result);
 		result = parse("function f(b:*=null):void{}");
 		assertParseResult(result);
-		result = parse("var f:* = function f(b:*=null):void{};");
-		assertParseResult(result);
 	}
 	public void testClass() throws Exception {
 		IParseResult result;
@@ -157,13 +159,11 @@ public class As3ParserTest extends AbstractXtextTests {
 	}
 	public void testEmbed() throws Exception {
 		IParseResult result;
-		result = parse("[Embed(source='demo.mpf',mimeType=\"application/octet-stream\")] var Levels:Class;");
+		result = parse("[Embed(source='demo.mpf',mimeType=\"application/octet-stream\")]\nclass B{}");
 		assertParseResult(result);
 	}
 	public void testConditional() throws Exception {
 		IParseResult result;
-		result = parse("a::b { i++; }");
-		assertParseResult(result);
 		result = parse("a::b public class B{ }");
 		assertParseResult(result);
 		result = parse("a::b public interface J{ }");
@@ -171,170 +171,6 @@ public class As3ParserTest extends AbstractXtextTests {
 		result = parse("a::b private static var w;");
 		assertParseResult(result);
 		result = parse("a::b override protected function g():void {}");
-		assertParseResult(result);
-	}
-	public void testIdentifier() throws Exception {
-		IParseResult result;
-		result = parseExpression("ident");
-		assertParseResult(result);
-	}
-	public void testQualifiedIdentifier() throws Exception {
-		IParseResult result;
-		result = parseExpression("a::b");
-		assertParseResult(result);
-		result = parseExpression("a..b::c");
-		assertParseResult(result);
-		result = parseExpression("a..*::b");
-		assertParseResult(result);
-	}
-	public void testLiteral() throws Exception {
-		IParseResult result;
-		result = parseExpression("1337");
-		assertParseResult(result);
-		result = parseExpression("1.3e-37");
-		assertParseResult(result);
-		result = parseExpression("\"String\"");
-		assertParseResult(result);
-		result = parseExpression("'String'");
-		assertParseResult(result);
-		result = parseExpression("'\n\t\f ü←\u00DE'");
-		assertParseResult(result);
-		result = parseExpression("false");
-		assertParseResult(result);
-		result = parseExpression("true");
-		assertParseResult(result);
-		result = parseExpression("null");
-		assertParseResult(result);
-		result = parseExpression("0x1234");
-		assertParseResult(result);
-	}
-	public void testPostfix() throws Exception {
-		IParseResult result;
-		result = parseExpression("a.b");
-		assertParseResult(result);
-		result = parseExpression("a['b']");
-		assertParseResult(result);
-		result = parseExpression("a['b'].c");
-		assertParseResult(result);
-		result = parseExpression("a.b.c","var a:*;");
-		assertParseResult(result);
-	}
-	public void testInvocation() throws Exception {
-		IParseResult result;
-		result = parseExpression("a()");
-		assertParseResult(result);
-		result = parseExpression("a(1)");
-		assertParseResult(result);
-		result = parseExpression("a(1,'2')");
-		assertParseResult(result);
-		result = parseExpression("a(b(1),'2')");
-		assertParseResult(result);
-	}
-	public void testWhile() throws Exception {
-		IParseResult result;
-		result = parse("while(true);");
-		assertParseResult(result);
-		result = parse("while(i<10){i+=1;i+=1;}");
-		assertParseResult(result);
-		result = parse("while(i<10){if (true) i+=1;}");
-		assertParseResult(result);
-	}
-	public void testTry() throws Exception {
-		IParseResult result;
-		result = parse("try { jump(); } catch (e:E) {}");
-		assertParseResult(result);
-	}
-	public void testExpressionStatementList() throws Exception {
-		IParseResult result;
-		result = parse("true == false, 1 > 0;");
-		assertParseResult(result);
-	}
-	public void testParenExpression() throws Exception {
-		IParseResult result;
-		result = parseExpression("2*(4+3)");
-		assertParseResult(result);
-	}
-	public void testSwitchStatement() throws Exception {
-		IParseResult result;
-		result = parse("switch (i) { case 1: i+=1; case 2: i+=1; default: i+=1;}");
-		assertParseResult(result);
-		result = parse("switch (i) { case 1: call(); case 2: call(); default: call();}");
-		assertParseResult(result);
-	}
-	public void testIfStatement() throws Exception {
-		IParseResult result;
-		result = parse("if(true)run();else run();");
-		assertParseResult(result);
-		result = parse("if(true)run();else if(true)run();");
-		assertParseResult(result);
-		result = parse("if(true){run();}else if(true){run();}");
-		assertParseResult(result);
-		result = parse("if(true){if(true)run();}else if(true){run();}");
-		assertParseResult(result);
-	}
-	public void testForStatement() throws Exception {
-		IParseResult result;
-		result = parse("for(i=1;i<100;i++)run();");
-		assertParseResult(result);
-		result = parse("for(i=1;i<100;i++){}");
-		assertParseResult(result);
-		result = parse("for(var i:int = 1;i<100;i++){}");
-		assertParseResult(result);
-	}
-	public void testForInStatement() throws Exception {
-		IParseResult result;
-		result = parse("for(i in list)run();");
-		assertParseResult(result);
-		result = parse("for(var i:* in list){}");
-		assertParseResult(result);
-		result = parse("for each(i in list){}");
-		assertParseResult(result);
-	}
-	public void testAssignmentExpression() throws Exception {
-		IParseResult result;
-		result = parse("i = j = 0;");
-		assertParseResult(result);
-		result = parse("i = 0\n");
-		assertParseResult(result);
-		result = parse("i \n . \n j \n = \n j \n = \n 0 \n");
-		assertParseResult(result);
-	}
-	public void testUnicodeIdent() throws Exception {
-		IParseResult result;
-		result = parseExpression("grüße");
-		assertParseResult(result);
-		// TODO work on unicode identifiers
-//		result = parseExpression("éáíóúêâîôûèàìòù");
-//		assertParseResult(result);
-	}
-	public void testXmlLiteral() throws Exception {
-		// TODO work on xml literals
-//		IParseResult result;
-//		result = parseExpression("<xml/>");
-//		assertParseResult(result);
-	}
-	public void testRegexLiteral() throws Exception {
-		IParseResult result;
-		// TODO regex not working add a custom lexer
-		result = parseExpression("/^regex$/gi");
-		assertParseResult(result);
-	}
-	public void testStatements() throws Exception {
-		IParseResult result;
-		result = parse("var i:int\ni++;");
-		assertParseResult(result);
-		result = parse("1++\n2++\n");
-		assertParseResult(result);
-	}
-	public void testVector() throws Exception {
-		IParseResult result;
-		result = parse("var v:Vector.<String>;");
-		assertParseResult(result);
-		result = parse("var v:Vector.<int> = new Vector.<int>();");
-		assertParseResult(result);
-		result = parse("var friends:Vector.<String> = Vector.<String>([\"Bob\", \"Larry\", \"Sarah\"]);");
-		assertParseResult(result);
-		result = parse("var friends:Vector.<String> = new <String>[\"Bob\", \"Larry\", \"Sarah\"];");
 		assertParseResult(result);
 	}
 }

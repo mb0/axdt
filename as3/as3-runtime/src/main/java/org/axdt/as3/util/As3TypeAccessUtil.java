@@ -11,12 +11,11 @@ import java.util.Map;
 
 import org.axdt.as3.As3EFactory;
 import org.axdt.as3.model.As3Class;
-import org.axdt.avm.model.AvmType;
 import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 public class As3TypeAccessUtil {
 	private static Map<String, AvmTypeAccess> globals = Maps.newHashMap();
@@ -27,18 +26,6 @@ public class As3TypeAccessUtil {
 			globals.put(name, access);
 		}
 		return access;
-	}
-	public static AvmTypeAccess normalAccess(AvmType type) {
-		return new AvmTypeAccess.Extended(type, false, false, true, false);
-	}
-	public static AvmTypeAccess staticAccess(AvmType type) {
-		return new AvmTypeAccess.Extended(type, false, false, false, true);
-	}
-	public static AvmTypeAccess superAccess(AvmType type) {
-		return new AvmTypeAccess.Extended(type, true, false, true, false);
-	}
-	public static AvmTypeAccess thisAccess(AvmType type) {
-		return new AvmTypeAccess.Extended(type, true, true, true, false);
 	}
 	protected static As3Class getClassProxy(String typeName) {
 		As3Class proxy = As3EFactory.eINSTANCE.createAs3Class();

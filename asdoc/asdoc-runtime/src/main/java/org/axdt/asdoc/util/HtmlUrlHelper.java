@@ -27,7 +27,7 @@ public class HtmlUrlHelper extends AsdocUrlHelper {
 		return "";
 	}
 	public String packageUrl(AsdocPackage pack) {
-		if (pack.getCanonicalName().length() == 0)
+		if (pack.getCanonicalName() == null)
 			return "";
 		return pack.getCanonicalName().replace(".", "/") + "/";
 	}

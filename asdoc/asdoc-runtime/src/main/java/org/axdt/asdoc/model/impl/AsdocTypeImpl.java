@@ -18,6 +18,8 @@ import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVisibility;
+import org.axdt.avm.util.AssignabilityComputer;
+import org.axdt.avm.util.SuperTypeCollector;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -240,16 +242,10 @@ public abstract class AsdocTypeImpl extends AsdocDefinitionImpl implements Asdoc
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)
 			return null;
-		if (!(other instanceof AvmDeclaredType))
-			return other;
-		String canonicalName = getCanonicalName();
-		String otherName = other.getCanonicalName();
-		if (canonicalName == null ? otherName == null : canonicalName
-				.equals(otherName)) {
-			return this;
-		}
-		// TODO: handle inheritance
-		return null;
+		if (other instanceof AvmDeclaredType)
+			return new AssignabilityComputer(new SuperTypeCollector())
+						.commonSuperType(this, (AvmDeclaredType) other);
+		return other.calculateCommonType(this);
 	}
 
 	/**

@@ -5,7 +5,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: fragment
 Bundle-SymbolicName: org.axdt.flex4.integration;singleton:=true
 Bundle-Version: 0.0.82.qualifier
-Fragment-Host: org.axdt.flex4.sdk;bundle-version="4.0.0"
+Fragment-Host: org.axdt.sdk.flex4;bundle-version="4.0.0.14159_mpl"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,

@@ -21,24 +21,8 @@ Require-Bundle: org.eclipse.ui.ide;bundle-version="3.5.0",
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.axdt.as3.ui.internal.As3Activator
-Export-Package: org.axdt.as3.resource;
-  uses:="org.eclipse.emf.ecore.resource,
-   org.eclipse.emf.ecore,
-   org.eclipse.xtext.util,
-   org.eclipse.core.resources,
-   org.eclipse.xtext.ui.resource,
-   org.eclipse.xtext.resource,
-   org.eclipse.xtext.ui.containers",
- org.axdt.as3.ui;
-  uses:="org.eclipse.ui.plugin,
-   org.osgi.framework,
-   org.eclipse.xtext.ui,
-   org.eclipse.xtext.ui.guice,
-   com.google.inject",
- org.axdt.as3.ui.contentassist.antlr;
-  uses:="org.eclipse.xtext,
-   org.axdt.as3.services,
-   org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
-   org.eclipse.xtext.ui.editor.contentassist.antlr,
-   org.axdt.as3.ui.contentassist.antlr.internal"
+Export-Package: org.axdt.as3.resource; uses:="org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore,  org.eclipse.xtext.util,  org.eclipse.core.resources,  org.eclipse.xtext.ui.resource,  org.eclipse.xtext.resource,  org.eclipse.xtext.ui.containers",
+ org.axdt.as3.ui; uses:="org.eclipse.ui.plugin,  org.osgi.framework,  org.eclipse.xtext.ui,  org.eclipse.xtext.ui.guice,  com.google.inject",
+ org.axdt.as3.ui.contentassist.antlr; uses:="org.eclipse.xtext,  org.axdt.as3.services,  org.eclipse.xtext.ui.editor.contentassist.antlr.internal,  org.eclipse.xtext.ui.editor.contentassist.antlr,  org.axdt.as3.ui.contentassist.antlr.internal",
+ org.axdt.as3.ui.internal
 Bundle-ClassPath: .

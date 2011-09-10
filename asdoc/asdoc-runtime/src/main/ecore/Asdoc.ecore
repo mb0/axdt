@@ -38,7 +38,8 @@
     <eOperations name="createChildPackage" eType="#//AsdocPackage">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canonicalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType ../../../../org.axdt.avm.runtime/src/main/ecore/Avm.ecore#//AvmQualifiedName"
+        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//AsdocPackage" containment="true" eOpposite="#//AsdocPackage/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//AsdocPackage"

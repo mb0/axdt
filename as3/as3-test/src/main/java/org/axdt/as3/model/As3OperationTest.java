@@ -88,10 +88,10 @@ public class As3OperationTest extends AvmOperationTest {
 		pack.getDirectives().add(getFixture());
 		assertEquals("spam",getFixture().getCanonicalName());
 		pack.setCanonicalName("foo.bar");
-		assertEquals("foo.bar::spam",getFixture().getCanonicalName());
+		assertEquals("foo.bar.spam",getFixture().getCanonicalName());
 		As3Program prog = As3EFactory.eINSTANCE.createAs3Program();
 		prog.getDirectives().add(getFixture());
-		assertEquals("::spam",getFixture().getCanonicalName());
+		assertEquals(".spam",getFixture().getCanonicalName());
 	}
 	public void testGetDeclarations() {
 		assertNotNull(getFixture().getDeclarations());
@@ -103,5 +103,8 @@ public class As3OperationTest extends AvmOperationTest {
 	
 	public void testGetVisibility() {
 		assertEquals(AvmVisibility.INTERNAL, getFixture().getVisibility());
+		As3Interface interfase = As3EFactory.eINSTANCE.createAs3Interface();
+		interfase.getDirectives().add(getFixture());
+		assertEquals(AvmVisibility.PUBLIC, getFixture().getVisibility());
 	}
 } //As3OperationTest

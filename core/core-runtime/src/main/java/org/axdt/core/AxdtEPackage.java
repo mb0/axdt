@@ -454,7 +454,17 @@ public interface AxdtEPackage extends EPackage {
 	 * @see org.axdt.core.model.impl.AxdtEPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 18;
+	int LIST = 19;
+
+	/**
+	 * The meta object id for the '<em>Set</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Set
+	 * @see org.axdt.core.model.impl.AxdtEPackageImpl#getSet()
+	 * @generated
+	 */
+	int SET = 18;
 
 	/**
 	 * The meta object id for the '<em>ICommand</em>' data type.
@@ -769,6 +779,16 @@ public interface AxdtEPackage extends EPackage {
 	EDataType getList();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Set</em>'.
+	 * @see java.util.Set
+	 * @generated
+	 */
+	EDataType getSet();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.core.resources.ICommand <em>ICommand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1067,6 +1087,16 @@ public interface AxdtEPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LIST = eINSTANCE.getList();
+
+		/**
+		 * The meta object literal for the '<em>Set</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Set
+		 * @see org.axdt.core.model.impl.AxdtEPackageImpl#getSet()
+		 * @generated
+		 */
+		EDataType SET = eINSTANCE.getSet();
 
 		/**
 		 * The meta object literal for the '<em>ICommand</em>' data type.

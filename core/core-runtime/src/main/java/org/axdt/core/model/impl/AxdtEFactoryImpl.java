@@ -9,6 +9,7 @@ package org.axdt.core.model.impl;
 
 import java.util.List;
 
+import java.util.Set;
 import org.axdt.core.AxdtEFactory;
 import org.axdt.core.AxdtEPackage;
 import org.axdt.core.model.*;
@@ -110,6 +111,8 @@ public class AxdtEFactoryImpl extends EFactoryImpl implements AxdtEFactory {
 				return createIProjectFromString(eDataType, initialValue);
 			case AxdtEPackage.IPROJECT_DESCRIPTION:
 				return createIProjectDescriptionFromString(eDataType, initialValue);
+			case AxdtEPackage.SET:
+				return createSetFromString(eDataType, initialValue);
 			case AxdtEPackage.LIST:
 				return createListFromString(eDataType, initialValue);
 			default:
@@ -139,6 +142,8 @@ public class AxdtEFactoryImpl extends EFactoryImpl implements AxdtEFactory {
 				return convertIProjectToString(eDataType, instanceValue);
 			case AxdtEPackage.IPROJECT_DESCRIPTION:
 				return convertIProjectDescriptionToString(eDataType, instanceValue);
+			case AxdtEPackage.SET:
+				return convertSetToString(eDataType, instanceValue);
 			case AxdtEPackage.LIST:
 				return convertListToString(eDataType, instanceValue);
 			default:
@@ -322,6 +327,26 @@ public class AxdtEFactoryImpl extends EFactoryImpl implements AxdtEFactory {
 	 * @generated
 	 */
 	public String convertListToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Set<?> createSetFromString(EDataType eDataType, String initialValue) {
+		return (Set<?>)super.createFromString(initialValue);
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSetToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 

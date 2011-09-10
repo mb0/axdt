@@ -40,6 +40,7 @@ import org.axdt.avm.model.AvmVariable;
 import org.axdt.avm.model.AvmVisibility;
 import org.axdt.avm.model.AvmVoid;
 import org.axdt.avm.model.AvmVoidReference;
+import org.axdt.avm.naming.AvmQualifiedName;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -267,6 +268,13 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * @generated
 	 */
 	private EDataType listEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType avmQualifiedNameEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -631,6 +639,15 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getAvmQualifiedName() {
+		return avmQualifiedNameEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AvmEFactory getAvmEFactory() {
 		return (AvmEFactory)getEFactoryInstance();
 	}
@@ -718,6 +735,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		// Create data types
 		listEDataType = createEDataType(LIST);
+		avmQualifiedNameEDataType = createEDataType(AVM_QUALIFIED_NAME);
 	}
 
 	/**
@@ -752,6 +770,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		avmDefinitionEClass.getESuperTypes().add(this.getAvmIdentifiable());
 		avmPackageEClass.getESuperTypes().add(this.getAvmDefinitionContainer());
 		avmPackageEClass.getESuperTypes().add(this.getAvmDefinition());
+		avmPackageEClass.getESuperTypes().add(this.getAvmReferable());
 		avmTypeEClass.getESuperTypes().add(this.getAvmDefinition());
 		avmTypeEClass.getESuperTypes().add(this.getAvmReferable());
 		avmDeclaredElementEClass.getESuperTypes().add(this.getAvmDefinition());
@@ -791,6 +810,8 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 		addEOperation(avmDefinitionEClass, ecorePackage.getEString(), "getQualifier", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(avmDefinitionEClass, ecorePackage.getEString(), "getCanonicalName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(avmDefinitionEClass, this.getAvmQualifiedName(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(avmDefinitionContainerEClass, AvmDefinitionContainer.class, "AvmDefinitionContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -954,6 +975,7 @@ public class AvmEPackageImpl extends EPackageImpl implements AvmEPackage {
 
 		// Initialize data types
 		initEDataType(listEDataType, List.class, "List", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(avmQualifiedNameEDataType, AvmQualifiedName.class, "AvmQualifiedName", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

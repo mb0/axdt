@@ -9,44 +9,53 @@ package org.axdt.avm.scoping;
 
 import java.util.Collections;
 
+import org.axdt.avm.access.AvmContainerPackage;
 import org.axdt.avm.model.AvmDeclaredType;
+import org.axdt.avm.model.AvmPackage;
 import org.axdt.avm.model.AvmReferable;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.util.AvmTypeAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+
 import com.google.common.collect.Iterables;
 
 public abstract class AvmPropertyScope<T extends EObject> extends AvmGenericScope<T> {
 
-	public AvmPropertyScope(T element, EReference ref, AvmScopeProvider scopeProvider) {
-		super(element, ref, scopeProvider);
+	public AvmPropertyScope(IScope parent, T element, EReference ref, IScope lookup) {
+		super(parent, element, ref, lookup);
 	}
-
+	
 	@Override
-	protected Iterable<? extends AvmReferable> getCandidates() {
+	protected Iterable<IEObjectDescription> getCandidates() {
 		AvmTypeAccess access = getQualifierType();
-		Iterable<AvmReferable> dynIdent = null;
-		if (access != null && access != AvmTypeAccess.NULL) {
+		if (access == null) return Collections.emptySet();
+		Iterable<IEObjectDescription> dynDesc = null;
+		if (access instanceof AvmTypeAccess.Builder) {
+			AvmPackage pack = ((AvmTypeAccess.Builder) access).getPackage();
+			if (pack instanceof AvmContainerPackage) {
+				return ((AvmContainerPackage) pack).getChildren();
+			}
+			return Iterables.transform(Iterables.filter(pack.eContents(), AvmReferable.class), GetDesciption);
+		} else if (access != AvmTypeAccess.NULL) {
 			AvmType type = access.getType();
 			type = resolveType(type, null);
 			if (type.isDynamic()) {
-				EObject reference = getReference();
-				if (reference != null) {
-					String text = getReferenceText(reference);
-					if (text != null)
-						dynIdent = Collections.singleton(getDynamicIdentifiable(text));
-				}
+				AvmReferable dynIdent = getDynamicIdentifiable(getReference());
+				if (dynIdent != null)
+					dynDesc = Collections.singleton(GetDesciption.apply(dynIdent));
 			}
 			if (type instanceof AvmDeclaredType) {
 				AvmDeclaredType typeDec = (AvmDeclaredType) type;
-				Iterable<? extends AvmReferable> members = getAllMembers(typeDec, access);
-				if (dynIdent != null)
-					members = Iterables.concat(members, dynIdent);
+				Iterable<IEObjectDescription> members = Iterables.transform(getAllMembers(typeDec, access), GetDesciption);
+				if (dynDesc != null)
+					members = Iterables.concat(members, dynDesc);
 				return members;
 			}
 		}
-		if (dynIdent != null) return dynIdent;
+		if (dynDesc != null) return dynDesc;
 		return Collections.emptySet();
 	}
 	

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="patch">
+	<description>
+            lexer regex patch
+    </description>
+	<property name="runtimeLexer" value="src/generated/java/org/axdt/as3/parser/antlr/internal/InternalAs3Lexer.java"/>
+	<property name="uiLexer" value="../as3-ui/src/generated/java/org/axdt/as3/ui/contentassist/antlr/internal/InternalAs3Lexer.java"/>
+	<property name="replaceToken" value="            mRULE_REGEXHEAD(); "/>
+	<target name="patch" depends="check">
+		<loadfile property="replaceValue" srcFile="regexPatch.txt"/>
+		<antcall target="patchRuntime"/>
+		<antcall target="patchUi"/>
+	</target>
+	<target name="check" description="description">
+		<condition property="notFoundRuntimePatch">
+			<not>
+				<isfileselected file="${runtimeLexer}">
+					<contains text="// XXX: axdt regex patch" />
+				</isfileselected>
+			</not>
+		</condition>
+		<condition property="notFoundUiPatch">
+			<not>
+				<isfileselected file="${uiLexer}">
+					<contains text="// XXX: axdt regex patch" />
+				</isfileselected>
+			</not>
+		</condition>
+	</target>
+	<target name="patchRuntime" if="notFoundRuntimePatch">
+		<echo>Patching runtime ...</echo>
+		<replace file="${runtimeLexer}" token="${replaceToken}" value="${replaceValue}"/>
+	</target>
+	<target name="patchUi" if="notFoundUiPatch">
+		<echo>Patching ui ...</echo>
+		<replace file="${uiLexer}" token="${replaceToken}" value="${replaceValue}"/>
+	</target>
+</project>

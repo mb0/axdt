@@ -43,4 +43,5 @@ Export-Package: org.axdt.asdoc;uses:="org.eclipse.emf.ecore,org.axdt.asdoc.model
    org.eclipse.emf.common.notify.impl,
    org.axdt.asdoc.model"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.naming

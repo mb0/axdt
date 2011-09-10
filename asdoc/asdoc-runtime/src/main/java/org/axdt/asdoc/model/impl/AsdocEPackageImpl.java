@@ -311,7 +311,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsdocPackage_CanonicalName() {
+	public EAttribute getAsdocPackage_QualifiedName() {
 		return (EAttribute)asdocPackageEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -734,7 +734,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		createEReference(asdocExecutableEClass, ASDOC_EXECUTABLE__PARAMETERS);
 
 		asdocPackageEClass = createEClass(ASDOC_PACKAGE);
-		createEAttribute(asdocPackageEClass, ASDOC_PACKAGE__CANONICAL_NAME);
+		createEAttribute(asdocPackageEClass, ASDOC_PACKAGE__QUALIFIED_NAME);
 		createEReference(asdocPackageEClass, ASDOC_PACKAGE__PACKAGES);
 		createEReference(asdocPackageEClass, ASDOC_PACKAGE__PARENT);
 		createEReference(asdocPackageEClass, ASDOC_PACKAGE__TYPES);
@@ -870,7 +870,7 @@ public class AsdocEPackageImpl extends EPackageImpl implements AsdocEPackage {
 		initEReference(getAsdocExecutable_Parameters(), this.getAsdocParameter(), null, "parameters", null, 0, -1, AsdocExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(asdocPackageEClass, AsdocPackage.class, "AsdocPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAsdocPackage_CanonicalName(), ecorePackage.getEString(), "canonicalName", null, 0, 1, AsdocPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsdocPackage_QualifiedName(), theAvmEPackage.getAvmQualifiedName(), "qualifiedName", "", 0, 1, AsdocPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsdocPackage_Packages(), this.getAsdocPackage(), this.getAsdocPackage_Parent(), "packages", null, 0, -1, AsdocPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsdocPackage_Parent(), this.getAsdocPackage(), this.getAsdocPackage_Packages(), "parent", null, 0, 1, AsdocPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsdocPackage_Types(), this.getAsdocType(), null, "types", null, 0, -1, AsdocPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -7,7 +7,6 @@
  ******************************************************************************/
 package org.axdt.avm.ui.naming;
 
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 
 import com.google.inject.Inject;
@@ -16,7 +15,7 @@ import com.google.inject.name.Named;
 /**
  * @author mb0
  */
-public class AvmPrefixMatcher extends PrefixMatcher implements IQualifiedNameSupport {
+public class AvmPrefixMatcher extends PrefixMatcher {
 	public static final String DELEGATE_NAME = "org.axdt.avm.ui.naming.AvmPrefixMatcher$delegate";
 
 	@Inject
@@ -26,10 +25,10 @@ public class AvmPrefixMatcher extends PrefixMatcher implements IQualifiedNameSup
 	@Override
 	public boolean isCandidateMatchingPrefix(String name, String prefix) {
 		int index;
-		if ((index = name.indexOf(getSubDelimiter())) > -1)
+		if ((index = name.lastIndexOf(getSubDelimiter())) > -1)
 			name = name.substring(index + 1);
-		else if ((index = name.indexOf(getDelimiter())) > -1)
-			name = name.substring(index + 2);
+		else if ((index = name.lastIndexOf(getDelimiter())) > -1)
+			name = name.substring(index + 1);
 		return delegate.isCandidateMatchingPrefix(name, prefix);
 	}
 
@@ -42,14 +41,10 @@ public class AvmPrefixMatcher extends PrefixMatcher implements IQualifiedNameSup
 	}
 
 	public String getDelimiter() {
-		return "::";
+		return ".";
 	}
 	
 	public char getSubDelimiter() {
 		return '#';
-	}
-
-	public String getWildCard() {
-		return "*";
 	}
 }

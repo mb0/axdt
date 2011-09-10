@@ -128,10 +128,10 @@ public class AsdocRootTest extends AsdocPackageTest {
 	}
 	@Override
 	public void testGetName() {
-		assertEquals("", getFixture().getName());
+		assertEquals(null, getFixture().getName());
 	}
 	@Override
-	public void testGetCanonicalName() {
-		assertEquals("", getFixture().getCanonicalName());
+	public void testGetQualifiedName() {
+		assertNull(getFixture().getQualifiedName());
 	}
 } //AsdocRootTest

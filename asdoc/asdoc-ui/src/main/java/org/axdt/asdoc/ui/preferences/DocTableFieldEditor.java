@@ -48,7 +48,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 public class DocTableFieldEditor extends FieldEditor {
 

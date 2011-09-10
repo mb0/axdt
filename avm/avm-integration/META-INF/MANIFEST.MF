@@ -4,12 +4,14 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.axdt.avm.integration;singleton:=true
 Bundle-Version: 0.0.81.qualifier
 Bundle-Vendor: %providerName
-Require-Bundle: org.axdt.core.runtime,
- org.axdt.avm.runtime;visibility:=reexport,
- org.eclipse.xtext
+Require-Bundle: org.axdt.avm.runtime;visibility:=reexport,
+ org.eclipse.xtext,
+ org.axdt.core.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.avm.access,
  org.axdt.avm.naming,
- org.axdt.avm.scoping,
- org.axdt.avm.util
+ org.axdt.avm.scoping
+Import-Package: org.apache.log4j,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime

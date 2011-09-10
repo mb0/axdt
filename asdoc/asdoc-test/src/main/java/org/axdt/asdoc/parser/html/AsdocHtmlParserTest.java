@@ -100,19 +100,19 @@ public class AsdocHtmlParserTest extends AsdocParserTest {
 		CollectTypeInfo parser = new CollectTypeInfo();
 		assertEquals(null, parser.parseTypeName(null, null));
 		assertEquals(null, parser.parseTypeName("     ", null));
-		assertEquals("flash.events::EventDispatcher", parser.parseTypeName(
+		assertEquals("flash.events.EventDispatcher", parser.parseTypeName(
 				" flash.events.EventDispatcher ", null
 		));
 		assertEquals("Object", parser.parseTypeName(
 				" Object ", null
 		));
-		assertEquals("asunit.framework::Test", parser.parseTypeName(
+		assertEquals("asunit.framework.Test", parser.parseTypeName(
 				" Test.html ", "asunit.framework"
 		));
-		assertEquals("asunit.framework::Test", parser.parseTypeName(
+		assertEquals("asunit.framework.Test", parser.parseTypeName(
 				" ../framework/Test.html ", "asunit.textui"
 		));
-		assertEquals("asunit.framework::Test", parser.parseTypeName(
+		assertEquals("asunit.framework.Test", parser.parseTypeName(
 				" ../../asunit/framework/Test.html ", "asunit.textui"
 		));
 		assertEquals("Object", parser.parseTypeName(

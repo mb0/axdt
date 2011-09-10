@@ -13,7 +13,10 @@ import junit.textui.TestRunner;
 
 import org.axdt.as3.formatting.As3FormatterTest;
 import org.axdt.as3.model.As3ETests;
+import org.axdt.as3.parser.antlr.As3ParserExpressionTest;
+import org.axdt.as3.parser.antlr.As3ParserStatementTest;
 import org.axdt.as3.parser.antlr.As3ParserTest;
+import org.axdt.as3.scoping.As3ScopeProviderTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,9 +43,10 @@ public class As3AllTests extends TestSuite {
 		TestSuite suite = new As3AllTests("As3 Tests");
 		suite.addTest(As3ETests.suite());
 		suite.addTestSuite(As3FormatterTest.class);
+		suite.addTestSuite(As3ParserExpressionTest.class);
+		suite.addTestSuite(As3ParserStatementTest.class);
 		suite.addTestSuite(As3ParserTest.class);
-		// TODO add scope and scope provider tests
-		// suite.addTestSuite(As3ScopeTest.class);
+		suite.addTestSuite(As3ScopeProviderTest.class);
 		return suite;
 	}
 

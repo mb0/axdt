@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.axdt.avm.AvmEFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ import org.axdt.avm.AvmEFactory;
  *   <li>{@link org.axdt.avm.model.AvmType#calculateCommonType(org.axdt.avm.model.AvmType) <em>Calculate Common Type</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifier() <em>Get Qualifier</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmDefinition#getCanonicalName() <em>Get Canonical Name</em>}</li>
+ *   <li>{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}</li>
  *   <li>{@link org.axdt.avm.model.AvmIdentifiable#getName() <em>Get Name</em>}</li>
  * </ul>
  * </p>
@@ -152,7 +154,7 @@ public class AvmGenericTest extends TestCase {
 	public void testCalculateCommonType__AvmType() {
 		assertNull(getFixture().calculateCommonType(null));
 		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
-		assertEquals(nul, getFixture().calculateCommonType(nul));
+		assertEquals(getFixture(), getFixture().calculateCommonType(nul));
 		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
 		assertEquals(voi, getFixture().calculateCommonType(voi));
 		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
@@ -187,6 +189,18 @@ public class AvmGenericTest extends TestCase {
 	 */
 	public void testGetCanonicalName() {
 		assertEquals("*", getFixture().getCanonicalName());
+	}
+
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDefinition#getQualifiedName()
+	 */
+	public void testGetQualifiedName() {
+		// TODO this is also the wildcard sign
+		/// we might run in trouble here
+		assertEquals(QualifiedName.create("*"), getFixture().getQualifiedName());
 	}
 
 } //AvmGenericTest

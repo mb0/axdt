@@ -15,6 +15,7 @@ import org.axdt.avm.model.AvmGeneric;
 import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVoid;
+import org.axdt.avm.naming.AvmQualifiedName;
 
 import com.google.common.collect.Iterators;
 
@@ -140,7 +141,7 @@ public abstract class AsdocTypeTest extends AsdocDefinitionTest {
 	public void testCalculateCommonType__AvmType() {
 		assertNull(getFixture().calculateCommonType(null));
 		AvmNull nul = AvmEFactory.eINSTANCE.createAvmNull();
-		assertEquals(nul, getFixture().calculateCommonType(nul));
+		assertEquals(getFixture(), getFixture().calculateCommonType(nul));
 		AvmVoid voi = AvmEFactory.eINSTANCE.createAvmVoid();
 		assertEquals(voi, getFixture().calculateCommonType(voi));
 		AvmGeneric generic = AvmEFactory.eINSTANCE.createAvmGeneric();
@@ -172,7 +173,7 @@ public abstract class AsdocTypeTest extends AsdocDefinitionTest {
 	public void testGetQualifier() {
 		assertNull(getFixture().getQualifier());
 		AsdocPackage pack = AsdocEFactory.eINSTANCE.createAsdocPackage();
-		pack.setCanonicalName("foo.bar");
+		pack.setQualifiedName(AvmQualifiedName.create("foo","bar"));
 		pack.getTypes().add(getFixture());
 		assertEquals("foo.bar", getFixture().getQualifier());
 	}
@@ -183,7 +184,7 @@ public abstract class AsdocTypeTest extends AsdocDefinitionTest {
 		AsdocPackage pack = AsdocEFactory.eINSTANCE.createAsdocPackage();
 		pack.getTypes().add(getFixture());
 		assertEquals("spam",getFixture().getCanonicalName());
-		pack.setCanonicalName("foo.bar");
-		assertEquals("foo.bar::spam", getFixture().getCanonicalName());
+		pack.setQualifiedName(AvmQualifiedName.create("foo","bar"));
+		assertEquals("foo.bar.spam", getFixture().getCanonicalName());
 	}
 } //AsdocTypeTest

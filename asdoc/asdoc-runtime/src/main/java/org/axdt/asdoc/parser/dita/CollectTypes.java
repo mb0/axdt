@@ -340,7 +340,10 @@ public class CollectTypes extends AbstractCollector {
 			result = asFactory.createAsdocField();
 			result.setConstant(!xml.is(valIsProp, detail));
 		}
-		result.setName(parseBasic(node, result));
+		String name = parseBasic(node, result);
+		if (name == null || name.length() < 1 || name.charAt(0) == '-')
+			return null;
+		result.setName(name);
 		result.setType(getTypeRef(xml.text(valType, detail)));
 		result.setVisibility(getVisibility(xml.text(accessExpr, detail)));
 		result.setStatic(xml.is(staticExpr, detail));

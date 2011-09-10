@@ -12,7 +12,8 @@ import java.net.URI;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
-import org.axdt.asdoc.model.AsdocDefinition;
+import org.axdt.asdoc.model.AsdocElement;
+import org.axdt.asdoc.model.AsdocPackage;
 import org.axdt.asdoc.model.AsdocRoot;
 import org.axdt.asdoc.model.ParseType;
 import org.axdt.asdoc.util.AsdocUrlHelper;
@@ -26,7 +27,7 @@ public class AsdocHyperlink extends AbstractHyperlink {
 	
 	private static final Logger logger = Logger.getLogger(AsdocHyperlink.class);
 	
-	private AsdocDefinition asdocDefinition; 
+	private AsdocElement asdocElement; 
 
 	public void open() {
 		IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
@@ -34,20 +35,20 @@ public class AsdocHyperlink extends AbstractHyperlink {
 					| IWorkbenchBrowserSupport.LOCATION_BAR
 					| IWorkbenchBrowserSupport.AS_EDITOR;
 		try {
-			AsdocRoot root = asdocDefinition.getRoot();
+			AsdocRoot root = asdocElement.getRoot();
 			String base = null;
 			AsdocUrlHelper urlHelper = ParseType.HTML.getUrlHelper();
 			ParseType parseType = root.getParseType();
 			if (ParseType.DITA.equals(parseType)) {
-				// TODO add asdoc html url
 				base = root.getAsdoc();
 			} else if (ParseType.HTML.equals(parseType)) {
 				base = root.getBaseUri();
 			}
 			if (base != null) { 
-				String name = asdocDefinition.getCanonicalName();
-				// TODO resolve url form element
-				String fullUri =  base + urlHelper.url(asdocDefinition);
+				String name = asdocElement.getName();
+				String fullUri =  base + urlHelper.url(asdocElement);
+				if (asdocElement instanceof AsdocPackage)
+					fullUri += "package-detail.html";
 				IWebBrowser browser = browserSupport.createBrowser(style, name, name, name);
 				URL url = URI.create(fullUri).toURL();
 				browser.openURL(url);
@@ -59,10 +60,10 @@ public class AsdocHyperlink extends AbstractHyperlink {
 		}
 	}
 
-	public void setDefinition(AsdocDefinition element) {
-		this.asdocDefinition = element;
+	public void setElement(AsdocElement element) {
+		this.asdocElement = element;
 	}
-	public AsdocDefinition getDefinition() {
-		return asdocDefinition;
+	public AsdocElement getElement() {
+		return asdocElement;
 	}
 }

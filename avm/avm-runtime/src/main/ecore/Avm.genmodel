@@ -6,7 +6,7 @@
     editorDirectory="/org.axdt.avm.editor/src" modelPluginID="org.axdt.avm.runtime"
     modelName="Avm" editPluginClass="org.axdt.avm.ui.AvmUiActivator" editorPluginClass=""
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.axdt.avm.test/src/main/java"
-    testSuiteClass="org.axdt.avm.AvmAllTests" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
+    testSuiteClass="" booleanFlagsField="flags" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.axdt.avm.ui" editorPluginID="org.axdt.avm.editor"
     testsPluginID="org.axdt.avm.test" language="">
   <foreignModel>Avm.ecore</foreignModel>
@@ -23,12 +23,14 @@
     <genDataTypes ecoreDataType="Avm.ecore#//List">
       <genTypeParameters ecoreTypeParameter="Avm.ecore#//List/E"/>
     </genDataTypes>
+    <genDataTypes ecoreDataType="Avm.ecore#//QualifiedName"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmIdentifiable">
       <genOperations ecoreOperation="Avm.ecore#//AvmIdentifiable/getName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmDefinition">
       <genOperations ecoreOperation="Avm.ecore#//AvmDefinition/getQualifier"/>
       <genOperations ecoreOperation="Avm.ecore#//AvmDefinition/getCanonicalName"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmDefinition/getQualifiedName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmDefinitionContainer">
       <genOperations ecoreOperation="Avm.ecore#//AvmDefinitionContainer/getTypes">
@@ -44,6 +46,9 @@
       <genOperations ecoreOperation="Avm.ecore#//AvmType/isFinal"/>
       <genOperations ecoreOperation="Avm.ecore#//AvmType/isInterface"/>
       <genOperations ecoreOperation="Avm.ecore#//AvmType/isClass"/>
+      <genOperations ecoreOperation="Avm.ecore#//AvmType/calculateCommonType">
+        <genParameters ecoreParameter="Avm.ecore#//AvmType/calculateCommonType/other"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmTypeReference">
       <genOperations ecoreOperation="Avm.ecore#//AvmTypeReference/getType"/>
@@ -109,6 +114,7 @@
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmGenericReference"/>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmDeclaredTypeReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Avm.ecore#//AvmDeclaredTypeReference/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Avm.ecore#//AvmDeclaredTypeReference/parameter"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Avm.ecore#//AvmReferable"/>
   </genPackages>

@@ -8,54 +8,57 @@
 package org.axdt.as3.ui;
 
 import org.axdt.as3.config.IFormattingConfig;
-import org.axdt.as3.resource.As3LocationInFileProvider;
 import org.axdt.as3.resource.As3ProjectsStateHelper;
 import org.axdt.as3.resource.AvmResourceSetProvider;
-import org.axdt.as3.ui.autoedit.As3AutoEditStrategy;
+import org.axdt.as3.ui.autoedit.As3AutoEditStrategyProvider;
 import org.axdt.as3.ui.coloring.As3HighlightingConfiguration;
 import org.axdt.as3.ui.coloring.As3TokenToAttributeIdMapper;
 import org.axdt.as3.ui.folding.As3FoldingRegionProvider;
 import org.axdt.as3.ui.folding.As3FoldingStructureProvider;
-import org.axdt.as3.ui.matching.As3BracketMatcher;
+import org.axdt.as3.ui.hover.As3DocumentationProvider;
+import org.axdt.as3.ui.hover.As3TextHover;
 import org.axdt.as3.ui.preferences.As3EditorPreferences;
 import org.axdt.as3.ui.preferences.As3FormattingPreferences;
 import org.axdt.as3.ui.templates.As3CrossReferenceTemplateVariableResolver;
 import org.axdt.as3.ui.templates.As3TemplateProposalProvider;
 import org.axdt.as3.ui.wizards.As3ProjectCreator;
-import org.axdt.asdoc.access.AsdocDefinitionProviderFactory;
+import org.axdt.asdoc.access.AsdocResourceFactoryProvider;
 import org.axdt.asdoc.access.AsdocRootProvider;
 import org.axdt.asdoc.access.IDocRootProvider;
-import org.axdt.asdoc.scoping.AsdocDefinitionScopeProvider;
+import org.axdt.asdoc.scoping.AsdocLibraryScopeProvider;
 import org.axdt.asdoc.ui.hyperlink.AsdocAwareHyperlinkHelper;
 import org.axdt.asdoc.ui.preferences.AsdocPreferences;
 import org.axdt.asdoc.ui.proposal.AsdocProposalProvider;
-import org.axdt.avm.access.AxdtProjectProvider;
-import org.axdt.avm.access.IAxdtProjectProvider;
-import org.axdt.avm.access.IDefinitionProvider;
-import org.axdt.avm.scoping.AbstractDefinitionScopeProvider;
+import org.axdt.avm.access.AvmResourceFactory;
+import org.axdt.avm.naming.AvmQualifiedNameConverter;
 import org.axdt.avm.scoping.AvmAwareGlobalScopeProvider;
+import org.axdt.avm.scoping.AvmLibraryScopeProvider;
 import org.axdt.avm.ui.naming.AvmPrefixMatcher;
 import org.axdt.avm.ui.proposal.IAvmProposalProvider;
 import org.axdt.core.ui.img.AxdtImageHelper;
 import org.axdt.core.ui.preferences.CorePreferences;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
-import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
+import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
@@ -87,11 +90,8 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public IDocRootProvider bindDocRootProviderToInstance() {
 		return AsdocRootProvider.getInstance();
 	}
-	public Class<? extends IAxdtProjectProvider> bindIAxdtProjectProvider() {
-		return AxdtProjectProvider.class;
-	}
-	public Class<? extends IDefinitionProvider.Factory> bindIDefinitionProvider$Factory() {
-		return AsdocDefinitionProviderFactory.class;
+	public Class<? extends AvmResourceFactory.Provider> bindAvmResourceFactory$Provider() {
+		return AsdocResourceFactoryProvider.class;
 	}
 	public Class<? extends IProjectCreator> bindIProjectCreator() {
 		return As3ProjectCreator.class;
@@ -99,8 +99,8 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
 		return As3FoldingRegionProvider.class;
 	}
-	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
-		return As3AutoEditStrategy.class;
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return As3AutoEditStrategyProvider.class;
 	}
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return As3HighlightingConfiguration.class;
@@ -108,15 +108,9 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return As3TokenToAttributeIdMapper.class;
 	}
-	public Class<? extends IBracketMatcher> bindIBracketMatcher() {
-		return As3BracketMatcher.class;
-	}
 	@Override
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return As3ImageHelper.class;
-	}
-	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
-		return As3LocationInFileProvider.class;
 	}
 	@Override
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
@@ -128,8 +122,8 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return AsdocAwareHyperlinkHelper.class;
 	}
-	public Class<? extends AbstractDefinitionScopeProvider> bindAbstractAvmScopeProvider() {
-		return AsdocDefinitionScopeProvider.class;
+	public Class<? extends AvmLibraryScopeProvider> bindAvmLibraryScopeProvider() {
+		return AsdocLibraryScopeProvider.class;
 	}
 	public Class<? extends IAvmProposalProvider> bindIAvmProposalProvider() {
 		return AsdocProposalProvider.class;
@@ -138,8 +132,8 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
 		return AvmPrefixMatcher.class;
 	}
-	public Class<? extends IQualifiedNameSupport> bindIQualifiedNameSupport() {
-		return AvmPrefixMatcher.class;
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameSupport() {
+		return AvmQualifiedNameConverter.class;
 	}
 	public void configureAvmPrefixMatcher_delegate(Binder binder) {
 		binder.bind(PrefixMatcher.class)
@@ -164,6 +158,22 @@ public class As3UiModule extends org.axdt.as3.ui.AbstractAs3UiModule {
 	}
 	public Class<? extends XtextSourceViewerConfiguration> bindXtextSourceViewerConfiguration() {
 		return As3SourceViewerConfiguration.class;
+	}
+	public Class<? extends IAnnotationHover> bindIAnnotationHover () {
+		return ProblemAnnotationHover.class;
+	}
+	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper () {
+		return As3TokenTypeToPartitionMapper.class;
+	}
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return As3DocumentationProvider.class;
+	}
+
+	public Class<? extends IEObjectHover> bindIEObjectHover() {
+		return As3TextHover.class;
+	}
+	public Class<? extends DispatchingEObjectTextHover> bindDispatchingEObjectTextHover() {
+		return As3TextHover.class;
 	}
 }
 class As3ImageHelper implements IImageHelper {

@@ -115,17 +115,21 @@ public class AxdtProjectSourceTest extends AxdtProjectTest {
 	 * @see org.axdt.core.model.AxdtProject#getDefaultPackageRoot()
 	 */
 	public void testGetDefaultPackageRoot() {
-		assertNull(getFixture().getDefaultPackageRoot());
-		IProject iProject = getIProject("bar");
-		getFixture().setProject(iProject);
-		// if we have no configuration use the project root
-		AxdtPackageRoot root = getFixture().getDefaultPackageRoot();
-		assertEquals(iProject, root.getResource());
-		MockCoreConfigProvider.install();
-		root = getFixture().getDefaultPackageRoot();
-		assertNotNull(root);
-		assertEquals("/bar/src", root.getPath().toString());
-		MockCoreConfigProvider.uninstall();
+		MockCoreConfigProvider.install(true);
+		try {
+			assertNull(getFixture().getDefaultPackageRoot());
+			IProject iProject = getIProject("bar");
+			getFixture().setProject(iProject);
+			// if we have no configuration, use the project root
+			AxdtPackageRoot root = getFixture().getDefaultPackageRoot();
+			assertEquals(iProject, root.getResource());
+			MockCoreConfigProvider.reinstall(false);
+			root = getFixture().getDefaultPackageRoot();
+			assertNotNull(root);
+			assertEquals("/bar/src", root.getPath().toString());
+		} finally {
+			MockCoreConfigProvider.uninstall();
+		}
 	}
 
 	/**
@@ -135,15 +139,19 @@ public class AxdtProjectSourceTest extends AxdtProjectTest {
 	 * @see org.axdt.core.model.AxdtProject#getConfiguredSourcePaths()
 	 */
 	public void testGetConfiguredSourcePaths() {
-		assertNull(getFixture().getConfiguredSourcePaths());
-		getFixture().setProject(getIProject("bar"));
-		assertTrue(getFixture().getConfiguredSourcePaths().isEmpty());
-		MockCoreConfigProvider.install();
-		List<IPath> paths = getFixture().getConfiguredSourcePaths();
-		assertEquals(2, getFixture().getConfiguredSourcePaths().size());
-		assertEquals("/bar/src", paths.get(0).toString());
-		assertEquals("/bar/test", paths.get(1).toString());
-		MockCoreConfigProvider.uninstall();
+		MockCoreConfigProvider.install(true);
+		try {
+			assertNull(getFixture().getConfiguredSourcePaths());
+			getFixture().setProject(getIProject("bar"));
+			assertTrue(getFixture().getConfiguredSourcePaths().isEmpty());
+			MockCoreConfigProvider.reinstall(false);
+			List<IPath> paths = getFixture().getConfiguredSourcePaths();
+			assertEquals(2, getFixture().getConfiguredSourcePaths().size());
+			assertEquals("/bar/src", paths.get(0).toString());
+			assertEquals("/bar/test", paths.get(1).toString());
+		} finally {
+			MockCoreConfigProvider.uninstall();
+		}
 	}
 
 	/**
@@ -188,18 +196,22 @@ public class AxdtProjectSourceTest extends AxdtProjectTest {
 	 * @see org.axdt.core.model.AxdtProject#getPackageRoots()
 	 */
 	public void testGetPackageRoots() {
-		assertNull(getFixture().getPackageRoots());
-		IProject iProject = getIProject("bar");
-		getFixture().setProject(iProject);
-		List<AxdtPackageRoot> roots = getFixture().getPackageRoots();
-		assertEquals(1, roots.size());
-		assertEquals(iProject, roots.get(0).getResource());
-		MockCoreConfigProvider.install();
-		roots = getFixture().getPackageRoots();
-		assertEquals(2, roots.size());
-		assertEquals("/bar/src", roots.get(0).getPath().toString());
-		assertEquals("/bar/test", roots.get(1).getPath().toString());
-		MockCoreConfigProvider.uninstall();
+		MockCoreConfigProvider.install(true);
+		try {
+			assertNull(getFixture().getPackageRoots());
+			IProject iProject = getIProject("bar");
+			getFixture().setProject(iProject);
+			List<AxdtPackageRoot> roots = getFixture().getPackageRoots();
+			assertEquals(1, roots.size());
+			assertEquals(iProject, roots.get(0).getResource());
+			MockCoreConfigProvider.reinstall(false);
+			roots = getFixture().getPackageRoots();
+			assertEquals(2, roots.size());
+			assertEquals("/bar/src", roots.get(0).getPath().toString());
+			assertEquals("/bar/test", roots.get(1).getPath().toString());
+		} finally {
+			MockCoreConfigProvider.uninstall();
+		}
 	}
 	@Override
 	public void testGetParent() {

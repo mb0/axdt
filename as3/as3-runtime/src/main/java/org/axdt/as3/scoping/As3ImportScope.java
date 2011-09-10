@@ -7,81 +7,100 @@
  ******************************************************************************/
 package org.axdt.as3.scoping;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Lists.newArrayList;
 
-import java.util.Set;
+import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.scoping.impl.ImportScope;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 
-public class As3ImportScope extends AbstractScope {
+public class As3ImportScope extends ImportScope {
 
-	private final IScope parent;
-	private final IScope localElements;
-	private final Set<As3ImportNormalizer> normalizers;
-
-	public As3ImportScope(IScope parent, IScope localElements, Set<As3ImportNormalizer> normalizers) {
-		this.parent = parent;
-		this.localElements = localElements;
-		this.normalizers = normalizers;
+	protected List<ImportNormalizer> normalizers;
+	protected final EClass type;
+	
+	public As3ImportScope(List<ImportNormalizer> namespaceResolvers,
+			IScope parent, ISelectable importFrom, EClass type,
+			boolean ignoreCase) {
+		super(namespaceResolvers, parent, importFrom, type, ignoreCase);
+		this.type = type;
 	}
 
 	@Override
-	public IEObjectDescription getContentByName(String name) {
-		boolean isQualified = name.indexOf("::")>=0;
-		if (isQualified)
-			return getOuterScope().getContentByName(name);
-		for (As3ImportNormalizer normalizer : normalizers) {
-			String shortToLongName = normalizer.shortToLongName(name);
-			if (shortToLongName != null) {
-				IEObjectDescription element = localElements.getContentByName(shortToLongName);
-				if (element != null)
-					return new AliasedEObjectDescription(name, element);
-			}
-		}
-		return getOuterScope().getContentByName(name);
+	protected List<ImportNormalizer> removeDuplicates(
+			List<ImportNormalizer> namespaceResolvers) {
+		normalizers = super.removeDuplicates(namespaceResolvers);
+		return normalizers;
 	}
 
 	@Override
-	public IEObjectDescription getContentByEObject(EObject object) {
-		IEObjectDescription candidate = localElements.getContentByEObject(object);
-		if (candidate != null)
-			for (As3ImportNormalizer normalizer : normalizers) {
-				String longToShortName = normalizer.longToShortName(candidate.getQualifiedName());
-				if (longToShortName != null) {
-					IEObjectDescription element = getContentByName(longToShortName);
-					if (element != null && element.getEObjectOrProxy() == object)
-						return new AliasedEObjectDescription(longToShortName, candidate);
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		List<IEObjectDescription> result = newArrayList();
+		ImportNormalizer foundForNormalizer = null;
+		ISelectable importFrom = getImportFrom();
+		for (ImportNormalizer normalizer : normalizers) {
+			final QualifiedName resolvedName = normalizer.resolve(name);
+			if (resolvedName != null) {
+				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName,
+						isIgnoreCase());
+				for (IEObjectDescription resolvedElement : resolvedElements) {
+					if (foundForNormalizer == null)
+						foundForNormalizer = normalizer;
+					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
+					if (alias == null)
+						throw new IllegalStateException("Couldn't deresolve " + resolvedElement.getName()
+								+ " with import " + normalizer);
+					final AliasedEObjectDescription aliasedEObjectDescription = new AliasedEObjectDescription(alias,
+							resolvedElement);
+					result.add(aliasedEObjectDescription);
 				}
 			}
-		return getOuterScope().getContentByEObject(object);
+		}
+		return result;
 	}
-
+	
 	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		return filter(transform(localElements.getAllContents(),
-				new Function<IEObjectDescription, IEObjectDescription>() {
-					public IEObjectDescription apply(final IEObjectDescription input) {
-						for (As3ImportNormalizer normalizer : normalizers) {
-							final String newName = normalizer.longToShortName(input.getName());
-							if (newName != null) {
-								return new AliasedEObjectDescription(newName, input);
-							}
-						}
-						return null;
+	protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
+		Multimap<QualifiedName, IEObjectDescription> keyToDescription = LinkedHashMultimap.create();
+		Multimap<QualifiedName, ImportNormalizer> keyToNormalizer = HashMultimap.create();
+
+		for (IEObjectDescription imported : candidates) {
+			QualifiedName fullyQualifiedName = imported.getName();
+			for (ImportNormalizer normalizer : normalizers) {
+				QualifiedName alias = normalizer.deresolve(fullyQualifiedName);
+				// XXX: dont use relative namespaces
+				if (alias != null && alias.getSegmentCount() == 1) {
+					QualifiedName key = alias;
+					if (isIgnoreCase()) {
+						key = key.toLowerCase();
 					}
-				}), Predicates.notNull());
+					keyToDescription.put(key, new AliasedEObjectDescription(alias, imported));
+					keyToNormalizer.put(key, normalizer);
+				}
+			}
+		}
+		for (QualifiedName name : keyToNormalizer.keySet()) {
+			if (keyToNormalizer.get(name).size() > 1)
+				keyToDescription.removeAll(name);
+		}
+		return keyToDescription.values();
 	}
-
-	public IScope getOuterScope() {
-		return parent;
+	
+	protected boolean isShadowed(IEObjectDescription input) {
+		QualifiedName name = input.getName();
+		int count = name.getSegmentCount();
+		if (count < 1 || count > 1)
+			return false;
+		return getLocalElementsByName(name).iterator().hasNext();
 	}
-
 }

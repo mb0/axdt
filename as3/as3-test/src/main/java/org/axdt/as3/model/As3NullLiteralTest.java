@@ -10,7 +10,7 @@ package org.axdt.as3.model;
 import junit.textui.TestRunner;
 
 import org.axdt.as3.As3EFactory;
-import org.axdt.avm.model.AvmVoid;
+import org.axdt.avm.model.AvmNull;
 import org.axdt.avm.util.AvmTypeAccess;
 
 /**
@@ -83,7 +83,7 @@ public class As3NullLiteralTest extends IExpressionTest {
 		// uses a static value and no type proxy
 		AvmTypeAccess type = getFixture().resolveType();
 		assertNotNull(type);
-		assertTrue(type.getType() instanceof AvmVoid);
+		assertTrue(type.getType() instanceof AvmNull);
 	}
 
 } //As3NullLiteralTest

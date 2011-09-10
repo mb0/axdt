@@ -35,7 +35,7 @@ public class Flex4Preferences extends AbstractPreferences {
 	}
 
 	public String getQualifier() {
-		return "org.axdt.flex4.sdk";
+		return "org.axdt.sdk.flex4";
 	}
 
 	public URL getDefaultConfig() {

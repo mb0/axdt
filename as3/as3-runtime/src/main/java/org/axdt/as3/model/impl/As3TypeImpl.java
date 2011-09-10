@@ -19,6 +19,8 @@ import org.axdt.avm.model.AvmDeclaredType;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmTypeReference;
 import org.axdt.avm.model.AvmVisibility;
+import org.axdt.avm.util.AssignabilityComputer;
+import org.axdt.avm.util.SuperTypeCollector;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -112,7 +114,8 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	 */
 	public List<AvmTypeReference> getSuperTypes() {
 		List<AvmTypeReference> result = Lists.newArrayList();
-		if (getExtendedClass() != null) result.add(getExtendedClass());
+		if (getExtendedClass() != null)
+			result.add(getExtendedClass());
 		result.addAll(getExtendedInterfaces());
 		return result;
 	}
@@ -141,7 +144,7 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	 */
 	public boolean isDynamic() {
 		As3Attributes attris = getAttributes();
-		return attris != null ? attris.isFinal() : false;
+		return attris != null ? attris.isDynamic() : false;
 	}
 
 	/**
@@ -176,16 +179,10 @@ public abstract class As3TypeImpl extends As3DefinitionImpl implements As3Type {
 	public AvmType calculateCommonType(AvmType other) {
 		if (other == null)
 			return null;
-		if (!(other instanceof AvmDeclaredType))
-			return other;
-		String canonicalName = getCanonicalName();
-		String otherName = other.getCanonicalName();
-		if (canonicalName == null ? otherName == null : canonicalName
-				.equals(otherName)) {
-			return this;
-		}
-		// TODO: handle inheritance
-		return null;
+		if (other instanceof AvmDeclaredType)
+			return new AssignabilityComputer(new SuperTypeCollector())
+						.commonSuperType(this, (AvmDeclaredType) other);
+		return other.calculateCommonType(this);
 	}
 
 	/**

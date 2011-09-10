@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.osgi.framework.Bundle;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 public class AsdocPreferences extends AbstractPreferences {
 	
@@ -158,7 +158,7 @@ public class AsdocPreferences extends AbstractPreferences {
 
 	public URL getFrameworksLocaleUrl() {
 		try {
-			Bundle bundle = Platform.getBundle("org.axdt.flex4.sdk");
+			Bundle bundle = Platform.getBundle("org.axdt.sdk.flex4");
 			URL[] urls = FileLocator.findEntries(bundle, new Path(
 					"flexsdk/frameworks/locale/"));
 			return FileLocator.resolve(urls[0]);

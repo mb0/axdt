@@ -10,16 +10,17 @@ package org.axdt.as3.model.impl;
 import org.axdt.as3.As3EPackage;
 import org.axdt.as3.model.As3Attributes;
 import org.axdt.as3.model.As3Definition;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.axdt.as3.model.As3Package;
 import org.axdt.avm.model.AvmDefinition;
 import org.axdt.avm.model.AvmType;
 import org.axdt.avm.model.AvmVisibility;
+import org.axdt.avm.naming.AvmQualifiedName;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -149,7 +150,11 @@ public abstract class As3DefinitionImpl extends As3IdentifiableImpl implements A
 
 	public AvmVisibility getVisibility() {
 		As3Attributes attris = getAttributes();
-		return attris != null ? attris.getVisibility() : AvmVisibility.INTERNAL;
+		return attris != null ? attris.getVisibility() : getDefaultVisibility();
+	}
+	
+	protected AvmVisibility getDefaultVisibility() {
+		return AvmVisibility.INTERNAL;
 	}
 
 	public String getQualifier() {
@@ -167,15 +172,24 @@ public abstract class As3DefinitionImpl extends As3IdentifiableImpl implements A
 		EObject container = getQualifyingParent();
 		String qualifier = getQualifier();
 		if (qualifier != null) {
-			if (container instanceof As3Package)
-				qualifier += "::";
-			else if (container instanceof AvmType)
-				qualifier += "#";
+			if (container instanceof AvmType)
+				qualifier += '#';
 			else qualifier += '.';
 			return qualifier + getName(); 
 		}
 		return container == null || container instanceof As3Package
-				? getName() : "::"+getName();
+				? getName() : "."+getName();
+	}
+	
+	public AvmQualifiedName getQualifiedName() {
+		if (name == null) return null;
+		EObject container = getQualifyingParent();
+		if (container instanceof AvmDefinition) {
+			AvmQualifiedName qname = ((AvmDefinition) container).getQualifiedName();
+			if (qname != null)
+				return qname.append(name);
+		}
+		return AvmQualifiedName.create(name);
 	}
 
 	/**

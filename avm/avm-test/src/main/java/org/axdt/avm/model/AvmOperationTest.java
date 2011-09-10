@@ -168,4 +168,14 @@ public abstract class AvmOperationTest extends AvmMemberTest {
 		super.testGetCanonicalName();
 	}
 
+	/**
+	 * Tests the '{@link org.axdt.avm.model.AvmDefinition#getQualifiedName() <em>Get Qualified Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.axdt.avm.model.AvmDefinition#getQualifiedName()
+	 */
+	public void testGetQualifiedName() {
+		assertNull(getFixture().getQualifiedName());
+	}
+
 } //AvmOperationTest

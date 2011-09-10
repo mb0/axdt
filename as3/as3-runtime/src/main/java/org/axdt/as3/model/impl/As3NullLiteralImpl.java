@@ -43,6 +43,6 @@ public class As3NullLiteralImpl extends IExpressionImpl implements As3NullLitera
 
 	@Override
 	public AvmTypeAccess resolveType() {
-		return AvmTypeAccess.VOID;
+		return AvmTypeAccess.NULL;
 	}
 } //As3NullLiteralImpl

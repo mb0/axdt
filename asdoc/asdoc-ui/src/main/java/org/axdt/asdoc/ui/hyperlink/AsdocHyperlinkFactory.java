@@ -7,7 +7,7 @@
  ******************************************************************************/
 package org.axdt.asdoc.ui.hyperlink;
 
-import org.axdt.asdoc.model.AsdocDefinition;
+import org.axdt.asdoc.model.AsdocElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
@@ -21,16 +21,15 @@ public class AsdocHyperlinkFactory {
 	private Provider<AsdocHyperlink> asdocHyperlinkProvider;
 
 	public boolean canHandle(EObject to) {
-		return to instanceof AsdocDefinition;
+		return to instanceof AsdocElement;
 	}
 
 	public void createHyperlink(Region region, EObject to, IHyperlinkAcceptor acceptor) {
-		AsdocDefinition element = (AsdocDefinition) to;
-		String label = element.getCanonicalName();
+		AsdocElement element = (AsdocElement) to;
 		AsdocHyperlink result = asdocHyperlinkProvider.get();
 		result.setHyperlinkRegion(region);
-		result.setHyperlinkText(label);
-		result.setDefinition(element);
+		result.setHyperlinkText(element.getName());
+		result.setElement(element);
 		acceptor.accept(result);
 	}
 	
