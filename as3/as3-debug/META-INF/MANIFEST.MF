@@ -4,12 +4,12 @@ Bundle-Name: %providerName
 Bundle-Vendor: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.as3.debug;singleton:=true
-Bundle-Version: 0.0.82.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-Activator: org.axdt.as3.debug.As3DebugPlugin
 Require-Bundle: org.eclipse.core.variables,
  org.axdt.core.compiler,
  org.axdt.core.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.as3.debug.launch.jobs,
  org.axdt.as3.debug.launch.model,

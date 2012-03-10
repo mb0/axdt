@@ -1,7 +1,0 @@
-Licensed under:
-	
-	Eclipse Public License 1.0
-
----
-You can find the license text in any Axdt feature
-or at http://www.eclipse.org/legal/epl-v10.html

@@ -4,10 +4,10 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.asdoc.runtime;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.9.qualifier
 Require-Bundle: org.axdt.avm.runtime;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
- com.google.collect,
+ com.google.guava,
  org.ccil.cowan.tagsoup
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.asdoc;uses:="org.eclipse.emf.ecore,org.axdt.asdoc.model",
@@ -42,6 +42,6 @@ Export-Package: org.axdt.asdoc;uses:="org.eclipse.emf.ecore,org.axdt.asdoc.model
    org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl,
    org.axdt.asdoc.model"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.naming

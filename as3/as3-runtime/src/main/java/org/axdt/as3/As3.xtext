@@ -1,5 +1,7 @@
 grammar org.axdt.as3.As3 hidden(WS,SL_COMMENT,ML_COMMENT,DOC_COMMENT)
 
+// ignore wargning. we cannot import by namespace uri because:
+// the maven build has not yet compiled the EPackage when generating sources 
 import "platform:/resource/org.axdt.as3.runtime/src/main/ecore/As3.ecore"
 import "platform:/resource/org.axdt.avm.runtime/src/main/ecore/Avm.ecore" as avm
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore

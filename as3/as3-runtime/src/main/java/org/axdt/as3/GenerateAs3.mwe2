@@ -19,9 +19,10 @@ var testProject = "../as3-test"
 var srcGen = "/src/generated/java"
 var src = "/src/main/java"
 var antlrTimeout = "10000"
+
 Workflow {
 	bean = StandaloneSetup {
-	    //scanClassPath = true
+	    scanClassPath = true
 		platformUri = "../../.."
 	}
 	component = DirectoryCleaner {

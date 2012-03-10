@@ -4,9 +4,9 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.avm.runtime;singleton:=true
-Bundle-Version: 0.0.82.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.axdt.avm,
  org.axdt.avm.access,
  org.axdt.avm.model,

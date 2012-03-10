@@ -8,4 +8,4 @@ Bundle-Version: 1.2.0
 Bundle-ClassPath: tagsoup-1.2.jar
 Export-Package: org.ccil.cowan.tagsoup,
  org.ccil.cowan.tagsoup.jaxp
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

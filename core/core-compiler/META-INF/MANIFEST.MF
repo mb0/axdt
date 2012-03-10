@@ -4,11 +4,11 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.core.compiler;singleton:=true
-Bundle-Version: 0.0.82.qualifier
+Bundle-Version: 0.0.9.qualifier
 Require-Bundle: org.eclipse.ui.console,
  org.eclipse.text,
  org.axdt.core.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.compiler,
  org.axdt.compiler.console,

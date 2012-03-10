@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Axdt Mxml Plug-in
 Bundle-SymbolicName: org.axdt.mxml.ui;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-Activator: org.axdt.mxml.ui.MxmlUiActivator
 Bundle-Vendor: http://axdt.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.wst.xml.core;bundle-version="1.0.0",
  org.axdt.core.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

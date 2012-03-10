@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.axdt.asdoc.ui;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.axdt.asdoc.ui.AsdocUiActivator$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.axdt.asdoc.access,
  org.axdt.asdoc.scoping,
  org.axdt.asdoc.ui,

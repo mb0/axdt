@@ -36,7 +36,7 @@ public class SwfEditorLauncher implements IEditorLauncher {
 
 	public void open(IPath file) {
 		try {
-			open(file.toFile().toURL());
+			open(file.toFile().toURI().toURL());
 		} catch (MalformedURLException e) {
 			MessageDialog.openError(PlatformUI.getWorkbench().getDisplay()
 					.getActiveShell(), "Error opening browser at path ",

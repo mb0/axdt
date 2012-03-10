@@ -78,7 +78,7 @@ public class PrepareLaunchJob extends AbstractLaunchJob {
 			return As3PathVariableHelper.resolveURL(targetPath, template)
 					.toURL();
 		}
-		return target.getDeployFileLocation().toFile().toURL();
+		return target.getDeployFileLocation().toFile().toURI().toURL();
 	}
 
 	protected String getPlayerId() throws CoreException {

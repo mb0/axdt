@@ -9,14 +9,13 @@
 	<groupId>org.axdt</groupId>
 	<artifactId>org.axdt</artifactId>
 	<name>Axdt</name>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>as3</module>
 		<module>asdoc</module>
 		<module>avm</module>
 		<module>core</module>
-		<module>flex4</module>
 		<module>mxml</module>
 		<module>swc</module>
 		<module>update</module>
@@ -24,7 +23,7 @@
 	<properties>
 		<maven.test.skip>true</maven.test.skip>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
-		<tycho-version>0.9.0</tycho-version>
+		<tycho-version>0.14.0</tycho-version>
 	</properties>
 	<licenses>
 		<license>
@@ -35,24 +34,23 @@
 	<url>http://axdt.org</url>
 	<inceptionYear>2010</inceptionYear>
 	<issueManagement>
-		<system>Trac</system>
-		<url>http://new.axdt.org/report</url>
+		<url>http://github.com/mb0/axdt/issues</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:git:git://axdt.org/newaxdt.git</connection>
-		<developerConnection>scm:git:ssh://git@axdt.org/newaxdt.git</developerConnection>
-		<url>http://new.axdt.org/browser</url>
+		<connection>scm:git:git://github.com/mb0/axdt.git</connection>
+		<developerConnection>scm:git:git@github.com:mb0/axdt.git</developerConnection>
+		<url>https://github.com/mb0/axdt</url>
 	</scm>
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.sonatype.tycho</groupId>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.tycho</groupId>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
@@ -63,31 +61,73 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.sonatype.tycho</groupId>
-					<artifactId>maven-osgi-lifecycle-plugin</artifactId>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
 					<version>${tycho-version}</version>
+               <configuration>
+                  <encoding>UTF-8</encoding>
+                  <source>6.0</source>
+                  <target>6.0</target>
+               </configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.sonatype.tycho</groupId>
-					<artifactId>maven-osgi-compiler-plugin</artifactId>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
 					<version>${tycho-version}</version>
-					<configuration>
-						<source>1.5</source>
-						<target>1.5</target>
-					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.sonatype.tycho</groupId>
-					<artifactId>maven-osgi-packaging-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<!-- workaround for TYCHO-349 or TYCHO-313 -->
-						<strictVersions>false</strictVersions>
-					</configuration>
-				</plugin>
+
+
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-resources-plugin</artifactId>
+               <version>2.4.1</version>
+               <configuration>
+                  <encoding>ISO-8859-1</encoding>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-clean-plugin</artifactId>
+               <version>2.4.1</version>
+            </plugin>
+
+            <plugin>
+               <groupId>org.fornax.toolsupport</groupId>
+               <artifactId>fornax-oaw-m2-plugin</artifactId>
+               <version>3.3.0</version>
+            </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+   <pluginRepositories>
+      <pluginRepository>
+         <id>fornax</id>
+         <url>http://www.fornax-platform.org/m2/repository</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </pluginRepository>
+   </pluginRepositories>
+         <repositories>
+            <repository>
+               <id>eclipse indigo</id>
+               <layout>p2</layout>
+               <url>http://download.eclipse.org/releases/indigo</url>
+            </repository>
+            <repository>
+               <id>xtext</id>
+               <layout>p2</layout>
+               <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+            </repository>
+            <repository>
+               <id>orbit</id>
+               <layout>p2</layout>
+               <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20120119162704/repository/</url>
+            </repository>
+         </repositories>
 	<developers>
 		<developer>
 			<id>mb0</id>

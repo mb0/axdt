@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Version: 0.0.82.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-SymbolicName: org.axdt.as3.runtime;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime,
  org.axdt.core.runtime
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.axdt.as3,
  org.axdt.as3.config,
  org.axdt.as3.formatting,

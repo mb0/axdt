@@ -3,15 +3,15 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.axdt.core.runtime;singleton:=true
-Bundle-Version: 0.0.81.qualifier
+Bundle-Version: 0.0.9.qualifier
 Bundle-Activator: org.axdt.core.AxdtCore
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.resources;visibility:=reexport,
- com.google.collect;visibility:=reexport,
- org.axdt.avm.runtime;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+ org.axdt.avm.runtime;visibility:=reexport,
+ com.google.guava;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.axdt.common,
  org.axdt.common.config,
