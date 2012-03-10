@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>org.axdt.as3.runtime</artifactId>
-  <version>0.0.9-SNAPSHOT</version>
-  <packaging>eclipse-plugin</packaging>
-  <parent>
-    <artifactId>org.axdt.as3</artifactId>
-    <groupId>org.axdt</groupId>
-    <version>0.0.9-SNAPSHOT</version>
-  </parent>
-    <build>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.axdt.as3.runtime</artifactId>
+	<version>0.0.9-SNAPSHOT</version>
+	<packaging>eclipse-plugin</packaging>
+	<parent>
+		<artifactId>org.axdt.as3</artifactId>
+		<groupId>org.axdt</groupId>
+		<version>0.0.9-SNAPSHOT</version>
+	</parent>
+	<build>
 		<resources>
 			<resource>
 				<directory>${project.build.directory}/xtext/tmp</directory>
 			</resource>
 		</resources>
-      <plugins>
+		<plugins>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
@@ -34,10 +35,7 @@
 									<includes>
 										<include>**/*.xtext</include>
 										<include>**/*.mwe2</include>
-<!--
-										<include>**/*.ecore</include>
-										<include>**/*.genmodel</include>
--->
+										<!-- <include>**/*.ecore</include> <include>**/*.genmodel</include> -->
 									</includes>
 								</resource>
 							</resources>
@@ -54,27 +52,27 @@
 							<includes>
 								<include>**</include>
 							</includes>
-                                                        <excludes>
-                                                                <exclude>.gitignore</exclude>
-                                                        </excludes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
 						</fileset>
 						<fileset>
 							<directory>../as3-ui/src/generated/java</directory>
 							<includes>
 								<include>**</include>
 							</includes>
-                                                        <excludes>
-                                                                <exclude>.gitignore</exclude>
-                                                        </excludes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
 						</fileset>
 						<fileset>
 							<directory>../as3-test/src/generated/java</directory>
 							<includes>
 								<include>**</include>
 							</includes>
-                                                        <excludes>
-                                                                <exclude>.gitignore</exclude>
-                                                        </excludes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
 						</fileset>
 					</filesets>
 				</configuration>
@@ -106,22 +104,24 @@
 					</execution>
 				</executions>
 			</plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.2</version>
-            <executions>
-               <execution>
-                  <phase>process-sources</phase>
-                  <goals>
-                     <goal>run</goal>
-                  </goals>
-                  <configuration>
-<target><ant antfile="${basedir}/build.xml"/></target>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-      </plugins>
-   </build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<ant antfile="${basedir}/build.xml" target="patch" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
