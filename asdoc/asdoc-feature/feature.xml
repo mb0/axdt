@@ -17,10 +17,6 @@
       %license
    </license>
 
-   <url>
-      <update label="%updateName" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/"/>
-   </url>
-
    <requires>
       <import plugin="org.axdt.avm.runtime"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>

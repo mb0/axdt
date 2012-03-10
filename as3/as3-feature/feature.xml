@@ -17,16 +17,12 @@
       %license
    </license>
 
-   <url>
-      <update label="%updateName" url="http://svn.codespot.com/a/eclipselabs.org/axdt/trunk/site/"/>
-   </url>
-
    <requires>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.axdt.core.compiler"/>
       <import plugin="org.axdt.core.ui"/>
       <import plugin="org.apache.log4j"/>
-      <import plugin="org.eclipse.xtext" version="1.0.1" match="equivalent"/>
+      <import plugin="org.eclipse.xtext"/>
       <import plugin="org.axdt.asdoc.runtime"/>
       <import plugin="org.axdt.avm.integration"/>
       <import plugin="org.apache.commons.logging"/>
@@ -34,16 +30,16 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.antlr.runtime"/>
+      <import plugin="org.axdt.core.runtime"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.builder"/>
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
-      <import plugin="org.eclipse.xtext.ui" version="1.0.1" match="equivalent"/>
-      <import plugin="org.eclipse.xtext.ui.shared" version="1.0.1" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.eclipse.xtext.ui.shared"/>
       <import plugin="org.axdt.asdoc.ui"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="org.axdt.core.runtime"/>
    </requires>
 
    <plugin
